@@ -65,3 +65,10 @@ group :test do
   gem 'factory_girl'
   gem 'mongoid-rspec', '>= 1.6.0', :github=>"mongoid-rspec/mongoid-rspec"
 end
+
+gem 'unicorn'
+group :development do
+  gem 'capistrano-rails'
+  gem 'capistrano-rvm'
+  gem 'capistrano3-unicorn'
+end
