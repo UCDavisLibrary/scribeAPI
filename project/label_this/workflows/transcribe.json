@@ -9,7 +9,6 @@
     "generates_subjects_method": "collect-unique",
     
     "tasks": {
-	
 	"annotation": {
 	    "tool": "textTool",
 	    "tool_config": {},
@@ -24,8 +23,7 @@
 	    },
 	    "instruction": "Enter the name of the appellation region.",
 	    "next_task": null
-	}
-	
+	},
 	"appellation_country": {
 	    "tool": "textTool",
 	    "tool_config": {
