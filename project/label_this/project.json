@@ -1,0 +1,28 @@
+{
+  "title": "Label This",
+  "short_title": "Label This",
+  "summary": "Change water into metadata",
+  "description": "Let's tag some wine labels",
+  "logo": "images/logo.svg",
+  "background": "images/background_cropped.jpg",
+  "admin_email": "lizadaly@gmail.com",
+  "team_emails": [
+    "lizadaly@gmail.com"
+  ],
+  "forum": {
+      "type": "talk",
+      "account_username": "example",
+      "project_name": "example"
+  },
+  "analytics": {
+    "google_tag_manager_client_id": "XXX-XXX"
+  },
+  "discuss_url": "https://example.com/",
+  "feedback_form_url": "https://example.com",
+  "terms_map": {
+    "group": "test_group",
+    "subject set": "page",
+    "subject": "page"
+  }
+
+}

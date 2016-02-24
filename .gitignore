@@ -87,3 +87,14 @@ node_modules
 
 #dump
 dump
+
+# raw media files
+raw
+
+# Python because Python
+ve
+
+# Emacs because Emacs
+\#*
+\.#*
+*~

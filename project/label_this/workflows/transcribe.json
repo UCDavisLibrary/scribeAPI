@@ -1,0 +1,44 @@
+{
+    "name": "transcribe",
+    "label": "Transcribe Workflow",
+    "retire_limit": 3,
+    "generates_subjects": true,
+    "generates_subjects_for": "verify",
+    "generates_subjects_after": 3,
+    "generates_subjects_max": 10,
+    "generates_subjects_method": "collect-unique",
+    
+    "tasks": {
+	
+	"annotation": {
+	    "tool": "textTool",
+	    "tool_config": {},
+	    "instruction": "Transcribe the highlighted annotation.",
+	    "next_task": null
+	},
+	
+	"appellation_region": {
+	    "tool": "textTool",
+	    "tool_config": {
+		"suggest": "common"
+	    },
+	    "instruction": "Enter the name of the appellation region.",
+	    "next_task": null
+	}
+	
+	"appellation_country": {
+	    "tool": "textTool",
+	    "tool_config": {
+		"suggest": "common"
+	    },
+	    "instruction": "Enter the name of the port.",
+	    "next_task": null
+	},
+	"appellation_other": {
+	    "tool": "textTool",
+	    "tool_config": {},
+	    "instruction": "Enter a brief description of the appellation.",
+	    "next_task": null
+	}
+    }
+}

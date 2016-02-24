@@ -1,0 +1,78 @@
+{
+    "name":"mark",
+    "label":"Mark Workflow",
+    "subject_fetch_limit": "10",
+    "generates_subjects": true,
+    "generates_subjects_for": "transcribe",
+    "first_task": "annotation_present",
+    
+    "tasks":{
+	
+	"annotation_present": {
+	    "tool": "pickOne",
+	    "instruction": "Are there any *unmarked* handwritten annotations present?",
+	    "help": {
+		"title": "Annotations",
+		"body": "Mark any visible handwritten annotations on the label or backing sheet"
+	    },
+	    "tool_config": {
+		"options": [
+		    {"value": "yes", "label": "Yes", "next_task": "annotation" },
+		    {"value": "no", "label": "No"}
+		]
+	    },
+	    "next_task": "apellation_present"
+	},
+	
+	"annotation": {
+	    "generates_subjects": true,
+	    "tool":"pickOneMarkOne",
+	    "instruction":"Draw a rectangle around each *unmarked* annotation.",
+	    "help": {
+		"title": "Annotations",
+		"body": "Mark any visible handwritten annotations on the label or backing sheet"
+	    },
+	    "tool_config": {
+		"options": [
+		    {"type": "rectangleTool", "label": "Annotation", "color": null, "generates_subject_type": "annotation" }
+		]
+	    },
+	    "next_task": "apellation_present"
+	},
+	
+	"apellation_present": {
+	    "tool": "pickOne",
+	    "instruction": "Is there apellation (region or country of origin) information present that *has not been marked*?",
+	    "help": {
+		"title": "Apellation, region, or country of origin",
+		"body": "Select the type of apellation, then draw a rectangle around each apellation of that type. Mark both the ocean region or whaling ground (typically at the top of the page) and any specific positions or geographic references that you see further down on the page."
+	    },
+	    "tool_config": {
+		"options": [
+		    { "value": "yes", "label": "Yes", "next_task": "apellation" },
+		    { "value": "no", "label": "No"}
+		]
+	    },
+	    "next_task": null	
+	},
+	
+	"apellation": {
+	    "generates_subjects": true,
+	    "tool":"pickOneMarkOne",
+	    "instruction":"Pick an appellation option. Draw a rectangle around each corresponding text region that *has not been marked*.",
+	    "help": {
+		"title": "Wine appellation",
+		"body": "This can be any geographic reference, from a wine region to a country of origin."
+	    },
+	    "tool_config": {
+		"options": [
+		    {"type": "rectangleTool", "label": "Region",       "color": "#eeff00", "generates_subject_type": "appellation_region" },
+		    {"type": "rectangleTool", "label": "Country of origin", "color": "#0000ff", "generates_subject_type": "appellation_country" },
+		    {"type": "rectangleTool", "label": "Other",                  "color": "#e59900", "generates_subject_type": "appellation_other" }
+		]
+	    },
+	    "next_task": null		
+	}
+	
+    }
+}
