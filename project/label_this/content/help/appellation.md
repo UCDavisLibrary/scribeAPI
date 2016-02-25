@@ -1,0 +1,1 @@
+Mark and then transcribe any appellation information on the labels.

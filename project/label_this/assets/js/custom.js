@@ -1,4 +1,4 @@
-// Load Typekit
+/*
 (function(d) {
     var config = {
       kitId: 'iuk1miw',
@@ -12,3 +12,4 @@ tk.src='//use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onread
 atechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;
 f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
   })(document);
+*/
