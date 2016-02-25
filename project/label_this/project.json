@@ -1,28 +1,35 @@
 {
-  "title": "Label This",
+  "title": "Wine Labels",
   "short_title": "Label This",
-  "summary": "Change water into metadata",
-  "description": "Let's tag some wine labels",
-  "logo": "images/logo.svg",
-  "background": "images/background_cropped.jpg",
+  "summary": "Metadata for wine labels",
+  "logo": "/images/FIXME.svg",
+  "background": "/images/FIXME.jpg",
   "admin_email": "lizadaly@gmail.com",
   "team_emails": [
     "lizadaly@gmail.com"
   ],
+
+  "team": [
+    {
+      "name": "Liza Daly",
+      "role": "Dev",
+      "image": "http://placekitten.com/200/300",
+      "organization": "Threepress"
+    }
+  ],
+
+  "organizations": [
+    {
+     "title": "UC Davis",
+     "description": "UC Davis",
+     "url":"http://ucdavis.example.com",
+     "logo": "http://businesscat.org/logo.png"
+    }
+  ],
+
   "forum": {
-      "type": "talk",
-      "account_username": "example",
-      "project_name": "example"
-  },
-  "analytics": {
-    "google_tag_manager_client_id": "XXX-XXX"
-  },
-  "discuss_url": "https://example.com/",
-  "feedback_form_url": "https://example.com",
-  "terms_map": {
-    "group": "test_group",
-    "subject set": "page",
-    "subject": "page"
+    "type": "discourse",
+    "base_url": "http://ucdavis-discourse.example.com"
   }
 
 }
