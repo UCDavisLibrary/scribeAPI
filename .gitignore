@@ -99,3 +99,6 @@ ve
 \.#*
 *~
 *.lock
+
+# Shared for unicorn deployment
+shared
