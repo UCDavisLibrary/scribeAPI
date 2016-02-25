@@ -23,7 +23,7 @@ gem "moped"
 gem 'sprockets-coffee-react'
 gem 'stylus', '~> 1.0.1'
 gem 'browserify-rails', '~> 0.9.1'
-gem 'react-rails', '~> 1.0.0.pre', github: 'reactjs/react-rails'
+gem 'react-rails', '~> 1.0.0.pre'#, github: 'reactjs/react-rails'
 
 gem 'rack-streaming-proxy', '~> 2.0.1'
 gem 'kaminari'
@@ -63,12 +63,7 @@ group :test do
   gem 'email_spec'
   gem 'launchy'
   gem 'factory_girl'
-  gem 'mongoid-rspec', '>= 1.6.0', :github=>"mongoid-rspec/mongoid-rspec"
+  gem 'mongoid-rspec', '>= 1.6.0'#, :github=>"mongoid-rspec/mongoid-rspec"
 end
 
 gem 'unicorn'
-group :development do
-  gem 'capistrano-rails'
-  gem 'capistrano-rvm'
-  gem 'capistrano3-unicorn'
-end
