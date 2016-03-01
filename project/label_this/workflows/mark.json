@@ -11,10 +11,10 @@
 	"annotation": {
 	    "generates_subjects": true,
 	    "tool":"pickOneMarkOne",
-	    "instruction":"Draw a rectangle around each *unmarked* annotation.",
+	    "instruction":"Draw a rectangle around any prominent names on the labels.",
 	    "help": {
 		"title": "Annotations",
-		"body": "Mark any visible handwritten annotations on the label or backing sheet"
+		"body": "Mark any large text on the labels."
 	    },
 	    "tool_config": {
 		"options": [
