@@ -5,7 +5,7 @@
         "welcome": {
             "next_task": "marking",
             "help": {
-                "title": "Welcome to Old Weather: Whaling!",
+                "title": "Welcome to Wine Labeling 101!",
                 "file": "welcome"
             }
         },
