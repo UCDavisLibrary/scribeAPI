@@ -11,7 +11,7 @@
 	"annotation": {
 	    "generates_subjects": true,
 	    "tool":"pickOneMarkOne",
-	    "instruction":"Draw a rectangle around any prominent names on the labels.",
+	    "instruction":"Draw a box around any prominent names on the labels.",
 	    "help": {
 		"title": "Annotations",
 		"body": "Mark any large text on the labels."
