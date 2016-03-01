@@ -4,25 +4,9 @@
     "subject_fetch_limit": "10",
     "generates_subjects": true,
     "generates_subjects_for": "transcribe",
-    "first_task": "annotation_present",
+    "first_task": "annotation",
 
     "tasks":{
-
-	"annotation_present": {
-	    "tool": "pickOne",
-	    "instruction": "Are there any *unmarked* handwritten annotations present?",
-	    "help": {
-		"title": "Annotations",
-		"body": "Mark any visible handwritten annotations on the label or backing sheet"
-	    },
-	    "tool_config": {
-		"options": [
-		    {"value": "yes", "label": "Yes", "next_task": "annotation" },
-		    {"value": "no", "label": "No"}
-		]
-	    },
-	    "next_task": "appellation_present"
-	},
 
 	"annotation": {
 	    "generates_subjects": true,

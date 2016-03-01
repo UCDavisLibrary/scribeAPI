@@ -7,7 +7,7 @@
     "generates_subjects_after": 3,
     "generates_subjects_max": 10,
     "generates_subjects_method": "collect-unique",
-    
+
     "tasks": {
 	"annotation": {
 	    "tool": "textTool",
@@ -15,7 +15,7 @@
 	    "instruction": "Transcribe the highlighted annotation.",
 	    "next_task": null
 	},
-	
+
 	"appellation_region": {
 	    "tool": "textTool",
 	    "tool_config": {
@@ -29,7 +29,7 @@
 	    "tool_config": {
 		"suggest": "common"
 	    },
-	    "instruction": "Enter the name of the port.",
+	    "instruction": "Enter the name of the country.",
 	    "next_task": null
 	},
 	"appellation_other": {
