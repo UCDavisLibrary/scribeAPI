@@ -235,7 +235,7 @@ TextTool = React.createClass
         else
           if @props.isLastSubject and ( @props.transcribeMode is 'page' or @props.transcribeMode is 'single' )
             'Return to Marking'
-          else 'Next Entry'
+          else 'Next Entry!!'
 
       buttons.push <SmallButton label={buttonLabel} key="done-button" onClick={@commitAnnotation} />
 
