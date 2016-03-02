@@ -17,9 +17,9 @@ def deploy():
 
 def deploy_app():
 
-    run('cd {} '.format(code_dir))
-    run('git pull origin master')
-    run('rake project:load["label_this","workflows","content"]')
-    sudo('service unicorn_labelthis stop')
-    sudo('service unicorn_labelthis start')
+    with cd(code_dir):
+        run('git pull origin master')
+        run('rake project:load["label_this","workflows","content"]')
+    sudo('service unicorn_labelthis stop', shell=False)
+    sudo('service unicorn_labelthis start', shell=False)
     print "Done deploying"

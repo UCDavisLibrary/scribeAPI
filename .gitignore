@@ -93,6 +93,7 @@ raw
 
 # Python because Python
 ve
+*.pyc
 
 # Emacs because Emacs
 \#*

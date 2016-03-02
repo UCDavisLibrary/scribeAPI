@@ -1,0 +1,7 @@
+#!/bin/sh
+
+echo "Pushing to deploy server with Fabric..."
+
+ve/bin/fab deploy
+
+echo "Done"
