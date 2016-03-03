@@ -8,6 +8,9 @@ Mark                          = require './mark'
 Transcribe                    = require './transcribe'
 Verify                        = require './verify'
 
+# New for Label This:
+Browse                        = require './browse'
+
 # TODO Group routes currently not implemented
 GroupPage                     = require './group-page'
 GroupBrowser                  = require './group-browser'
@@ -27,6 +30,8 @@ class AppRouter
         <Redirect from="_=_" to="/" />
 
         <Route name="home" path="/home" handler={HomePage}/>
+
+        <Route name="browse" path="/browse" handler={Browse}/>
 
         { (w for w in project.workflows when w.name in ['mark','transcribe','verify']).map (workflow, key) =>
             handler = eval workflow.name.charAt(0).toUpperCase() + workflow.name.slice(1)

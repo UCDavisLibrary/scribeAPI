@@ -11,52 +11,32 @@
 	"annotation": {
 	    "generates_subjects": true,
 	    "tool":"pickOneMarkOne",
-	    "instruction":"Draw a box around any prominent names on the labels.",
+	    "instruction":"Draw a box around any text on the labels.",
 	    "help": {
-		"title": "Annotations",
+		"title": "Text on labels",
 		"body": "Mark any large text on the labels."
 	    },
 	    "tool_config": {
 		"options": [
-		    {"type": "rectangleTool", "label": "Annotation", "color": null, "generates_subject_type": "annotation" }
+		    {"type": "rectangleTool", "label": "Text highlights", "color": null, "generates_subject_type": "text" }
 		]
 	    },
-	    "next_task": "appellation_present"
+	    "next_task": "images"
 	},
-
-	"appellation_present": {
-	    "tool": "pickOne",
-	    "instruction": "Is there appellation (region or country of origin) information present that *has not been marked*?",
-	    "help": {
-		"title": "Appellation, region, or country of origin",
-		"body": "Select the type of appellation, then draw a rectangle around each appellation of that type. Mark both the ocean region or whaling ground (typically at the top of the page) and any specific positions or geographic references that you see further down on the page."
-	    },
-	    "tool_config": {
-		"options": [
-		    { "value": "yes", "label": "Yes", "next_task": "appellation" },
-		    { "value": "no", "label": "No"}
-		]
-	    },
-	    "next_task": null
-	},
-
-	"appellation": {
+	"images": {
 	    "generates_subjects": true,
 	    "tool":"pickOneMarkOne",
-	    "instruction":"Pick an appellation option. Draw a rectangle around each corresponding text region that *has not been marked*.",
+	    "instruction":"Draw a box around any *images* on the labels.",
 	    "help": {
-		"title": "Wine appellation",
-		"body": "This can be any geographic reference, from a wine region to a country of origin."
+		"title": "Wine images",
+		"body": "Draw a box around any images that appear on the label, including crests, illustrations, or seals."
 	    },
 	    "tool_config": {
 		"options": [
-		    {"type": "rectangleTool", "label": "Region",       "color": "#eeff00", "generates_subject_type": "appellation_region" },
-		    {"type": "rectangleTool", "label": "Country of origin", "color": "#0000ff", "generates_subject_type": "appellation_country" },
-		    {"type": "rectangleTool", "label": "Other",                  "color": "#e59900", "generates_subject_type": "appellation_other" }
-		]
+		    {"type": "rectangleTool", "label": "Image highlights", "color": null, "generates_subject_type": "image" }
+                ]
 	    },
 	    "next_task": null
 	}
-
     }
 }

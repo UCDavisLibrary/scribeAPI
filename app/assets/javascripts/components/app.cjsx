@@ -42,7 +42,7 @@ App = React.createClass
   setTutorialComplete: ->
     previously_saved = @state.user?.tutorial_complete?
 
-    # Immediately ammend user object with tutorial_complete flag so that we can hide the Tutorial:
+    # Immediately amend user object with tutorial_complete flag so that we can hide the Tutorial:
     @setState user: $.extend(@state.user ? {}, tutorial_complete: true)
 
     # Don't re-save user.tutorial_complete if already saved:

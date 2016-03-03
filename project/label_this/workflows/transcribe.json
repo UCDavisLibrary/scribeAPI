@@ -7,36 +7,18 @@
     "generates_subjects_after": 3,
     "generates_subjects_max": 10,
     "generates_subjects_method": "collect-unique",
-
     "tasks": {
-	"annotation": {
+	"text": {
 	    "tool": "textTool",
 	    "tool_config": {},
-	    "instruction": "Transcribe the highlighted annotation.",
-	    "next_task": null
+	    "instruction": "Transcribe the highlighted text.",
+	    "next_task": "image"
 	},
-
-	"appellation_region": {
-	    "tool": "textTool",
-	    "tool_config": {
-		"suggest": "common"
-	    },
-	    "instruction": "Enter the name of the appellation region.",
-	    "next_task": null
-	},
-	"appellation_country": {
-	    "tool": "textTool",
-	    "tool_config": {
-		"suggest": "common"
-	    },
-	    "instruction": "Enter the name of the country.",
-	    "next_task": null
-	},
-	"appellation_other": {
+	"image": {
 	    "tool": "textTool",
 	    "tool_config": {},
-	    "instruction": "Enter a brief description of the appellation.",
+	    "instruction": "Describe keywords in the highlighted images.",
 	    "next_task": null
-	}
+        }
     }
 }
