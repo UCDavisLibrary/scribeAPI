@@ -25,7 +25,7 @@ def deploy_app():
 
     stop_host()
     time.sleep(DEPLOY_WAIT_TIME)  # Wait for the process to die
-    start_shot()
+    start_host()
     
     print "Done deploying"
 
