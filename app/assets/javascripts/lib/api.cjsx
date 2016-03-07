@@ -1,5 +1,5 @@
 JSONAPIClient = require 'json-api-client'
-
+# https://www.npmjs.com/package/json-api-client
 PATH_TO_API_ROOT = "#{window.location.protocol}//#{window.location.host}/" # 'http://localhost:3000/'
 
 DEFAULT_HEADERS =

@@ -5,8 +5,8 @@ module.exports = React.createClass
   displayName: 'NextButton'
 
   getDefaultProps: ->
-    label: 'Next &gt;'
+    label: 'Next'
  
   render: ->
-    <MajorButton key="major-button" {...@props} className='next'/>
+    <GenericButton key="next-button" {...@props} className='next'/>
      
