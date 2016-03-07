@@ -21,5 +21,6 @@ def deploy_app():
         run('git pull origin master')
         run('rake project:load["label_this","workflows","content"]')
     sudo('service unicorn_labelthis stop', shell=False)
+    time.sleep(30)  # Wait for the process to die
     sudo('service unicorn_labelthis start', shell=False)
     print "Done deploying"
