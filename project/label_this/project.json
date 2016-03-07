@@ -2,8 +2,6 @@
   "title": "Wine Labels",
   "short_title": "Label This",
   "summary": "Metadata for wine labels",
-  "logo": "/images/FIXME.svg",
-  "background": "/images/FIXME.jpg",
   "admin_email": "lizadaly@gmail.com",
   "team_emails": [
     "lizadaly@gmail.com"
