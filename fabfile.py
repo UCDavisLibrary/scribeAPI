@@ -37,4 +37,5 @@ def start_host():
     sudo('service unicorn_labelthis start', shell=False)
 
 def delete_cache():
-    run('rm -rf /tmp/label-cache/')
+    #run('rm -rf /tmp/label-cache/')
+    pass
