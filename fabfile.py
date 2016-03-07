@@ -24,6 +24,7 @@ def deploy_app():
         run('rake project:load["label_this","workflows","content"]')
 
     stop_host()
+    delete_cache()
     time.sleep(DEPLOY_WAIT_TIME)  # Wait for the process to die
     start_host()
     
@@ -34,3 +35,6 @@ def stop_host():
 
 def start_host():
     sudo('service unicorn_labelthis start', shell=False)
+
+def delete_cache():
+    run('rm -rf /tmp/label-cache/')
