@@ -2,23 +2,26 @@ React = require 'react'
 {Navigation} = require 'react-router'
 API = require 'lib/api'
 GenericButton = require 'components/buttons/generic-button'
+FetchSubjectsMixin = require 'lib/fetch-subjects-mixin'
 
 module.exports = React.createClass
   displayName: "Browse"
-  mixins: [Navigation]
+  mixins: [Navigation, FetchSubjectsMixin]
 
   getDefaultProps: ->
     page: 1
+    browse: true
+    limit: 20
     
   getInitialState: ->
     subjects: []
-    
+
   render: ->
-    if @state.prevPage?
+    if @state.subjects_prev_page?
        prevButton = <GenericButton onClick={@prevPage} label="Prev" />
     else
        prevButton = <span/>
-    if @state.nextPage?
+    if @state.subjects_next_page?
        nextButton = <GenericButton onClick={@nextPage} label="Next" />
     else
        nextButton = <span/>
@@ -38,33 +41,13 @@ module.exports = React.createClass
         {prevButton}
         {nextButton}
       </div>              
-      <div>Number of results: {@state.totalResults}</div>
-      <div>Current page: {@state.currentPage}</div>                
+      <div>Number of results: {@state.subjects_total_results}</div>
+      <div>Current page: {@state.subjects_current_page}</div>                
    </div>
            
-  componentDidMount: ->
-    @fetchSubjects()
+  nextPage: ->
+    @fetchSubjects(page: @state.subjects_next_page)
 
-  nextPage: (callback_fn)->
-    @fetchSubjects(page: @state.nextPage)
+  prevPage: ->
+    @fetchSubjects(page: @state.subjects_prev_page)
 
-  prevPage: (callback_fn) ->
-    @fetchSubjects(page: @state.prevPage)
-  
-  fetchSubjects: (params) ->
-
-    _params = $.extend({
-      browse: true
-      limit: 20
-    }, params)
-
-    API.type('subjects').get(_params).then (subjects) =>
-      @setState
-        subjects: subjects
-        totalResults: subjects[0].getMeta('total_pages')
-        nextPage: subjects[0].getMeta('next_page')
-        prevPage: subjects[0].getMeta('prev_page')        
-        currentPage: subjects[0].getMeta('current_page')
-        
-    if @fetchSubjectsCallback?
-      @fetchSubjectsCallback()

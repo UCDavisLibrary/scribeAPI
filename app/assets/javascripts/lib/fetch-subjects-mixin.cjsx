@@ -37,21 +37,29 @@ module.exports =
 
   fetchSubjects: (params, callback) ->
     _params = $.extend({
-      workflow_id: @getActiveWorkflow().id
-      limit: @getActiveWorkflow().subject_fetch_limit
+      workflow_id: @getActiveWorkflow?().id
+      limit: @getActiveWorkflow?().subject_fetch_limit
     }, params)
+    
     API.type('subjects').get(_params).then (subjects) =>
       if subjects.length is 0
         @setState noMoreSubjects: true
 
       else
+        if @props.browse
+          @setState subjects: subjects          
+        else
+          @setState subjects: @orderSubjectsByY(subjects)
+          
         @setState
           subject_index: 0
-          subjects: subjects
-          subjects: @orderSubjectsByY(subjects)
           subjects_next_page: subjects[0].getMeta("next_page")
-
+          subjects_prev_page: subjects[0].getMeta("next_page")
+          subjects_total_results: subjects[0].getMeta("total")  
+          subjects_current_page: subjects[0].getMeta("current_page")
+          
       # Does including instance have a defined callback to call when new subjects received?
       if @fetchSubjectsCallback?
         @fetchSubjectsCallback()
+
 
