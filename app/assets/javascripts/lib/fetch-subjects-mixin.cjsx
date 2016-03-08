@@ -17,6 +17,7 @@ module.exports =
         page:                     @props.params.page ? @props.page ? 1
         limit:                    @props.limit ? @getActiveWorkflow?().subject_fetch_limit
         order_filter:             @props.params.order_filter ? null
+        type:                     @props.type ? "root"
       @fetchSubjects params
 
   orderSubjectsByY: (subjects) ->

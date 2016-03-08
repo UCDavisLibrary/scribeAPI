@@ -13,6 +13,7 @@ module.exports = React.createClass
     page: 1
     browse: true
     limit: 40
+    type: "root"
         
   getInitialState: ->
     subjects: []
@@ -51,8 +52,20 @@ module.exports = React.createClass
    </div>
            
   nextPage: ->
-    @fetchSubjects(page: @state.subjects_next_page)
+    params =
+      page: @state.subjects_next_page
+      type: @props.type 
+      limit: @props.limit
+      browse: true
+      
+    @fetchSubjects(params)
 
   prevPage: ->
-    @fetchSubjects(page: @state.subjects_prev_page)
+    params =
+      page: @state.subjects_prev_page
+      type: @props.type 
+      limit: @props.limit
+      browse: true
+      
+    @fetchSubjects(params)
 
