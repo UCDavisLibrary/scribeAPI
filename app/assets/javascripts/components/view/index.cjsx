@@ -18,14 +18,12 @@ module.exports = React.createClass
     subjects: []
     
   render: ->
-    if @state.subjects_prev_page?
+    if @state.subjects[0]?.order > 1
        prevButton = <GenericButton onClick={@prevPage} label="Prev" />
     else
        prevButton = <span/>
-    if @state.subjects_next_page?
-       nextButton = <GenericButton onClick={@nextPage} label="Next" />
-    else
-       nextButton = <span/>
+
+    nextButton = <GenericButton onClick={@nextPage} label="Next" />
 
     <div className="temp-browse">
       <div className="temp-browse-nav">
@@ -45,8 +43,8 @@ module.exports = React.createClass
    </div>
            
   nextPage: ->
-    @fetchSubjects(page: @state.subjects_next_page, limit: @props.limit)
+    @fetchSubjects(order_filter: @state.subjects[0]?.order, limit: @props.limit, order_dir: "next")
 
   prevPage: ->
-    @fetchSubjects(page: @state.subjects_prev_page, limit: @props.limit)
+    @fetchSubjects(order_filter: @state.subjects[0]?.order - 1, limit: @props.limit, order_dir: "prev")
 

@@ -43,9 +43,11 @@ class SubjectsController < ApplicationController
     # Filter by order key, from view?
     if order_filter > 0
       if order_dir == "next"
-        @subjects = @subjects.where(:order.gte => order_filter)
+        @subjects = @subjects.where(:order.gt => order_filter)
+      elsif order_dir == "prev"
+        @subjects = @subjects.where(:order.lte => order_filter).order(order: :desc)        
       else
-        @subjects = @subjects.where(:order.lte => order_filter).order(order: :desc)
+        @subjects = @subjects.where(:order.gte => order_filter)
       end
     end
 
