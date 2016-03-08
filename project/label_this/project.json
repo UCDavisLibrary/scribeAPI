@@ -23,11 +23,6 @@
      "url":"http://ucdavis.example.com",
      "logo": "http://businesscat.org/logo.png"
     }
-  ],
-
-  "forum": {
-    "type": "discourse",
-    "base_url": "http://ucdavis-discourse.example.com"
-  }
+  ]
 
 }

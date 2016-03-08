@@ -6,17 +6,17 @@ GenericButton = require 'components/buttons/generic-button'
 FetchSubjectsMixin = require 'lib/fetch-subjects-mixin'
 
 module.exports = React.createClass
-  displayName: "Browse"
+  displayName: "View"
   mixins: [Navigation, FetchSubjectsMixin]
 
   getDefaultProps: ->
     page: 1
     browse: true
-    limit: 40
+    limit: 1
         
   getInitialState: ->
     subjects: []
-
+    
   render: ->
     if @state.subjects_prev_page?
        prevButton = <GenericButton onClick={@prevPage} label="Prev" />
@@ -32,16 +32,10 @@ module.exports = React.createClass
         {prevButton}
         {nextButton}
       </div>
-      <div className="groups">
-          { 
-            for subject in @state.subjects
-              <div className="group" key={subject.id}>
-                <Link to="/view/index/#{subject.order}">
-                  <img src={subject.location.thumbnail} width="150" height="100"/>
-                </Link>
-              </div>
-          }
-      </div>
+      { 
+        for subject in @state.subjects
+          <div className="temp-view" key={subject.id}><img src={subject.location.standard} width="1024" height="682" /></div>
+      }
       <div className="temp-browse-nav">
         {prevButton}
         {nextButton}
@@ -51,8 +45,8 @@ module.exports = React.createClass
    </div>
            
   nextPage: ->
-    @fetchSubjects(page: @state.subjects_next_page)
+    @fetchSubjects(page: @state.subjects_next_page, limit: @props.limit)
 
   prevPage: ->
-    @fetchSubjects(page: @state.subjects_prev_page)
+    @fetchSubjects(page: @state.subjects_prev_page, limit: @props.limit)
 

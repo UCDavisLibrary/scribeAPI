@@ -10,6 +10,7 @@ Verify                        = require './verify'
 
 # New for Label This:
 Browse                        = require './browse'
+View                          = require './view'
 
 # TODO Group routes currently not implemented
 GroupPage                     = require './group-page'
@@ -32,6 +33,9 @@ class AppRouter
         <Route name="home" path="/home" handler={HomePage}/>
 
         <Route name="browse" path="/browse" handler={Browse}/>
+        <Route name="view" path="/view/:subject_id" handler={View} />
+        <Route name="view-index" path="/view/index/:order_filter" handler={View} />
+          
 
         { (w for w in project.workflows when w.name in ['mark','transcribe','verify']).map (workflow, key) =>
             handler = eval workflow.name.charAt(0).toUpperCase() + workflow.name.slice(1)

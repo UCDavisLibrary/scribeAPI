@@ -38,6 +38,9 @@ class SubjectSetsController < ApplicationController
       @subject_sets = SubjectSet.where(query)
     end
 
+
+    
+    
     # Apply pagination:
     @subject_sets = @subject_sets.page(subject_sets_page).per(subject_sets_limit)
 

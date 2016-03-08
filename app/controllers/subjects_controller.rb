@@ -14,7 +14,9 @@ class SubjectsController < ApplicationController
     page                  = get_int :page, 1
     type                  = params[:type]
     browse                = get_bool :browse, false
-
+    order_filter          = get_int :order_filter, 0
+    order_dir             = params[:order_dir]
+    
     # `status` filter must be one of: 'active', 'any'
     status                = ['active','any'].include?(params[:status]) ? params[:status] : 'active'
 
@@ -37,6 +39,16 @@ class SubjectsController < ApplicationController
 
     # Filter by subject set?
     @subjects = @subjects.by_subject_set(subject_set_id) if subject_set_id
+
+    # Filter by order key, from view?
+    if order_filter > 0
+      if order_dir == "next"
+        @subjects = @subjects.where(:order.gte => order_filter)
+      else
+        @subjects = @subjects.where(:order.lte => order_filter).order(order: :desc)
+      end
+    end
+
 
     if ! subject_set_id
       # Randomize?
