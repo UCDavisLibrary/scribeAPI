@@ -7,8 +7,9 @@ class User
          :recoverable, :rememberable, :trackable, :validatable
 
 
-  devise :omniauthable, :omniauth_providers => [:facebook,:google_oauth2,:zooniverse]
-
+  #  devise :omniauthable, :omniauth_providers => [:facebook,:google_oauth2,:zooniverse]
+  # LD: Removing omniauth options for now; local auth only
+  devise :omniauthable, :omniauth_providers => []
 
   ## Database authenticatable
   field :email,              :type => String, :default => ""

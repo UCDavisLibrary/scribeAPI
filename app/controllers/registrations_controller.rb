@@ -1,4 +1,6 @@
 class RegistrationsController < Devise::RegistrationsController
+  layout "admin"  # LD: Force use of the admin layout to render this rather than override with React
+  
   before_filter :update_sanitized_params, if: :devise_controller?
 
   def update_sanitized_params
