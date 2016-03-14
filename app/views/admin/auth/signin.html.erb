@@ -1,13 +1,16 @@
 <div class="admin-signin">
 
-  <h1>Woah there.</h1>
+  <h3>Sign In.</h3>
 
-  <p>Sign In.</p>
+  <%= form_for(:user, :url => session_path(:user)) do |f| %>
+    <%= f.text_field :email %>
+    <%= f.password_field :password %>
+    <%= f.check_box :remember_me %>
+    <%= f.label :remember_me %>
+    <%= f.submit 'Sign in' %>
+    <%= link_to "Forgot your password?", new_password_path(:user) %>
+  <% end %>  
 
-  <ul>
-  <% @providers.each do |provider| %>
-    <li><%= link_to provider[:name], provider[:path] %></li>
-  <% end %>
-  </ul
+
   
 </div>

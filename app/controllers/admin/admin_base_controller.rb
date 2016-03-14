@@ -1,6 +1,7 @@
 class Admin::AdminBaseController < ApplicationController
   layout "admin"
 
+  # LD: remove auth checks for now
   before_action :check_admin_user, except: :signin
 
   def index
@@ -8,9 +9,10 @@ class Admin::AdminBaseController < ApplicationController
   end
 
   def check_admin_user
-    if current_user.nil? || ! current_user.can_view_admin?
-      session[:login_redirect] = request.fullpath
-      redirect_to admin_signin_path
-    end
+    # LD: No auth checks right now
+    #if current_user.nil? || ! current_user.can_view_admin?
+    #  session[:login_redirect] = request.fullpath
+    #  redirect_to admin_signin_path
+    #end
   end
 end

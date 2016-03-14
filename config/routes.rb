@@ -40,7 +40,7 @@ API::Application.routes.draw do
     get 'dashboard' => 'dashboard#index'
     get 'data' => 'data#index'
     get 'data/download' => 'data#download'
-    get 'signin' => 'auth#signin'
+    get 'signin' => 'auth#signin'  
     post 'stats/recalculate' => 'dashboard#recalculate_stats'
   end
   get 'admin' => 'admin/dashboard#index'
