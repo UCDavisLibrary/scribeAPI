@@ -23,6 +23,6 @@
      "url":"http://ucdavis.example.com",
      "logo": "http://businesscat.org/logo.png"
     }
-  ]
-
+  ],
+  "blog_url": "http://blogs.lib.ucdavis.edu/"
 }
