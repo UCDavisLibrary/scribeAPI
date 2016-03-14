@@ -21,3 +21,9 @@
 @include foundation-float-classes;
 @include foundation-flex-classes;
 
+html {
+    background: $body-background;
+}
+.subject-set-toolbar-links {
+    background: $body-background;
+}
