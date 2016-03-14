@@ -7,10 +7,9 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
-
+<% if current_user %>
   <%= render 'admin/partials/head.html.erb' %>
-
+<% end %>
 
 <div id="admin-content">
   <%= yield %>
