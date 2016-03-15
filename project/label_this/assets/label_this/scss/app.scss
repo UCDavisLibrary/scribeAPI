@@ -27,3 +27,9 @@ html {
 .subject-set-toolbar-links {
     background: $body-background;
 }
+
+footer {
+    background: $topbar-background;
+    padding: 3em;
+    min-height: 200px;
+}

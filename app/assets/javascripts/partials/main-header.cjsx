@@ -17,6 +17,9 @@ module.exports = React.createClass
       <nav className="top-bar">
         <ul className="menu">
           <li>
+            <Link to="/#" activeClassName="selected">Label This</Link>
+          </li>          
+          <li>
             <Link to="/#browse" activeClassName="selected">Browse</Link>
           </li>
           {

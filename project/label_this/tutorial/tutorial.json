@@ -17,17 +17,10 @@
             }
         },
         "transcribing": {
-            "next_task": "start_exploring",
+            "next_task": null,
             "help": {
                 "title": "How to just transcribe",
                 "file": "transcribing"
-            }
-        },
-        "start_exploring": {
-            "next_task": null,
-            "help": {
-                "title": "You're ready to start exploring!",
-                "file": "start_exploring"
             }
         }
     }
