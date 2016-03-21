@@ -29,13 +29,15 @@ for f in csvkit.reader(open(raw)):
 
     # Check locally first
     local_filename = MEDIA_DIR + file_suffix + '/' + filename + FILE_SUFFIX  
-    temp_f = open(local_filename, 'rb')
-        
-    im = Image.open(temp_f)
-    width, height = im.size
-    if not os.path.exists(local_filename):
-        im.save(local_filename)
+    try:
+        temp_f = open(local_filename, 'rb')
+        im = Image.open(temp_f)
+        width, height = im.size
+        if not os.path.exists(local_filename):
+            im.save(local_filename)
     
-    output_csv.writerow((order, url, thumbnail, width, height))
+        output_csv.writerow((order, url, thumbnail, width, height))
 
+    except FileNotFoundError:
+        print("Skipping missing " + str(local_filename))
 
