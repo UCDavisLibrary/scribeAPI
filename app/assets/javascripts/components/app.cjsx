@@ -61,10 +61,8 @@ App = React.createClass
     style.backgroundImage = "url(#{project.background})" if project.background?
 
     <div>
-      <div className="readymade-site-background" style={style}>
-        <div className="readymade-site-background-effect"></div>
-      </div>
-      <div className="panoptes-main">
+
+      <div>
 
         <MainHeader
           workflows={project.workflows}

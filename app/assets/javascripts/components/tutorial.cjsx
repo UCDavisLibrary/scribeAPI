@@ -26,6 +26,8 @@ module.exports = React.createClass
         completedSteps: @state.completedSteps + 1
 
   onClose: ->
+    # LD 
+    localStorage.setItem('seen_tutorial', true)
     @animateClose()
     @props.onCloseTutorial()
 

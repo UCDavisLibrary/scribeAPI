@@ -18,7 +18,7 @@ Draggable               = require 'lib/draggable'
 
 module.exports = React.createClass # rename to Classifier
   displayName: 'Mark'
-
+  
   propTypes:
     onCloseTutorial: React.PropTypes.func.isRequired
 
@@ -52,6 +52,9 @@ module.exports = React.createClass # rename to Classifier
     if user?.tutorial_complete?
       # If we have a user, show tutorial if they haven't completed it:
       show = ! user.tutorial_complete
+    #LD Use local storage to persist Tutorial state
+    if localStorage.getItem('seen_tutorial')?
+      show = false
     show
 
   componentDidMount: ->
@@ -192,12 +195,11 @@ module.exports = React.createClass # rename to Classifier
       currentAnswer = (a for a in currentTask.tool_config.options when a.value == currentAnnotation.value)[0]
       waitingForAnswer = not currentAnswer
 
-    <div className="classifier">
-
-      <div className="subject-area">
+    <div className="row">
+ 
+      <div className="columns">
         { if @state.noMoreSubjectSets
-            style = marginTop: "50px"
-            <p style={style}>There is nothing left to do. Thanks for your work and please check back soon!</p>
+            <p>There is nothing left to do. Thanks for your work and please check back soon!</p>
 
           else if @state.notice
             <DraggableModal header={@state.notice.header} onDone={@state.notice.onClick}>{@state.notice.message}</DraggableModal>
@@ -226,8 +228,8 @@ module.exports = React.createClass # rename to Classifier
               interimMarks={@state.interimMarks}
             />
         }
-      </div>
-      <div className="right-column">
+      </div>  
+      <div className="columns">
         <div className={"task-area " + @getActiveWorkflow().name}>
           { if @getCurrentTask()? && @getCurrentSubject()?
               <div className="task-container">
@@ -262,7 +264,7 @@ module.exports = React.createClass # rename to Classifier
                     <HelpButton onClick={@toggleHelp} label="" className="task-help-button" />
                   }
                   { if onFirstAnnotation
-                    <BadSubjectButton class="bad-subject-button" label={"Bad " + @props.project.term('subject')} active={@state.badSubject} onClick={@toggleBadSubject} />
+                    <BadSubjectButton className="bad-subject-button" label={"Bad " + @props.project.term('subject')} active={@state.badSubject} onClick={@toggleBadSubject} />
                   }
                   { if @state.badSubject
                     <p>You&#39;ve marked this {@props.project.term('subject')} as BAD. Thanks for flagging the issue! <strong>Press DONE to continue.</strong></p>

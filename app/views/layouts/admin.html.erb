@@ -10,6 +10,7 @@
 <% if current_user %>
   <%= render 'admin/partials/head.html.erb' %>
 <% end %>
+ <%= link_to "Sign out", destroy_user_session_path, :method => :delete %></li>
 
 <div id="admin-content">
   <%= yield %>
