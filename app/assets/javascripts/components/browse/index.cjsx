@@ -38,7 +38,7 @@ module.exports = React.createClass
             for subject in @state.subjects
               <div className="group" key={subject.id}>
                 <Link to="/view/index/#{subject.order}">
-                  <img src={subject.location.thumbnail} width="150" height="100"/>
+                  <img src={subject.location.thumbnail} width="200" height="150"/>
                 </Link>
               </div>
           }

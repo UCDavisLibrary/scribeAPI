@@ -24,6 +24,8 @@ module.exports = React.createClass # rename to Classifier
 
   getDefaultProps: ->
     workflowName: 'mark'
+    type: 'root'
+    
     # hideOtherMarks: false
 
   mixins: [FetchSubjectSetsMixin, BaseWorkflowMethods, Navigation] # load subjects and set state variables: subjects, currentSubject, classification
@@ -274,7 +276,10 @@ module.exports = React.createClass # rename to Classifier
           }
 
           <div className="task-secondary-area">
-
+           <p>
+             <a href={pageURL}>Direct link to this page</a>
+           </p>
+            
             {
               if @getCurrentTask()?
                 <p>
