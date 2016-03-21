@@ -28,12 +28,12 @@ module.exports = React.createClass
     else
        nextButton = <span/>
 
-    <div className="browse row">
-      <div className="browse-nav columns expanded">
+    <div className="browse">
+      <div className="browse-nav row">
         <div className="columns">{prevButton}</div>
         <div className="columns">{nextButton}</div>
       </div>
-      <div className="browse-group row">
+      <div className="browse-group columns">
           {
             subj_array = @state.subjects.slice(0)
             cols = []
@@ -41,7 +41,7 @@ module.exports = React.createClass
               cols.push(subj_array.splice(0, 4))
 
             for col, i in cols
-               <div className="row" key={i}>
+               <div className="row small-up-1 medium-up-2 large-up-4" key={i}>
                  {
                    for subj, index in col
                      <div className="column" key={index}>
@@ -53,12 +53,10 @@ module.exports = React.createClass
                </div>
           }
       </div>
-      <div className="browse-nav columns expanded">
+      <div className="browse-nav row">
         <div className="columns">{prevButton}</div>
         <div className="columns">{nextButton}</div>        
-      </div>              
-      <div>Number of results: {@state.subjects_total_results}</div>
-      <div>Current page: {@state.subjects_current_page}</div>                
+      </div>
    </div>
            
   nextPage: ->

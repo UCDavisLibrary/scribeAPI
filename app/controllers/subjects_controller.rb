@@ -26,7 +26,7 @@ class SubjectsController < ApplicationController
     @subjects = @subjects.active if status == 'active'
 
     # Filter by subject type (e.g. 'root')
-    @subjects = @subjects.by_type(type) if type
+    @subjects = @subjects.by_type(type) if type != ''
 
     # Filter by workflow (There should almost always be a workflow_id filter)
     @subjects = @subjects.by_workflow(workflow_id) if workflow_id
