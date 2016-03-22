@@ -2768,3 +2768,6 @@ footer {
 .browse-group .column img, .browse-group .columns img, .view-group .column img, .view-group .columns img {
   display: inline-block;
   margin: auto; }
+
+.view-group .column, .view-group .columns {
+  min-height: 1200px; }
