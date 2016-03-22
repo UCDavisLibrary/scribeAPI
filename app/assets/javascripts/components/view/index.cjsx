@@ -14,6 +14,10 @@ module.exports = React.createClass
     browse: true
     limit: 1
     type: 'root'
+
+  componentDidUpdate: (prev_props) ->
+    if prev_props.hash != @props.hash
+      @_fetchByProps()
         
   getInitialState: ->
     subjects: []
@@ -54,6 +58,9 @@ module.exports = React.createClass
       order_filter: @state.subjects[0]?.order,
       
     @fetchSubjects(params)
+    
+    nextPage = parseInt(@state.subjects[0]?.order) + 1
+    window.history.pushState({page: @props.page}, '', '#/view/index/' + nextPage)
 
   prevPage: ->
     params =
@@ -62,6 +69,10 @@ module.exports = React.createClass
       browse: true
       order_filter: @state.subjects[0]?.order - 1,
       order_dir: "prev"
-      
+
     @fetchSubjects(params)
+    
+    prevPage = parseInt(@state.subjects[0]?.order) + 1
+    window.history.pushState({page: @props.page}, '', '#/view/index/' + prevPage)
+          
 
