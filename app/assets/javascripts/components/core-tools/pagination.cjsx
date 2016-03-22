@@ -36,6 +36,8 @@ module.exports = React.createClass
     smallestPage = Math.max [@props.currentPage - @props.leftsidePages, 1]...
 
     hideFinalNav = true unless @props.nextPage and @props.totalPages - @props.currentPage > @props.rightsidePages
+
+    hideStartNav = true unless @props.previousPage and @props.currentPage > @props.leftsidePages + 1
     
     if @props.previousPage
       lefts = for x in [smallestPage ... @props.currentPage]
@@ -56,10 +58,15 @@ module.exports = React.createClass
         }
       </li>
         
+      <Page pagenum="1" href="#{@props.urlBase}/1" hide={hideStartNav} />
+
+      <li className="ellipsis #{'hide' if hideStartNav }" ariaHidden="true"></li>
+              
       { lefts }
 
       <li className="current"><span className="show-for-sr">Current page is</span> {@props.currentPage}</li>
 
+        
       { rights }
       
 
