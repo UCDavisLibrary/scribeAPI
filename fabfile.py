@@ -28,7 +28,7 @@ def deploy_app():
     time.sleep(DEPLOY_WAIT_TIME)  # Wait for the process to die
     start_host()
     
-    print "Done deploying"
+    print("Done deploying")
 
 def stop_host():
     sudo('service unicorn_labelthis stop', shell=False)

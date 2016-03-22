@@ -70,11 +70,7 @@ $global-weight-normal: normal;
 $global-weight-bold: bold;
 $global-radius: 0;
 $global-text-direction: ltr;
-<<<<<<< HEAD
-$global-flexbox: false;
-=======
 $global-flexbox: true;
->>>>>>> ui-foundation
 $print-transparent-backgrounds: true;
 
 @include add-foundation-colors;
@@ -94,11 +90,11 @@ $breakpoint-classes: (small medium large);
 // 3. The Grid
 // -----------
 
-$grid-row-width: $global-width;
+$grid-row-width: 920px; // $global-width;
 $grid-column-count: 12;
 $grid-column-gutter: (
-  small: 20px,
-  medium: 30px,
+  small: 10px,
+  medium: 15px,
 );
 $grid-column-align-edge: true;
 $block-grid-max: 8;

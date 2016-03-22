@@ -24,14 +24,10 @@
 html {
     background: $body-background;
 }
-<<<<<<< HEAD
-=======
-
 .browse {
     min-height: 80%;
 }
 
->>>>>>> ui-foundation
 .subject-set-toolbar-links {
     background: $body-background;
 }
@@ -40,8 +36,20 @@ footer {
     background: $topbar-background;
     padding: 3em;
     min-height: 200px;
-<<<<<<< HEAD
 }
-=======
+
+.browse-group .row {
+
+    margin-top: 30px;
+    margin-bottom: 30px;
+
 }
->>>>>>> ui-foundation
+.browse-group .column {
+    text-align: center;
+    padding: 0;
+}
+
+.browse-group .column img {
+    display: inline-block;
+    margin: auto;
+}

@@ -41,7 +41,7 @@ module.exports = React.createClass
               cols.push(subj_array.splice(0, 4))
 
             for col, i in cols
-               <div className="row small-up-1 medium-up-2 large-up-4" key={i}>
+               <div className="row small-up-1 medium-up-2 large-up-4 align-center" key={i}>
                  {
                    for subj, index in col
                      <div className="column" key={index}>
