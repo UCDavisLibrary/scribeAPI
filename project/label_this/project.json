@@ -1,28 +1,30 @@
 {
-  "title": "Wine Labels",
-  "short_title": "Label This",
-  "summary": "Metadata for wine labels",
-  "admin_email": "lizadaly@gmail.com",
-  "team_emails": [
-    "lizadaly@gmail.com"
-  ],
-
-  "team": [
-    {
-      "name": "Liza Daly",
-      "role": "Dev",
-      "image": "http://placekitten.com/200/300",
-      "organization": "Threepress"
-    }
-  ],
-
-  "organizations": [
-    {
-     "title": "UC Davis",
-     "description": "UC Davis",
-     "url":"http://ucdavis.example.com",
-     "logo": "http://businesscat.org/logo.png"
-    }
-  ],
-  "blog_url": "http://blogs.lib.ucdavis.edu/"
+    "title": "Label This",
+    "short_title": "Historic Wine Labels from the Maynard Amerine Collection",
+    "summary": "Browse and transcribe history early 20th century wine labels from the Maynard Amerine Collection at the UC Davis Library",
+    "admin_email": "lizadaly@gmail.com",
+    "author": "University of California, Davis",
+    "keywords": "Maynard Amerine, wine, University of California, Davis, UC Davis",
+    "team_emails": [
+	"lizadaly@gmail.com"
+    ],
+    
+    "team": [
+	{
+	    "name": "Liza Daly",
+	    "role": "Dev",
+	    "image": "http://placekitten.com/200/300",
+	    "organization": "Threepress"
+	}
+    ],
+    
+    "organizations": [
+	{
+	    "title": "UC Davis",
+	    "description": "UC Davis",
+	    "url":"http://ucdavis.example.com",
+	    "logo": "http://businesscat.org/logo.png"
+	}
+    ],
+    "blog_url": "http://blogs.lib.ucdavis.edu/"
 }

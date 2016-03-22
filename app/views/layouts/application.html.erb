@@ -9,7 +9,14 @@
 
   <% if current_project %>
     <meta property="og:title" content="<%= current_project.title %>"/>
+    <meta property="og:description" content="<%= current_project.summary %>"/>
+    <meta property="og:image" content=""/>
+    
     <meta name="twitter:title" content="<%= current_project.title %>"/>
+    <meta name="twitter:card" content="summary_large_image"/>
+    <meta name="twitter:description" content="<%= current_project.summary %>"/>
+    <meta name="twitter:image" content="" />
+
     <meta name="description" content="<%= current_project.summary %>"/>
     <meta name="author" content="<%= current_project.author %>"/>
     <meta name="keywords" content="<%= current_project.keywords %>"/>
