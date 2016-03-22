@@ -20,7 +20,7 @@ module.exports = React.createClass
             <Link to="/#" activeClassName="selected">Label This</Link>
           </li>          
           <li>
-            <Link to="/#browse" activeClassName="selected">Browse</Link>
+            <Link to="browse" activeClassName="selected">Browse</Link>
           </li>
           {
             # Workflows tabs:

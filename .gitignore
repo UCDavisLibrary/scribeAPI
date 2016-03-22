@@ -103,3 +103,4 @@ ve
 
 # Shared for unicorn deployment
 shared
+bower_components

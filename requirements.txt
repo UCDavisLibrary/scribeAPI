@@ -1,0 +1,4 @@
+pip>=8.0
+-e git+git@github.com:pashinin/fabric.git@6783d2f7ad7a449c97cd1ee0df9a2dbc29422fce#egg=Fabric
+csvkit
+Pillow

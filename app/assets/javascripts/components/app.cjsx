@@ -78,7 +78,7 @@ App = React.createClass
           onLogout={() => @setState user: null}
         />
 
-        <div className="main-content">
+        <div>
           <BrowserWarning />
           <RouteHandler hash={window.location.hash} project={project} onCloseTutorial={@setTutorialComplete} user={@state.user}/>
         </div>
@@ -87,3 +87,5 @@ App = React.createClass
     </div>
 
 module.exports = App
+ 
+ 

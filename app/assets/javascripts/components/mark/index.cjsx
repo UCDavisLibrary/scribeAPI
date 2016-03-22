@@ -24,6 +24,8 @@ module.exports = React.createClass # rename to Classifier
 
   getDefaultProps: ->
     workflowName: 'mark'
+    type: 'root'
+    
     # hideOtherMarks: false
 
   mixins: [FetchSubjectSetsMixin, BaseWorkflowMethods, Navigation] # load subjects and set state variables: subjects, currentSubject, classification
@@ -196,7 +198,6 @@ module.exports = React.createClass # rename to Classifier
       waitingForAnswer = not currentAnswer
 
     <div className="row">
- 
       <div className="columns">
         { if @state.noMoreSubjectSets
             <p>There is nothing left to do. Thanks for your work and please check back soon!</p>
@@ -228,7 +229,7 @@ module.exports = React.createClass # rename to Classifier
               interimMarks={@state.interimMarks}
             />
         }
-      </div>  
+      </div>
       <div className="columns">
         <div className={"task-area " + @getActiveWorkflow().name}>
           { if @getCurrentTask()? && @getCurrentSubject()?
@@ -274,7 +275,10 @@ module.exports = React.createClass # rename to Classifier
           }
 
           <div className="task-secondary-area">
-
+           <p>
+             <a href={pageURL}>Direct link to this page</a>
+           </p>
+            
             {
               if @getCurrentTask()?
                 <p>
