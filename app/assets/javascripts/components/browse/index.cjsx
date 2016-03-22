@@ -2,6 +2,7 @@ React = require 'react'
 {Navigation} = require 'react-router'
 {Link} = require 'react-router'
 API = require 'lib/api'
+
 GenericButton = require 'components/buttons/generic-button'
 FetchSubjectsMixin = require 'lib/fetch-subjects-mixin'
 
@@ -19,6 +20,7 @@ module.exports = React.createClass
     subjects: []
 
   render: ->
+    
     if @state.subjects_prev_page?
        prevButton = <GenericButton onClick={@prevPage} label="Prev" />
     else

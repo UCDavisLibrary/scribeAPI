@@ -13,6 +13,7 @@ module.exports = React.createClass
     page: 1
     browse: true
     limit: 1
+    type: 'root'
         
   getInitialState: ->
     subjects: []
@@ -43,8 +44,22 @@ module.exports = React.createClass
    </div>
            
   nextPage: ->
-    @fetchSubjects(order_filter: @state.subjects[0]?.order, limit: @props.limit, order_dir: "next")
+    params =
+      type: @props.type 
+      limit: @props.limit
+      browse: true
+      order_dir: "next"
+      order_filter: @state.subjects[0]?.order,
+      
+    @fetchSubjects(params)
 
   prevPage: ->
-    @fetchSubjects(order_filter: @state.subjects[0]?.order - 1, limit: @props.limit, order_dir: "prev")
+    params =
+      type: @props.type 
+      limit: @props.limit
+      browse: true
+      order_filter: @state.subjects[0]?.order - 1,
+      order_dir: "prev"
+      
+    @fetchSubjects(params)
 
