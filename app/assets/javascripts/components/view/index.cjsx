@@ -26,21 +26,23 @@ module.exports = React.createClass
 
     nextButton = <GenericButton onClick={@nextPage} label="Next" />
 
-    <div className="temp-browse">
-      <div className="temp-browse-nav">
-        {prevButton}
-        {nextButton}
+    <div className="view">
+      <div className="view-nav row">
+        <div className="columns">{prevButton}</div>
+        <div className="columns">{nextButton}</div>
       </div>
       { 
         for subject in @state.subjects
-          <div className="temp-view" key={subject.id}><img src={subject.location.standard} width="1024" height="682" /></div>
+          <div className="view-group columns" key={subject.id}>
+             <div className="column">
+               <img src={subject.location.standard} width={subject.width / 2} height={subject.height / 2} />
+             </div>
+          </div>
       }
-      <div className="temp-browse-nav">
-        {prevButton}
-        {nextButton}
+      <div className="view-nav row">
+        <div className="columns">{prevButton}</div>
+        <div className="columns">{nextButton}</div>        
       </div>              
-      <div>Number of results: {@state.subjects_total_results}</div>
-      <div>Current page: {@state.subjects_current_page}</div>                
    </div>
            
   nextPage: ->

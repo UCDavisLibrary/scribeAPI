@@ -2761,10 +2761,10 @@ footer {
   margin-top: 30px;
   margin-bottom: 30px; }
 
-.browse-group .column, .browse-group .columns {
+.browse-group .column, .browse-group .columns, .view-group .column, .view-group .columns {
   text-align: center;
   padding: 0; }
 
-.browse-group .column img, .browse-group .columns img {
+.browse-group .column img, .browse-group .columns img, .view-group .column img, .view-group .columns img {
   display: inline-block;
   margin: auto; }
