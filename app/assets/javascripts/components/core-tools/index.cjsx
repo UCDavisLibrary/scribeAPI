@@ -5,3 +5,4 @@ module.exports =
   pickMany:         require './pick-many'
   pickOneMarkOne:   require './pick-one-mark-one'
   transcribe:       require './transcribe' # ????
+  pagination:       require './pagination'  # LD

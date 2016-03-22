@@ -60,7 +60,8 @@ module.exports =
           subjects_prev_page: subjects[0].getMeta("prev_page")
           subjects_total_results: subjects[0].getMeta("total")  
           subjects_current_page: subjects[0].getMeta("current_page")
-          
+          subjects_total_pages: subjects[0].getMeta("total_pages")
+                    
       # Does including instance have a defined callback to call when new subjects received?
       if @fetchSubjectsCallback?
         @fetchSubjectsCallback()

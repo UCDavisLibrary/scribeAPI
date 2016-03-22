@@ -3,7 +3,6 @@ MainHeader                    = require '../partials/main-header'
 Footer                        = require '../partials/footer'
 API                           = require '../lib/api'
 Project                       = require 'models/project.coffee'
-
 BrowserWarning                = require './browser-warning'
 
 {RouteHandler}                = require 'react-router'
@@ -15,11 +14,25 @@ App = React.createClass
     routerRunning:        false
     user:                 null
     loginProviders:       []
+    subjectsTotalResults: 0
 
   componentDidMount: ->
     @fetchUser()
 
+    # Calculate the total number of labels and remember that
+    @fetchSubjectCount()
 
+  fetchSubjectCount: ->
+    _params =
+      type: 'root'
+      browse: true
+      page: 1
+      limit: 1
+      
+    API.type('subjects').get(_params).then (subjects) =>
+      if subjects.length > 0
+        @setState subjectsTotalResults: subjects[0].getMeta("total")  
+      
   fetchUser:->
     @setState
       error: null
@@ -82,6 +95,8 @@ App = React.createClass
           <BrowserWarning />
           <RouteHandler hash={window.location.hash} project={project} onCloseTutorial={@setTutorialComplete} user={@state.user}/>
         </div>
+
+        Total labels: {@state.subjectsTotalResults}
         <Footer privacyPolicy={ project.privacy_policy } menus={project.menus} partials={project.partials} />
       </div>
     </div>

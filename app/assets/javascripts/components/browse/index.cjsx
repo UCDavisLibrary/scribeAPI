@@ -5,6 +5,7 @@ API = require 'lib/api'
 
 GenericButton = require 'components/buttons/generic-button'
 FetchSubjectsMixin = require 'lib/fetch-subjects-mixin'
+Pagination = require 'components/core-tools/pagination'
 
 module.exports = React.createClass
   displayName: "Browse"
@@ -24,20 +25,11 @@ module.exports = React.createClass
     subjects: []
 
   render: ->
-    
-    if @state.subjects_prev_page?
-       prevButton = <Link to="/browse/#{@state.subjects_prev_page}">Previous</Link>
-    else
-       prevButton = <span/>
-    if @state.subjects_next_page?
-       nextButton = <Link to="/browse/#{@state.subjects_next_page}">Next</Link>      
-    else
-       nextButton = <span/>
-
+    pagination = <Pagination currentPage={@state.subjects_current_page} nextPage={@state.subjects_next_page} previousPage={@state.subjects_prev_page} totalResults={@state.subjectsTotalResults} urlBase="/browse" totalPages={@state.subjects_total_pages}/>
+      
     <div className="browse">
       <div className="browse-nav row">
-        <div className="columns">{prevButton}</div>
-        <div className="columns">{nextButton}</div>
+        { pagination }
       </div>
       <div className="browse-group columns">
           {
@@ -60,8 +52,7 @@ module.exports = React.createClass
           }
       </div>
       <div className="browse-nav row">
-        <div className="columns">{prevButton}</div>
-        <div className="columns">{nextButton}</div>        
+        { pagination }        
       </div>
    </div>
            
