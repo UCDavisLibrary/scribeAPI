@@ -46,7 +46,7 @@ module.exports = React.createClass
                    for subj, index in col
                      <div className="column" key={index}>
                         <Link to="/view/index/#{subj.order}">
-                           <img src={subj.location.thumbnail} width="200" height="150"/>
+                           <img src={subj.location.thumbnail} width="200" height="200"/>
                         </Link>
                      </div>
                  }
