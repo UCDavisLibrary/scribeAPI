@@ -2,7 +2,9 @@ API = require './api'
 
 module.exports =
   componentDidMount: ->
+   @_fetchByProps()
 
+  _fetchByProps: ->
     # Fetching a single subject?
     if @props.params.subject_id?
       @fetchSubject @props.params.subject_id
@@ -19,7 +21,7 @@ module.exports =
         order_filter:             @props.params.order_filter ? null
         type:                     @props.type ? null
       @fetchSubjects params
-
+    
   orderSubjectsByY: (subjects) ->
     subjects.sort (a,b) ->
       return if a.region.y >= b.region.y then 1 else -1

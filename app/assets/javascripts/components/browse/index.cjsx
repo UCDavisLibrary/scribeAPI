@@ -15,18 +15,22 @@ module.exports = React.createClass
     browse: true
     limit: 28
     type: 'root'
-        
+    
+  componentDidUpdate: (prev_props) ->
+    if prev_props.hash != @props.hash
+      @_fetchByProps()
+      
   getInitialState: ->
     subjects: []
 
   render: ->
     
     if @state.subjects_prev_page?
-       prevButton = <GenericButton onClick={@prevPage} label="Prev" />
+       prevButton = <Link to="/browse/#{@state.subjects_prev_page}">Previous</Link>
     else
        prevButton = <span/>
     if @state.subjects_next_page?
-       nextButton = <GenericButton onClick={@nextPage} label="Next" />
+       nextButton = <Link to="/browse/#{@state.subjects_next_page}">Next</Link>      
     else
        nextButton = <span/>
 
@@ -61,21 +65,4 @@ module.exports = React.createClass
       </div>
    </div>
            
-  nextPage: ->
-    params =
-      page: @state.subjects_next_page
-      type: @props.type 
-      limit: @props.limit
-      browse: true
-      
-    @fetchSubjects(params)
-
-  prevPage: ->
-    params =
-      page: @state.subjects_prev_page
-      type: @props.type 
-      limit: @props.limit
-      browse: true
-      
-    @fetchSubjects(params)
 

@@ -17,10 +17,10 @@ module.exports = React.createClass
       <nav className="top-bar">
         <ul className="menu">
           <li>
-            <Link to="/#" activeClassName="selected">Label This</Link>
+            <Link to="/" activeClassName="selected">Label This</Link>
           </li>          
           <li>
-            <Link to="browse" activeClassName="selected">Browse</Link>
+            <Link to="/browse/1" activeClassName="selected">Browse</Link>
           </li>
           {
             # Workflows tabs:
@@ -32,7 +32,7 @@ module.exports = React.createClass
               <li key={key}><Link to="/#{workflow.name}" activeClassName="selected">{title}</Link></li>
           }
           <li>
-            <Link to="/#about" activeClassName="selected">About the Project</Link>
+            <Link to="/" activeClassName="selected">About the Project</Link>
           </li>
           { # include blog tab if defined
             if @props.blogUrl?

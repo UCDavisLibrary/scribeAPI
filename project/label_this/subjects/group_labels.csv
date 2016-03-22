@@ -1,5 +1,4 @@
 order,file_path,thumbnail,width,height
-1,/images/labels/2048x/0/Amerine-0001.jpg,/images/labels/200x/0/Amerine-0001.jpg,2048,1365
 2,/images/labels/2048x/0/Amerine-0002.jpg,/images/labels/200x/0/Amerine-0002.jpg,1366,2048
 3,/images/labels/2048x/0/Amerine-0003.jpg,/images/labels/200x/0/Amerine-0003.jpg,1366,2048
 4,/images/labels/2048x/0/Amerine-0004.jpg,/images/labels/200x/0/Amerine-0004.jpg,2048,1365
@@ -12,7 +11,6 @@ order,file_path,thumbnail,width,height
 11,/images/labels/2048x/0/Amerine-0011.jpg,/images/labels/200x/0/Amerine-0011.jpg,2048,1365
 12,/images/labels/2048x/0/Amerine-0012.jpg,/images/labels/200x/0/Amerine-0012.jpg,2048,1365
 13,/images/labels/2048x/0/Amerine-0013.jpg,/images/labels/200x/0/Amerine-0013.jpg,2048,1365
-14,/images/labels/2048x/0/Amerine-0014.jpg,/images/labels/200x/0/Amerine-0014.jpg,2048,1365
 15,/images/labels/2048x/0/Amerine-0015.jpg,/images/labels/200x/0/Amerine-0015.jpg,2048,1365
 16,/images/labels/2048x/0/Amerine-0016.jpg,/images/labels/200x/0/Amerine-0016.jpg,2048,1365
 17,/images/labels/2048x/0/Amerine-0017.jpg,/images/labels/200x/0/Amerine-0017.jpg,2048,1365
@@ -63,7 +61,6 @@ order,file_path,thumbnail,width,height
 62,/images/labels/2048x/0/Amerine-0062.jpg,/images/labels/200x/0/Amerine-0062.jpg,2048,1365
 63,/images/labels/2048x/0/Amerine-0063.jpg,/images/labels/200x/0/Amerine-0063.jpg,2048,1365
 64,/images/labels/2048x/0/Amerine-0064.jpg,/images/labels/200x/0/Amerine-0064.jpg,2048,1365
-65,/images/labels/2048x/0/Amerine-0065.jpg,/images/labels/200x/0/Amerine-0065.jpg,2048,1365
 66,/images/labels/2048x/0/Amerine-0066.jpg,/images/labels/200x/0/Amerine-0066.jpg,2048,1365
 67,/images/labels/2048x/0/Amerine-0067.jpg,/images/labels/200x/0/Amerine-0067.jpg,2048,1365
 68,/images/labels/2048x/0/Amerine-0068.jpg,/images/labels/200x/0/Amerine-0068.jpg,2048,1365
