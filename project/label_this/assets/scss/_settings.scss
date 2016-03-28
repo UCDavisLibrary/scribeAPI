@@ -49,7 +49,7 @@ $global-font-size: 100%;
 $global-width: rem-calc(1200);
 $global-lineheight: 1.5;
 $foundation-palette: (
-  primary: #fff,
+  primary: #FFF7EC,
   secondary: #777,
   success: #3adb76,
   warning: #ffae00,
@@ -59,7 +59,7 @@ $light-gray: #e6e6e6;
 $medium-gray: #cacaca;
 $dark-gray: #8a8a8a;
 $black: #0a0a0a;
-$white: #fefefe;
+$white: #FFF7EC;
 $labels-red: #4D0717;
 $body-background: $labels-red;
 $body-font-color: $white;
@@ -69,7 +69,7 @@ $global-margin: 1rem;
 $global-padding: 1rem;
 $global-weight-normal: normal;
 $global-weight-bold: bold;
-$global-radius: 0;
+$global-radius: .3rem;
 $global-text-direction: ltr;
 $global-flexbox: true;
 $print-transparent-backgrounds: true;
@@ -237,7 +237,7 @@ $breadcrumbs-item-slash: true;
 $button-padding: 0.85em 1em;
 $button-margin: 0 0 $global-margin 0;
 $button-fill: hollow;
-$button-background: $primary-color;
+$button-background: $white;
 $button-background-hover: scale-color($button-background, $lightness: -15%);
 $button-color: $white;
 $button-color-alt: $black;
@@ -263,12 +263,12 @@ $buttongroup-expand-max: 6;
 
 $callout-background: $white;
 $callout-background-fade: 85%;
-$callout-border: 1px solid rgba($black, 0.25);
+$callout-border: 1px solid rgba($labels-red, 0.25);
 $callout-margin: 0 0 1rem 0;
 $callout-padding: 1rem;
-$callout-font-color: $body-font-color;
+$callout-font-color: $labels-red;
 $callout-font-color-alt: $body-background;
-$callout-radius: $global-radius;
+$callout-radius: 0;
 $callout-link-tint: 30%;
 
 // 14. Close Button
@@ -328,14 +328,14 @@ $fieldset-padding: rem-calc(20);
 $fieldset-margin: rem-calc(18 0);
 $legend-padding: rem-calc(0 3);
 $form-spacing: rem-calc(16);
-$helptext-color: $black;
+$helptext-color: $white;
 $helptext-font-size: rem-calc(13);
 $helptext-font-style: italic;
-$input-prefix-color: $black;
+$input-prefix-color: $white;
 $input-prefix-background: $light-gray;
 $input-prefix-border: 1px solid $medium-gray;
 $input-prefix-padding: 1rem;
-$form-label-color: $black;
+$form-label-color: $white;
 $form-label-font-size: rem-calc(14);
 $form-label-font-weight: $global-weight-normal;
 $form-label-line-height: 1.8;
