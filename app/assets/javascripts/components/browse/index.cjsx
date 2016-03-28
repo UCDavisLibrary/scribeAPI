@@ -1,15 +1,8 @@
 React = require 'react'
 {Navigation} = require 'react-router'
 {Link} = require 'react-router'
-API = require 'lib/api'
-
-GenericButton = require 'components/buttons/generic-button'
-Pagination = require 'components/core-tools/pagination'
 
 BrowsePanel = require './browse-panel'
-
-MAX_COLS = 5
-MAX_ROWS = 6
 
 module.exports = React.createClass
   displayName: "Browse"

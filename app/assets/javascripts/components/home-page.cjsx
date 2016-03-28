@@ -23,8 +23,9 @@ HomePage = React.createClass
   render:->
      <div className="row">
 
-       <section className="medium-10 medium-offset-1 large-8 large-offset-2 columns">
-         <h1>Label This</h1>
+       <section className="intro medium-10 medium-offset-1 large-8 large-offset-2 columns">
+
+         <h1 className="title"></h1>
           
          <p>The labels in the Maynard Amerine Collection at the UC Davis Libary tell the story of the growing wine industry in
          California. Many of them are meaningful windows into the fabric of both winemaking and winemakers and should be
