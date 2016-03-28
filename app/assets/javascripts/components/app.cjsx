@@ -96,7 +96,6 @@ App = React.createClass
           <RouteHandler hash={window.location.hash} project={project} onCloseTutorial={@setTutorialComplete} user={@state.user}/>
         </div>
 
-        Total labels: {@state.subjectsTotalResults}
         <Footer privacyPolicy={ project.privacy_policy } menus={project.menus} partials={project.partials} />
       </div>
     </div>
