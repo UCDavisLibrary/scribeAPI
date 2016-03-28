@@ -49,7 +49,7 @@ $global-font-size: 100%;
 $global-width: rem-calc(1200);
 $global-lineheight: 1.5;
 $foundation-palette: (
-  primary: #2199e8,
+  primary: #fff,
   secondary: #777,
   success: #3adb76,
   warning: #ffae00,
@@ -60,9 +60,10 @@ $medium-gray: #cacaca;
 $dark-gray: #8a8a8a;
 $black: #0a0a0a;
 $white: #fefefe;
-$body-background: $white;
-$body-font-color: $black;
-$body-font-family: 'proxima-nova', Helvetica, Roboto, Arial, sans-serif;
+$labels-red: #4D0717;
+$body-background: $labels-red;
+$body-font-color: $white;
+$body-font-family: "alverata pe", "alverata-pe", 'Georgia', serif;
 $body-antialiased: true;
 $global-margin: 1rem;
 $global-padding: 1rem;
@@ -90,11 +91,11 @@ $breakpoint-classes: (small medium large);
 // 3. The Grid
 // -----------
 
-$grid-row-width: 920px; // $global-width;
+$grid-row-width: $global-width;
 $grid-column-count: 12;
 $grid-column-gutter: (
-  small: 10px,
-  medium: 15px,
+  small: 20px,
+  medium: 30px,
 );
 $grid-column-align-edge: true;
 $block-grid-max: 8;
@@ -108,19 +109,19 @@ $header-font-style: normal;
 $font-family-monospace: Consolas, 'Liberation Mono', Courier, monospace;
 $header-sizes: (
   small: (
-    'h1': 24,
-    'h2': 20,
-    'h3': 19,
+    'h1': 36,
+    'h2': 24,
+    'h3': 21,
     'h4': 18,
-    'h5': 17,
+    'h5': 16,
     'h6': 16,
   ),
   medium: (
-    'h1': 48,
-    'h2': 40,
-    'h3': 31,
-    'h4': 25,
-    'h5': 20,
+    'h1': 36,
+    'h2': 24,
+    'h3': 21,
+    'h4': 18,
+    'h5': 16,
     'h6': 16,
   ),
 );
@@ -155,11 +156,11 @@ $list-nested-side-margin: 1.25rem;
 $defnlist-margin-bottom: 1rem;
 $defnlist-term-weight: $global-weight-bold;
 $defnlist-term-margin-bottom: 0.3rem;
-$blockquote-color: $dark-gray;
+$blockquote-color: $white;
 $blockquote-padding: rem-calc(9 20 0 19);
 $blockquote-border: 1px solid $medium-gray;
 $cite-font-size: rem-calc(13);
-$cite-color: $dark-gray;
+$cite-color: $white;
 $keystroke-font: $font-family-monospace;
 $keystroke-color: $black;
 $keystroke-background: $light-gray;
@@ -235,7 +236,7 @@ $breadcrumbs-item-slash: true;
 
 $button-padding: 0.85em 1em;
 $button-margin: 0 0 $global-margin 0;
-$button-fill: solid;
+$button-fill: hollow;
 $button-background: $primary-color;
 $button-background-hover: scale-color($button-background, $lightness: -15%);
 $button-color: $white;
@@ -426,7 +427,7 @@ $orbit-control-zindex: 10;
 
 $pagination-font-size: rem-calc(14);
 $pagination-margin-bottom: $global-margin;
-$pagination-item-color: $black;
+$pagination-item-color: $white;
 $pagination-item-padding: rem-calc(3 10);
 $pagination-item-spacing: rem-calc(1);
 $pagination-radius: $global-radius;
@@ -434,7 +435,7 @@ $pagination-item-background-hover: $light-gray;
 $pagination-item-background-current: $primary-color;
 $pagination-item-color-current: foreground($pagination-item-background-current);
 $pagination-item-color-disabled: $medium-gray;
-$pagination-ellipsis-color: $black;
+$pagination-ellipsis-color: $white;
 $pagination-mobile-items: false;
 $pagination-arrows: true;
 
@@ -482,11 +483,11 @@ $switch-height: 2rem;
 $switch-height-tiny: 1.5rem;
 $switch-height-small: 1.75rem;
 $switch-height-large: 2.5rem;
-$switch-radius: $global-radius;
+$switch-radius: 3rem;
 $switch-margin: $global-margin;
 $switch-paddle-background: $white;
 $switch-paddle-offset: 0.25rem;
-$switch-paddle-radius: $global-radius;
+$switch-paddle-radius: 3rem;
 $switch-paddle-transition: all 0.25s ease-out;
 
 // 31. Table
@@ -524,7 +525,7 @@ $tab-content-padding: 1rem;
 // 33. Thumbnail
 // -------------
 
-$thumbnail-border: solid 4px $white;
+$thumbnail-border: none;
 $thumbnail-margin-bottom: $global-margin;
 $thumbnail-shadow: 0 0 0 1px rgba($black, 0.2);
 $thumbnail-shadow-hover: 0 0 6px 1px rgba($primary-color, 0.5);
@@ -559,7 +560,7 @@ $tooltip-radius: $global-radius;
 // -----------
 
 $topbar-padding: 0.5rem;
-$topbar-background: $light-gray;
+$topbar-background: $body-background;
 $topbar-submenu-background: $topbar-background;
 $topbar-title-spacing: 1rem;
 $topbar-input-width: 200px;
