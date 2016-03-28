@@ -34,11 +34,11 @@ HomePage = React.createClass
          <p className="lead">Before we can create a searchable database, we need to transcribe the labels. That’s where you come in! Help us
          uncork a piece of history.</p>
 
-   			 <div class="row align-center">
+   			 <div className="row align-center">
            <Link to="/mark" className="button large">Get Started</Link>        
    			 </div>
        </section>
- 		   <section class="small-12 medium-10 medium-offset-1 large-8 large-offset-2 columns">           
+ 		   <section className="small-12 medium-10 medium-offset-1 large-8 large-offset-2 columns">           
          <h2>Just want to look at the pretty labels?</h2>
 
          <p>Since the labels aren’t transcribed yet, they’re just ordered randomly. That’s why we need your help. As we

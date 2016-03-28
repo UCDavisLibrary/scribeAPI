@@ -33,45 +33,6 @@ footer {
   display: inline-block;
   margin: auto; }
 
-.main-wine-label {
-  margin: 0 0 1rem 0; }
-
-.callout {
-  min-width: 100%; }
-
-.button {
-  text-transform: uppercase; }
-
-.secondary.button {
-  color: #4D0717;
-  border-color: #4D0717; }
-
-.intro {
-  background: #FFF7EC;
-  color: #4D0717;
-  padding: 3rem;
-  margin-bottom: 2rem; }
-  .intro .title {
-    height: 15rem;
-    background: url("../images/label-this-title-image.svg");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 300;
-    margin-bottom: 3rem; }
-
-.modal-position {
-  position: fixed;
-  top: 200px;
-  left: 25%; }
-
-.transcribe-tool {
-  min-width: 30rem;
-  background: #FFF7EC;
-  padding: 1rem;
-  border-radius: 0.3rem; }
-  .transcribe-tool label {
-    color: #4D0717; }
-
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
 /**
    * 1. Set default font family to sans-serif.
