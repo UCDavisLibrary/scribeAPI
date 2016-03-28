@@ -1,0 +1,89 @@
+@charset 'utf-8';
+
+@import 'settings';
+@import 'foundation';
+@import 'motion-ui';
+
+@include foundation-global-styles;
+//@include foundation-grid;
+@include foundation-flex-grid;
+@include foundation-typography;
+@include foundation-button;
+@include foundation-forms;
+@include foundation-button-group;
+@include foundation-menu;
+@include foundation-menu-icon;
+@include foundation-tabs;
+@include foundation-thumbnail;
+@include foundation-tooltip;
+@include foundation-top-bar;
+@include foundation-visibility-classes;
+@include foundation-float-classes;
+@include foundation-flex-classes;
+@include foundation-pagination;
+
+html {
+    background: $body-background;
+}
+.browse {
+    min-height: 80%;
+}
+
+.subject-set-toolbar-links {
+    background: $body-background;
+}
+
+footer {
+    background: $topbar-background;
+    padding: 3em;
+    min-height: 200px;
+}
+
+.browse-group .row {
+
+    margin-top: 30px;
+    margin-bottom: 30px;
+
+}
+.browse-group .column, .view-group .column {
+    text-align: center;
+    padding: 0;
+}
+
+.browse-group .column img, .view-group .column img {
+    display: inline-block;
+    margin: auto;
+}
+
+.view-group .column {
+    min-height: 1200px;
+}
+
+.group {
+    background: none;
+    width: auto;
+    height: auto;
+    border: none;
+    box-shadow: none;
+}
+
+.temp-browse {
+    margin: 50px 200px;
+}
+
+.temp-browse-nav {
+    margin: 20px 25%;
+    text-align: center;
+}
+.temp-browse-nav button {
+    margin: 0 2em;
+}
+
+.temp-view {
+    margin: auto;
+}
+
+.temp-view img {
+    display: block;
+    margin: auto;
+}
