@@ -5,6 +5,73 @@
  * foundation.zurb.com
  * Licensed under MIT Open Source
  */
+html {
+  background: #4D0717; }
+
+.browse {
+  min-height: 80%; }
+
+.subject-set-toolbar-links {
+  background: #4D0717; }
+
+footer {
+  background: #4D0717;
+  padding: 3em;
+  min-height: 200px; }
+
+.browse-group .row {
+  margin-top: 30px;
+  margin-bottom: 30px; }
+
+.view-group figure {
+  min-height: 682px; }
+
+.browse-group {
+  min-height: 800px; }
+
+.view .button {
+  display: inline-block;
+  margin: auto; }
+
+.main-wine-label {
+  margin: 0 0 1rem 0; }
+
+.callout {
+  min-width: 100%; }
+
+.button {
+  text-transform: uppercase; }
+
+.secondary.button {
+  color: #4D0717;
+  border-color: #4D0717; }
+
+.intro {
+  background: #FFF7EC;
+  color: #4D0717;
+  padding: 3rem;
+  margin-bottom: 2rem; }
+  .intro .title {
+    height: 15rem;
+    background: url("../images/label-this-title-image.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 300;
+    margin-bottom: 3rem; }
+
+.modal-position {
+  position: fixed;
+  top: 200px;
+  left: 25%; }
+
+.transcribe-tool {
+  min-width: 30rem;
+  background: #FFF7EC;
+  padding: 1rem;
+  border-radius: 0.3rem; }
+  .transcribe-tool label {
+    color: #4D0717; }
+
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
 /**
    * 1. Set default font family to sans-serif.
@@ -3980,34 +4047,6 @@ table.hover tr:nth-of-type(even):hover {
     -webkit-order: 6;
         -ms-flex-order: 6;
             order: 6; } }
-
-html {
-  background: #4D0717; }
-
-.browse {
-  min-height: 80%; }
-
-.subject-set-toolbar-links {
-  background: #4D0717; }
-
-footer {
-  background: #4D0717;
-  padding: 3em;
-  min-height: 200px; }
-
-.browse-group .row {
-  margin-top: 30px;
-  margin-bottom: 30px; }
-
-.view-group figure {
-  min-height: 682px; }
-
-.browse-group {
-  min-height: 800px; }
-
-.view .button {
-  display: inline-block;
-  margin: auto; }
 
 .main-wine-label {
   margin: 0 0 1rem 0; }
