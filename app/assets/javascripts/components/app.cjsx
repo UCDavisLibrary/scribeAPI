@@ -74,9 +74,6 @@ App = React.createClass
     style.backgroundImage = "url(#{project.background})" if project.background?
 
     <div>
-
-      <div>
-
         <MainHeader
           workflows={project.workflows}
           feedbackFormUrl={project.feedback_form_url}
@@ -97,7 +94,7 @@ App = React.createClass
         </div>
 
         <Footer privacyPolicy={ project.privacy_policy } menus={project.menus} partials={project.partials} />
-      </div>
+
     </div>
 
 module.exports = App

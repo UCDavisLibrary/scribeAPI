@@ -2,23 +2,23 @@ API = require './api'
 
 module.exports =
   componentDidMount: ->
-   @_fetchByProps()
+    @_fetchByProps()
 
   _fetchByProps: ->
     # Fetching a single subject?
-    if @props.params.subject_id?
+    if @props.params?.subject_id?
       @fetchSubject @props.params.subject_id
 
     # Fetching subjects by current workflow and optional filters:
     else
       # Gather filters by which to query subjects
       params =
-        parent_subject_id:        @props.params.parent_subject_id
-        group_id:                 @props.query.group_id ? null
-        subject_set_id:           @props.query.subject_set_id ? null
-        page:                     @props.params.page ? @props.page ? 1
+        parent_subject_id:        @props.params?.parent_subject_id ? null
+        group_id:                 @props.query?.group_id ? null
+        subject_set_id:           @props.query?.subject_set_id ? null
+        page:                     @props.params?.page ? @props.page ? 1
         limit:                    @props.limit ? @getActiveWorkflow?().subject_fetch_limit
-        order_filter:             @props.params.order_filter ? null
+        order_filter:             @props.params?.order_filter ? null
         type:                     @props.type ? null
       @fetchSubjects params
     
