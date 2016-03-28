@@ -2,7 +2,7 @@
 React         = require("react")
 GroupBrowser  = require('./group-browser')
 NameSearch    = require('./name-search')
-Browse        = require './browse'
+BrowsePanel   = require 'components/browse/browse-panel'
 {Navigation}  = require 'react-router'
 {Link} = require 'react-router'
 
@@ -43,7 +43,7 @@ HomePage = React.createClass
           
          <p>In the meantime, you can browse through the labels at random below, or search for terms within the labels we’ve transcribed so far.</p>
     
-         <Browse page={1}/> 
+         <BrowsePanel project={@props.project} page={"1"} />
         </section>
      </div>
 module.exports = HomePage

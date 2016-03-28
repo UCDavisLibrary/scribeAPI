@@ -4,51 +4,32 @@ React = require 'react'
 API = require 'lib/api'
 
 GenericButton = require 'components/buttons/generic-button'
-FetchSubjectsMixin = require 'lib/fetch-subjects-mixin'
 Pagination = require 'components/core-tools/pagination'
+
+BrowsePanel = require './browse-panel'
 
 MAX_COLS = 5
 MAX_ROWS = 6
 
 module.exports = React.createClass
   displayName: "Browse"
-  mixins: [Navigation, FetchSubjectsMixin]
+  mixins: [Navigation]
   
-  getDefaultProps: ->
-    page: 1
-    browse: true
-    limit: MAX_COLS * MAX_ROWS
-    type: 'root'
-    
-  componentDidUpdate: (prev_props) ->
-    if prev_props.hash != @props.hash
-      @_fetchByProps()
-      
-  getInitialState: ->
-    subjects: []
-
   render: ->
-    pagination = <Pagination currentPage={@state.subjects_current_page} nextPage={@state.subjects_next_page} previousPage={@state.subjects_prev_page} totalResults={@state.subjectsTotalResults} urlBase="/browse" totalPages={@state.subjects_total_pages}/>
-      
-    <div className="browse">
-      <div className="browse-nav row">
-        { pagination }
-      </div>
-      <div className="browse-group columns"> 
-         <div className="row small-up-2 medium-up-4 large-up-5 align-center">       
-            {
-             for subj, index in @state.subjects
-               <div className="column" key={index}>
-                 <Link className="thumbnail" to="/view/index/#{subj.order}">
-                   <img src={subj.location.thumbnail} width="200" height="200"/>
-                 </Link>
-               </div>
-            }
-          </div>
-      </div>
-      <div className="browse-nav row">
-        { pagination }        
-      </div>
-   </div>
-           
-
+    <div>
+      <section className="medium-10 medium-offset-1 large-8 large-offset-2 row align-middle">
+        <div className="column">
+          <h3>Help us uncork a piece of history</h3>
+          <p>Before we can create a searchable database, we need to transcribe the labels. That’s where you come in!</p>
+        </div>
+        <div className="shrink">
+          <Link className="button" to="/mark">Get started</Link>
+        </div>
+      </section>
+      <section className="medium-10 medium-offset-1 large-8 large-offset-2 columns ">
+        <h1>Browse labels randomly</h1>
+          
+        <BrowsePanel project={@props.project} page={@props.params.page} />
+      </section>
+    </div>           
+ 

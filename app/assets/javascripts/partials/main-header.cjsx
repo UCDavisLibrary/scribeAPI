@@ -18,7 +18,7 @@ module.exports = React.createClass
         <div className="top-bar-left">
           <ul className="menu">
             <li>
-              <Link to="/" activeClassName="selected">Label This</Link>
+              <Link to="/home" activeClassName="selected">Label This</Link>
             </li>          
             <li>
               <Link to="/browse/1" activeClassName="selected">Browse</Link>
