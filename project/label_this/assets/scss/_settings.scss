@@ -59,10 +59,12 @@ $light-gray: #e6e6e6;
 $medium-gray: #cacaca;
 $dark-gray: #8a8a8a;
 $black: #0a0a0a;
-$white: #FFF7EC;
+$white: #FFF;
 $labels-red: #4D0717;
+$labels-focal: #642667;
+$labels-background: #FFF7EC;
 $body-background: $labels-red;
-$body-font-color: $white;
+$body-font-color: #FFF7EC;
 $body-font-family: "alverata pe", "alverata-pe", 'Georgia', serif;
 $body-antialiased: true;
 $global-margin: 1rem;
@@ -236,8 +238,8 @@ $breadcrumbs-item-slash: true;
 
 $button-padding: 0.85em 1em;
 $button-margin: 0 0 $global-margin 0;
-$button-fill: hollow;
-$button-background: $white;
+$button-fill: solid;
+$button-background: $labels-focal;
 $button-background-hover: scale-color($button-background, $lightness: -15%);
 $button-color: $white;
 $button-color-alt: $black;
@@ -261,11 +263,11 @@ $buttongroup-expand-max: 6;
 // 13. Callout
 // -----------
 
-$callout-background: $white;
-$callout-background-fade: 85%;
-$callout-border: 1px solid rgba($labels-red, 0.25);
-$callout-margin: 0 0 1rem 0;
-$callout-padding: 1rem;
+$callout-background: $labels-background;
+//$callout-background-fade: 85%;
+$callout-border: 1px solid $labels-red;
+$callout-margin: 0 0 0 0;
+$callout-padding: .5rem;
 $callout-font-color: $labels-red;
 $callout-font-color-alt: $body-background;
 $callout-radius: 0;
@@ -478,7 +480,7 @@ $slider-radius: $global-radius;
 // ----------
 
 $switch-background: $medium-gray;
-$switch-background-active: $primary-color;
+$switch-background-active: $labels-focal;
 $switch-height: 2rem;
 $switch-height-tiny: 1.5rem;
 $switch-height-small: 1.75rem;
