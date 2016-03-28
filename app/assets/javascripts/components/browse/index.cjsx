@@ -7,14 +7,17 @@ GenericButton = require 'components/buttons/generic-button'
 FetchSubjectsMixin = require 'lib/fetch-subjects-mixin'
 Pagination = require 'components/core-tools/pagination'
 
+MAX_COLS = 5
+MAX_ROWS = 6
+
 module.exports = React.createClass
   displayName: "Browse"
   mixins: [Navigation, FetchSubjectsMixin]
-
+  
   getDefaultProps: ->
     page: 1
     browse: true
-    limit: 28
+    limit: MAX_COLS * MAX_ROWS
     type: 'root'
     
   componentDidUpdate: (prev_props) ->
@@ -31,25 +34,17 @@ module.exports = React.createClass
       <div className="browse-nav row">
         { pagination }
       </div>
-      <div className="browse-group columns">
-          {
-            subj_array = @state.subjects.slice(0)
-            cols = []
-            while (subj_array.length) 
-              cols.push(subj_array.splice(0, 4))
-
-            for col, i in cols
-               <div className="row small-up-1 medium-up-2 large-up-4 align-center" key={i}>
-                 {
-                   for subj, index in col
-                     <div className="column" key={index}>
-                        <Link to="/view/index/#{subj.order}">
-                           <img src={subj.location.thumbnail} width="200" height="200"/>
-                        </Link>
-                     </div>
-                 }
+      <div className="browse-group columns"> 
+         <div className="row small-up-2 medium-up-4 large-up-5 align-center">       
+            {
+             for subj, index in @state.subjects
+               <div className="column" key={index}>
+                 <Link className="thumbnail" to="/view/index/#{subj.order}">
+                   <img src={subj.location.thumbnail} width="200" height="200"/>
+                 </Link>
                </div>
-          }
+            }
+          </div>
       </div>
       <div className="browse-nav row">
         { pagination }        

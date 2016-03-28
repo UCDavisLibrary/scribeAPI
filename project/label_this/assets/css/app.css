@@ -23,14 +23,6 @@ footer {
   margin-top: 30px;
   margin-bottom: 30px; }
 
-.browse-group .column, .browse-group .columns, .view-group .column, .view-group .columns {
-  text-align: center;
-  padding: 0; }
-
-.browse-group .column img, .browse-group .columns img, .view-group .column img, .view-group .columns img {
-  display: inline-block;
-  margin: auto; }
-
 .view-group .column, .view-group .columns {
   min-height: 1200px; }
 
@@ -40,23 +32,6 @@ footer {
   height: auto;
   border: none;
   box-shadow: none; }
-
-.temp-browse {
-  margin: 50px 200px; }
-
-.temp-browse-nav {
-  margin: 20px 25%;
-  text-align: center; }
-
-.temp-browse-nav button {
-  margin: 0 2em; }
-
-.temp-view {
-  margin: auto; }
-
-.temp-view img {
-  display: block;
-  margin: auto; }
 
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
 /**
