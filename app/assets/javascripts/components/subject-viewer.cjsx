@@ -420,17 +420,15 @@ module.exports = React.createClass
 
     #  Render any tools passed directly in in same parent div so that we can efficiently position them with respect to marks"
 
-    <div className="subject-viewer#{if @props.active then ' active' else ''}">
-      <div className="subject-container">
-        <div className="marking-surface">
+    <section className="">
+        <figure className="main-wine-label">
           {markingSurfaceContent}
           { if @props.children?
               React.cloneElement @props.children,
                 loading: @state.loading       # pass loading state to current transcribe tool
                 scale: scale                  # pass scale down to children (for transcribe tools)
           }
-        </div>
-      </div>
-    </div>
+        </figure>
+    </section>
 
 window.React = React
