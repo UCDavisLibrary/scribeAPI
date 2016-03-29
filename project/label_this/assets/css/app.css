@@ -5,19 +5,8 @@
  * foundation.zurb.com
  * Licensed under MIT Open Source
  */
-html {
-  background: #4D0717; }
-
 .browse {
   min-height: 80%; }
-
-.subject-set-toolbar-links {
-  background: #4D0717; }
-
-footer {
-  background: #4D0717;
-  padding: 3em;
-  min-height: 200px; }
 
 .browse-group .row {
   margin-top: 30px;
@@ -28,10 +17,6 @@ footer {
 
 .browse-group {
   min-height: 800px; }
-
-.view .button {
-  display: inline-block;
-  margin: auto; }
 
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
 /**
@@ -4009,6 +3994,20 @@ table.hover tr:nth-of-type(even):hover {
         -ms-flex-order: 6;
             order: 6; } }
 
+body {
+  background: #4D0717;
+  /* Old browsers */
+  /* FF3.6+ */
+  /* Chrome,Safari4+ */
+  /* Chrome10+,Safari5.1+ */
+  /* Opera 11.10+ */
+  /* IE10+ */
+  background: linear-gradient(to bottom, #4D0717 0%, #0a0a0a 100%);
+  /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#000000',GradientType=0 );
+  /* IE6-9 */
+  background-attachment: fixed; }
+
 .main-wine-label {
   margin: 0 0 1rem 0; }
 
@@ -4037,13 +4036,106 @@ table.hover tr:nth-of-type(even):hover {
 
 .modal-position {
   position: fixed;
-  top: 200px;
+  top: 250px;
   left: 25%; }
 
-.transcribe-tool {
+.transcribe-tool, .help-dialogue {
   min-width: 30rem;
+  max-width: 35rem;
   background: #FFF7EC;
   padding: 1rem;
   border-radius: 0.3rem; }
-  .transcribe-tool label {
+  .transcribe-tool label, .help-dialogue label {
     color: #4D0717; }
+
+.vignette-overlay {
+  background: rgba(0, 0, 0, 0.6);
+  position: absolute;
+  top: 1;
+  left: 0;
+  width: 100%;
+  height: 100%; }
+
+.webicon.facebook {
+  background: url("../images/webicons/webicon-facebook.svg"); }
+
+.webicon.pinterest {
+  background: url("../images/webicons/webicon-pinterest.svg"); }
+
+.webicon.twitter {
+  background: url("../images/webicons/webicon-twitter.svg"); }
+
+/* Webicons by Adam Fairhead: http://adamfairhead.com */
+.webicon {
+  display: inline-block;
+  background-size: 100%;
+  width: 30px;
+  height: 30px;
+  text-indent: -999em;
+  text-align: left;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.5);
+  border-radius: 5px;
+  margin-bottom: 5px; }
+
+.webicon:hover {
+  margin: -1px 0 1px;
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.25); }
+
+.webicon.small {
+  width: 20px;
+  height: 20px;
+  border-radius: 3px; }
+
+.webicon.large {
+  width: 48px;
+  height: 48px;
+  border-radius: 6px; }
+
+/* restore webicons accessibility for print */
+@media print {
+  * {
+    background: transparent !important;
+    color: #000 !important;
+    box-shadow: none !important;
+    text-shadow: none !important; }
+  .webicon {
+    text-indent: 0;
+    width: auto !important;
+    height: auto !important;
+    border-radius: 0 !important; } }
+
+.no-svg .webicon.facebook {
+  background: url("../images/webicons/webicon-facebook-m.png"); }
+
+.no-svg .webicon.facebook.large {
+  background: url("../images/webicons/webicon-facebook.png"); }
+
+.no-svg .webicon.facebook.small {
+  background: url("../images/webicons/webicon-facebook-s.png"); }
+
+.svg .webicon.facebook {
+  background: url("../images/webicons/webicon-facebook.svg"); }
+
+.no-svg .webicon.pinterest {
+  background: url("../images/webicons/webicon-pinterest-m.png"); }
+
+.no-svg .webicon.pinterest.large {
+  background: url("../images/webicons/webicon-pinterest.png"); }
+
+.no-svg .webicon.pinterest.small {
+  background: url("../images/webicons/webicon-pinterest-s.png"); }
+
+.svg .webicon.pinterest {
+  background: url("../images/webicons/webicon-pinterest.svg"); }
+
+.no-svg .webicon.twitter {
+  background: url("../images/webicons/webicon-twitter-m.png"); }
+
+.no-svg .webicon.twitter.large {
+  background: url("../images/webicons/webicon-twitter.png"); }
+
+.no-svg .webicon.twitter.small {
+  background: url("../images/webicons/webicon-twitter-s.png"); }
+
+.svg .webicon.twitter {
+  background: url("../images/webicons/webicon-twitter.svg"); }
