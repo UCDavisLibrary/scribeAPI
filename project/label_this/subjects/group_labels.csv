@@ -1,4 +1,4 @@
-order,file_path,thumbnail,width,height,filenumber
+order,file_path,thumbnail,width,height,identifier
 0,/images/labels/2048x/0/Amerine-0002.jpg,/images/labels/200x/0/Amerine-0002.jpg,1366,2048,0002
 1,/images/labels/2048x/0/Amerine-0003.jpg,/images/labels/200x/0/Amerine-0003.jpg,1366,2048,0003
 2,/images/labels/2048x/0/Amerine-0004.jpg,/images/labels/200x/0/Amerine-0004.jpg,2048,1365,0004

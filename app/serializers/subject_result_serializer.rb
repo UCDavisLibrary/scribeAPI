@@ -19,11 +19,14 @@ class SubjectResultSerializer < ActiveModel::MongoidSerializer
       next_page: object.next_page,
       prev_page: object.prev_page,
       total_pages: object.total_pages,
-      total: object.count
+      total: object.count,
+      links: self.links()  # LD: Get this to a place where we can consume it
     } if object.respond_to? :current_page
   end
 
   def links
     serialization_options[:links]
   end
+
+  
 end

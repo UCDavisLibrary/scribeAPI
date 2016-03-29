@@ -6,9 +6,13 @@ module.exports =
 
   _fetchByProps: ->
     # Fetching a single subject?
-    if @props.params?.subject_id?
-      @fetchSubject @props.params.subject_id
+    if @props.identifier?
+      @fetchSubjectByIdentifier @props.identifier
 
+    else if @props.params?.subject_id?
+      @fetchSubject @props.params.subject_id 
+
+      
     # Fetching subjects by current workflow and optional filters:
     else
       # Gather filters by which to query subjects
@@ -26,6 +30,19 @@ module.exports =
     subjects.sort (a,b) ->
       return if a.region.y >= b.region.y then 1 else -1
 
+  # Fetch by identifier
+  fetchSubjectByIdentifier: (identifier) ->
+    request = API.type("labels").get identifier
+
+    request.then (subject) =>
+      @setState
+        subjects_next_page: subject.getMeta("links")["next"]["href"]
+        subjects_prev_page: subject.getMeta("links")["prev"]["href"]
+        subjects: [subject],
+        () =>
+          if @fetchSubjectsCallback?
+            @fetchSubjectsCallback()
+    
   # Fetch a single subject:
   fetchSubject: (subject_id)->
     request = API.type("subjects").get subject_id

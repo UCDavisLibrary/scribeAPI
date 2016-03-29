@@ -37,8 +37,7 @@ class AppRouter
           <Redirect from="/browse" to="/browse/1" />
         </Route>
 
-        <Route name="view" path="/view/index/:order_filter" handler={View} />
-        <Route name="view-index" path="/view/:subject_id" handler={View} />
+        <Route name="view" path="/view/:identifier" handler={View} />
           
         { (w for w in project.workflows when w.name in ['mark','transcribe','verify']).map (workflow, key) =>
             handler = eval workflow.name.charAt(0).toUpperCase() + workflow.name.slice(1)

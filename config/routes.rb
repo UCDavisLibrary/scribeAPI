@@ -21,6 +21,7 @@ API::Application.routes.draw do
   get '/workflows/:workflow_id/subject_sets',                 to: 'subject_sets#index'
   
   # Subjects
+  get '/labels/:key',                                   to: 'subjects#show_by_key',  defaults: { format: 'json' }  
   get '/subjects/:subject_id',                                to: 'subjects#show',         defaults: { format: 'json' }
   get '/subjects',                                            to: 'subjects#index',        defaults: { format: 'json' }
   get '/workflows/:workflow_id/subject_sets/:subject_set_id/subjects/:subject_id',    to: 'subject_sets#show',     defaults: { format: 'json' }

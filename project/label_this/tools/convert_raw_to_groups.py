@@ -9,7 +9,7 @@ raw = 'raw-manifest.csv'
 URL_BASE = '/images/labels/'
 FILE_SUFFIX = '.jpg'
 OUTPUT_DIR = 'subjects/'
-OUTPUT_FIELDS = ('order', 'file_path', 'thumbnail', 'width', 'height', 'filenumber')
+OUTPUT_FIELDS = ('order', 'file_path', 'thumbnail', 'width', 'height', 'identifier')
 MEDIA_DIR = 'assets/images/labels/2048x/'
 
 output_file = OUTPUT_DIR + 'group_labels.csv'
