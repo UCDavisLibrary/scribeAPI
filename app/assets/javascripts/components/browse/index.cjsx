@@ -22,7 +22,7 @@ module.exports = React.createClass
       <section className="medium-10 medium-offset-1 large-8 large-offset-2 columns ">
         <h1>Browse labels randomly</h1>
           
-        <BrowsePanel project={@props.project} page={@props.params.page} />
+        <BrowsePanel project={@props.project}  page={@props.params.page} show_pagination={true} />
       </section>
     </div>           
  

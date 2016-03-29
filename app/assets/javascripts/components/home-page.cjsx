@@ -47,7 +47,11 @@ HomePage = React.createClass
           
          <p>In the meantime, you can browse through the labels at random below, or search for terms within the labels we’ve transcribed so far.</p>
     
-         <BrowsePanel project={@props.project} page={"1"} />
+         <BrowsePanel project={@props.project} page={"1"} show_pagination={false}/>
+
+         <div className="row align-center">
+           <Link className="small secondary button" to="/browse">Browse More Labels</Link>
+         </div>           
         </section>
      </div>
         
