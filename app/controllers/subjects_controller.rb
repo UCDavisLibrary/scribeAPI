@@ -105,7 +105,7 @@ class SubjectsController < ApplicationController
 
     this_subject_result = Subject.page(1).where('meta_data.identifier' => key)
     
-    next_subjects = Subject.by_type(type).where(:order.gt => subject.order)
+    next_subjects = Subject.by_type(type).where(:order.gt => subject.order.to_i)
     if next_subjects.count > 0
       next_page_identifier = next_subjects[0].meta_data[:identifier]
       if next_page_identifier
@@ -113,7 +113,7 @@ class SubjectsController < ApplicationController
       end
     end
     
-    previous_subjects = Subject.by_type(type).where(:order.lt => subject.order).order(order: :desc)
+    previous_subjects = Subject.by_type(type).where(:order.lt => subject.order.to_i).order(order: :desc)
     if previous_subjects.count > 0
       previous_page_identifier = previous_subjects[0].meta_data[:identifier]
       if previous_page_identifier
