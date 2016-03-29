@@ -107,7 +107,7 @@ class SubjectsController < ApplicationController
     
     next_subjects = Subject.by_type(type).where(:order.gt => subject.order.to_i)
     if next_subjects.count > 0
-      next_page_identifier = next_subjects[0].meta_data[:identifier]
+      next_page_identifier = next_subjects[0].meta_data[:identifier].order(order: :asc)
       if next_page_identifier
         next_page = '/view/' + next_page_identifier
       end
