@@ -196,16 +196,35 @@ module.exports = React.createClass # rename to Classifier
     if currentTask?.tool is 'pick_one'
       currentAnswer = (a for a in currentTask.tool_config.options when a.value == currentAnnotation.value)[0]
       waitingForAnswer = not currentAnswer
+    <div>
+      <section className="row align-center align-middle callout">
+        <div className="shrink columns">
+          <div className="switch">
+            <input className="switch-input" id="exampleSwitch" type="checkbox" name="exampleSwitch"/>
+            <label classNamee="switch-paddle" htmlFor="exampleSwitch">
+              <span className="show-for-sr">Show Others Marks</span>
+            </label>
+          </div>
+        </div>
+        <div className="shrink columns">
+          <div className="image-zoom-controls">
+            Image zooming—TKTK
+          </div>
+        </div>
+        <div className="medium-5 columns">
+          <small>Draw a box around an area of interest on this label. Then tell us whether what you’ve marked is an image or text. Mark as many elements as you want.<a href="../../patterns/04-pages-03-mark-help/04-pages-03-mark-help.html">Need help?</a></small>
+        </div>
+        <div className="columns-2">
+          <a className="button" href="">Next Label</a>
+        </div>
+      </section>
+     { if @state.noMoreSubjectSets
+         <p>There is nothing left to do. Thanks for your work and please check back soon!</p>
 
-    <div className="row">
-      <div className="columns">
-        { if @state.noMoreSubjectSets
-            <p>There is nothing left to do. Thanks for your work and please check back soon!</p>
+       else if @state.notice
+         <DraggableModal header={@state.notice.header} onDone={@state.notice.onClick}>{@state.notice.message}</DraggableModal>
 
-          else if @state.notice
-            <DraggableModal header={@state.notice.header} onDone={@state.notice.onClick}>{@state.notice.message}</DraggableModal>
-
-          else if @getCurrentSubjectSet()?
+       else if @getCurrentSubjectSet()?
             <SubjectSetViewer
               subject_set={@getCurrentSubjectSet()}
               subject_index={@state.subject_index}
@@ -229,119 +248,6 @@ module.exports = React.createClass # rename to Classifier
               interimMarks={@state.interimMarks}
             />
         }
-      </div>
-      <div className="columns">
-        <div className={"task-area " + @getActiveWorkflow().name}>
-          { if @getCurrentTask()? && @getCurrentSubject()?
-              <div className="task-container">
-                <TaskComponent
-                  key={@getCurrentTask().key}
-                  task={currentTask}
-                  annotation={@getCurrentClassification()?.annotation ? {}}
-                  onChange={@handleDataFromTool}
-                  onSubjectHelp={@showSubjectHelp}
-                  subject={@getCurrentSubject()}
-                />
-
-                <nav className="task-nav">
-                  { if false
-                    <button type="button" className="back minor-button" disabled={onFirstAnnotation} onClick={@destroyCurrentAnnotation}>Back</button>
-                  }
-                  { if @getNextTask() and not @state.badSubject?
-                      <button type="button" className="continue major-button" disabled={waitingForAnswer} onClick={@advanceToNextTask}>Next</button>
-                    else
-                      if @state.taskKey == "completion_assessment_task"
-                        if @getCurrentSubject() == @getCurrentSubjectSet().subjects[@getCurrentSubjectSet().subjects.length-1]
-                          <button type="button" className="continue major-button" disabled={waitingForAnswer} onClick={@completeSubjectAssessment}>Next</button>
-                        else
-                          <button type="button" className="continue major-button" disabled={waitingForAnswer} onClick={@completeSubjectAssessment}>Next Page</button>
-                      else
-                        <button type="button" className="continue major-button" disabled={waitingForAnswer} onClick={@completeSubjectSet}>Done</button>
-                  }
-                </nav>
-
-                <div className="help-bad-subject-holder">
-                  { if @getCurrentTask().help?
-                    <HelpButton onClick={@toggleHelp} label="" className="task-help-button" />
-                  }
-                  { if onFirstAnnotation
-                    <BadSubjectButton className="bad-subject-button" label={"Bad " + @props.project.term('subject')} active={@state.badSubject} onClick={@toggleBadSubject} />
-                  }
-                  { if @state.badSubject
-                    <p>You&#39;ve marked this {@props.project.term('subject')} as BAD. Thanks for flagging the issue! <strong>Press DONE to continue.</strong></p>
-                  }
-                </div>
-              </div>
-          }
-
-          <div className="task-secondary-area">
-           <p>
-             <a href={pageURL}>Direct link to this page</a>
-           </p>
-            
-            {
-              if @getCurrentTask()?
-                <p>
-                  <a className="tutorial-link" onClick={@toggleTutorial}>View A Tutorial</a>
-                </p>
-            }
-
-            {
-              if @getCurrentTask()? && @getActiveWorkflow()? && @getWorkflowByName('transcribe')?
-                <p>
-                  <Link to="/transcribe/#{@getWorkflowByName('transcribe').id}/#{@getCurrentSubject()?.id}" className="transcribe-link">Transcribe this {@props.project.term('subject')} now!</Link>
-                </p>
-            }
-
-            {
-              if @getActiveWorkflow()? and @state.groups?.length > 1
-                <p>
-                  <Link to="/groups/#{@getCurrentSubjectSet().group_id}" className="about-link">About this {@props.project.term('group')}.</Link>
-                </p>
-            }
-
-            <div className="forum-holder">
-              <ForumSubjectWidget subject={@getCurrentSubject()} subject_set={@getCurrentSubjectSet()} project={@props.project} />
-            </div>
-
-            <div className="social-media-container">
-              <a href="https://www.facebook.com/sharer.php?u=#{encodeURIComponent pageURL}" target="_blank">
-                <i className="fa fa-facebook-square"/>
-              </a>
-              <a href="https://twitter.com/home?status=#{encodeURIComponent pageURL}%0A" target="_blank">
-                <i className="fa fa-twitter-square"/>
-              </a>
-              <a href="https://plus.google.com/share?url=#{encodeURIComponent pageURL}" target="_blank">
-                <i className="fa fa-google-plus-square"/>
-              </a>
-            </div>
-          </div>
-
-        </div>
-      </div>
-      { if @props.project.tutorial? && @state.showingTutorial
-          # Check for workflow-specific tutorial
-          if @props.project.tutorial.workflows? && @props.project.tutorial.workflows[@getActiveWorkflow()?.name]
-            <Tutorial tutorial={@props.project.tutorial.workflows[@getActiveWorkflow().name]} onCloseTutorial={@props.onCloseTutorial} />
-          # Otherwise just show general tutorial
-          else
-            <Tutorial tutorial={@props.project.tutorial} onCloseTutorial={@props.onCloseTutorial} />
-      }
-      { if @state.helping
-        <HelpModal help={@getCurrentTask().help} onDone={=> @setState helping: false } />
-      }
-      {
-        if @state.lightboxHelp
-          <HelpModal help={{title: "The Lightbox", body: "<p>This Lightbox displays a complete set of documents in order. You can use it to go through the documents sequentially—but feel free to do them in any order that you like! Just click any thumbnail to open that document and begin marking it.</p><p>However, please note that **once you start marking a page, the Lightbox becomes locked ** until you finish marking that page! You can select a new page once you have finished.</p>"}} onDone={=> @setState lightboxHelp: false } />
-      }
-      {
-        if @getCurrentTask()?
-          for tool, i in @getCurrentTask().tool_config.options
-            if tool.help && tool.generates_subject_type && @state.activeSubjectHelper == tool.generates_subject_type
-              <HelpModal help={tool.help} onDone={@hideSubjectHelp} />
-      }
-
     </div>
-
 
 window.React = React
