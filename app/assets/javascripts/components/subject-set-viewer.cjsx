@@ -56,25 +56,6 @@ module.exports = React.createClass
     return null if ! @props.subject_set.subjects?
 
     <div className={"subject-set-viewer" + if @state.toolbar_expanded then ' expand' else ''}>
-      <SubjectSetToolbar
-        workflow={@props.workflow}
-        task={@props.task}
-        subject={@props.subject_set.subjects[@props.subject_index]}
-        subject_set={@props.subject_set}
-        subject_index={@props.subject_index}
-        subjectCurrentPage={@props.subjectCurrentPage}
-        lightboxHelp={@props.lightboxHelp}
-        onSubject={@specificSelection.bind this, @props.subject_index}
-        nextPage={@props.nextPage}
-        prevPage={@props.prevPage}
-        totalSubjectPages={@props.totalSubjectPages}
-        onZoomChange={@handleZoomPanViewBoxChange}
-        viewBox={@state.zoomPanViewBox}
-        onExpand={@onToolbarExpand}
-        onHide={@onToolbarHide}
-        hideOtherMarks={@props.hideOtherMarks}
-        toggleHideOtherMarks={@props.toggleHideOtherMarks}
-      />
 
       <SubjectViewer
         subject={@props.subject_set.subjects[@props.subject_index]}

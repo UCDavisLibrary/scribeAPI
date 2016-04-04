@@ -419,7 +419,6 @@ module.exports = React.createClass
         </svg>
 
     #  Render any tools passed directly in in same parent div so that we can efficiently position them with respect to marks"
-
     <section className="">
         <figure className="main-wine-label">
           {markingSurfaceContent}
@@ -429,6 +428,8 @@ module.exports = React.createClass
                 scale: scale                  # pass scale down to children (for transcribe tools)
           }
         </figure>
+
+        <SubjectMetadata />
     </section>
 
 window.React = React
