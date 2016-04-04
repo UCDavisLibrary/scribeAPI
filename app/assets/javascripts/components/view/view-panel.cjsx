@@ -47,8 +47,7 @@ module.exports = React.createClass
         }
       </section>
         
-      <section className="medium-10 medium-offset-1">
-        <section className="medium-unstack row">
+      <section className="medium-10 medium-offset-1 medium-unstack row">
           <div className="column">
             <h1>Label #XXXXX</h1>
               <dl>
@@ -75,7 +74,6 @@ module.exports = React.createClass
             <h5>Tell us your story</h5>
             <p>Are you a wine expert? Do you have family history with this label? <a href="#">Send us your story</a>!</p>
           </div>
-        </section>        
       </section>
     </div>
 
