@@ -87,7 +87,7 @@ module.exports = React.createClass
 
           else
 
-            <g className="checkbox">
+            <g className="checkbox-x">
               <rect
                 transform="translate(#{-0.5*20},#{-0.5*20})"
                 fill="rgba(255,255,255,0)"

@@ -181,6 +181,13 @@ module.exports = React.createClass
     x: Math.min points[0], @props.sizeRect.props.width - 40 / @props.xScale
     y: Math.min points[1] + 20 / @props.yScale, @props.sizeRect.props.height - 15 / @props.yScale
 
+  # LD Add buttons for text/image marking
+  getMarkSelectionButtonPosition: ()->
+    points = @state.pointsHash["handleHHDrag"]
+
+    x: Math.min points[0], @props.sizeRect.props.width - 40 / @props.xScale
+    y: Math.min points[1] - 100 / @props.yScale,  @props.sizeRect.props.height - 15 / @props.yScale
+
   handleMouseDown: ->
     @props.onSelect @props.mark
 
@@ -195,6 +202,9 @@ module.exports = React.createClass
 
     @props.onChange()
 
+  markSelectionAsImage: ->
+    console.log("Calling mark-as-image")
+    
   render: ->
     classes = []
     classes.push 'transcribable' if @props.isTranscribable
@@ -251,7 +261,6 @@ module.exports = React.createClass
               "
             }
           />
-
         </Draggable>
 
         { if @props.selected
@@ -272,7 +281,20 @@ module.exports = React.createClass
           if @props.selected or @state.markStatus is 'transcribe-enabled'
             @renderMarkButton() if @props.isTranscribable
         }
-
-      </g>
-
+        <Draggable onEnd={@markSelectionAsImage}>
+          <g>
+            <rect
+             transform="translate(#{@getMarkSelectionButtonPosition().x}, #{@getMarkSelectionButtonPosition().y})"
+             fill="rgb(255,0,0)"
+             stroke="rgb(255,0,0)"
+             width="200"
+             height="50"
+             x="0"
+             y="0"
+             rx="0"
+             />
+          </g>
+        </Draggable>
+        
     </g>
+</g>

@@ -310,6 +310,8 @@ module.exports = React.createClass
         continue unless mark.belongsToUser
 
       displaysTranscribeButton = @props.task?.tool_config.displays_transcribe_button != false
+      displaysTranscribeButton = false
+      
       isPriorMark = ! mark.userCreated
 
       <g key={mark._key} className="marks-for-annotation#{if mark.groupActive then ' group-active' else ''}" data-disabled={isPriorMark or null}>

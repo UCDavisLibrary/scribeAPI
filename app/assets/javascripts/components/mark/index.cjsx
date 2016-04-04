@@ -183,6 +183,9 @@ module.exports = React.createClass # rename to Classifier
     return null unless @getCurrentSubjectSet()? && @getActiveWorkflow()?
 
     currentTask = @getCurrentTask()
+    # console.log(@getTasks())
+    
+
     TaskComponent = @getCurrentTool()
     activeWorkflow = @getActiveWorkflow()
     firstTask = activeWorkflow.first_task
@@ -195,6 +198,7 @@ module.exports = React.createClass # rename to Classifier
     if currentTask?.tool is 'pick_one'
       currentAnswer = (a for a in currentTask.tool_config.options when a.value == currentAnnotation.value)[0]
       waitingForAnswer = not currentAnswer
+
     <div>
       <section className="row align-center align-middle callout">
         <div className="shrink columns">
@@ -214,9 +218,7 @@ module.exports = React.createClass # rename to Classifier
           <small>Draw a box around an area of interest on this label. Then tell us whether what you’ve marked is an image or text. Mark as many elements as you want.<a href="../../patterns/04-pages-03-mark-help/04-pages-03-mark-help.html">Need help?</a></small>
         </div>
         <div className="columns-2">
-          { if @getNextTask()
-              <button type="button" className="button" disabled={waitingForAnswer} onClick={@advanceToNextSubject}>Next Label</button>
-          }
+          <button type="button" className="button" disabled={waitingForAnswer} onClick={@advanceToNextSubject}>Next Label</button>
         </div>
       </section>
      { if @state.noMoreSubjectSets

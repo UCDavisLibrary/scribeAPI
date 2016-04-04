@@ -61,12 +61,12 @@ module.exports =
 
     switch markStatus
       when 'mark-committed'
-        # @setState locked: true
-        # console.log '''
-        #   1) disable mark editing
-        #   2) submit mark
-        #   3) wait for post confirmation
-        # '''
+        @setState locked: true
+        console.log '''
+          1) disable mark editing
+          2) submit mark
+          3) wait for post confirmation
+        '''
         @setState locked: true
         @props.submitMark(@props.mark)
         # console.log 'Mark submitted. Click TRANSCRIBE to begin transcribing.'
