@@ -18,6 +18,25 @@
 .browse-group {
   min-height: 800px; }
 
+/* Mark */
+.rectangle-tool .tool-shape {
+  stroke-width: 3;
+  stroke: #646400;
+  fill: transparent; }
+  .rectangle-tool .tool-shape .transcribable {
+    stroke: #43bbfd;
+    stroke-opacity: 1; }
+  .rectangle-tool .tool-shape .interim {
+    opacity: 0.35; }
+  .rectangle-tool .tool-shape .committed {
+    cursor: default; }
+  .rectangle-tool .tool-shape .uncommitted {
+    stroke: #fc5424; }
+
+.rectangle-tool .tool-shape.committed.transcribable:hover {
+  fill: rgba(55, 58, 204, 0.4);
+  transition-delay: 0.0s; }
+
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
 /**
    * 1. Set default font family to sans-serif.
