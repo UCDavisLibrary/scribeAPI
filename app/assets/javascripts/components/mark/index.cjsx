@@ -192,7 +192,6 @@ module.exports = React.createClass # rename to Classifier
     # direct link to this page
     pageURL = "#{location.origin}/#/mark?subject_set_id=#{@getCurrentSubjectSet().id}&selected_subject_id=#{@getCurrentSubject()?.id}"
 
-
     if currentTask?.tool is 'pick_one'
       currentAnswer = (a for a in currentTask.tool_config.options when a.value == currentAnnotation.value)[0]
       waitingForAnswer = not currentAnswer
@@ -215,7 +214,9 @@ module.exports = React.createClass # rename to Classifier
           <small>Draw a box around an area of interest on this label. Then tell us whether what you’ve marked is an image or text. Mark as many elements as you want.<a href="../../patterns/04-pages-03-mark-help/04-pages-03-mark-help.html">Need help?</a></small>
         </div>
         <div className="columns-2">
-          <a className="button" href="">Next Label</a>
+          { if @getNextTask()
+              <button type="button" className="button" disabled={waitingForAnswer} onClick={@advanceToNextSubject}>Next Label</button>
+          }
         </div>
       </section>
      { if @state.noMoreSubjectSets
