@@ -99,18 +99,12 @@ module.exports = React.createClass # rename to Classifier
     # 
     # @handleDataFromTool(annotation)
     #
-    # LD: replacing with direct modification of the classifications state obj
-    classifications = @state.classifications
-    classifications[@state.classificationIndex].annotation[k] = v for k, v of d
-
-    @setState
-        classifications: classifications
-          , =>
-            @forceUpdate()
-
-    # End LD changes
-    @createAndCommitClassification(annotation)
-
+    if annotation.override_task_key?
+      @setState
+         taskKey: annotation.override_task_key, =>
+           @createAndCommitClassification(annotation)
+    else
+      @createAndCommitClassification(annotation)      
 
   # Handle user selecting a pick/drawing tool:
   handleDataFromTool: (d) ->
@@ -196,8 +190,6 @@ module.exports = React.createClass # rename to Classifier
     return null unless @getCurrentSubjectSet()? && @getActiveWorkflow()?
 
     currentTask = @getCurrentTask()
-    # console.log(@getTasks())
-    
 
     TaskComponent = @getCurrentTool()
     activeWorkflow = @getActiveWorkflow()

@@ -43,7 +43,8 @@ module.exports =
     return unless classification?
 
     # Create visual interim mark just in case POST takes a while
-    interim_mark = @addInterimMark classification
+    # LD: This seems unnecessarily complicated and was confusing React's state
+    # interim_mark = @addInterimMark classification
 
     # Commit classification to backend
     classification.commit (classification) =>

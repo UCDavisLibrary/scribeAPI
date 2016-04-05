@@ -110,8 +110,6 @@ module.exports = React.createClass
   # Commit mark
   submitMark: (mark) ->
     return unless mark?
-    console.log("Calling the onComplete method with mark " + mark._key)
-    console.log(@props.onComplete)
     @props.onComplete? mark
     @setUncommittedMark null # reset uncommitted mark
 
@@ -123,8 +121,6 @@ module.exports = React.createClass
     # Don't proceed as if a new mark was created if no mark was created (i.e. no drawing tool selected)
     return if ! newMark?
     
-    console.log("Creating new mark as " + newMark._key)
-
     # LD -- we only want to commit a mark directly, so don't commit the old one, just throw it out
 
     if @state.uncommittedMark?
@@ -188,11 +184,9 @@ module.exports = React.createClass
 
   # Handle mouseup at end of drag:
   handleInitRelease: (e) ->
-    console.log('handle initrelease')
     return null if ! @state.uncommittedMark?
 
     mark = @state.uncommittedMark
-    console.log("Uncommitted mark: " + mark._key)
 
     # Instantiate appropriate marking tool:
     # AMS: think this is going to markingTools[mark._toolIndex]
@@ -211,8 +205,6 @@ module.exports = React.createClass
     @setUncommittedMark mark
 
   setUncommittedMark: (mark) ->
-    if mark
-      console.log("Setting the uncommitted mark to " + mark._key)
     @setState
       uncommittedMark: mark,
       selectedMark: mark #, => @forceUpdate() # not sure if this is needed?

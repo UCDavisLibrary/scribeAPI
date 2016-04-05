@@ -204,6 +204,13 @@ module.exports = React.createClass
 
   markSelectionAsImage: ->
     console.log("Calling mark-as-image")
+    @props.mark.override_task_key = 'image-on-label'
+    @props.submitMark @props.mark
+
+  markSelectionAsText: ->
+    console.log("Calling mark-as-text")
+    @props.mark.override_task_key = 'text-on-label'    
+    @props.submitMark @props.mark
     
   render: ->
     classes = []
@@ -280,21 +287,56 @@ module.exports = React.createClass
         { # REQUIRES MARK-BUTTON-MIXIN
           if @props.selected or @state.markStatus is 'transcribe-enabled'
             @renderMarkButton() if @props.isTranscribable
+            <Draggable onEnd={@markSelectionAsImage}>
+              <g transform="translate(#{@getMarkSelectionButtonPosition().x}, #{@getMarkSelectionButtonPosition().y})">
+                <rect
+                fill="rgb(255,0,0)"
+                stroke="rgb(255,0,0)"
+                width="200"
+                height="50"
+                x="0"
+                y="0"
+                rx="0"
+                />
+                <text
+                  x="0"
+                  y="0"
+                  fontSize="24"
+                  transform="translate(10,30)"
+                  fill="rgb(255,255,255)"
+                  stroke="none">
+                  Mark as Image
+                </text>
+                  
+              </g>
+            </Draggable>
         }
-        <Draggable onEnd={@markSelectionAsImage}>
-          <g>
-            <rect
-             transform="translate(#{@getMarkSelectionButtonPosition().x}, #{@getMarkSelectionButtonPosition().y})"
-             fill="rgb(255,0,0)"
-             stroke="rgb(255,0,0)"
-             width="200"
-             height="50"
-             x="0"
-             y="0"
-             rx="0"
-             />
-          </g>
-        </Draggable>
-        
+        {
+          if @props.selected
+            <Draggable onEnd={@markSelectionAsText}>
+              <g transform="translate(#{@getMarkSelectionButtonPosition().x}, #{@getMarkSelectionButtonPosition().y + 50})">
+                <rect
+                fill="rgb(0,0,255)"
+                stroke="rgb(0,0,255)"
+                width="200"
+                height="50"
+                x="0"
+                y="0"
+                rx="0"
+                />
+                <text
+                  x="0"
+                  y="0"
+                  fontSize="24"
+                  transform="translate(10,30)"
+                  fill="rgb(255,255,255)"
+                  stroke="none">
+                  Mark as Text
+                </text>
+                  
+              </g>
+                
+            </Draggable>
+       }
     </g>
 </g>

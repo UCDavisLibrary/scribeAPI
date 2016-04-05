@@ -4,11 +4,11 @@
     "subject_fetch_limit": "10",
     "generates_subjects": true,
     "generates_subjects_for": "transcribe",
-    "first_task": "annotation",
+    "first_task": "text-on-label",
 
     "tasks":{
 
-	"annotation": {
+	"text-on-label": {
 	    "generates_subjects": true,
 	    "tool":"pickOneMarkOne",
 	    "instruction":"Draw a box around any text on the labels.",
@@ -21,9 +21,9 @@
 		    {"type": "rectangleTool", "label": "Text highlights", "color": null, "generates_subject_type": "text" }
 		]
 	    },
-	    "next_task": "images"
+	    "next_task": "image-on-label"
 	},
-	"images": {
+	"image-on-label": {
 	    "generates_subjects": true,
 	    "tool":"pickOneMarkOne",
 	    "instruction":"Draw a box around any *images* on the labels.",
