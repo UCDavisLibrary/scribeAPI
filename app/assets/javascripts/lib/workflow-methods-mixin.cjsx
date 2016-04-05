@@ -48,6 +48,7 @@ module.exports =
 
     # Commit classification to backend
     classification.commit (classification) =>
+            
       # Did this generate a child_subject? Update local copy:
       if classification.child_subject
         @appendChildSubject classification.subject_id, classification.child_subject
@@ -62,6 +63,8 @@ module.exports =
       if @state.illegibleSubject
         @toggleIllegibleSubject =>
           @advanceToNextSubject()
+
+
 
   # Called immediately before saving a classification, adds a fake mark in lieu
   # of the real generated mark:

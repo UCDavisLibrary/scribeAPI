@@ -18,7 +18,7 @@
 	    },
 	    "tool_config": {
 		"options": [
-		    {"type": "rectangleTool", "label": "Text highlights", "color": null, "generates_subject_type": "text" }
+		    {"type": "rectangleTool", "label": "Text highlights", "color": "black", "generates_subject_type": "text" }
 		]
 	    },
 	    "next_task": "image-on-label"
@@ -33,7 +33,7 @@
 	    },
 	    "tool_config": {
 		"options": [
-		    {"type": "rectangleTool", "label": "Image highlights", "color": null, "generates_subject_type": "image" }
+		    {"type": "rectangleTool", "label": "Image highlights", "color": "black", "generates_subject_type": "image" }
                 ]
 	    },
 	    "next_task": null

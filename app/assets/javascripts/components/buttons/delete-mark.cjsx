@@ -1,9 +1,11 @@
 React = require 'react'
 
-RADIUS = 8
+RADIUS = 16
 STROKE_COLOR = '#000'
 FILL_COLOR = '#f00'
-STROKE_WIDTH = 1.5
+STROKE_WIDTH = 3.0
+# X_OFFSET = -20 # These can be found in rectangle-tool/index.cjsx as DELETE_BUTTON_BLAH for no obvious reason LD 
+# Y_OFFSET = -10
 
 CROSS_PATH = "
   M #{-1 * RADIUS * 0.7 } 0

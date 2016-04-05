@@ -110,6 +110,7 @@ module.exports = React.createClass
   # Commit mark
   submitMark: (mark) ->
     return unless mark?
+    mark.isUncommitted = false
     @props.onComplete? mark
     @setUncommittedMark null # reset uncommitted mark
 
@@ -319,7 +320,7 @@ module.exports = React.createClass
       displaysTranscribeButton = false
       
       isPriorMark = ! mark.userCreated
-
+      
       <g key={mark._key} className="marks-for-annotation#{if mark.groupActive then ' group-active' else ''}" data-disabled={isPriorMark or null}>
         {
           mark._key ?= Math.random()
@@ -342,7 +343,6 @@ module.exports = React.createClass
             submitMark={@submitMark}
             sizeRect={@refs.sizeRect}
             displaysTranscribeButton={displaysTranscribeButton}
-
             onSelect={@selectMark.bind this, mark}
             onChange={@handleChange.bind this, mark}
             onDestroy={@destroyMark.bind this, mark}
@@ -405,6 +405,7 @@ module.exports = React.createClass
                 isPriorMark = true
                 <g>
                   { @highlightMark(mark, toolName) }
+
                   <ToolComponent
                     key={@props.subject.id}
                     xBound={@props.subject.width}

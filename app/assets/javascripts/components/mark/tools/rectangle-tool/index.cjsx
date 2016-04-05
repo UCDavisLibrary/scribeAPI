@@ -6,8 +6,8 @@ MarkButtonMixin = require 'lib/mark-button-mixin'
 
 MINIMUM_SIZE = 15
 DELETE_BUTTON_ANGLE = 45
-DELETE_BUTTON_DISTANCE_X = 12
-DELETE_BUTTON_DISTANCE_Y = 0
+DELETE_BUTTON_DISTANCE_X = -20
+DELETE_BUTTON_DISTANCE_Y = -10
 DEBUG = false
 
 module.exports = React.createClass
@@ -63,7 +63,8 @@ module.exports = React.createClass
     unless mark.status?
       mark.status = 'mark'
     mark: mark
-    # set up the state in order to caluclate the polyline as rectangle
+
+    # set up the state in order to calculate the polyline as rectangle
     x1 = @props.mark.x
     x2 = x1 + @props.mark.width
     y1 = @props.mark.y
@@ -169,7 +170,7 @@ module.exports = React.createClass
     x >= 0 && x + w <= @props.sizeRect.props.width
 
   getDeleteButtonPosition: ()->
-    points = @state.pointsHash["handleHLDrag"]
+    points = @state.pointsHash["handleLLDrag"]
     x = points[0] + DELETE_BUTTON_DISTANCE_X / @props.xScale
     y = points[1] + DELETE_BUTTON_DISTANCE_Y / @props.yScale
     x = Math.min x, @props.sizeRect.props.width - 15 / @props.xScale
@@ -204,9 +205,12 @@ module.exports = React.createClass
 
   markSelectionAsImage: ->
     console.log("Calling mark-as-image")
+    console.log(@props.mark)
     @props.mark.override_task_key = 'image-on-label'
     @props.submitMark @props.mark
-
+    console.log("After mark-as-image")
+    console.log(@props.mark)
+    
   markSelectionAsText: ->
     console.log("Calling mark-as-text")
     @props.mark.override_task_key = 'text-on-label'    
@@ -251,6 +255,7 @@ module.exports = React.createClass
             key={points}
             dangerouslySetInnerHTML={
               __html: "
+
                 <filter id=\"dropShadow\">
                   <feGaussianBlur in=\"SourceAlpha\" stdDeviation=\"3\" />
                   <feOffset dx=\"2\" dy=\"4\" />
@@ -263,7 +268,7 @@ module.exports = React.createClass
                 <polyline
                   #{if @props.mark.color? then "stroke=\"#{@props.mark.color}\""}
                   points=\"#{points}\"
-                  filter=\"#{if @props.selected then 'url(#dropShadow)' else 'none'}\"
+                  
                 />
               "
             }
