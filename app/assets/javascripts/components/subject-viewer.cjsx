@@ -110,6 +110,8 @@ module.exports = React.createClass
   # Commit mark
   submitMark: (mark) ->
     return unless mark?
+    console.log("Calling the onComplete method with mark " + mark._key)
+    console.log(@props.onComplete)
     @props.onComplete? mark
     @setUncommittedMark null # reset uncommitted mark
 
@@ -117,19 +119,27 @@ module.exports = React.createClass
   handleInitStart: (e) ->
     return null if e.buttons? && e.button? && e.button > 0 # ignore right-click
     newMark = @createMark(e)
-
+    
     # Don't proceed as if a new mark was created if no mark was created (i.e. no drawing tool selected)
     return if ! newMark?
+    
+    console.log("Creating new mark as " + newMark._key)
 
-    # submit uncommitted mark
+    # LD -- we only want to commit a mark directly, so don't commit the old one, just throw it out
+
     if @state.uncommittedMark?
-      @submitMark(@state.uncommittedMark)
+      # LD: Dropping this mark instead
+      @destroyMark(@state.uncommittedMark)
+      # @submitMark(@state.uncommittedMark)
 
     @props.onChange? newMark
     @setUncommittedMark newMark
     # @selectMark newMark
 
   createMark: (e) ->
+    # Creates a mark if the conditions are valid, like the user has engaged in an activity
+    # that would generate a tool (like drawing a rect). Otherwise returns null. -LD
+     
     return null if ! (subToolIndex = @props.subToolIndex)?
     return null if ! (subTool = @props.task.tool_config?.options?[subToolIndex])?
 
@@ -178,9 +188,11 @@ module.exports = React.createClass
 
   # Handle mouseup at end of drag:
   handleInitRelease: (e) ->
+    console.log('handle initrelease')
     return null if ! @state.uncommittedMark?
 
     mark = @state.uncommittedMark
+    console.log("Uncommitted mark: " + mark._key)
 
     # Instantiate appropriate marking tool:
     # AMS: think this is going to markingTools[mark._toolIndex]
@@ -199,6 +211,8 @@ module.exports = React.createClass
     @setUncommittedMark mark
 
   setUncommittedMark: (mark) ->
+    if mark
+      console.log("Setting the uncommitted mark to " + mark._key)
     @setState
       uncommittedMark: mark,
       selectedMark: mark #, => @forceUpdate() # not sure if this is needed?

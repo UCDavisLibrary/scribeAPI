@@ -95,7 +95,20 @@ module.exports = React.createClass # rename to Classifier
 
   # User somehow indicated current task is complete; commit current classification
   handleToolComplete: (annotation) ->
-    @handleDataFromTool(annotation)
+    # LD - removing this code as we only have one type of tool (rect) and we don't need this distinction
+    # 
+    # @handleDataFromTool(annotation)
+    #
+    # LD: replacing with direct modification of the classifications state obj
+    classifications = @state.classifications
+    classifications[@state.classificationIndex].annotation[k] = v for k, v of d
+
+    @setState
+        classifications: classifications
+          , =>
+            @forceUpdate()
+
+    # End LD changes
     @createAndCommitClassification(annotation)
 
 
