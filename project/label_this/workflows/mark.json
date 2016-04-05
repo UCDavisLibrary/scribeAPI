@@ -10,7 +10,7 @@
 
 	"annotation": {
 	    "generates_subjects": true,
-	    "tool":"pickMany",
+	    "tool":"pickOneMarkOne",
 	    "instruction":"Draw a box around any text on the labels.",
 	    "help": {
 		"title": "Text on labels",
@@ -40,3 +40,4 @@
 	}
     }
 }
+ 
