@@ -118,28 +118,24 @@ module.exports = React.createClass # rename to Classifier
 
     <div>
         {
-          unless @getCurrentSubject() || @state.noMoreSubjects
-            
-            <DraggableModal
-              header          = { "Loading transcription subjects." }
-              buttons         = {<GenericButton label='Back to Marking' href='/#/mark' />}
-            >
-                We are currently looking for a subject for you to {@props.workflowName}.
-            </DraggableModal>
+          if @state.noMoreSubjects or not @getCurrentSubject()
+            <section className="row align-center callout">
+              <div className="column align-center">            
+                Currently, there are no labels for you to transcribe. Try <a href="/#/mark">marking</a> instead!
+              </div>
+            </section>
+          else
+            <section className="row align-center callout">
+              <div className="medium-5 column">                        
+                 <small>Please tell us what the highlighted text says. <a href="#">Need help?</a></small>
+              </div>
+              <div className="shrink column">
+                <button className="button" onClick={@advanceToNextSubject}>Next Label</button>
+              </div>
+            </section>
         }
-
-        { if @state.noMoreSubjects
-             <section className="row align-center align-middle callout">
-               <div className="shrink columns">
-                 <DraggableModal
-                 header          = { if @state.userClassifiedAll then "Thanks for transcribing!" else "Nothing to transcribe" }
-                 buttons         = {<GenericButton label='Continue' href='/#/mark' />}
-                 >
-                   Currently, there are no {@props.project.term('subject')}s for you to {@props.workflowName}. Try <a href="/#/mark">marking</a> instead!
-                 </DraggableModal>
-               </div>
-             </section>
-          else if @getCurrentSubject()? and @getCurrentTask()?
+        {                   
+          if @getCurrentSubject()? and @getCurrentTask()? and not @state.noMoreSubjects
 
             <SubjectViewer
               onLoad={@handleViewerLoad}
