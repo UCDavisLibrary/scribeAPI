@@ -75,14 +75,15 @@ module.exports = React.createClass
     buttonDisabled: false
     lockTool: false
 
-  componentWillMount: ->
-    document.addEventListener("keydown", @handleEscKey, false)
-
+  componentDidMount: ->
+    # If the mark tool is currently active, add an event listener to close the modal on ESC
+    if @props.selected
+      document.addEventListener("keydown", @handleEscKey)
+      
   componentWillUnmount: ->
-    document.removeEventListener("keydown", @handleEscKey, false)
+    document.removeEventListener("keydown", @handleEscKey)
 
   handleEscKey: (event) ->
-    console.log(event)
     if event.keyCode == 27
       @props.onDestroy()
       
@@ -217,12 +218,13 @@ module.exports = React.createClass
   markSelectionAsImage: ->
     @props.mark.override_task_key = 'image-on-label'
     @props.submitMark @props.mark
+    document.removeEventListener("keydown", @handleEscKey, false)    
     
   markSelectionAsText: ->
-    console.log("Calling mark-as-text")
     @props.mark.override_task_key = 'text-on-label'    
     @props.submitMark @props.mark
-    
+    document.removeEventListener("keydown", @handleEscKey, false)
+        
   render: ->
     classes = []
     classes.push 'transcribable' if @props.isTranscribable
