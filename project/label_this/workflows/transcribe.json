@@ -14,7 +14,7 @@
 		"limit": 500,
 		"multiline": true
 	    },
-	    "instruction": "Transcribe the highlighted text.",
+	    "instruction": "Please tell us what the highlighted text says.",
 	    "next_task": "image"
 	},
 	"image": {
@@ -24,7 +24,7 @@
 		"multiline": false,
 		"suggest": "common"
 	    },
-	    "instruction": "Describe keywords in the highlighted images.",
+	    "instruction": "Please tell us what this image is depicting, using one or two words.",
 	    "next_task": null
         }
     }

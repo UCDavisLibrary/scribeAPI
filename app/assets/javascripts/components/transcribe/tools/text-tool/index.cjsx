@@ -49,7 +49,7 @@ TextTool = React.createClass
 
   toolConfig: ->
     @props.tool_config ? @props.task.tool_config
-
+ 
   # Set focus on input:
   focus: ->
     el = $(@refs.input0?.getDOMNode())
@@ -177,8 +177,8 @@ TextTool = React.createClass
     tool_content =
       <div className="input-field active">
         <label>
-          <h2>Transcribe this Text</h2>
-          <p>Please tell us what the highlighted text says.</p>          
+          <h2>Transcribe this {@props.task.key}</h2>
+          <p>{@props.task.instruction}</p>          
           {
             atts =
               ref: ref
