@@ -5,6 +5,13 @@
  * foundation.zurb.com
  * Licensed under MIT Open Source
  */
+.transcribe-tool {
+  position: absolute;
+  min-width: 200px;
+  max-width: 500px;
+  background-color: rgba(255, 255, 255, 0.75);
+  cursor: move; }
+
 .browse {
   min-height: 80%; }
 
