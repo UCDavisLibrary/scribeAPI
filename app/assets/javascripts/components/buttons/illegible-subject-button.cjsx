@@ -5,6 +5,6 @@ module.exports = React.createClass
   displayName: 'IllegibleSubjectButton'
 
   render: ->
-    label = if @props.active then 'Illegible' else 'Illegible?'
+    label = if @props.active then 'This text was marked illegible' else 'This text is illegible'
 
-    <SmallButton key="illegible-subject-button" label={label} onClick={@props.onClick} className="ghost toggle-button #{'toggled' if @props.active}" />
+    <SmallButton key="illegible-subject-button" label={label} onClick={@props.onClick} className="secondary #{'toggled' if @props.active}" />

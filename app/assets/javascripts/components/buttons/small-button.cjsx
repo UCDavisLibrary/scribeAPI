@@ -6,10 +6,9 @@ module.exports = React.createClass
 
   getDefaultProps: ->
     label: 'Next &gt;'
- 
+    className: ''
+    
   render: ->
-    classes = ['small-button']
-    classes.push @props.className if @props.className?
 
-    <GenericButton {...@props} className={classes.join ' '} />
+    <GenericButton {...@props} className={@props.className} />
      

@@ -71,7 +71,7 @@ module.exports = React.createClass
               }
             </div>
         }
-        <div className="modal-buttons">
+        <div className="button-group align-right">
           { if @props.buttons?
               @props.buttons
 

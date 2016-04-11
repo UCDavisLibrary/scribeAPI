@@ -176,44 +176,36 @@ TextTool = React.createClass
     # create component input field(s)
     tool_content =
       <div className="input-field active">
+        <label>
+          <h2>Transcribe this Text</h2>
+          <p>Please tell us what the highlighted text says.</p>          
+          {
+            atts =
+              ref: ref
+              key: "#{@props.task.key}.#{@props.annotation_key}"
+              "data-task_key": @props.task.key
+              onKeyDown: @handleKeyDown
+              onChange: @handleChange
+              onFocus: ( () => @props.onInputFocus? @props.annotation_key )
+              value: val
+              disabled: @props.badSubject
+              
+            if @props.inputType == "text"
+              <input type="text" value={val} {...atts} placeholder="Enter text here"/>
 
-        <label dangerouslySetInnerHTML={{__html: marked( label ) }} />
+            else if @props.inputType == "textarea"
+              <textarea key={@props.task.key} value={val} {...atts} placeholder="Enter text here"/>
 
-        { if examples
-          <ul className="task-examples">
-          { for ex,i in examples
-              <li key={i}>{ex}</li>
-          }
-          </ul>
+            else if @props.inputType == "number"
+              # Let's not make it input[type=number] because we don't want the browser to absolutely *force* numeric; We should coerce numerics without obliging
+              <input type="text" value={val} {...atts} />
+
+            else if @props.inputType == "date"
+              <input type="date" value={val} {...atts} />
+
+            else console.warn "Invalid inputType specified: #{@props.inputType}"
         }
-
-        {
-          atts =
-            ref: ref
-            key: "#{@props.task.key}.#{@props.annotation_key}"
-            "data-task_key": @props.task.key
-            onKeyDown: @handleKeyDown
-            onChange: @handleChange
-            onFocus: ( () => @props.onInputFocus? @props.annotation_key )
-            value: val
-            disabled: @props.badSubject
-
-          if @props.inputType == "text"
-            <input type="text" value={val} {...atts} />
-
-          else if @props.inputType == "textarea"
-            <textarea key={@props.task.key} value={val} {...atts} />
-
-          else if @props.inputType == "number"
-            # Let's not make it input[type=number] because we don't want the browser to absolutely *force* numeric; We should coerce numerics without obliging
-            <input type="text" value={val} {...atts} />
-
-          else if @props.inputType == "date"
-            <input type="date" value={val} {...atts} />
-
-          else console.warn "Invalid inputType specified: #{@props.inputType}"
-
-        }
+        </label>
       </div>
 
     if @props.standalone # 'standalone' true if component handles own mouse events
@@ -231,11 +223,11 @@ TextTool = React.createClass
 
       buttonLabel =
         if @props.task.next_task?
-         'Continue'
+         'Next Label'
         else
           if @props.isLastSubject and ( @props.transcribeMode is 'page' or @props.transcribeMode is 'single' )
             'Return to Marking'
-          else 'Next Entry!!'
+          else 'Next Entry'
 
       buttons.push <SmallButton label={buttonLabel} key="done-button" onClick={@commitAnnotation} />
 

@@ -6,7 +6,7 @@ DoneButton = React.createClass
 
   render: ->
     classes = 'button done'
-    title   = 'Next'
+    title   = 'Next Label'
     
     <button className = {classes} onClick = {@props.onClick} >
       {title}

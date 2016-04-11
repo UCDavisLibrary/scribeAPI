@@ -140,7 +140,7 @@ module.exports = React.createClass # rename to Classifier
             <SubjectViewer
               onLoad={@handleViewerLoad}
               task={@getCurrentTask()}
-              subject={@getCurrentSubject()}
+              subject={@getCurrentSubject()}ext-
               active=true
               workflow={@getActiveWorkflow()}
               classification={@props.classification}
@@ -161,14 +161,15 @@ module.exports = React.createClass # rename to Classifier
                 viewerSize={@state.viewerSize}
                 transcribeTools={transcribeTools}
                 onShowHelp={@toggleHelp if @getCurrentTask().help?}
-                badSubject={@state.badSubject}
-                onBadSubject={@toggleBadSubject}
+                badSubject={null}
+                onBadSubject={null}
                 illegibleSubject={@state.illegibleSubject}
                 onIllegibleSubject={@toggleIllegibleSubject}
                 returnToMarking={@returnToMarking}
                 transcribeMode={transcribeMode}
                 isLastSubject={isLastSubject}
                 project={@props.project}
+                inputType="textarea"
               />
 
             </SubjectViewer>

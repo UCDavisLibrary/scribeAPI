@@ -10,13 +10,20 @@
     "tasks": {
 	"text": {
 	    "tool": "textTool",
-	    "tool_config": {},
+	    "tool_config": {
+		"limit": 500,
+		"multiline": true
+	    },
 	    "instruction": "Transcribe the highlighted text.",
 	    "next_task": "image"
 	},
 	"image": {
 	    "tool": "textTool",
-	    "tool_config": {},
+	    "tool_config": {
+		"limit": 100,
+		"multiline": false,
+		"suggest": "common"
+	    },
 	    "instruction": "Describe keywords in the highlighted images.",
 	    "next_task": null
         }
