@@ -75,6 +75,17 @@ module.exports = React.createClass
     buttonDisabled: false
     lockTool: false
 
+  componentWillMount: ->
+    document.addEventListener("keydown", @handleEscKey, false)
+
+  componentWillUnmount: ->
+    document.removeEventListener("keydown", @handleEscKey, false)
+
+  handleEscKey: (event) ->
+    console.log(event)
+    if event.keyCode == 27
+      @props.onDestroy()
+      
   componentWillReceiveProps:(newProps)->
     x1 = newProps.mark.x
     x2 = x1 + newProps.mark.width
@@ -204,12 +215,8 @@ module.exports = React.createClass
     @props.onChange()
 
   markSelectionAsImage: ->
-    console.log("Calling mark-as-image")
-    console.log(@props.mark)
     @props.mark.override_task_key = 'image-on-label'
     @props.submitMark @props.mark
-    console.log("After mark-as-image")
-    console.log(@props.mark)
     
   markSelectionAsText: ->
     console.log("Calling mark-as-text")
