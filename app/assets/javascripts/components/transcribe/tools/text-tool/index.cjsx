@@ -182,7 +182,7 @@ TextTool = React.createClass
           {
             atts =
               ref: ref
-              key: "#{@props.task.key}.#{@props.annotation_key}"
+              key: "#{@props.task.key}.#{@props.annotation_key}" 
               "data-task_key": @props.task.key
               onKeyDown: @handleKeyDown
               onChange: @handleChange
@@ -220,14 +220,12 @@ TextTool = React.createClass
 
       if @props.onIllegibleSubject?
         buttons.push <IllegibleSubjectButton key="illegal-subject-button" active={@props.illegibleSubject} onClick={@props.onIllegibleSubject} />
-
+      
       buttonLabel =
-        if @props.task.next_task?
-         'Next Label'
+        if @props.isLastSubject
+         'Finish Transcribing'
         else
-          if @props.isLastSubject and ( @props.transcribeMode is 'page' or @props.transcribeMode is 'single' )
-            'Return to Marking'
-          else 'Next Entry'
+         'Next Label'
 
       buttons.push <SmallButton label={buttonLabel} key="done-button" onClick={@commitAnnotation} />
 

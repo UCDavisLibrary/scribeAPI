@@ -15,7 +15,7 @@
 		"multiline": true
 	    },
 	    "instruction": "Please tell us what the highlighted text says.",
-	    "next_task": "image"
+	    "next_task": null
 	},
 	"image": {
 	    "tool": "textTool",
