@@ -116,10 +116,10 @@ module.exports = React.createClass # rename to Classifier
     TranscribeComponent = @getCurrentTool() # @state.currentTool
     onFirstAnnotation = currentAnnotation?.task is @getActiveWorkflow().first_task
 
-    <div className="classifier">
-      <div className="subject-area">
+    <div>
         {
           unless @getCurrentSubject() || @state.noMoreSubjects
+            
             <DraggableModal
               header          = { "Loading transcription subjects." }
               buttons         = {<GenericButton label='Back to Marking' href='/#/mark' />}
@@ -129,14 +129,16 @@ module.exports = React.createClass # rename to Classifier
         }
 
         { if @state.noMoreSubjects
-            <DraggableModal
-              header          = { if @state.userClassifiedAll then "Thanks for transcribing!" else "Nothing to transcribe" }
-              buttons         = {<GenericButton label='Continue' href='/#/mark' />}
-            >
-                Currently, there are no {@props.project.term('subject')}s for you to {@props.workflowName}. Try <a href="/#/mark">marking</a> instead!
-            </DraggableModal>
-
-
+             <section className="row align-center align-middle callout">
+               <div className="shrink columns">
+                 <DraggableModal
+                 header          = { if @state.userClassifiedAll then "Thanks for transcribing!" else "Nothing to transcribe" }
+                 buttons         = {<GenericButton label='Continue' href='/#/mark' />}
+                 >
+                   Currently, there are no {@props.project.term('subject')}s for you to {@props.workflowName}. Try <a href="/#/mark">marking</a> instead!
+                 </DraggableModal>
+               </div>
+             </section>
           else if @getCurrentSubject()? and @getCurrentTask()?
 
             <SubjectViewer
@@ -175,7 +177,6 @@ module.exports = React.createClass # rename to Classifier
 
             </SubjectViewer>
         }
-      </div>
 
       { if @getCurrentTask()? and @getCurrentSubject()
           nextTask =
@@ -183,27 +184,14 @@ module.exports = React.createClass # rename to Classifier
               @getCurrentTask().tool_config.options?[currentAnnotation.value].next_task
             else
               @getCurrentTask().next_task
-
-          <div className="right-column">
-            <div className="task-area transcribe">
-
-              <div className="task-secondary-area">
-
+              <div>
                 {
                   if @getCurrentTask()?
                     <p>
                       <a className="tutorial-link" onClick={@toggleTutorial}>View A Tutorial</a>
                     </p>
                 }
-
-                <div className="forum-holder">
-                  <ForumSubjectWidget subject=@getCurrentSubject() project={@props.project} />
-                </div>
-
               </div>
-
-            </div>
-          </div>
       }
 
       { if @props.project.tutorial? && @state.showingTutorial
