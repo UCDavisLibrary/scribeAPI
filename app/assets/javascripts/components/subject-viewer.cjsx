@@ -438,7 +438,7 @@ module.exports = React.createClass
           }
         </figure>
 
-        <SubjectMetadata />
+        <SubjectMetadata subject={@props.subject} nextTask={null} />
     </section>
 
 window.React = React

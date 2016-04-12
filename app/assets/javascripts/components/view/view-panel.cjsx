@@ -47,6 +47,6 @@ module.exports = React.createClass
             </figure>
         }
       </section>
-      <SubjectMetadata />
+      <SubjectMetadata subject={subject} />
     </div>
 

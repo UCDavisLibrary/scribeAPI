@@ -9,7 +9,7 @@ raw = 'raw-manifest.csv'
 URL_BASE = '/images/labels/'
 FILE_SUFFIX = '.jpg'
 OUTPUT_DIR = 'subjects/'
-OUTPUT_FIELDS = ('order', 'file_path', 'thumbnail', 'width', 'height', 'identifier')
+OUTPUT_FIELDS = ('order', 'file_path', 'thumbnail', 'width', 'height', 'category', 'subcategory', 'identifier')
 MEDIA_DIR = 'assets/images/labels/2048x/'
 
 output_file = OUTPUT_DIR + 'group_labels.csv'
@@ -38,7 +38,7 @@ for i, f in enumerate(csvkit.reader(open(raw))):
         if not os.path.exists(local_filename):
             im.save(local_filename)
     
-        output_csv.writerow((order, url, thumbnail, width, height, filenumber))
+        output_csv.writerow((order, url, thumbnail, width, height, caption, title, filenumber))
 
     except FileNotFoundError:
         print("Skipping missing " + str(local_filename))

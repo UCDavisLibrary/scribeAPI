@@ -1,24 +1,33 @@
 # @cjsx React.DOM
 
 React = require 'react'
+{Navigation} = require 'react-router'
+{Link} = require 'react-router'
 
 SubjectMetadata = React.createClass
   displayName: "Metadata"
 
+  getDefaultProps: ->
+    subject: null
+    nextTask: 'mark'
+    
   render: ->
+    if @props.subject
       <section className="medium-10 medium-offset-1 medium-unstack row">
           <div className="column">
-            <h1>Label #XXXXX</h1>
-              <dl>
-                <dt>Definition List</dt>
-                  <dd>A number of connected items or names written or printed consecutively, typically one below the other.</dd>
-                  <dt>This is a term.</dt>
-                  <dd>This is the definition of that term.</dd>
-                  <dt>Here is another term.</dt>
-                  <dd>And it gets a definition too, which is this line.</dd>
-                <dt>Here is term that shares a definition with the term below.</dt>
-                  <dd>And it gets a definition too, which is this line.</dd>
-              </dl>              
+            <h1>Label #{@props.subject.meta_data.identifier}</h1>
+              { if @props.subject.meta_data.category 
+                  <dl>
+                    <dt>Category</dt>
+                    <dd>{@props.subject.meta_data.category}</dd>
+                    { if @props.subject.meta_data.subcategory
+                      <div>
+                        <dt>Subcategory</dt>
+                        <dd>{@props.subject.meta_data.sub_category}</dd>
+                      </div>
+                    }
+                  </dl>
+               }
           </div>
           <div className="small-4 columns">
             <div className="row small-10 align-spaced">
@@ -26,13 +35,18 @@ SubjectMetadata = React.createClass
               <a className="webicon pinterest" href="#">Pinterest</a>
               <a className="webicon twitter" href="#">Twitter</a>
             </div>
-            <h5>Status: Needs transcribing</h5>
-            <p><a href="#" className="button">Mark this Label</a></p>
+            { if @props.nextTask == 'mark'
+               <div>
+                 <h5>Status: Needs marking</h5>
+                 <p><Link to="/mark?subject_set_id=#{@props.subject.subject_set_id}&selected_subject_id=#{@props.subject.id}" className="button">Mark this Label</Link></p>
+               </div>
+            }
             <h5>Get the story behind this label:</h5>
             <h6><a href="">Who was Maynard Amerine?</a></h6>
             <h5>Tell us your story</h5>
             <p>Are you a wine expert? Do you have family history with this label? <a href="#">Send us your story</a>!</p>
           </div>
       </section>        
-
+    else
+      <section></section>
 module.exports = SubjectMetadata
