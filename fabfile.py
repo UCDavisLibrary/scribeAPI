@@ -9,9 +9,11 @@ DEPLOY_WAIT_TIME = 15
 timestamp="release-%s" % int(time.time() * 1000)
 
 env.user = 'deploy'  # Special group with limited sudo
-env.hosts = ['104.236.224.252']
+#env.hosts = ['104.236.224.252']
+env.hosts = ['labelthis.lib.ucdavis.edu']
 
-code_dir = '/home/liza/scribeAPI'
+#code_dir = '/home/liza/scribeAPI'
+code_dir = '/home/deploy/scribeAPI'
 
 
 def deploy():
@@ -24,7 +26,6 @@ def deploy_app():
         run('rake project:load["label_this","workflows","content"]')
 
     stop_host()
-    delete_cache()
     time.sleep(DEPLOY_WAIT_TIME)  # Wait for the process to die
     start_host()
     
@@ -36,6 +37,4 @@ def stop_host():
 def start_host():
     sudo('service unicorn_labelthis start', shell=False)
 
-def delete_cache():
-    #run('rm -rf /tmp/label-cache/')
-    pass
+
