@@ -22,6 +22,7 @@ API::Application.routes.draw do
 
   # SEO pages
   get '/browse/:page',                                        to: 'browse#index'
+  get '/view/:identifier',                                    to: 'browse#view'
   
   # Subjects
   get '/labels/:key',                                   to: 'subjects#show_by_key',  defaults: { format: 'json' }  
