@@ -3,12 +3,10 @@
   TK pagination
   </section>
   <section class="row align-center">  
-      <% for @subject in @subjects %>
-      <div class="column">
-        <figure class="main-wine-label">
-          <img src="<%= @subject.location['standard'] %>"  width="<%= @subject.width / 2 %>" height="<%= @subject.height / 2 %>" /> 
-	</figure>
+    <div class="column">
+      <figure class="main-wine-label">
+        <img src="<%= @subject.location['standard'] %>"  width="<%= @subject.width / 2 %>" height="<%= @subject.height / 2 %>" /> 
+      </figure>
       </div>
-      <% end %>
   </section>
 </div>

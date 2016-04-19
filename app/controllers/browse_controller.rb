@@ -12,7 +12,9 @@ class BrowseController < ApplicationController
 
   def view
     identifier = params[:identifier]
-    @subjects = Subject.page(1).where('meta_data.identifier' => identifier)
+    
+    subject, @link = BrowseMethods.show_by_identifier(identifier)
+    @subject = subject[0]
   end
   
 end

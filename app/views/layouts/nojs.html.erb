@@ -7,7 +7,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />  
   <title><%= current_project && current_project.title ? current_project.title: 'Scribe' %></title>
 
-  <% if current_project %>
+  <% if @subject %>
+
+    <meta name="og:title" content="Label <%= @subject.meta_data['identifier'] %>"/>
+    <meta name="og:description" content="<%= @subject.meta_data['category'] %>"/>
+    <meta name="og:image" content="<%= @subject.location['thumbnail'] %>"/>
+    
+    <meta name="twitter:card" content="summary_large_image"/>
+  
+  <% elsif current_project %>
     <meta name="og:title" content="<%= current_project.title %>"/>
     <meta name="og:description" content="<%= current_project.summary %>"/>
     
@@ -19,8 +27,6 @@
     <meta name="description" content="<%= current_project.summary %>"/>
     <meta name="author" content="<%= current_project.author %>"/>
     <meta name="keywords" content="<%= current_project.keywords %>"/>
-<!--    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"> -->
-
     <script src="https://use.typekit.net/hob5nwu.js"></script>
     <script>try{Typekit.load({ async: true });}catch(e){}</script>    
   <% end %>
