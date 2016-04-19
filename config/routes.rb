@@ -19,13 +19,16 @@ API::Application.routes.draw do
 
   get '/workflows/:workflow_id/subjects',                     to: 'subjects#index'
   get '/workflows/:workflow_id/subject_sets',                 to: 'subject_sets#index'
+
+  # SEO pages
+  get '/browse/:page',                                        to: 'browse#index'
   
   # Subjects
   get '/labels/:key',                                   to: 'subjects#show_by_key',  defaults: { format: 'json' }  
   get '/subjects/:subject_id',                                to: 'subjects#show',         defaults: { format: 'json' }
   get '/subjects',                                            to: 'subjects#index',        defaults: { format: 'json' }
   get '/workflows/:workflow_id/subject_sets/:subject_set_id/subjects/:subject_id',    to: 'subject_sets#show',     defaults: { format: 'json' }
-  
+
   # Subject_sets
   resources :subject_sets, only: [:show, :index], :defaults => { :format => 'json' }  # we are using the _url helper for show, so opting to keep this as resources for now
   get '/subject_sets/terms/:field',                           to: 'subject_sets#name_search'
