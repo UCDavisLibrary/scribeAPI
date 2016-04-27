@@ -13,17 +13,11 @@
     <meta name="og:description" content="<%= @subject.meta_data['category'] %>"/>
     <meta name="og:image" content="<%= @subject.location['standard'] %>"/>
     
-    <meta name="twitter:card" content="summary_large_image"/>
-  
   <% elsif current_project %>
     <meta name="og:title" content="<%= current_project.title %>"/>
     <meta name="og:description" content="<%= current_project.summary %>"/>
+    <meta name="og:image" content="/images/label-this-title-image.svg"/>
     
-    <meta name="twitter:title" content="<%= current_project.title %>"/>
-    <meta name="twitter:card" content="summary_large_image"/>
-    <meta name="twitter:description" content="<%= current_project.summary %>"/>
-    <meta name="twitter:image" content="" />
-
   <% end %>
     
   <script src="https://use.typekit.net/hob5nwu.js"></script>
