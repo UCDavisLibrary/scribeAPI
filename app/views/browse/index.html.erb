@@ -2,7 +2,8 @@
   
   <section class="medium-10 medium-offset-1 large-8 large-offset-2 columns ">
     <div class="browse">
-      TK pagination
+
+      <%= paginate @subjects, :window => 2 %>
       
       <div class="browse-group columns"> 
 	<div class="row small-up-2 medium-up-4 large-up-5 align-center">       
@@ -16,6 +17,8 @@
 	  <% end %>
 	</div>
       </div>
+      <%= paginate @subjects, :window => 2 %>
+      
   </div>
   </section>
 </div>

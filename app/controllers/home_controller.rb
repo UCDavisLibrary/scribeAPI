@@ -1,6 +1,4 @@
-class HomeController < ApplicationController
+class HomeController < BrowseController
   caches_action :index, :cache_path => "home/index"
 
-  def index
-  end
 end

@@ -28,10 +28,6 @@ class AppRouter
     routes =
       <Route name="root" path="/" handler={App}>
 
-        <Redirect from="_=_" to="/" />
-
-        <Route name="home" path="/home" handler={HomePage}/>
-
         <Route name="browse" path="/browse/:page" handler={Browse}/>
         <Route name="browse-index" path="/browse">
           <Redirect from="/browse" to="/browse/1" />
@@ -107,11 +103,10 @@ class AppRouter
         />
 
 
-        <DefaultRoute name="home-default" handler={HomePage} />
       </Route>
 
     Router.run routes, (Handler, state) ->
-      React.render <Handler />, document.body
+      React.render <Handler />, document.getElementById('react-target')
 
   controllerForPage: (page) ->
     React.createClass

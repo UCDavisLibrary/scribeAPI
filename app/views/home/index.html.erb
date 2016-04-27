@@ -1,1 +1,70 @@
-<div id="react-target"></div>
+<div class="row homepage">
+
+  <section class="small-12 medium-12 large-10 large-offset-1 columns title">
+
+    <img class="large-title" src="/images/label-this-title-image.svg"/>    
+    <img class="small-title" src="/images/label-this-title-image-sm.svg"/>
+    
+  </section>
+  <section class="small-12 medium-10 medium-offset-1 large-8 large-offset-2 columns">         
+    <p class="lead">The labels in the Maynard Amerine Collection at the UC Davis Libary tell the story of the growing wine industry in
+      California. Many of them are meaningful windows into the fabric of both winemaking and winemakers and should be
+      searchable in a way that accessible.</p>
+    
+    <p class="lead">Before we can create a searchable database, we need to transcribe the labels. That’s where you come in! Help us
+      uncork a piece of history.</p>
+  </section>
+  <section class="small-12 medium-12 large-10 large-offset-1 columns">
+    <h1>Here’s how you can help:</h1>
+    <div class="row">
+      <div class="small-11 medium-expand columns step-by-step">
+        <h6>Step 1: Mark</h6>
+        <img class="step-image" src="/images/image-step-1.png"/>
+        <p><small>Mark the areas on each label that will need transcribing or describing.</small></p>
+      </div>
+      <div class="small-11 medium-expand columns step-by-step">
+        <h6>Step 2: Transcribe</h6>
+        <img class="step-image" src="/images/image-step-2.png"/>
+        <p><small>Mark the areas on each label that will need transcribing or describing.</small></p>
+      </div>
+      <div class="small-11 medium-expand columns step-by-step">
+        <h6>Step 3: Describe</h6>
+        <img class="step-image" src="/images/image-step-3.png"/>
+        <p><small>Mark the areas on each label that will need transcribing or describing.</small></p>
+      </div>
+    </div>
+  </section>
+  <section class="small-12 medium-10 medium-offset-1 columns">
+    <div class="row align-center">
+      <a href="#/mark" class="large button"><img class="left-pointer" src="/images/left-pointer-knockout.svg"/>Get Started<img class="right-pointer" src="/images/right-pointer-knockout.svg"/></a>               
+    </div>
+  </section>
+  
+  <section class="small-12 medium-10 medium-offset-1 large-8 large-offset-2 columns">           
+    <h2>Just want to look at the pretty labels?</h2>
+    
+    <p>Since the labels aren’t transcribed yet, they’re just ordered randomly. That’s why we need your help. As we
+      transcribe more labels, we’ll be able to gather more information about them. That will help us organize how we
+      present them to you.</p>
+    
+    <p>In the meantime, you can browse through the labels at random below, or search for terms within the labels we’ve transcribed so far.</p>
+    
+    <%= paginate @subjects, :window => 2, :params => {:controller => 'browse', :action => 'index'} %>
+    
+    <div class="browse-group columns"> 
+      <div class="row small-up-2 medium-up-4 large-up-5 align-center">       
+
+	<% for @subject in @subjects %>
+	<div class="column">
+	  <a class="thumbnail" href="/view/<%= @subject.meta_data['identifier'] %>">
+	    <img src="<%= @subject.location['thumbnail'] %>" width="200" height="200" />
+	  </a>
+	</div>
+	<% end %>
+      </div>
+    </div>
+
+    <%= paginate @subjects, :window => 2, :params => {:controller => 'browse', :action => 'index'} %>    
+    
+  </section>
+</div>

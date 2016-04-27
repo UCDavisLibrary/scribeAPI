@@ -21,7 +21,8 @@ API::Application.routes.draw do
   get '/workflows/:workflow_id/subject_sets',                 to: 'subject_sets#index'
 
   # SEO pages
-  get '/browse/:page',                                        to: 'browse#index'
+  get '/browse/:page/',                                        to: 'browse#index'
+  get '/browse',                                        to: 'browse#index'  
   get '/view/:identifier',                                    to: 'browse#view'
   
   # Subjects
@@ -41,7 +42,7 @@ API::Application.routes.draw do
   resources :groups, only: [:show, :index], :defaults => { :format => 'json' }
 
   namespace :admin do
-    resources :subject_sets, :subjects, :classifications, :users
+    resources :subjects, :subject_sets, :classifications, :users
     get 'dashboard' => 'dashboard#index'
     get 'data' => 'data#index'
     get 'data/download' => 'data#download'

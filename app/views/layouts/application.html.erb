@@ -6,8 +6,16 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />  
   <title><%= current_project && current_project.title ? current_project.title: 'Scribe' %></title>
+  
+  <% if @subject %>
 
-  <% if current_project %>
+    <meta name="og:title" content="Label <%= @subject.meta_data['identifier'] %>"/>
+    <meta name="og:description" content="<%= @subject.meta_data['category'] %>"/>
+    <meta name="og:image" content="<%= @subject.location['standard'] %>"/>
+    
+    <meta name="twitter:card" content="summary_large_image"/>
+  
+  <% elsif current_project %>
     <meta name="og:title" content="<%= current_project.title %>"/>
     <meta name="og:description" content="<%= current_project.summary %>"/>
     
@@ -16,16 +24,13 @@
     <meta name="twitter:description" content="<%= current_project.summary %>"/>
     <meta name="twitter:image" content="" />
 
-    <meta name="description" content="<%= current_project.summary %>"/>
-    <meta name="author" content="<%= current_project.author %>"/>
-    <meta name="keywords" content="<%= current_project.keywords %>"/>
-<!--    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"> -->
-
-    <script src="https://use.typekit.net/hob5nwu.js"></script>
-    <script>try{Typekit.load({ async: true });}catch(e){}</script>    
   <% end %>
+    
+  <script src="https://use.typekit.net/hob5nwu.js"></script>
+  <script>try{Typekit.load({ async: true });}catch(e){}</script>    
 
   <%= stylesheet_link_tag "application", media: "all" %>
+  
   <link rel="stylesheet" href="/css/app.css">
 
   <% if current_project && current_project.favicon  %>
@@ -33,24 +38,51 @@
   <% end %>
 
   <script src="https://cdn.polyfill.io/v1/polyfill.min.js?features=default,es6,Promise,fetch&amp;flags=gated"></script>
+  
   <%= javascript_include_tag "application" %>
 
   <%= csrf_meta_tags %>
-  </head>
+</head>
 
 <body>
+  <header>
+    <nav class="top-bar">
+      <div class="top-bar-left">
+        <ul class="menu">
+          <li>
+            <a href="/">Label This</a>
+          </li>          
+          <li>
+            <a href="/browse/1#/browse/1">Browse</a>
+          </li>
+          <li>
+            <a href="#/mark">Mark</a>
+          </li>
+          <li>
+            <a href="#/transcribe">Transcribe</a>
+          </li>
+        </ul>
+      </div>
+      <div class="top-bar-right">
+        <ul class="menu">
+          <li>
+            <a href="">About the Project</a>
+          </li>
+          <li>
+            <a target="_blank" href="">Blog</a>
+          </li>
+	  <% if user_signed_in? %>
+	  <li><a href="/admin/">Admin<a/></li>
+	  <% else %>
+	  <li><%= link_to 'Log in', new_user_registration_path %></li>
+	  <% end %>
+        </ul>
+      </div>
+    </nav>
+  </header>
+  
+  <%= yield %>
 
-<noscript>
-  <div class="browser-warning noscript">
-    <h1>Hi!</h1>
-    <p><%= current_project && current_project.title ? current_project.title: 'Scribe' %> requires JavaScript.</p>
-    <p>Looks like JavaScript is disabled in your browser. <i class="fa fa-frown-o"></i></p>
-    <p><a href="http://www.enable-javascript.com/" target="_blank">
-      Enable JavaScript to participate <i class="fa fa-smile-o"></i></a></p>
-  </div>
-</noscript>
-
-<%= yield %>
-
+  <div id="react-target"></div>
 </body>
 </html>

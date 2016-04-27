@@ -1,5 +1,4 @@
 React = require("react")
-MainHeader                    = require '../partials/main-header'
 Footer                        = require '../partials/footer'
 API                           = require '../lib/api'
 Project                       = require 'models/project.coffee'
@@ -74,19 +73,6 @@ App = React.createClass
     style.backgroundImage = "url(#{project.background})" if project.background?
 
     <div>
-        <MainHeader
-          workflows={project.workflows}
-          feedbackFormUrl={project.feedback_form_url}
-          discussUrl={project.discuss_url}
-          blogUrl={project.blog_url}
-          pages={project.pages}
-          short_title={project.short_title}
-          logo={project.logo}
-          menus={project.menus}
-          user={@state.user}
-          loginProviders={@state.loginProviders}
-          onLogout={() => @setState user: null}
-        />
 
         <div>
           <BrowserWarning />
