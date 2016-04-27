@@ -117,23 +117,30 @@ module.exports = React.createClass # rename to Classifier
     onFirstAnnotation = currentAnnotation?.task is @getActiveWorkflow().first_task
 
     <div>
-        {
-          if @state.noMoreSubjects or not @getCurrentSubject()
-            <section className="row align-center callout">
-              <div className="column align-center">            
-                Currently, there are no labels for you to transcribe. Try <a href="/#/mark">marking</a> instead!
-              </div>
-            </section>
-          else
-            <section className="row align-center callout">
-              <div className="medium-5 column">                        
-                 <small>Please tell us what the highlighted text says. <a href="#">Need help?</a></small>
-              </div>
-              <div className="shrink column">
-                <button className="button" onClick={@advanceToNextSubject}>Next Label</button>
-              </div>
-            </section>
-        }
+        <section className="row align-justify toolbar">
+          <div className="columns align-center label-title">
+            <div className="transcribe-instructions small-12">
+              {
+                if @state.noMoreSubjects or not @getCurrentSubject()
+                  <div>
+                    <br/>                    
+                    Currently, there are no labels for you to transcribe. Try <a href="/#/mark">marking</a> instead!
+                    <br/><br/>
+                  </div>
+                else
+                  <div>
+                    <h1>Instructions:</h1>
+                      <p><small>Tell us what the highlighted text says, or describe the highlighted image.
+                      <br/><em>Need help? <a href="{{ link.pages-transcribe-help }}">Watch a tutorial.</a></em></small></p>
+                  </div>
+              }
+            </div>
+          </div>
+          {
+            if not @state.noMoreSubjects and @getCurrentSubject()              
+              <a className="secondary button next-label" onClick={@advanceToNextSubject}>Next Label<img className="right-pointer" src="../../images/right-pointer-red.svg"/></a>
+          }
+        </section>
         {                   
           if @getCurrentSubject()? and @getCurrentTask()? and not @state.noMoreSubjects
 
