@@ -49,7 +49,7 @@ $global-font-size: 100%;
 $global-width: rem-calc(1200);
 $global-lineheight: 1.5;
 $foundation-palette: (
-  primary: #FFF7EC,
+  primary: #F1E3D1,
   secondary: #FFF7EC,
   success: #3adb76,
   warning: #ffae00,
@@ -62,9 +62,11 @@ $black: #0a0a0a;
 $white: #FFF;
 $labels-red: #4D0717;
 $labels-focal: #642667;
-$labels-background: #FFF7EC;
+$labels-green: #455b00;
+$labels-background: #F1E3D1;
+$labels-background-dark: #CBBAA5;
 $body-background: $labels-red;
-$body-font-color: #FFF7EC;
+$body-font-color: #F1E3D1;
 $body-font-family: "alverata pe", "alverata-pe", 'Georgia', serif;
 $body-antialiased: true;
 $global-margin: 1rem;
@@ -239,11 +241,11 @@ $breadcrumbs-item-slash: true;
 $button-padding: 0.85em 1em;
 $button-margin: 0 0 $global-margin 0;
 $button-fill: solid;
-$button-background: $labels-focal;
+$button-background: #455B00;
 $button-background-hover: scale-color($button-background, $lightness: -15%);
-$button-color: $white;
+$button-color: $body-font-color;
 $button-color-alt: $black;
-$button-radius: $global-radius;
+$button-radius: 3px;
 $button-sizes: (
   tiny: 0.6rem,
   small: 0.75rem,
@@ -256,7 +258,7 @@ $button-opacity-disabled: 0.25;
 // ----------------
 
 $buttongroup-margin: 1rem;
-$buttongroup-spacing: 1px;
+$buttongroup-spacing: 10px;
 $buttongroup-child-selector: '.button';
 $buttongroup-expand-max: 6;
 
@@ -325,7 +327,7 @@ $flexvideo-ratio-widescreen: 16 by 9;
 // 19. Forms
 // ---------
 
-$fieldset-border: 1px solid $medium-gray;
+$fieldset-border: 1px solid $labels-background-dark;
 $fieldset-padding: rem-calc(20);
 $fieldset-margin: rem-calc(18 0);
 $legend-padding: rem-calc(0 3);
@@ -333,27 +335,27 @@ $form-spacing: rem-calc(16);
 $helptext-color: $white;
 $helptext-font-size: rem-calc(13);
 $helptext-font-style: italic;
-$input-prefix-color: $white;
+$input-prefix-color: $labels-background-dark;
 $input-prefix-background: $light-gray;
 $input-prefix-border: 1px solid $medium-gray;
 $input-prefix-padding: 1rem;
-$form-label-color: $white;
+$form-label-color: $labels-background;
 $form-label-font-size: rem-calc(14);
 $form-label-font-weight: $global-weight-normal;
 $form-label-line-height: 1.8;
-$select-background: $white;
+$select-background: $labels-background;
 $select-triangle-color: $dark-gray;
 $select-radius: $global-radius;
 $input-color: $black;
-$input-placeholder-color: $medium-gray;
+$input-placeholder-color: $labels-background-dark;
 $input-font-family: inherit;
 $input-font-size: rem-calc(16);
 $input-background: $white;
 $input-background-focus: $white;
 $input-background-disabled: $light-gray;
-$input-border: 1px solid $medium-gray;
+$input-border: 1px solid $labels-background-dark;
 $input-border-focus: 1px solid $dark-gray;
-$input-shadow: inset 0 1px 2px rgba($black, 0.1);
+$input-shadow: none; //inset 0 1px 2px rgba($black, 0.1);
 $input-shadow-focus: 0 0 5px $medium-gray;
 $input-cursor-disabled: default;
 $input-transition: box-shadow 0.5s, border-color 0.25s ease-in-out;
@@ -429,17 +431,17 @@ $orbit-control-zindex: 10;
 
 $pagination-font-size: rem-calc(14);
 $pagination-margin-bottom: $global-margin;
-$pagination-item-color: $white;
+$pagination-item-color: $labels-background;
 $pagination-item-padding: rem-calc(3 10);
 $pagination-item-spacing: rem-calc(1);
 $pagination-radius: $global-radius;
-$pagination-item-background-hover: $light-gray;
+$pagination-item-background-hover: none;
 $pagination-item-background-current: $primary-color;
 $pagination-item-color-current: foreground($pagination-item-background-current);
 $pagination-item-color-disabled: $medium-gray;
-$pagination-ellipsis-color: $white;
+$pagination-ellipsis-color: $labels-background;
 $pagination-mobile-items: false;
-$pagination-arrows: true;
+$pagination-arrows: false;
 
 // 27. Progress Bar
 // ----------------
@@ -479,15 +481,15 @@ $slider-radius: $global-radius;
 // 30. Switch
 // ----------
 
-$switch-background: $medium-gray;
-$switch-background-active: $labels-focal;
+$switch-background: $labels-background;
+$switch-background-active: $labels-red;
 $switch-height: 2rem;
 $switch-height-tiny: 1.5rem;
 $switch-height-small: 1.75rem;
 $switch-height-large: 2.5rem;
 $switch-radius: 3rem;
 $switch-margin: $global-margin;
-$switch-paddle-background: $white;
+$switch-paddle-background: $labels-background-dark;
 $switch-paddle-offset: 0.25rem;
 $switch-paddle-radius: 3rem;
 $switch-paddle-transition: all 0.25s ease-out;
