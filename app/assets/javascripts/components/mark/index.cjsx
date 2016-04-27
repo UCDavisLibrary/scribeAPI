@@ -205,27 +205,40 @@ module.exports = React.createClass # rename to Classifier
       waitingForAnswer = not currentAnswer
 
     <div>
-      <section className="row align-center align-middle callout">
-        <div className="shrink columns">
-          <div className="switch">
-            <input className="switch-input" id="exampleSwitch" type="checkbox" name="exampleSwitch"/>
-            <label classNamee="switch-paddle" htmlFor="exampleSwitch">
-              <span className="show-for-sr">Show Others Marks</span>
-            </label>
+      <section className="row align-justify toolbar">
+        <div>
+          <div className="row tools">
+            <img className="zoom-button" src="/images/zoom-button.svg"/>
+            <div className="pan-zoom-area pan-zoom pane active">
+              <div className="subject-zoom-pan">
+                <button className="zoom out disabled" title="zoom out"></button>
+                <button className="zoom in undefined" title="zoom in"></button>
+                <button className="pan up disabled" title="pan up"></button>
+                <button className="pan right undefined" title="pan right"></button>
+                <button className="pan left disabled" title="pan left"></button>
+                <button className="pan down undefined" title="pan down"></button>
+                <button className="reset">Reset</button>
+              </div>
+            </div>
+            <div className="switch">
+              <div className="toggle">
+                <input className="switch-input" id="exampleSwitch" type="checkbox" name="exampleSwitch"/>
+                <label className="switch-paddle" htmlFor="exampleSwitch">
+                  <span className="show-for-sr">Show Others’ Marks</span>
+                </label>
+              </div>
+            </div>
           </div>
         </div>
-        <div className="shrink columns">
-          <div className="image-zoom-controls">
-            Image zooming—TKTK
-          </div>
+        <div className="columns align-center label-title">          
+          <div className="mark-instructions small-12">
+            <h1>Instructions:</h1>
+            <p><small>Draw a box around an area of interest on this label. Then tell us whether what you’ve marked is an image or text.
+            <br/><em>Need help? <a href="#">Watch a tutorial.</a></em></small></p>
+          </div>             
         </div>
-        <div className="medium-5 columns">
-          <small>Draw a box around an area of interest on this label. Then tell us whether what you’ve marked is an image or text. Mark as many elements as you want.<a href="../../patterns/04-pages-03-mark-help/04-pages-03-mark-help.html">Need help?</a></small>
-        </div>
-        <div className="columns-2">
-          <button type="button" className="button" disabled={waitingForAnswer} onClick={@advanceToNextSubject}>Next Label</button>
-        </div>
-      </section>
+        <a className="secondary button next-label" disabled={waitingForAnswer} onClick={@advanceToNextSubject}>Next Label<img className="right-pointer" src="../../images/right-pointer-red.svg"/></a>
+      </section>          
      { if @state.noMoreSubjectSets
          <p>There is nothing left to do. Thanks for your work and please check back soon!</p>
 

@@ -59,7 +59,7 @@ HomePage = React.createClass
        </section>
        <section className="small-12 medium-10 medium-offset-1 columns">
          <div className="row align-center">
-           <button type="button" className="large button" href="#/mark"><img className="left-pointer" src="/images/left-pointer-knockout.svg"/>Get Started<img className="right-pointer" src="/images/right-pointer-knockout.svg"/></button>               
+           <Link to="/mark" className="large button"><img className="left-pointer" src="/images/left-pointer-knockout.svg"/>Get Started<img className="right-pointer" src="/images/right-pointer-knockout.svg"/></Link>               
          </div>
       </section>
 
