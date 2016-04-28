@@ -150,7 +150,7 @@ body {
 //-----------------------------------------------------
 // Modal/dialogue box overrides
 
-.draggable-modal, .transcribe-tool, .help-dialogue, .step-by-step, .login {
+.draggable-modal, .transcribe-tool, .help-dialogue, .step-by-step, .login, .signup {
   background: $label-background;
   padding: $global-padding;
   border-radius: 0;
@@ -163,13 +163,20 @@ body {
   }
 }
 
-.draggable-modal, .transcribe-tool, .help-dialogue {
+.draggable-modal, .transcribe-tool, .help-dialogue, .signup {
   min-width: 30rem;
   max-width: 35rem;
 }
 
-.login {
+.login, .signup {
   color: $labels-red;
+  .large.button {
+    margin-bottom: 1em;
+  }
+  small a {
+    color: $labels-red;
+    text-decoration: underline;
+  }
 }
 
 //-----------------------------------------------------
@@ -293,13 +300,31 @@ body {
   height: 36px;
 }
 
+.helper {
+  visibility: visible;
+  background-color: $labels-red;
+  color: $labels-background;
+  width: 10em;
+  left: -40%;
+  text-align: center;
+  z-index: 99999999;
+  &:before {
+    border-color: transparent transparent $labels-red;
+  }
+}
+
 //-----------------------------------------------------
 // Zoom UI styles, based on the ones on the ScribeAPI repo
 
 .zoom-button {
   z-index: 100;
+  cursor: pointer;
+  &:hover ~ .pan-zoom-area {
+    display: block;
+  }
 }
 .pan-zoom-area {
+  display: none;
   background-color: $labels-background-dark;
   width: 140px;
   height: 135px;
@@ -509,7 +534,8 @@ footer {
 .pie-chart {
   margin-bottom: 2em;
   img {
-    max-width: 90%;
+    width: 90%;
+    max-width: 400px;
   }
 }
 

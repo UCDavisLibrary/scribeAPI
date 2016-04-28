@@ -304,10 +304,10 @@ module.exports = React.createClass
             <Draggable onEnd={@markSelectionAsImage}>
               <g transform="translate(#{@getMarkSelectionButtonPosition().x}, #{@getMarkSelectionButtonPosition().y})">
                 <rect
-                fill="rgb(255,0,0)"
-                stroke="rgb(255,0,0)"
+                fill="#642667"
+                stroke="#642667"
                 width="200"
-                height="50"
+                height="60"
                 x="0"
                 y="0"
                 rx="0"
@@ -315,11 +315,11 @@ module.exports = React.createClass
                 <text
                   x="0"
                   y="0"
+                  transform="translate(10,34)"
                   fontSize="24"
-                  transform="translate(10,30)"
-                  fill="rgb(255,255,255)"
+                  fill="#F1E3D1"
                   stroke="none">
-                  Mark as Image
+                  MARK AS IMAGE
                 </text>
                   
               </g>
@@ -330,8 +330,8 @@ module.exports = React.createClass
             <Draggable onEnd={@markSelectionAsText}>
               <g transform="translate(#{@getMarkSelectionButtonPosition().x}, #{@getMarkSelectionButtonPosition().y + 50})">
                 <rect
-                fill="rgb(0,0,255)"
-                stroke="rgb(0,0,255)"
+                fill="rgb(77, 7, 23)"
+                stroke="rgb(77, 7, 23)"
                 width="200"
                 height="50"
                 x="0"
@@ -342,10 +342,10 @@ module.exports = React.createClass
                   x="0"
                   y="0"
                   fontSize="24"
-                  transform="translate(10,30)"
-                  fill="rgb(255,255,255)"
+                  transform="translate(14,34)"
+                  fill="#F1E3D1"
                   stroke="none">
-                  Mark as Text
+                  MARK AS TEXT
                 </text>
                   
               </g>
