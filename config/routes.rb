@@ -9,8 +9,10 @@ API::Application.routes.draw do
 
   # Annotate is the default anchor for React-bound requests
   get '/annotate',                                            to: 'annotate#index'
-  get '/projects',                                            to: 'projects#index',       defaults: { format: 'json' }
 
+  # JSON endpoints
+  get '/projects',                                            to: 'projects#index',       defaults: { format: 'json' }
+  
   get '/workflows',                                           to: 'workflow#index',       defaults: { format: 'json' }
   get '/workflows/:id',                                       to: 'workflow#show',        defaults: { format: 'json' }
 
@@ -22,10 +24,11 @@ API::Application.routes.draw do
   get '/workflows/:workflow_id/subjects',                     to: 'subjects#index'
   get '/workflows/:workflow_id/subject_sets',                 to: 'subject_sets#index'
 
-  # SEO pages
-  get '/browse/:page/',                                        to: 'browse#index'
-  get '/browse',                                        to: 'browse#index'  
+  # SEO-friendly pages
+  get '/browse/:page/',                                       to: 'browse#index'
+  get '/browse',                                              to: 'browse#index'  
   get '/view/:identifier',                                    to: 'browse#view'
+  get '/metadata/:identifier',                                to: 'browse#metadata'
   
   # Subjects
   get '/labels/:key',                                   to: 'subjects#show_by_key',  defaults: { format: 'json' }  

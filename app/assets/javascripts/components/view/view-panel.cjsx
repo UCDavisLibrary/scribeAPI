@@ -47,6 +47,8 @@ module.exports = React.createClass
             </figure>
         }
       </section>
-      <SubjectMetadata subject={subject} />
+      { if subject? 
+        <SubjectMetadata subject={subject} key={subject.meta_data.identifier} />
+      }
     </div>
 

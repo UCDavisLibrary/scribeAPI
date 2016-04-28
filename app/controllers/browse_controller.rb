@@ -13,5 +13,14 @@ class BrowseController < ApplicationController
     subject, @link = BrowseMethods.show_by_identifier(identifier)
     @subject = subject[0]
   end
+
+  def metadata
+    identifier = params[:identifier]
+    
+    subject, @link = BrowseMethods.show_by_identifier(identifier)
+    @subject = subject[0] 
+
+    render layout: false
+  end
   
 end

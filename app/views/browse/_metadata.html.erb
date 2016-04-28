@@ -1,0 +1,27 @@
+<section class="medium-10 medium-offset-1 medium-unstack row">
+  <div class="column">
+    <h1>Label <%= @subject.meta_data['identifier'] %></h1>
+    <% if @subject.meta_data['category'] %>
+    <dl>
+      <dt>Category</dt>
+      <dd><%= @subject.meta_data['category'] %></dd>
+    </dl>
+    <% end %> 
+  </div>
+  <div class="small-4 columns">
+    <div class="row small-10 align-spaced">
+      <a class="webicon facebook" href="#">Facebook</a>
+      <a class="webicon pinterest" href="#">Pinterest</a>
+      <a class="webicon twitter" href="#">Twitter</a>
+    </div>
+    <div>
+      <h5>Status: Needs marking</h5>
+      <p><a href to="/mark?subject_set_id=<%= @subject.subject_set_id %>&selected_subject_id=<%= @subject.id %>" class="button">Mark this Label</a></p>
+    </div>
+    <h5>Get the story behind this label:</h5>
+    <h6><a href="">Who was Maynard Amerine?</a></h6>
+    <h5>Tell us your story</h5>
+    <p>Are you a wine expert? Do you have family history with this label? <a href="#">Send us your story</a>!</p>
+  </div>
+</section>        
+ 

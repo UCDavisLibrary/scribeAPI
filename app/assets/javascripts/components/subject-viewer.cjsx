@@ -437,8 +437,9 @@ module.exports = React.createClass
                 scale: scale                  # pass scale down to children (for transcribe tools)
           }
         </figure>
-
-        <SubjectMetadata subject={@props.subject} nextTask={null} />
+        { if @props.subject? 
+          <SubjectMetadata subject={@props.subject} />
+        }
     </section>
 
 window.React = React
