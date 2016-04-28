@@ -104,8 +104,7 @@ class AppRouter
 
 
       </Route>
-
-    Router.run routes, (Handler, state) ->
+    Router.run routes, Router.HistoryLocation, (Handler) ->
       React.render <Handler />, document.getElementById('react-target')
 
   controllerForPage: (page) ->

@@ -1,24 +1,27 @@
-<div>
-  
-  <section class="medium-10 medium-offset-1 large-8 large-offset-2 columns ">
-    <div class="browse">
-
-      <%= paginate @subjects, :window => 2 %>
-      
-      <div class="browse-group columns"> 
-	<div class="row small-up-2 medium-up-4 large-up-5 align-center">       
-	  
-	  <% for @subject in @subjects %>
-	  <div class="column">
-	    <a class="thumbnail" href="/view/<%= @subject.meta_data['identifier'] %>">
-	      <img src="<%= @subject.location['thumbnail'] %>" width="200" height="200" />
-	    </a>
+<noscript>
+  <div>
+    <section class="medium-10 medium-offset-1 large-8 large-offset-2 columns ">
+      <div class="browse">
+	
+	<%= paginate @subjects, :window => 2 %>
+	
+	<div class="browse-group columns"> 
+	  <div class="row small-up-2 medium-up-4 large-up-5 align-center">       
+	    
+	    <% for @subject in @subjects %>
+	    <div class="column">
+	      <a class="thumbnail" href="/view/<%= @subject.meta_data['identifier'] %>">
+		<img src="<%= @subject.location['thumbnail'] %>" width="200" height="200" />
+	      </a>
+	    </div>
+	    <% end %>
 	  </div>
-	  <% end %>
 	</div>
+	<%= paginate @subjects, :window => 2 %>
+	
       </div>
-      <%= paginate @subjects, :window => 2 %>
-      
+    </section>
   </div>
-  </section>
-</div>
+</noscript>
+
+<div id="react-target"></div>

@@ -7,9 +7,10 @@ API::Application.routes.draw do
                                       :sessions => "sessions"}
 
 
-  # Annotate is the default anchor for React-bound requests
-  get '/annotate',                                            to: 'annotate#index'
-
+  # Annotation endpoints
+  get '/mark',                                                to: 'annotate#index'
+  get '/transcribe',                                          to: 'annotate#index'  
+  
   # JSON endpoints
   get '/projects',                                            to: 'projects#index',       defaults: { format: 'json' }
   
