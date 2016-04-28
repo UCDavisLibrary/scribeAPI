@@ -3,7 +3,6 @@ App         = require './app'
 Router      = require 'react-router'
 {Handler, Root, RouteHandler, Route, DefaultRoute, Redirect, Navigation, Link} = Router
 
-HomePage                      = require './home-page'
 Mark                          = require './mark'
 Transcribe                    = require './transcribe'
 Verify                        = require './verify'
