@@ -1,5 +1,4 @@
 React = require("react")
-Footer                        = require '../partials/footer'
 API                           = require '../lib/api'
 Project                       = require 'models/project.coffee'
 BrowserWarning                = require './browser-warning'
@@ -78,8 +77,6 @@ App = React.createClass
           <BrowserWarning />
           <RouteHandler hash={window.location.hash} project={project} onCloseTutorial={@setTutorialComplete} user={@state.user}/>
         </div>
-
-        <Footer privacyPolicy={ project.privacy_policy } menus={project.menus} partials={project.partials} />
 
     </div>
 
