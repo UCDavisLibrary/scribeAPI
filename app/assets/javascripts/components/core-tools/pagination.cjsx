@@ -52,7 +52,7 @@ module.exports = React.createClass
       <li className="pagination-previous #{'disabled' unless @props.previousPage} ">
         {
          if @props.previousPage
-           <Link to="#{@props.urlBase}/#{@props.previousPage}" ariaLabel="Previous page">Previous <span className="show-for-sr">page</span></Link>
+           <Link to="#{@props.urlBase}/#{@props.previousPage}" ariaLabel="Previous page"><img className="left-pointer" src="/images/left-pointer-knockout.svg"/>Previous <span className="show-for-sr">page</span></Link>
          else
            <span>Previous <span className="show-for-sr">page</span></span>
         }
@@ -77,7 +77,7 @@ module.exports = React.createClass
       <li className="pagination-next #{'disabled' unless @props.nextPage}">
         {
          if @props.nextPage
-           <Link to="#{@props.urlBase}/#{@props.nextPage}" ariaLabel="Next page">Next <span className="show-for-sr">page</span></Link>
+           <Link to="#{@props.urlBase}/#{@props.nextPage}" ariaLabel="Next page">Next<img className="right-pointer" src="/images/right-pointer-knockout.svg"/><span className="show-for-sr">page</span></Link>
          else
            <span>Next <span className="show-for-sr">page</span></span>
         }
