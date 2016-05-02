@@ -68,7 +68,7 @@ module.exports = React.createClass
         destroyCurrentClassification={@props.destroyCurrentClassification}
         hideOtherMarks={@props.hideOtherMarks}
         currentSubtool={@props.currentSubtool}
-        viewBox={@state.zoomPanViewBox}
+        viewBox={@props.viewBox}        
         interimMarks={@props.interimMarks}
       />
 

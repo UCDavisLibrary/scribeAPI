@@ -431,7 +431,7 @@ module.exports = React.createClass
         </svg>
 
     #  Render any tools passed directly in in same parent div so that we can efficiently position them with respect to marks"
-    <section className="">
+    <section>
         <figure className="main-wine-label">
           {markingSurfaceContent}
           { if @props.children?

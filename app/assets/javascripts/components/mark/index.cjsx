@@ -1,6 +1,7 @@
 React                   = require 'react'
 {Navigation}            = require 'react-router'
 SubjectViewer           = require 'components/subject-viewer'
+SubjectSetViewer = require 'components/subject-set-viewer' 
 coreTools               = require 'components/core-tools'
 FetchSubjectSetsMixin   = require 'lib/fetch-subject-sets-mixin'
 SubjectSetToolbar       = require 'components/subject-set-toolbar'
@@ -239,24 +240,30 @@ module.exports = React.createClass # rename to Classifier
          <DraggableModal header={@state.notice.header} onDone={@state.notice.onClick}>{@state.notice.message}</DraggableModal>
 
        else if @getCurrentSubjectSet().subjects?
-         <SubjectViewer
-         subject={@getCurrentSubjectSet().subjects[@state.subject_index]}
-         workflow={@getActiveWorkflow()}
-         task={currentTask}
-         subjectCurrentPage={@state.subjectCurrentPage}
-         annotation={@getCurrentClassification()?.annotation ? {}}
-         active={true}
-         onComplete={@handleToolComplete}
-         onChange={@handleDataFromTool}
-         onDestroy={@handleMarkDelete}
-         destroyCurrentClassification={@destroyCurrentClassification}
-         hideOtherMarks={@state.hideOtherMarks}
-         currentSubtool={currentSubtool}
-         viewBox={@state.viewBox}
-         interimMarks={@state.interimMarks}
-         />
+            <SubjectSetViewer
+              subject_set={@getCurrentSubjectSet()}
+              subject_index={@state.subject_index}
+              workflow={@getActiveWorkflow()}
+              task={currentTask}
+              annotation={@getCurrentClassification()?.annotation ? {}}
+              onComplete={@handleToolComplete}
+              onChange={@handleDataFromTool}
+              onDestroy={@handleMarkDelete}
+              onViewSubject={@handleViewSubject}
+              subToolIndex={@state.currentSubToolIndex}
+              nextPage={@nextPage}
+              prevPage={@prevPage}
+              subjectCurrentPage={@state.subjectCurrentPage}
+              totalSubjectPages={@state.subjects_total_pages}
+              destroyCurrentClassification={@destroyCurrentClassification}
+              hideOtherMarks={@state.hideOtherMarks}
+              toggleHideOtherMarks={@toggleHideOtherMarks}
+              currentSubtool={currentSubtool}
+              lightboxHelp={@toggleLightboxHelp}
+              viewBox={@state.viewBox}              
+              interimMarks={@state.interimMarks}
+            />
 
         }
     </div>
 
-window.React = React
