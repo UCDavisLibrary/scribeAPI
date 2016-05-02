@@ -1,6 +1,5 @@
 module.exports =
-  getInitialState: ->
-    zoomPanViewBox: null
 
   handleZoomPanViewBoxChange: (viewBox) ->
-    @setState zoomPanViewBox: viewBox
+    console.log("In handle zoombox: new viewbox is " + viewBox)
+    @setState viewBox: viewBox

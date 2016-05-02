@@ -22,7 +22,7 @@ module.exports = React.createClass
       level: 1
       x: 0
       y: 0
-
+      
   componentDidMount: ->
     window.addEventListener "keydown", (e) => @_handleZoomKeys(e)
 
@@ -81,8 +81,9 @@ module.exports = React.createClass
       h = @props.subject.height / @state.zoom.level
       x = @props.subject.width * @state.zoom.x
       y = @props.subject.height * @state.zoom.y
-      @props.onChange? [ x, y, w, h ]
+      @props.handleZoomUI [ x, y, w, h ]
 
+    
   # Compute next value for either x or y given pan direction
   _computeNewPanValue: (dir) ->
     zoom = @state.zoom

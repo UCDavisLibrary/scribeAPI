@@ -15,9 +15,13 @@ module.exports =
         # Get the index of the specified subject in the (presumably first & only) subject set:
         state.subject_index = (ind for subj,ind in subject_sets[0].subjects when subj.id == @props.query.selected_subject_id )[0] ? 0
 
+      if subject_sets[0]?.subjects.length == 1
+        subject = subject_sets[0]?.subjects[0]
+        state.viewBox = [0, 0, subject.width, subject.height]
+
       # If taskKey specified, now's the time to set that too:
       state.taskKey = @props.query.mark_task_key if @props.query.mark_task_key
-
+      
       @setState state if state
 
     # Fetch by subject-set id?

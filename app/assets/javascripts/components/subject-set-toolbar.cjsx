@@ -3,11 +3,9 @@ LightBox                      = require './light-box'
 ForumSubjectWidget            = require './forum-subject-widget'
 {Link}                        = require 'react-router'
 SubjectZoomPan          = require 'components/subject-zoom-pan'
-ZoomPanListenerMethods        = require 'lib/zoom-pan-listener-methods'
 
 module.exports = React.createClass
   displayName: "SubjectSetToolbar"
-  mixins: [ZoomPanListenerMethods]
   
   propTypes:
     hideOtherMarks: React.PropTypes.bool.isRequired
@@ -15,13 +13,13 @@ module.exports = React.createClass
   getInitialState: ->
     hideMarks: true
     zoomExpanded: false
-    
+    viewBox: @props.viewBox
   onZoomExpand: ->
     @setState zoomExpanded: true
 
   onZoomHide: ->
     @setState zoomExpanded: false
-
+ 
   toggleZoom: ->
     if @state.zoomExpanded
       @onZoomHide()
@@ -32,13 +30,12 @@ module.exports = React.createClass
   render: ->
     # disable LightBox if work has begun
     disableLightBox = if @props.task.key isnt @props.workflow.first_task then true else false
-
     <div>
       <div className="row tools">
         <div className="pan-zoom-controller" onMouseOver={@toggleZoom} onMouseOut={@toggleZoom}>          
 
           <div className={"pan-zoom-area pan-zoom pane" + if @state.zoomExpanded then ' active' else '' }>
-            <SubjectZoomPan subject={@props.subject} onChange={@props.onZoomChange} viewBox={@state.zoomPanViewBox}/>
+            <SubjectZoomPan subject={@props.subject} handleZoomUI={@props.handleZoomUI} />
           </div>
         </div>
         <div className="switch">

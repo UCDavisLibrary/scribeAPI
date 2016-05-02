@@ -43,13 +43,11 @@ module.exports = React.createClass # rename to Classifier
     @beginClassification()
 
   fetchSubjectsCallback: ->
-    @setState taskKey: @getCurrentSubject().type if @getCurrentSubject()?
-
-  __DEP__handleTaskComponentChange: (val) ->
-    taskOption = @getCurrentTask().tool_config.options[val]
-    if taskOption.next_task?
-      @advanceToTask taskOption.next_task
-
+    if @getCurrentSubject()?    
+      @setState
+        taskKey: @getCurrentSubject().type 
+        viewBox: [0, 0, @getCurrentSubject().width, @getCurrentSubject().height] 
+    
   # Handle user selecting a pick/drawing tool:
   handleDataFromTool: (d) ->
     classifications = @state.classifications
@@ -124,7 +122,7 @@ module.exports = React.createClass # rename to Classifier
                 if @state.noMoreSubjects or not @getCurrentSubject()
                   <div>
                     <br/>                    
-                    Currently, there are no labels for you to transcribe. Try <a href="/#/mark">marking</a> instead!
+                    Currently, there are no labels for you to transcribe. Try <a href="/mark">marking</a> instead!
                     <br/><br/>
                   </div>
                 else
@@ -147,9 +145,10 @@ module.exports = React.createClass # rename to Classifier
             <SubjectViewer
               onLoad={@handleViewerLoad}
               task={@getCurrentTask()}
-              subject={@getCurrentSubject()}ext-
+              subject={@getCurrentSubject()}
               active=true
               workflow={@getActiveWorkflow()}
+              viewBox={@state.viewBox}              
               classification={@props.classification}
               annotation={currentAnnotation}
             >

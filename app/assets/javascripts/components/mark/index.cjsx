@@ -1,6 +1,6 @@
 React                   = require 'react'
 {Navigation}            = require 'react-router'
-SubjectSetViewer        = require '../subject-set-viewer'
+SubjectViewer           = require 'components/subject-viewer'
 coreTools               = require 'components/core-tools'
 FetchSubjectSetsMixin   = require 'lib/fetch-subject-sets-mixin'
 SubjectSetToolbar       = require 'components/subject-set-toolbar'
@@ -16,6 +16,7 @@ HideOtherMarksButton    = require 'components/buttons/hide-other-marks-button'
 DraggableModal          = require 'components/draggable-modal'
 Draggable               = require 'lib/draggable'
 {Link}                  = require 'react-router'
+ZoomPanListenerMethods        = require 'lib/zoom-pan-listener-methods'
 
 module.exports = React.createClass # rename to Classifier
   displayName: 'Mark'
@@ -26,8 +27,6 @@ module.exports = React.createClass # rename to Classifier
   getDefaultProps: ->
     workflowName: 'mark'
     type: 'root'
-    
-    # hideOtherMarks: false
 
   mixins: [FetchSubjectSetsMixin, BaseWorkflowMethods, Navigation] # load subjects and set state variables: subjects, currentSubject, classification
 
@@ -64,6 +63,7 @@ module.exports = React.createClass # rename to Classifier
     @getCompletionAssessmentTask()
     @fetchSubjectSetsBasedOnProps()
     @fetchGroups()
+
 
   componentWillMount: ->
     @setState taskKey: @getActiveWorkflow().first_task
@@ -138,6 +138,10 @@ module.exports = React.createClass # rename to Classifier
   handleMarkDelete: (m) ->
     @flagSubjectAsUserDeleted m.subject_id
 
+  handleZoomUI: (viewBox) ->
+    # accept changes to the viewbox and update accordingly
+    @setState viewBox: viewBox
+    
   destroyCurrentClassification: ->
     classifications = @state.classifications
     classifications.splice(@state.classificationIndex,1)
@@ -205,6 +209,7 @@ module.exports = React.createClass # rename to Classifier
       currentAnswer = (a for a in currentTask.tool_config.options when a.value == currentAnnotation.value)[0]
       waitingForAnswer = not currentAnswer
 
+
     <div>
       <section className="row align-justify toolbar">
         <SubjectSetToolbar
@@ -213,6 +218,8 @@ module.exports = React.createClass # rename to Classifier
           subject={@getCurrentSubjectSet()?.subjects?[0]}
           lightboxHelp={@togglelightboxHelp}
           hideOtherMarks={@state.hideOtherMarks}
+          handleZoomUI={@handleZoomUI}
+          viewBox={@state.viewBox}
           toggleHideOtherMarks={@toggleHideOtherMarks}
           />
             
@@ -231,29 +238,24 @@ module.exports = React.createClass # rename to Classifier
        else if @state.notice
          <DraggableModal header={@state.notice.header} onDone={@state.notice.onClick}>{@state.notice.message}</DraggableModal>
 
-       else if @getCurrentSubjectSet()?
-            <SubjectSetViewer
-              subject_set={@getCurrentSubjectSet()}
-              subject_index={@state.subject_index}
-              workflow={@getActiveWorkflow()}
-              task={currentTask}
-              annotation={@getCurrentClassification()?.annotation ? {}}
-              onComplete={@handleToolComplete}
-              onChange={@handleDataFromTool}
-              onDestroy={@handleMarkDelete}
-              onViewSubject={@handleViewSubject}
-              subToolIndex={@state.currentSubToolIndex}
-              nextPage={@nextPage}
-              prevPage={@prevPage}
-              subjectCurrentPage={@state.subjectCurrentPage}
-              totalSubjectPages={@state.subjects_total_pages}
-              destroyCurrentClassification={@destroyCurrentClassification}
-              hideOtherMarks={@state.hideOtherMarks}
-              toggleHideOtherMarks={@toggleHideOtherMarks}
-              currentSubtool={currentSubtool}
-              lightboxHelp={@toggleLightboxHelp}
-              interimMarks={@state.interimMarks}
-            />
+       else if @getCurrentSubjectSet().subjects?
+         <SubjectViewer
+         subject={@getCurrentSubjectSet().subjects[@state.subject_index]}
+         workflow={@getActiveWorkflow()}
+         task={currentTask}
+         subjectCurrentPage={@state.subjectCurrentPage}
+         annotation={@getCurrentClassification()?.annotation ? {}}
+         active={true}
+         onComplete={@handleToolComplete}
+         onChange={@handleDataFromTool}
+         onDestroy={@handleMarkDelete}
+         destroyCurrentClassification={@destroyCurrentClassification}
+         hideOtherMarks={@state.hideOtherMarks}
+         currentSubtool={currentSubtool}
+         viewBox={@state.viewBox}
+         interimMarks={@state.interimMarks}
+         />
+
         }
     </div>
 

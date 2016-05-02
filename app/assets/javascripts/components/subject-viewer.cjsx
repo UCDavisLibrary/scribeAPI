@@ -18,7 +18,11 @@ module.exports = React.createClass
   resizing: false
 
   mixins: [MarkDrawingMixin] # load helper methods to draw marks and highlights
-
+  
+  handleZoomPanViewBoxChange: (viewBox) ->
+    console.log("In handle zoombox: new viewbox is " + viewBox)
+    @setState viewBox: viewBox
+    
   getInitialState: ->
     subject: @props.subject
     marks: @getMarksFromProps(@props)
@@ -30,7 +34,7 @@ module.exports = React.createClass
       y: 0
     scale: {horizontal: 1, vertical: 1}
     sameSessionTranscriptions: []
-
+    
   getDefaultProps: ->
     tool: null # Optional tool to place alongside subject (e.g. transcription tool placed alongside mark)
     onLoad: null
@@ -45,6 +49,7 @@ module.exports = React.createClass
 
     @setState
       marks: @getMarksFromProps(new_props)
+      viewBox: new_props.viewBox
 
     if new_props.subject.id == @props.subject.id
       @scrollToSubject()
@@ -355,11 +360,9 @@ module.exports = React.createClass
   render: ->
     return null if ! @props.active
 
-    viewBox = @props.viewBox ? [0, 0, @props.subject.width, @props.subject.height]
-    scale = @state.scale # @getScale()
-
-    # marks = @getCurrentMarks()
+    scale = @state.scale
     marks = @state.marks
+    
     marks = marks.concat @state.uncommittedMark if @state.uncommittedMark?
 
     {transcribableMarks, otherMarks} = @separateTranscribableMarks(marks)
@@ -376,7 +379,7 @@ module.exports = React.createClass
       markingSurfaceContent =
         <svg
           className = "subject-viewer-svg"
-          viewBox = {viewBox}
+          viewBox = {@state.viewBox}
           data-tool = {@props.selectedDrawingTool?.type} >
           <rect
             ref = "sizeRect"

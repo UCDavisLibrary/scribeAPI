@@ -194,7 +194,7 @@ TextTool = React.createClass
               <input type="text" value={val} {...atts} placeholder="Enter text here"/>
 
             else if @props.inputType == "textarea"
-              <textarea key={@props.task.key} value={val} {...atts} placeholder="Enter text here"/>
+              <textarea key={@props.task.key} value={val} {...atts} placeholder="Enter text here"></textarea>
 
             else if @props.inputType == "number"
               # Let's not make it input[type=number] because we don't want the browser to absolutely *force* numeric; We should coerce numerics without obliging
