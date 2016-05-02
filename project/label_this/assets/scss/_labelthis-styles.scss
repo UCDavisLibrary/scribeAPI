@@ -315,6 +315,13 @@ body {
 
 //-----------------------------------------------------
 // Zoom UI styles, based on the ones on the ScribeAPI repo
+.pan-zoom-controller {
+    background: url('/images/zoom-button.svg') no-repeat center 4px;
+    width: 28px;
+    height: 30px;
+    margin: 4px 0 0 -2px;
+    padding: 0;
+}
 
 .zoom-button {
   z-index: 100;
@@ -324,8 +331,12 @@ body {
   }
 }
 .pan-zoom-area {
-  display: none;
+  &.active {
+      display: block; 
+  }
   background-color: $labels-background-dark;
+  
+  display: none; 
   width: 140px;
   height: 135px;
   left: 15px;
@@ -338,12 +349,12 @@ body {
     border-radius: 4px;
     width: 60px;
     height: 70px;
-    position: absolute;
+    position: absolute; 
     top: -7px;
     left: 36px;
     margin-top: -36px;
     margin-left: -36px;
-    background-color: $labels-background-dark;
+    background: $labels-background-dark url('/images/zoom-button.svg') no-repeat center 4px; 
   }
 }
 

@@ -4241,6 +4241,13 @@ body {
   .helper:before {
     border-color: transparent transparent #4D0717; }
 
+.pan-zoom-controller {
+  background: url("/images/zoom-button.svg") no-repeat center 4px;
+  width: 28px;
+  height: 30px;
+  margin: 4px 0 0 -2px;
+  padding: 0; }
+
 .zoom-button {
   z-index: 100;
   cursor: pointer; }
@@ -4248,8 +4255,8 @@ body {
     display: block; }
 
 .pan-zoom-area {
-  display: none;
   background-color: #CBBAA5;
+  display: none;
   width: 140px;
   height: 135px;
   left: 15px;
@@ -4257,6 +4264,8 @@ body {
   border-radius: 4px;
   position: absolute;
   z-index: 99; }
+  .pan-zoom-area.active {
+    display: block; }
   .pan-zoom-area:before {
     content: ' ';
     border-radius: 4px;
@@ -4267,7 +4276,7 @@ body {
     left: 36px;
     margin-top: -36px;
     margin-left: -36px;
-    background-color: #CBBAA5; }
+    background: #CBBAA5 url("/images/zoom-button.svg") no-repeat center 4px; }
 
 .subject-zoom-pan {
   width: 130px;

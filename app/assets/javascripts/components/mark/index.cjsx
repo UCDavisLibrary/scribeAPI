@@ -3,6 +3,7 @@ React                   = require 'react'
 SubjectSetViewer        = require '../subject-set-viewer'
 coreTools               = require 'components/core-tools'
 FetchSubjectSetsMixin   = require 'lib/fetch-subject-sets-mixin'
+SubjectSetToolbar       = require 'components/subject-set-toolbar'
 BaseWorkflowMethods     = require 'lib/workflow-methods-mixin'
 JSONAPIClient           = require 'json-api-client' # use to manage data?
 ForumSubjectWidget      = require '../forum-subject-widget'
@@ -206,30 +207,15 @@ module.exports = React.createClass # rename to Classifier
 
     <div>
       <section className="row align-justify toolbar">
-        <div>
-          <div className="row tools">
-            <img className="zoom-button" src="/images/zoom-button.svg"/>
-            <div className="pan-zoom-area pan-zoom pane active">
-              <div className="subject-zoom-pan">
-                <button className="zoom out disabled" title="zoom out"></button>
-                <button className="zoom in undefined" title="zoom in"></button>
-                <button className="pan up disabled" title="pan up"></button>
-                <button className="pan right undefined" title="pan right"></button>
-                <button className="pan left disabled" title="pan left"></button>
-                <button className="pan down undefined" title="pan down"></button>
-                <button className="reset">Reset</button>
-              </div>
-            </div>
-            <div className="switch">
-              <div className="toggle">
-                <input className="switch-input" id="exampleSwitch" type="checkbox" name="exampleSwitch"/>
-                <label className="switch-paddle" htmlFor="exampleSwitch">
-                  <span className="show-for-sr">Show Others’ Marks</span>
-                </label>
-              </div>
-            </div>
-          </div>
-        </div>
+        <SubjectSetToolbar
+          workflow={@getActiveWorkflow()}
+          task={currentTask}
+          subject={@getCurrentSubjectSet()[@state.subject_index]}
+          lightboxHelp={@togglelightboxHelp}
+          hideOtherMarks={@state.hideOtherMarks}
+          toggleHideOtherMarks={@toggleHideOtherMarks}
+          />
+            
         <div className="columns align-center label-title">          
           <div className="mark-instructions small-12">
             <h1>Instructions:</h1>

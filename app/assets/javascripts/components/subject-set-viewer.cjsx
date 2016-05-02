@@ -8,7 +8,6 @@ LoadingIndicator              = require './loading-indicator'
 SubjectMetadata               = require './subject-metadata'
 ActionButton                  = require './action-button'
 markingTools                  = require './mark/tools'
-ZoomPanListenerMethods        = require 'lib/zoom-pan-listener-methods'
 SubjectSetToolbar             = require './subject-set-toolbar'
 
 module.exports = React.createClass
@@ -17,8 +16,6 @@ module.exports = React.createClass
 
   propTypes:
     onDestroy: React.PropTypes.func.isRequired #hands @handleMarkDelete, which call wmm method: @flagSubjectAsUserDeleted
-
-  mixins: [ZoomPanListenerMethods]
 
   getInitialState: ->
     subject_set: @props.subject_set
