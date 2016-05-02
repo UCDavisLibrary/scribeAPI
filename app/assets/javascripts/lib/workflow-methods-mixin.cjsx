@@ -210,22 +210,13 @@ module.exports =
     console.warn "TaskKey invalid: #{@state.taskKey}. Should be: #{(k for k,v of @getTasks())}" if ! @getTasks()[@state.taskKey]?
     @getTasks()[@state.taskKey]
 
-
-
   getTasks: ->
     # Add completion_assessment_task to list of tasks dynamically:
-# <<<<<<< HEAD
     tasks = @getActiveWorkflow().tasks
     completion_assessment_task = @getCompletionAssessmentTask()
     # Merge keys recursively if it exists in config
     completion_assessment_task = $.extend true, tasks['completion_assessment_task'], completion_assessment_task if tasks['completion_assessment_task']?
     $.extend tasks, completion_assessment_task: completion_assessment_task
-# =======
-#     tasks = @getActiveWorkflow().tasks
-#     if @props.workflowName == 'mark'
-#       tasks = $.extend tasks, completion_assessment_task: @getCompletionAssessmentTask()
-#     tasks
-# >>>>>>> master
 
   # Get instance of current tool:
   getCurrentTool: ->

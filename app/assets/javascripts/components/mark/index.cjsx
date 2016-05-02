@@ -210,7 +210,7 @@ module.exports = React.createClass # rename to Classifier
         <SubjectSetToolbar
           workflow={@getActiveWorkflow()}
           task={currentTask}
-          subject={@getCurrentSubjectSet()[@state.subject_index]}
+          subject={@getCurrentSubjectSet()?.subjects?[0]}
           lightboxHelp={@togglelightboxHelp}
           hideOtherMarks={@state.hideOtherMarks}
           toggleHideOtherMarks={@toggleHideOtherMarks}
