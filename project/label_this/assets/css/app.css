@@ -4131,6 +4131,10 @@ body {
   .draggable-modal label, .transcribe-tool label, .help-dialogue label, .step-by-step label, .login label, .signup label {
     color: #4D0717; }
 
+.draggable-modal {
+  position: absolute;
+  z-index: 10; }
+
 .draggable-modal, .transcribe-tool, .help-dialogue, .signup {
   min-width: 30rem;
   max-width: 35rem; }

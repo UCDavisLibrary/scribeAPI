@@ -31,11 +31,7 @@ module.exports = React.createClass
     # Position roughly in center of screen unless explicit x,y given:
     width = @props.width ? 400
     x = @props.x ? (( $(window).width() - width ) / 2 )
-    header_h = 80
-    if $('.main-nav').length > 0
-      header_h = $('.main-nav').first().height()
-    y = @props.y ? header_h + 30 + $(window).scrollTop()
-    y = Math.max y, 50
+    y = 130
     x = Math.max x, 100
     x = $(window).width() - width if x > $(window).width() - width
 

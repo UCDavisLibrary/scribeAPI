@@ -162,6 +162,10 @@ body {
     color: $labels-red;
   }
 }
+.draggable-modal {
+    position: absolute;
+    z-index: 10;
+}
 
 .draggable-modal, .transcribe-tool, .help-dialogue, .signup {
   min-width: 30rem;
