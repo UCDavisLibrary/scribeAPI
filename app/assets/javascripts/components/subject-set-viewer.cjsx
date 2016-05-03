@@ -67,6 +67,7 @@ module.exports = React.createClass
         subToolIndex={@props.subToolIndex}
         destroyCurrentClassification={@props.destroyCurrentClassification}
         hideOtherMarks={@props.hideOtherMarks}
+        toggleHideOtherMarks={@props.toggleHideOtherMarks}
         currentSubtool={@props.currentSubtool}
         viewBox={@props.viewBox}        
         interimMarks={@props.interimMarks}

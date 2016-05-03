@@ -47,8 +47,8 @@ module.exports = React.createClass # rename to Classifier
     @setState showingTutorial: @showTutorialBasedOnUser(new_props.user)
 
   showTutorialBasedOnUser: (user) ->
-    # Show tutorial by default
-    show = true
+    # Don't show tutorial by default
+    show = false
     if user?.tutorial_complete?
       # If we have a user, show tutorial if they haven't completed it:
       show = ! user.tutorial_complete
@@ -193,7 +193,7 @@ module.exports = React.createClass # rename to Classifier
     currentSubtool = if @state.currentSubtool then @state.currentSubtool else @getTasks()[firstTask]?.tool_config.tools?[0]
 
     # direct link to this page
-    pageURL = "#{location.origin}/#/mark?subject_set_id=#{@getCurrentSubjectSet().id}&selected_subject_id=#{@getCurrentSubject()?.id}"
+    pageURL = "#{location.origin}/mark?subject_set_id=#{@getCurrentSubjectSet().id}&selected_subject_id=#{@getCurrentSubject()?.id}"
 
     if currentTask?.tool is 'pick_one'
       currentAnswer = (a for a in currentTask.tool_config.options when a.value == currentAnnotation.value)[0]
@@ -255,6 +255,6 @@ module.exports = React.createClass # rename to Classifier
         { if @state.showingTutorial
          <Tutorial workflow={@getActiveWorkflow()} onCloseTutorial={@toggleTutorial} />
         }           
-        
+        <div>{pageURL}</div>
     </div>
 

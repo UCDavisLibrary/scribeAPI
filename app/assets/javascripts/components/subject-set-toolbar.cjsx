@@ -40,7 +40,7 @@ module.exports = React.createClass
         </div>
         <div className="switch">
            <div className="toggle">
-              <input className="switch-input" id="exampleSwitch" type="checkbox" name="exampleSwitch"/>
+              <input className="switch-input" id="exampleSwitch" type="checkbox" name="exampleSwitch" onClick={@props.toggleHideOtherMarks}/>
               <label className="switch-paddle" htmlFor="exampleSwitch">
                  <span className="show-for-sr">Show Others’ Marks</span>
               </label>
