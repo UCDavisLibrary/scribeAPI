@@ -205,7 +205,9 @@ module.exports = React.createClass # rename to Classifier
 
 
     <div>
-      <Tutorial tutorial={@props.project.tutorial} onCloseTutorial={@props.onCloseTutorial} />
+      { if @state.showingTutorial
+         <Tutorial tutorial={@props.project.tutorial} onCloseTutorial={@props.onCloseTutorial} />
+      }           
       <section className="row align-justify toolbar">
         <SubjectSetToolbar
           workflow={@getActiveWorkflow()}
