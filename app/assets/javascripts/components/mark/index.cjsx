@@ -255,6 +255,5 @@ module.exports = React.createClass # rename to Classifier
         { if @state.showingTutorial
          <Tutorial workflow={@getActiveWorkflow()} onCloseTutorial={@toggleTutorial} />
         }           
-        <div>{pageURL}</div>
     </div>
 
