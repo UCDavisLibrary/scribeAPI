@@ -174,6 +174,13 @@ TextTool = React.createClass
     examples = @props.task.examples ? ( t for t in (@props.task.tool_config?.options ? []) when t.value==@props.annotation_key )[0]?.examples
 
     {x,y} = @getPosition @props.subject.region
+
+    if @props.task.key == 'image'          
+      title = <h2>Describe this Element</h2>
+      illegible_button = "I can't tell what this is"
+    else
+      title = <h2>Transcribe this text</h2>
+      illegible_button = "This text is illegible"
     
     # create component input field(s)
     tool_content =
@@ -185,11 +192,9 @@ TextTool = React.createClass
           
       <div className="input-field active">
         <label>
-          {if @props.task.key == 'image'          
-              <h2>Describe this Element</h2>
-           else
-              <h2>Transcribe this text</h2>
-              }
+          
+          { title }
+          
           <p>{@props.task.instruction}</p>          
           {
             atts =
@@ -219,7 +224,7 @@ TextTool = React.createClass
         }
         </label>
         <div className="button-group align-right">
-          <IllegibleSubjectButton key="illegal-subject-button" active={@props.illegibleSubject} onClick={() => @props.onIllegibleSubject(@commitAnnotation)} />
+          <IllegibleSubjectButton label={illegible_button} key="illegal-subject-button" active={@props.illegibleSubject} onClick={() => @props.onIllegibleSubject(@commitAnnotation)} />
       
           { if @props.isLastSubject
               buttonLabel = 'Finish Transcribing'
