@@ -156,7 +156,7 @@ module.exports =
     @setState badSubject: not @state.badSubject, =>
       callback?()
 
-  toggleIllegibleSubject: (e, callback) ->
+  toggleIllegibleSubject: (callback) ->
     @setState illegibleSubject: not @state.illegibleSubject, =>
       callback?()
 

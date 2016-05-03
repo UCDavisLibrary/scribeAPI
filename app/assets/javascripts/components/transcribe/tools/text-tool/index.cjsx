@@ -219,7 +219,7 @@ TextTool = React.createClass
         }
         </label>
         <div className="button-group align-right">
-          <IllegibleSubjectButton key="illegal-subject-button" active={@props.illegibleSubject} onClick={@props.onIllegibleSubject} />
+          <IllegibleSubjectButton key="illegal-subject-button" active={@props.illegibleSubject} onClick={() => @props.onIllegibleSubject(@commitAnnotation)} />
       
           { if @props.isLastSubject
               buttonLabel = 'Finish Transcribing'
