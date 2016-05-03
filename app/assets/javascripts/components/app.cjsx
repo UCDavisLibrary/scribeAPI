@@ -50,20 +50,6 @@ App = React.createClass
         loading:false
         error: "Having trouble logging you in"
 
-  setTutorialComplete: ->
-    previously_saved = @state.user?.tutorial_complete?
-
-    # Immediately amend user object with tutorial_complete flag so that we can hide the Tutorial:
-    @setState user: $.extend(@state.user ? {}, tutorial_complete: true)
-
-    # Don't re-save user.tutorial_complete if already saved:
-    return if previously_saved
-
-    request = $.post "/tutorial_complete"
-    request.fail (error)=>
-      console.log "failed to set tutorial value for user"
-
-
   render: ->
     project = window.project
     return null if ! project?
@@ -75,7 +61,7 @@ App = React.createClass
 
         <div>
           <BrowserWarning />
-          <RouteHandler hash={window.location.hash} project={project} onCloseTutorial={@setTutorialComplete} user={@state.user}/>
+          <RouteHandler hash={window.location.hash} project={project} user={@state.user}/>
         </div>
 
     </div>

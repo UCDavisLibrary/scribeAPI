@@ -26,7 +26,7 @@ GenericButton           = require 'components/buttons/generic-button'
 module.exports = React.createClass # rename to Classifier
   displayName: 'Transcribe'
   mixins: [FetchSubjectsMixin, BaseWorkflowMethods, Navigation] # load subjects and set state variables: subjects,  classification
-
+  
   getInitialState: ->
     taskKey:                      null
     classifications:              []
@@ -81,9 +81,6 @@ module.exports = React.createClass # rename to Classifier
   toggleTutorial: ->
     @setState showingTutorial: not @state.showingTutorial
 
-  hideTutorial: ->
-    @setState showingTutorial: false
-
   componentWillUnmount:->
     # PB: What's intended here? Docs state `void componentWillUnmount()`, so not sure what this serves:
     not @state.badSubject
@@ -115,7 +112,7 @@ module.exports = React.createClass # rename to Classifier
     onFirstAnnotation = currentAnnotation?.task is @getActiveWorkflow().first_task
 
     <div>
-        <section className="row align-justify toolbar">
+      <section className="row align-justify toolbar">
           <div className="columns align-center label-title">
             <div className="transcribe-instructions small-12">
               {
@@ -129,7 +126,7 @@ module.exports = React.createClass # rename to Classifier
                   <div>
                     <h1>Instructions:</h1>
                       <p><small>Tell us what the highlighted text says, or describe the highlighted image.
-                      <br/><em>Need help? <a href="{{ link.pages-transcribe-help }}">Watch a tutorial.</a></em></small></p>
+                      <br/><em>Need help? <a onClick={@toggleTutorial}>Watch a tutorial.</a></em></small></p>
                   </div>
               }
             </div>
@@ -138,7 +135,7 @@ module.exports = React.createClass # rename to Classifier
             if not @state.noMoreSubjects and @getCurrentSubject()              
               <a className="secondary button next-label" onClick={@advanceToNextSubject}>Next Label<img className="right-pointer" src="../../images/right-pointer-red.svg"/></a>
           }
-        </section>
+       </section>
         {                   
           if @getCurrentSubject()? and @getCurrentTask()? and not @state.noMoreSubjects
 
@@ -196,20 +193,10 @@ module.exports = React.createClass # rename to Classifier
                 }
               </div>
       }
-
-      { if @props.project.tutorial? && @state.showingTutorial
-          # Check for workflow-specific tutorial
-          if @props.project.tutorial.workflows? && @props.project.tutorial.workflows[@getActiveWorkflow()?.name]
-            <Tutorial tutorial={@props.project.tutorial.workflows[@getActiveWorkflow().name]} onCloseTutorial={@hideTutorial} />
-          # Otherwise just show general tutorial
-          else
-            <Tutorial tutorial={@props.project.tutorial} onCloseTutorial={@hideTutorial} />
-      }
-
-      { if @state.helping
-        <HelpModal help={@getCurrentTask().help} onDone={=> @setState helping: false } />
-      }
-
+      { if @state.showingTutorial
+         <Tutorial workflow={@getActiveWorkflow()} onCloseTutorial={@toggleTutorial} />
+      }                 
+      
     </div>
 
 window.React = React

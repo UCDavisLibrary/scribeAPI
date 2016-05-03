@@ -22,9 +22,6 @@ ZoomPanListenerMethods        = require 'lib/zoom-pan-listener-methods'
 module.exports = React.createClass # rename to Classifier
   displayName: 'Mark'
   
-  propTypes:
-    onCloseTutorial: React.PropTypes.func.isRequired
-
   getDefaultProps: ->
     workflowName: 'mark'
     type: 'root'
@@ -81,7 +78,6 @@ module.exports = React.createClass # rename to Classifier
 
   toggleTutorial: ->
     @setState showingTutorial: not @state.showingTutorial
-    @hideSubjectHelp()
 
   toggleLightboxHelp: ->
     @setState lightboxHelp: not @state.lightboxHelp
@@ -205,9 +201,6 @@ module.exports = React.createClass # rename to Classifier
 
 
     <div>
-      { if @state.showingTutorial
-         <Tutorial tutorial={@props.project.tutorial} onCloseTutorial={@props.onCloseTutorial} />
-      }           
       <section className="row align-justify toolbar">
         <SubjectSetToolbar
           workflow={@getActiveWorkflow()}
@@ -259,5 +252,9 @@ module.exports = React.createClass # rename to Classifier
          />
            
         }
+        { if @state.showingTutorial
+         <Tutorial workflow={@getActiveWorkflow()} onCloseTutorial={@toggleTutorial} />
+        }           
+        
     </div>
 
