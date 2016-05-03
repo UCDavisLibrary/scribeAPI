@@ -1,14 +1,7 @@
 {
     "name": "Tutorial",
-    "first_task": "welcome",
+    "first_task": "marking",
     "tasks": {
-        "welcome": {
-            "next_task": "marking",
-            "help": {
-                "title": "Welcome to Wine Labeling 101!",
-                "file": "welcome"
-            }
-        },
         "marking": {
             "next_task": "transcribing",
             "help": {

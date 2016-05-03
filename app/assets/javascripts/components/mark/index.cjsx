@@ -205,6 +205,7 @@ module.exports = React.createClass # rename to Classifier
 
 
     <div>
+      <Tutorial tutorial={@props.project.tutorial} onCloseTutorial={@props.onCloseTutorial} />
       <section className="row align-justify toolbar">
         <SubjectSetToolbar
           workflow={@getActiveWorkflow()}
@@ -216,12 +217,11 @@ module.exports = React.createClass # rename to Classifier
           viewBox={@state.viewBox}
           toggleHideOtherMarks={@toggleHideOtherMarks}
           />
-            
         <div className="columns align-center label-title">          
           <div className="mark-instructions small-12">
             <h1>Instructions:</h1>
             <p><small>Draw a box around an area of interest on this label. Then tell us whether what you’ve marked is an image or text.
-            <br/><em>Need help? <a href="#">Watch a tutorial.</a></em></small></p>
+            <br/><em>Need help? <a onClick={@toggleTutorial}>Watch a tutorial.</a></em></small></p>
           </div>             
         </div>
         <a className="secondary button next-label" disabled={waitingForAnswer} onClick={() => @advanceToNextSubject(@computeViewBox)}>Next Label<img className="right-pointer" src="/images/right-pointer-red.svg"/></a>
@@ -233,28 +233,29 @@ module.exports = React.createClass # rename to Classifier
          <DraggableModal header={@state.notice.header} onDone={@state.notice.onClick}>{@state.notice.message}</DraggableModal>
 
        else if @getCurrentSubjectSet().subjects?
-            <SubjectSetViewer
-              subject_set={@getCurrentSubjectSet()}
-              subject_index={@state.subject_index}
-              workflow={@getActiveWorkflow()}
-              task={currentTask}
-              annotation={@getCurrentClassification()?.annotation ? {}}
-              onComplete={@handleToolComplete}
-              onChange={@handleDataFromTool}
-              onDestroy={@handleMarkDelete}
-              onViewSubject={@handleViewSubject}
-              subToolIndex={@state.currentSubToolIndex}
-              subjectCurrentPage={@state.subjectCurrentPage}
-              totalSubjectPages={@state.subjects_total_pages}
-              destroyCurrentClassification={@destroyCurrentClassification}
-              hideOtherMarks={@state.hideOtherMarks}
-              toggleHideOtherMarks={@toggleHideOtherMarks}
-              currentSubtool={currentSubtool}
-              lightboxHelp={@toggleLightboxHelp}
-              viewBox={@state.viewBox}              
-              interimMarks={@state.interimMarks}
-            />
 
+         <SubjectSetViewer
+         subject_set={@getCurrentSubjectSet()}
+         subject_index={@state.subject_index}
+         workflow={@getActiveWorkflow()}
+         task={currentTask}
+         annotation={@getCurrentClassification()?.annotation ? {}}
+         onComplete={@handleToolComplete}
+         onChange={@handleDataFromTool}
+         onDestroy={@handleMarkDelete}
+         onViewSubject={@handleViewSubject}
+         subToolIndex={@state.currentSubToolIndex}
+         subjectCurrentPage={@state.subjectCurrentPage}
+         totalSubjectPages={@state.subjects_total_pages}
+         destroyCurrentClassification={@destroyCurrentClassification}
+         hideOtherMarks={@state.hideOtherMarks}
+         toggleHideOtherMarks={@toggleHideOtherMarks}
+         currentSubtool={currentSubtool}
+         lightboxHelp={@toggleLightboxHelp}
+         viewBox={@state.viewBox}              
+         interimMarks={@state.interimMarks}
+         />
+           
         }
     </div>
 

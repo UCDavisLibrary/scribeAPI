@@ -52,7 +52,7 @@ module.exports = React.createClass
           </div>
         }
 
-        <div className="modal-body">
+        <div>
           { @props.children }
         </div>
 
@@ -71,14 +71,6 @@ module.exports = React.createClass
               }
             </div>
         }
-        <div className="button-group align-right">
-          { if @props.buttons?
-              @props.buttons
-
-            else if onDone?
-              <DoneButton label={@props.doneButtonLabel} onClick={onDone} />
-          }
-        </div>
       </div>
 
     </Draggable>

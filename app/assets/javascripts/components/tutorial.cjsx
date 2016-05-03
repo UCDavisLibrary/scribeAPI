@@ -74,6 +74,22 @@ module.exports = React.createClass
     for key, step of @props.tutorial.tasks
       progressSteps.push step
 
-    <DraggableModal ref="tutorialModal" header={helpContent.title ? 'Help'} doneButtonLabel={doneButtonLabel} onDone={@advanceToNextTask} width={800} classes="help-modal" currentStepIndex={@state.completedSteps} closeButton=true onClose={@onClose} progressSteps={progressSteps} onClickStep={@onClickStep} >
-      <div dangerouslySetInnerHTML={{__html: marked( helpContent.body ) }} />
+    <DraggableModal ref="tutorialModal" width={800} classes="help-diagogue">
+      if task == "marking"
+        <div>
+          <label>
+            <h2>How to Mark this label</h2>
+            <p>Before we can transcribe the labels, we need to know which sections need transcription.</p>
+            <p>You can help us by marking up the labels — draw a box around each area of interest on the label, and log it as an image or as a piece of text. Mark as many areas as you want.</p>
+            <p>Try to keep phrases or groups of words that look like they belong together in one box.</p>
+            <figure>
+              <img src="/images/fpo_4x3.png" alt="4x3 Image" />
+            </figure>
+            <div className="button-group align-center">
+              <a onClick={@onClose} className="button">OK, got it!</a>
+            </div>
+          </label>          
+        </div>
+      
+      
     </DraggableModal>
