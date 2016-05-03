@@ -362,7 +362,11 @@ module.exports = React.createClass
 
     scale = @state.scale
     marks = @state.marks
-    
+    if @state.viewBox
+      viewBox = @state.viewBox
+    else
+      viewBox = @props.viewBox
+      
     marks = marks.concat @state.uncommittedMark if @state.uncommittedMark?
 
     {transcribableMarks, otherMarks} = @separateTranscribableMarks(marks)
@@ -379,7 +383,7 @@ module.exports = React.createClass
       markingSurfaceContent =
         <svg
           className = "subject-viewer-svg"
-          viewBox = {@state.viewBox}
+          viewBox = {viewBox}
           data-tool = {@props.selectedDrawingTool?.type} >
           <rect
             ref = "sizeRect"

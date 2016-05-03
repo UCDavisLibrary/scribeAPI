@@ -51,7 +51,7 @@ module.exports = React.createClass
 
   render: ->
     return null if ! @props.subject_set.subjects?
-
+    
     <div className={"subject-set-viewer" + if @state.toolbar_expanded then ' expand' else ''}>
 
       <SubjectViewer

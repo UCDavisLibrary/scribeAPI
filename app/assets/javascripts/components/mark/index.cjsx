@@ -62,7 +62,7 @@ module.exports = React.createClass # rename to Classifier
 
   componentDidMount: ->
     @getCompletionAssessmentTask()
-    @fetchSubjectSetsBasedOnProps()
+    @fetchSubjectSetsBasedOnProps(@computeViewBox)
     @fetchGroups()
 
 
@@ -153,10 +153,6 @@ module.exports = React.createClass # rename to Classifier
     # There should always be an empty classification ready to receive data:
     @beginClassification()
 
-  destroyCurrentAnnotation: ->
-    # TODO: implement mechanism for going backwards to previous classification, potentially deleting later classifications from stack:
-    # @props.classification.annotations.pop()
-
   completeSubjectSet: ->
     @commitCurrentClassification()
     @beginClassification()
@@ -167,19 +163,16 @@ module.exports = React.createClass # rename to Classifier
       @setState
         taskKey: "completion_assessment_task"
 
-  completeSubjectAssessment: ->
+  completeSubjectAssessment: (callback_fn) ->
     @commitCurrentClassification()
     @beginClassification()
-    @advanceToNextSubject()
+    @advanceToNextSubject(callback_fn)
 
-  nextPage: (callback_fn)->
-    new_page = @state.subjectCurrentPage + 1
-    @setState subjectCurrentPage: new_page, => @fetchSubjectsForCurrentSubjectSet(new_page, null, callback_fn)
-
-  prevPage: (callback_fn) ->
-    new_page = @state.subjectCurrentPage - 1
-    @setState subjectCurrentPage: new_page
-    @fetchSubjectsForCurrentSubjectSet(new_page, null, callback_fn)
+  computeViewBox: ->
+    subject = @getCurrentSubjectSet()?.subjects?[0]
+    if subject
+      viewBox = [0, 0, subject.width, subject.height]
+      @setState viewBox: viewBox
 
   showSubjectHelp: (subject_type) ->
     @setState
@@ -231,7 +224,7 @@ module.exports = React.createClass # rename to Classifier
             <br/><em>Need help? <a href="#">Watch a tutorial.</a></em></small></p>
           </div>             
         </div>
-        <a className="secondary button next-label" disabled={waitingForAnswer} onClick={@advanceToNextSubject}>Next Label<img className="right-pointer" src="../../images/right-pointer-red.svg"/></a>
+        <a className="secondary button next-label" disabled={waitingForAnswer} onClick={() => @advanceToNextSubject(@computeViewBox)}>Next Label<img className="right-pointer" src="/images/right-pointer-red.svg"/></a>
       </section>          
      { if @state.noMoreSubjectSets
          <p>There is nothing left to do. Thanks for your work and please check back soon!</p>
@@ -251,8 +244,6 @@ module.exports = React.createClass # rename to Classifier
               onDestroy={@handleMarkDelete}
               onViewSubject={@handleViewSubject}
               subToolIndex={@state.currentSubToolIndex}
-              nextPage={@nextPage}
-              prevPage={@prevPage}
               subjectCurrentPage={@state.subjectCurrentPage}
               totalSubjectPages={@state.subjects_total_pages}
               destroyCurrentClassification={@destroyCurrentClassification}

@@ -316,11 +316,11 @@ module.exports =
     subToolIndex: 0
 
   # Regardless of what workflow we're in, call this to display next subject (if any avail)
-  advanceToNextSubject: ->
+  advanceToNextSubject: (callback_fn) ->
     if @state.subjects?
-      @_advanceToNextSubjectInSubjects()
+      @_advanceToNextSubjectInSubjects(callback_fn)
     else
-      @_advanceToNextSubjectInSubjectSets()
+      @_advanceToNextSubjectInSubjectSets(callback_fn)
 
   # This is the version of advanceToNextSubject for workflows that consume subjects (transcribe,verify)
   _advanceToNextSubjectInSubjects: ->
@@ -343,8 +343,11 @@ module.exports =
         noMoreSubjects: true
         userClassifiedAll: @state.subjects.length > 0
 
+    callback_fn() if callback_fn?
+    
+
   # This is the version of advanceToNextSubject for workflows that consume subject sets (mark)
-  _advanceToNextSubjectInSubjectSets: ->
+  _advanceToNextSubjectInSubjectSets: (callback_fn) ->
     new_subject_set_index = @state.subject_set_index
     new_subject_index = @state.subject_index + 1
 
@@ -370,16 +373,16 @@ module.exports =
                 taskKey: @getActiveWorkflow().first_task
         console.warn "NO MORE SUBJECT SETS"
       return
-
-    # console.log "Mark#index Advancing to subject_set_index #{new_subject_set_index} (of #{@state.subjectSets.length}), subject_index #{new_subject_index} (of #{@state.subjectSets[new_subject_set_index].subjects.length})"
-
+    
+    callback_fn() if callback_fn?
+        
     @setState
       subject_set_index: new_subject_set_index
       subject_index: new_subject_index
       taskKey: @getActiveWorkflow().first_task
       currentSubToolIndex: 0, () =>
         @fetchSubjectsForCurrentSubjectSet(1, 100)
-
+    
   commitClassificationAndContinue: (d) ->
     @commitCurrentClassification()
     @beginClassification {}, () =>
