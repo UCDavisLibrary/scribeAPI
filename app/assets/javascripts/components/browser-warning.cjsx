@@ -15,9 +15,6 @@ module.exports = React.createClass
     # Need promises to work (note this may punish IE users even though we've shimmed it):
     pass &&= Modernizr.promises
 
-    # Should warn about touch devices.
-    pass &&= ! @isTouchDevice()
-
     pass
 
   isTouchDevice: ->
