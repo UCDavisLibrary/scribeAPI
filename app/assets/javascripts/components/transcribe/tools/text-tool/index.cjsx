@@ -173,11 +173,23 @@ TextTool = React.createClass
     # Grab examples either from examples in top level of task or (for composite tool) inside this field's option hash:
     examples = @props.task.examples ? ( t for t in (@props.task.tool_config?.options ? []) when t.value==@props.annotation_key )[0]?.examples
 
+    {x,y} = @getPosition @props.subject.region
+    
     # create component input field(s)
     tool_content =
+    
+     <DraggableModal
+        x={x*@props.scale.horizontal + @props.scale.offsetX}
+        y={y*@props.scale.vertical + @props.scale.offsetY}
+        classes="transcribe-tool">
+          
       <div className="input-field active">
         <label>
-          <h2>Transcribe this {@props.task.key}</h2>
+          {if @props.task.key == 'image'          
+              <h2>Describe this Element</h2>
+           else
+              <h2>Transcribe this text</h2>
+              }
           <p>{@props.task.instruction}</p>          
           {
             atts =
@@ -206,44 +218,20 @@ TextTool = React.createClass
             else console.warn "Invalid inputType specified: #{@props.inputType}"
         }
         </label>
-      </div>
-
-    if @props.standalone # 'standalone' true if component handles own mouse events
-
-      buttons = []
-
-      if @props.onShowHelp?
-        buttons.push <HelpButton key="help-button" onClick={@props.onShowHelp}/>
-
-      if @props.onBadSubject?
-        buttons.push <BadSubjectButton key="bad-subject-button" label={"Bad #{@props.project.term('mark')}"} active={@props.badSubject} onClick={@props.onBadSubject} />
-
-      if @props.onIllegibleSubject?
-        buttons.push <IllegibleSubjectButton key="illegal-subject-button" active={@props.illegibleSubject} onClick={@props.onIllegibleSubject} />
+        <div className="button-group align-right">
+          <IllegibleSubjectButton key="illegal-subject-button" active={@props.illegibleSubject} onClick={@props.onIllegibleSubject} />
       
-      buttonLabel =
-        if @props.isLastSubject
-         'Finish Transcribing'
-        else
-         'Next Label'
+          { if @props.isLastSubject
+              buttonLabel = 'Finish Transcribing'
+            else
+              buttonLabel = 'Continue'
+          }
 
-      buttons.push <SmallButton label={buttonLabel} key="done-button" onClick={@commitAnnotation} />
+          <SmallButton label={buttonLabel} key="done-button" onClick={@commitAnnotation} />
 
-      {x,y} = @getPosition @props.subject.region
+        </div>
+      </div>
+    </DraggableModal>
 
-      tool_content = <DraggableModal
-        x={x*@props.scale.horizontal + @props.scale.offsetX}
-        y={y*@props.scale.vertical + @props.scale.offsetY}
-        buttons={buttons}
-        classes="transcribe-tool"
-        >
-
-          {tool_content}
-
-      </DraggableModal>
-
-    <div>
-      {tool_content}
-    </div>
 
 module.exports = TextTool
