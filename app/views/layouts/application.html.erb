@@ -32,9 +32,7 @@
   <% end %>
 
   <script src="https://cdn.polyfill.io/v1/polyfill.min.js?features=default,es6,Promise,fetch&amp;flags=gated"></script>
-  
   <%= javascript_include_tag "application" %>
-
   <%= csrf_meta_tags %>
 </head>
 
@@ -66,9 +64,10 @@
             <a target="_blank" href="">Blog</a>
           </li>
 	  <% if user_signed_in? %>
-	  <li><a href="/admin/">Admin<a/></li>
+    	  <li><a href="/admin/">Admin</a></li>
+    	  <li><%= link_to 'Sign out',  destroy_user_session_path, :method => :delete %></li>
 	  <% else %>
-	  <li><%= link_to 'Log in', new_user_registration_path %></li>
+	    <li><%= link_to 'Log in', new_user_session_path %></li>
 	  <% end %>
         </ul>
       </div>
@@ -76,7 +75,8 @@
   </header>
   
   <%= yield %>
-      
+  <div id="react-target"></div>
+  
   <footer>
     <section class="row align-spaced">
       <div><a href="https://www.lib.ucdavis.edu">UC Davis Library</a></div>
@@ -97,7 +97,7 @@
       <p>Copyright &copy; The Regents of the University of California, Davis campus. All rights reserved.</p>
     </section>
   </footer>
-        
+
 
 </body>
 </html>

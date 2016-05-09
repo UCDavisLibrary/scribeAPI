@@ -1,4 +1,6 @@
 #= require jquery
+#= require jquery
+#= require jquery_ujs
 #= require 'lib/jquery-ui.min'
 #= require 'lib/jquery.extensions'
 #= require 'lib/marked.min'
