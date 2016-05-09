@@ -30,6 +30,47 @@ body {
 }
 
 //-----------------------------------------------------
+// Nav
+
+#small-menu {
+  margin-top: 10em;
+  display: block;
+  @media only screen and (min-width: 48em) {
+    display: none;
+  }
+  ul {
+    list-style: none;
+    li {
+      padding: 1em;
+    }
+  }
+  .close-button {
+    position: relative;
+    float: right;
+    padding: 0;
+  }
+}
+
+.menu-item-large {
+    display: none;
+    @media only screen and (min-width: 48em) {
+      display: block;
+    }
+  }
+
+  .menu-item-small {
+      display: block;
+      @media only screen and (min-width: 48em) {
+        display: none;
+      }
+      a {
+        font-size: 2em;
+        margin: -.5em 0 0 0;
+      }
+    }
+
+
+//-----------------------------------------------------
 //Button style overrides
 
 .button {
@@ -162,10 +203,6 @@ body {
     color: $labels-red;
   }
 }
-.draggable-modal {
-    position: absolute;
-    z-index: 20;
-}
 
 .draggable-modal, .transcribe-tool, .help-dialogue, .signup {
   min-width: 30rem;
@@ -242,7 +279,6 @@ body {
   border: 1px solid $labels-red;
   border-radius: 1px;
   box-shadow: 0 0 0 5px $labels-background-dark, 0 2px 15px #000;
-  margin: -1em 1em 0 0;
   padding: .5em 1em 0 1em;
   h1 {
     font-size: 1em;
@@ -257,10 +293,29 @@ body {
     color: $labels-red;
     text-decoration: underline;
   }
+  left: 5px;
+  top: 116px;
+  @media only screen and (min-width: 45.88em) {
+
+  }
 }
 
-.transcribe-instructions, .browse-instructions {
-  margin-left: 10em;
+.browse-instructions, .transcribe-instructions {
+  margin: -4.1em 10em 0 10px;
+  position: absolute;
+  @media only screen and (min-width: 45.88em) {
+    margin: -8em 1em 0 10px;
+    position: relative;
+  }
+}
+
+.mark-instructions {
+  margin: 0 5px 0 0;
+  position: absolute;
+  @media only screen and (min-width: 45.88em) {
+    margin: -8em 1em 0 0;
+    position: relative;
+  }
 }
 
 .browse {
@@ -319,13 +374,6 @@ body {
 
 //-----------------------------------------------------
 // Zoom UI styles, based on the ones on the ScribeAPI repo
-.pan-zoom-controller {
-    background: url('/images/zoom-button.svg') no-repeat center 4px;
-    width: 28px;
-    height: 30px;
-    margin: 4px 0 0 -2px;
-    padding: 0;
-}
 
 .zoom-button {
   z-index: 100;
@@ -335,12 +383,8 @@ body {
   }
 }
 .pan-zoom-area {
-  &.active {
-      display: block; 
-  }
+  display: none;
   background-color: $labels-background-dark;
-  
-  display: none; 
   width: 140px;
   height: 135px;
   left: 15px;
@@ -353,12 +397,12 @@ body {
     border-radius: 4px;
     width: 60px;
     height: 70px;
-    position: absolute; 
+    position: absolute;
     top: -7px;
     left: 36px;
     margin-top: -36px;
     margin-left: -36px;
-    background: $labels-background-dark url('/images/zoom-button.svg') no-repeat center 4px; 
+    background-color: $labels-background-dark;
   }
 }
 

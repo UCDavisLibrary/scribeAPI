@@ -4035,6 +4035,36 @@ body {
 .callout {
   min-width: 100%; }
 
+#small-menu {
+  margin-top: 10em;
+  display: block; }
+  @media only screen and (min-width: 48em) {
+    #small-menu {
+      display: none; } }
+  #small-menu ul {
+    list-style: none; }
+    #small-menu ul li {
+      padding: 1em; }
+  #small-menu .close-button {
+    position: relative;
+    float: right;
+    padding: 0; }
+
+.menu-item-large {
+  display: none; }
+  @media only screen and (min-width: 48em) {
+    .menu-item-large {
+      display: block; } }
+
+.menu-item-small {
+  display: block; }
+  @media only screen and (min-width: 48em) {
+    .menu-item-small {
+      display: none; } }
+  .menu-item-small a {
+    font-size: 2em;
+    margin: -.5em 0 0 0; }
+
 .button {
   text-transform: uppercase;
   border: 1px solid #CBBAA5;
@@ -4131,10 +4161,6 @@ body {
   .draggable-modal label, .transcribe-tool label, .help-dialogue label, .step-by-step label, .login label, .signup label {
     color: #4D0717; }
 
-.draggable-modal {
-  position: absolute;
-  z-index: 20; }
-
 .draggable-modal, .transcribe-tool, .help-dialogue, .signup {
   min-width: 30rem;
   max-width: 35rem; }
@@ -4192,8 +4218,9 @@ body {
   border: 1px solid #4D0717;
   border-radius: 1px;
   box-shadow: 0 0 0 5px #CBBAA5, 0 2px 15px #000;
-  margin: -1em 1em 0 0;
-  padding: .5em 1em 0 1em; }
+  padding: .5em 1em 0 1em;
+  left: 5px;
+  top: 116px; }
   .mark-instructions h1, .transcribe-instructions h1, .browse-instructions h1 {
     font-size: 1em;
     font-weight: bold;
@@ -4205,8 +4232,21 @@ body {
     color: #4D0717;
     text-decoration: underline; }
 
-.transcribe-instructions, .browse-instructions {
-  margin-left: 10em; }
+.browse-instructions, .transcribe-instructions {
+  margin: -4.1em 10em 0 10px;
+  position: absolute; }
+  @media only screen and (min-width: 45.88em) {
+    .browse-instructions, .transcribe-instructions {
+      margin: -8em 1em 0 10px;
+      position: relative; } }
+
+.mark-instructions {
+  margin: 0 5px 0 0;
+  position: absolute; }
+  @media only screen and (min-width: 45.88em) {
+    .mark-instructions {
+      margin: -8em 1em 0 0;
+      position: relative; } }
 
 .browse h1 {
   margin-top: 30px; }
@@ -4245,13 +4285,6 @@ body {
   .helper:before {
     border-color: transparent transparent #4D0717; }
 
-.pan-zoom-controller {
-  background: url("/images/zoom-button.svg") no-repeat center 4px;
-  width: 28px;
-  height: 30px;
-  margin: 4px 0 0 -2px;
-  padding: 0; }
-
 .zoom-button {
   z-index: 100;
   cursor: pointer; }
@@ -4259,8 +4292,8 @@ body {
     display: block; }
 
 .pan-zoom-area {
-  background-color: #CBBAA5;
   display: none;
+  background-color: #CBBAA5;
   width: 140px;
   height: 135px;
   left: 15px;
@@ -4268,8 +4301,6 @@ body {
   border-radius: 4px;
   position: absolute;
   z-index: 99; }
-  .pan-zoom-area.active {
-    display: block; }
   .pan-zoom-area:before {
     content: ' ';
     border-radius: 4px;
@@ -4280,7 +4311,7 @@ body {
     left: 36px;
     margin-top: -36px;
     margin-left: -36px;
-    background: #CBBAA5 url("/images/zoom-button.svg") no-repeat center 4px; }
+    background-color: #CBBAA5; }
 
 .subject-zoom-pan {
   width: 130px;
