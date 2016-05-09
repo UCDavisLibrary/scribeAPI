@@ -1,6 +1,8 @@
 class Admin::DashboardController < Admin::AdminBaseController
   
   def index
+    project = Project.current
+    @stats = project.calc_stats
   end
 
   def recalculate_stats

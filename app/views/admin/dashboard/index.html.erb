@@ -1,133 +1,70 @@
+<section class="row align-center toolbar admin">
+  <a class="secondary button" href="/admin">Admin Dashboard</a>
+  <a class="secondary button" href="/browse">Catalogue</a>
+  <a class="secondary button" href="#">Log Out </a>
+</section>
 
-<div class="dashboard">
-  <%= link_to '#', onclick: "window.stats.recalculateStats();", class: 'recalculate-stats' do %>Recalculate Stats<% end %>
-
+<section class="small-12 medium-10 medium-offset-1 large-8 large-offset-2 columns">
+  <h2>Admin</h2>
+  <p>Here's how we're doing so far:</p>
   <div class="row">
+    <div class="pie-chart large-9 columns">
+      <div id="chart"></div>
+      <script>
+	var data = <%= raw @stats[:graphable_data].to_json %>;
 
-    <div class="classifications category">
-      <h3 class="title">Classifications</h3>
+	var w = 400;
+	var h = 400;
+	var r = h/2;
+	var color = d3.scale.ordinal()
+	   .range(["#039317", "#921377", "#E6E6E6", "#214BB5"]);
+	
+	var vis = d3.select('#chart')
+	   .append("svg:svg")
+	   .data([data])
+	   .attr("width", w)
+	   .attr("height", h)
+	   .append("svg:g")
+   	   .attr("transform", "translate(" + r + "," + r + ")");
+	
+	var pie = d3.layout.pie().value(function(d){return d.value;});
 
-      <div class="units">
-        <button class="active" data-category="classifications" data-group-by="hour">Hourly</button>
-        <button data-category="classifications" data-group-by="day">Daily</button>
-        <button data-category="classifications" data-group-by="week">Weekly</button>
-      </div>
+	// declare an arc generator function
+	var arc = d3.svg.arc().outerRadius(r);
 
-      <div class="total">
-        <span class="count">0</span>
-        <span class="label">Total</span>
-      </div>
+	// select paths, use arc generator to draw
+	var arcs = vis.selectAll("g.slice").data(pie).enter().append("svg:g").attr("class", "slice");
+	arcs.append("svg:path")
+  	  .attr("fill", function(d, i){
+              return color(i);
+	})
+	.attr("d", function (d) {
+          return arc(d);
+	});
+	
+	// add the text
+	arcs.append("svg:text").attr("transform", function(d) {
+	  d.innerRadius = 0;
+	  d.outerRadius = r;
+	return "translate(" + arc.centroid(d) + ")";}).attr("text-anchor", "middle").attr("fill", "white")
+	  .style("text-transform", "uppercase")
+	  .text(function(d, i) {
+  	     if (data[i].value > 0) {
+    	       return data[i].label;
+  	   }
+	});
 
-      <div class="chart"></div>
+      </script>
     </div>
-
-    <div class="users category">
-      <h3 class="title">Users</h3>
-
-      <div class="units">
-        <button data-category="users" class="active" data-group-by="hour">Hourly</button>
-        <button data-category="users" data-group-by="day">Daily</button>
-        <button data-category="users" data-group-by="week">Weekly</button>
-      </div>
-
-      <div class="total">
-        <span class="count">0</span>
-        <span class="label">Total</span>
-      </div>
-
-      <div class="chart"></div>
+    <div class="status-list columns">
+      <dl>
+	<dd><%= @stats[:completion_data][:verifies] %></dd>
+	<dt>Verified labels</dt>
+	<dd><%= @stats[:completion_data][:marks] %></dd>
+	<dt>Marked labels</dt>
+	<dd><%= @stats[:completion_data][:transcribes] %></dd>
+	<dt>Transcribed labels</dt>
+      </dl>
     </div>
-
   </div>
-
-  <div class="row">
-
-    <!-- <div class="analytics category">
-      <h3 class="title">Site Traffic</h3>
-
-      <div class="units">
-        <button data-category="analytics" class="active" data-group-by="hour">Hourly</button>
-        <button data-category="analytics" data-group-by="day">Daily</button>
-        <button data-category="analytics" data-group-by="week">Weekly</button>
-      </div>
-
-      <div class="total">
-        <span class="count">0</span>
-        <span class="label">Total pageviews in the last 30 days</span>
-      </div>
-
-      <div class="chart"></div>
-
-    </div> -->
-
-    <div class="mark-subjects category">
-
-      <h3 class="title">Pages Being Marked</h3>
-      <div class="total">
-        <span class="count">0</span>
-        <span class="label">Total</span>
-      </div>
-
-      <div class="chart"></div>
-
-      <div class="chart-key">
-        <dl>
-          <dt>Active:</dt>
-          <dd>Pages being actively marked</dd>
-          <dt>Bad:</dt>
-          <dd>Pages that have been marked as invalid by sufficient users</dd>
-          <dt>Retired:</dt>
-          <dd>Pages that no longer appear in Mark because sufficient people have state there is nothing more to mark.</dd>
-        </dl>
-      </div>
-    </div>
-
-    <div class="transcribe-subjects category">
-
-      <h3 class="title">Marks Being Transcribed</h3>
-      <div class="total">
-        <span class="count">0</span>
-        <span class="label">Total</span>
-      </div>
-
-      <div class="chart"></div>
-
-      <div class="chart-key">
-        <dl>
-          <dt>Active:</dt>
-          <dd>Marks being actively transcribed</dd>
-          <dt>Bad:</dt>
-          <dd>Marks that have been marked as invalid by sufficient users</dd>
-          <dt>Retired:</dt>
-          <dd>Marks that are no longer shown because they've received sufficient transcriptions.</dd>
-        </dl>
-      </div>
-    </div>
-<!--
-    <div class="verify-subjects category">
-
-      <h3 class="title">Verify</h3>
-      <div class="total">
-        <span class="count">0</span>
-        <span class="label">Total</span>
-      </div>
-
-      <div class="chart"></div>
-
-      <div class="chart-key">
-        <dl>
-          <dt>Active:</dt>
-          <dd>Verify subjects actively being voted upon</dd>
-          <dt>Inactive:</dt>
-          <dd>Verify subjects waiting for one or more transcriptions before being activated</dd>
-          <dt>Complete:</dt>
-          <dd>Verify subjects that have received sufficient votes to choose one best transcription</dd>
-        </dl>
-      </div>
-    </div>
--->
-
-
-  </div>
-
-</div>
+</section>

@@ -8,3 +8,5 @@
 #= require 'lib/proto'
 #= require 'lib/modernizr-custom.js'
 #= require 'components'
+#= require lib/d3.min
+

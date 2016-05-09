@@ -1,8 +1,5 @@
 class Stats
 
-	constructor: () ->
-		@getStats()
-
 	addAreaChart: (item) ->
 		data = item.data
 		unit = item.unit
@@ -320,12 +317,6 @@ class Stats
 			.attr("dy", ".35em")
 			.style("text-anchor", "middle")
 			.text((d) -> return d.data.label)
-
-	getStats: () ->
-		$.getJSON "/projects/stats.json", (data) =>
-			@data = @parseData(data.stats)
-			@updateUI()
-			@addChartListeners()
 
 	recalculateStats: () ->
 		$('.chart').empty()

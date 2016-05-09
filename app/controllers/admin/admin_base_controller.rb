@@ -1,5 +1,4 @@
 class Admin::AdminBaseController < ApplicationController
-  layout "admin"
 
   # LD: remove auth checks for now
   before_action :check_admin_user, except: :signin

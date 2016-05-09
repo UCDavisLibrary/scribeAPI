@@ -1,0 +1,32 @@
+{
+    "name": "verify",
+    "label": "Verify Workflow",
+    "retire_limit": 1,
+    "generates_subjects": true,
+    "generates_subjects_method": "most-popular",
+    "generates_subjects_after": 1,
+    "generates_subjects_max": 20,
+    "generates_subjects_agreement": 0.75,
+    "subjects_classifiable_by_creator": false,
+    
+    "tasks": {
+	
+	"transcribed_image": {
+	    "instruction": "Please choose one of the following descriptions as the most correct one.",
+	    "tool": "verifyTool",
+	    "tool_config": {
+		"displays_transcribe_button": true
+	    },
+	    "generates_subject_type": "consensus_image"
+	},
+	
+	"transcribed_text": {
+	    "instruction": "Please choose one of the following transcriptions as the most correct one.",	  
+	    "tool": "verifyTool",
+	    "tool_config": {
+		"displays_transcribe_button": true
+	    },
+	    "generates_subject_type": "consensus_text"
+	}
+    }
+}

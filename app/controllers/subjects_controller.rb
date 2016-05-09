@@ -82,7 +82,7 @@ class SubjectsController < ApplicationController
         href: @subjects.prev_page.nil? ? nil : url_for(controller: 'subjects', page: @subjects.prev_page)
       }
     }
-    puts "LINK"
+
     respond_with SubjectResultSerializer.new(@subjects, scope: self.view_context), workflow_id: workflow_id, links: links
   end
 

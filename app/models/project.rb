@@ -80,15 +80,16 @@ class Project
 
     # retrieve user data in range
     users_data = []
-    users_in_range = User.where(:created_at => start_date..end_date).group_by {|d| d.created_at.strftime(datetime_format)}
-    (start_date.to_i..end_date.to_i).step(1.hour) do |i_date|
-      n_date = Time.at(i_date).utc
-      hour = n_date.strftime(datetime_format)
-      users_data << {
-        date: hour,
-        value: users_in_range[hour] ? users_in_range[hour].size : 0
-      }
-    end
+    # LD: Not needed
+    # users_in_range = User.where(:created_at => start_date..end_date).group_by {|d| d.created_at.strftime(datetime_format)}
+    # (start_date.to_i..end_date.to_i).step(1.hour) do |i_date|
+    #  n_date = Time.at(i_date).utc
+    #  hour = n_date.strftime(datetime_format)
+    #  users_data << {
+    #    date: hour,
+    #    value: users_in_range[hour] ? users_in_range[hour].size : 0
+    #  }
+    #end
 
     # retrieve subject statuses by workflow:
     workflow_counts = {}
@@ -97,25 +98,33 @@ class Project
       groups = Subject.group_by_field(:status, {workflow_id: workflow.id})
       groups.each do |(v, count)|
         workflow_counts[workflow.name][:data] << { label: v, value: count }
+        workflow_counts[workflow.name]['id'] = workflow.id
       end
     end
 
     # retrieve classification data in range
-    classifications_in_range = Classification.group_by_hour({"created_at" => {"$gte" => start_date}}).inject({}) do |h,(rec,total)|
-      hour = "#{rec['y']}-#{rec['m']}-#{'%02d' % rec['d']} #{rec['h']}:00"
-      h[hour] = total
-      h
-    end
+    # LD: Not needed at this time anad computationally expensive
+    # classifications_in_range = Classification.group_by_hour({"created_at" => {"$gte" => start_date}}).inject({}) do |h,(rec,total)|
+    #  hour = "#{rec['y']}-#{rec['m']}-#{'%02d' % rec['d']} #{rec['h']}:00"
+    #  h[hour] = total
+    #  h
+    #end
 
     classifications_data = []
-    (start_date.to_i..end_date.to_i).step(1.hour) do |i_date|
-      n_date = Time.at(i_date).utc
-      hour = n_date.strftime(datetime_format)
-      classifications_data << {
-        date: hour,
-        value: classifications_in_range[hour] ? classifications_in_range[hour] : 0
-      }
-    end
+    #(start_date.to_i..end_date.to_i).step(1.hour) do |i_date|
+    #  n_date = Time.at(i_date).utc
+    #  hour = n_date.strftime(datetime_format)
+    # classifications_data << {
+    #    date: hour,
+    #    value: classifications_in_range[hour] ? classifications_in_range[hour] : 0
+    #  }
+    # end
+    mark_count = 0
+    transcribe_count = 0
+
+    transcribe_count = Classification.where(:workflow => Workflow.where(:name => "transcribe").first.id).count
+    mark_count = Classification.where(:workflow => Workflow.where(:name => "mark").first.id).count
+    verify_count = Classification.where(:workflow => Workflow.where(:name => "verify").first.id).count
 
     {
       updated_at: current_time.strftime(datetime_format),
@@ -129,7 +138,26 @@ class Project
       classifications: {
         count: total_classifications,
         data: classifications_data
-      }
+      },
+      completion_data: {
+        marks: mark_count,
+        transcribes: transcribe_count,
+        verifies: verify_count
+      },
+      graphable_data: [
+        {
+          label: "mark",
+          value: mark_count,
+        },
+        {
+          label: "transcribe",
+          value: transcribe_count,
+        },
+        {
+          label: "verify",
+          value: verify_count,
+        }
+      ]
     }
   end
 
