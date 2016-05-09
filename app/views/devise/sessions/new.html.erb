@@ -1,0 +1,24 @@
+<div class="row align-center">
+  <div class="login">
+    <h2>Admin Login</h2>
+    <p>In order to verify labels, you need to log in to the admin dashboard.</p>
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>    
+
+    <%= f.label :email %>
+    <%= f.email_field :email, autofocus: true %>      
+
+    <%= f.label :password %>
+    <%= f.password_field :password, autocomplete: "off" %>
+
+    <div class="row align-center">
+     <%= f.submit "Log in" %>
+    </div>
+    
+    <%= render "devise/shared/links" %>
+    <% end %>    
+  </div>
+</div>
+
+
+
+
