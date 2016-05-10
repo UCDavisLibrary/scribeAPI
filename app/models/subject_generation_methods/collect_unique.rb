@@ -9,7 +9,7 @@ module SubjectGenerationMethods
       
       atts[:status] = 'inactive'
 
-      classification.child_subject = Subject.find_or_initialize_by(workflow: atts[:workflow], parent_subject: atts[:parent_subject], type: atts[:type])
+      classification.child_subject = Subject.find_or_initialize_by(workflow: atts[:workflow], parent_subject: atts[:parent_subject], type: atts[:type], meta_data: atts[:meta_data])
       classification.save
 
       ann = classification.annotation.except(:key, :tool, :generates_subject_type)
@@ -80,6 +80,8 @@ module SubjectGenerationMethods
       puts "Saving atts to classification: #{atts.inspect}"
       classification.child_subject.update_attributes atts
 
+      puts "------- Final state of child_subject: #{classification.child_subject.inspect}"
+      puts "------- Final state of classification: #{classification.inspect}"      
       classification.child_subject
     end
 

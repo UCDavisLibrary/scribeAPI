@@ -60,7 +60,8 @@ class SubjectGenerationMethod
       },
       region: region.empty? ? nil : region,
       width: classification.subject.width,
-      height: classification.subject.height
+      height: classification.subject.height,
+      meta_data: classification.subject.meta_data
     }
   end
 

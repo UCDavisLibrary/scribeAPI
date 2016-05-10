@@ -66,7 +66,7 @@ module.exports =
         @setState noMoreSubjects: true
 
       else
-        if @props.browse
+        if @props.browse or not subjects.region?
           @setState subjects: subjects          
         else
           @setState subjects: @orderSubjectsByY(subjects)

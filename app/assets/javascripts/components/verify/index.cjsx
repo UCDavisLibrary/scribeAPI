@@ -76,13 +76,18 @@ module.exports = React.createClass # rename to Classifier
 
             <DraggableModal
               header          = { if @state.userClassifiedAll then "You verified them all!" else "Nothing to verify" }
-              buttons         = {<GenericButton label='Continue' href='/#/mark' />}
+              buttons         = {<GenericButton label='Continue' href='/mark' />}
             >
-              Currently, there are no {@props.project.term('subject')}s for you to {@props.workflowName}. Try <a href="/#/mark">marking</a> instead!
+              Currently, there are no {@props.project.term('subject')}s for you to {@props.workflowName}. Try <a href="/mark">marking</a> instead!
             </DraggableModal>
-
           else if @getCurrentSubject()?
-            <SubjectViewer onLoad={@handleViewerLoad} subject={@getCurrentSubject()} active=true workflow={@getActiveWorkflow()} classification={@props.classification} annotation={currentAnnotation}>
+            
+            <SubjectViewer onLoad={@handleViewerLoad}
+            subject={@getCurrentSubject()}
+            active=true
+            workflow={@getActiveWorkflow()}
+            classification={@props.classification}
+            annotation={currentAnnotation}>
               { if ( VerifyComponent = @getCurrentTool() )?
 
                 <VerifyComponent
@@ -99,45 +104,12 @@ module.exports = React.createClass # rename to Classifier
                   project={@props.project}
                 />
               }
+              
             </SubjectViewer>
+
         }
       </div>
 
-      { if @getCurrentSubject()?
-          <div className="right-column">
-            <div className="task-area verify">
-
-              <div className="task-secondary-area">
-
-                {
-                  if @getCurrentTask()?
-                    <p>
-                      <a className="tutorial-link" onClick={@toggleTutorial}>View A Tutorial</a>
-                    </p>
-                }
-
-                <div className="forum-holder">
-                  <ForumSubjectWidget subject=@getCurrentSubject() project={@props.project} />
-                </div>
-
-              </div>
-
-            </div>
-          </div>
-      }
-
-      { if @props.project.tutorial? && @state.showingTutorial
-          # Check for workflow-specific tutorial
-          if @props.project.tutorial.workflows? && @props.project.tutorial.workflows[@getActiveWorkflow()?.name]
-            <Tutorial tutorial={@props.project.tutorial.workflows[@getActiveWorkflow().name]} onCloseTutorial={@hideTutorial} />
-          # Otherwise just show general tutorial
-          else
-            <Tutorial tutorial={@props.project.tutorial} onCloseTutorial={@hideTutorial} />
-      }
-
-      { if @state.helping
-        <HelpModal help={@getCurrentTask().help} onDone={=> @setState helping: false } />
-      }
     </div>
 
 window.React = React

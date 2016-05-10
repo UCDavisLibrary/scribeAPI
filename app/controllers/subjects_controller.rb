@@ -66,12 +66,13 @@ class SubjectsController < ApplicationController
       # If the user is just browsing, let them do whatever
 
       # Should we filter out subjects that the user herself created?
-      if workflow_id
-         if ! user.nil? && ! (workflow = Workflow.find(workflow_id)).nil? && ! workflow.subjects_classifiable_by_creator && ! browse
-           # Note: creating_user_ids are stored as ObjectIds, so no need to filter on user.id.to_s:
-           @subjects = @subjects.user_did_not_create user.id if ! user.nil?
-         end
-      end
+      # LD NO
+      #if workflow_id
+      #   if ! user.nil? && ! (workflow = Workflow.find(workflow_id)).nil? && ! workflow.subjects_classifiable_by_creator && ! browse
+      #     # Note: creating_user_ids are stored as ObjectIds, so no need to filter on user.id.to_s:
+      #     @subjects = @subjects.user_did_not_create user.id if ! user.nil?
+      #   end
+      # end
     end
 
     links = {
