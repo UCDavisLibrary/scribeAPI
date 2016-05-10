@@ -42,7 +42,6 @@ VerifyTool = React.createClass
 
   chooseOption: (e) ->
     el = $(e.target)
-    el = $(el.parents('a')[0]) if el.tagName != 'A'
     value = @props.subject.data['values'][el.data('value_index')]
 
     @setState({annotation: value}, () =>
@@ -92,38 +91,25 @@ VerifyTool = React.createClass
         buttons.push <SmallButton label='Next' key="done-button" onClick={@commitAnnotation} />
 
     {x,y} = @getPosition @props.subject.region
-    <DraggableModal
 
-      header  = {label}
-      x={x*@props.scale.horizontal + @props.scale.offsetX}
-      y={y*@props.scale.vertical + @props.scale.offsetY}
-      onDone  = {@commitAnnotation}
-      buttons = {buttons}>
-
-      <div className="verify-tool-choices">
-        { if @props.subject.data.task_prompt?
-          <span>Original prompt: <em>{ @props.subject.data.task_prompt }</em></span>
-        }
-        <ul>
-        { for data,i in @props.subject.data['values']
-            <li key={i}>
-              <a href="javascript:void(0);" onClick={@chooseOption} data-value_index={i}>
-                <ul className="choice clickable" >
-                { for k,v of data
-                    # Label should be the key in the data hash unless it's a single-value hash with key 'value':
-                    label = if k != 'value' or (_k for _k,_v of data).length > 1 then k else ''
-                    # TODO: hack to approximate a friendly label in emigrant; should pull from original label:
-                    label = label.replace(/em_/,'')
-                    label = label.replace(/_/g, ' ')
-                    <li key={k}><span className="label">{label}</span> {v}</li>
-                }
-                </ul>
-              </a>
-            </li>
-        }
-        </ul>
-      </div>
-
-    </DraggableModal>
+    tool_content = 
+      <DraggableModal
+        x = {x*@props.scale.horizontal + @props.scale.offsetX}
+        y = {y*@props.scale.vertical + @props.scale.offsetY}
+        onDone = {@commitAnnotation}
+        buttons = {buttons} >
+      
+          <label>
+            <h2>Verify this transcription</h2>
+            <p>Please choose one of the following transcriptions as the most correct one.</p>
+            <ul className="choice clickable">
+              { for data,i in @props.subject.data['values']
+                  <li key={i} onClick={@chooseOption} data-value_index={i}>
+                    <span className="value">{data["value"]}</span><img src="/images/left-pointer-knockout.svg" alt="" />
+                  </li>
+              }
+            </ul>
+          </label>
+        </DraggableModal>
 
 module.exports = VerifyTool

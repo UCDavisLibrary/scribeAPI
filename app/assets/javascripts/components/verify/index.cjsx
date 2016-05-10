@@ -40,7 +40,10 @@ module.exports = React.createClass # rename to Classifier
     @beginClassification()
 
   fetchSubjectsCallback: ->
-    @setState taskKey: @getCurrentSubject().type if @getCurrentSubject()?
+    if @getCurrentSubject()?    
+      @setState
+        taskKey: @getCurrentSubject().type 
+        viewBox: [0, 0, @getCurrentSubject().width, @getCurrentSubject().height]     
 
   # Handle user selecting a pick/drawing tool:
   handleDataFromTool: (d) ->
@@ -69,25 +72,29 @@ module.exports = React.createClass # rename to Classifier
     currentAnnotation = @getCurrentClassification().annotation
 
     onFirstAnnotation = currentAnnotation?.task is @getActiveWorkflow().first_task
+    <div>
+         { if ! @getCurrentSubject()?
+             <section className="row align-justify toolbar">
+               <div className="columns align-center label-title">
+                 <div className="transcribe-instructions small-12">
+                   <br/>
+                   Currently, there are no labels for you to verify. Try <a href="/mark">marking</a> instead!
+                   <br/><br/>
+                 </div>
+               </div>
+             </section>
 
-    <div className="classifier">
-      <div className="subject-area">
-        { if ! @getCurrentSubject()?
-
-            <DraggableModal
-              header          = { if @state.userClassifiedAll then "You verified them all!" else "Nothing to verify" }
-              buttons         = {<GenericButton label='Continue' href='/mark' />}
-            >
-              Currently, there are no {@props.project.term('subject')}s for you to {@props.workflowName}. Try <a href="/mark">marking</a> instead!
-            </DraggableModal>
           else if @getCurrentSubject()?
             
-            <SubjectViewer onLoad={@handleViewerLoad}
-            subject={@getCurrentSubject()}
-            active=true
-            workflow={@getActiveWorkflow()}
-            classification={@props.classification}
-            annotation={currentAnnotation}>
+            <SubjectViewer
+               onLoad={@handleViewerLoad}
+               subject={@getCurrentSubject()}
+               active=true
+               workflow={@getActiveWorkflow()}
+               viewBox={@state.viewBox}                          
+               classification={@props.classification}
+               annotation={currentAnnotation}>
+                 
               { if ( VerifyComponent = @getCurrentTool() )?
 
                 <VerifyComponent
@@ -104,12 +111,8 @@ module.exports = React.createClass # rename to Classifier
                   project={@props.project}
                 />
               }
-              
             </SubjectViewer>
-
         }
       </div>
-
-    </div>
 
 window.React = React
