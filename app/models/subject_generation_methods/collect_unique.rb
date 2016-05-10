@@ -5,6 +5,8 @@ module SubjectGenerationMethods
     def process_classification(classification)
 
       atts = subject_attributes_from_classification(classification)
+      puts "Atts at start: #{atts.inspect}"
+      
       atts[:status] = 'inactive'
 
       classification.child_subject = Subject.find_or_initialize_by(workflow: atts[:workflow], parent_subject: atts[:parent_subject], type: atts[:type])
@@ -33,17 +35,24 @@ module SubjectGenerationMethods
       # If subject has enough parent classifications, activate it:
       if num_parent_classifications >= classification.workflow.generates_subjects_after
 
-        # Get number of distinct classifications:
-        num_vals = classification.child_subject.data['values'].nil? ? -1 : classification.child_subject.data['values'].size
-
+        if classification.child_subject.data?
+          # Get number of distinct classifications:
+          num_vals = classification.child_subject.data['values'].nil? ? -1 : classification.child_subject.data['values'].size
+        else
+          num_vals = -1
+        end
+        
         # Where will this generated subject appear, if anywhere?
         next_workflow = classification.child_subject.workflow
-
+        puts "Child subject: #{classification.child_subject.inspect}"
+        puts "Current atts: #{atts.inspect}"
+        
+        puts "Next workflow: #{next_workflow}"
         # If there is no next workflow, this subject is done. Presumably the retire_limit caused the parent subject to be retired as well.
         if next_workflow.nil? 
           atts[:status] = 'complete'
 
-        # There is a next workfllow (probably Verify)
+        # There is a next workflow (probably Verify)
         else
           # Get subject-generation method type (presumably for Verify workflow) (which is likely 'most-popular')
           verify_method = next_workflow.generates_subjects_method
@@ -68,7 +77,7 @@ module SubjectGenerationMethods
       atts[:creating_user_ids] ||= []
       classification.child_subject.creating_user_ids.push classification.user_id
 
-      # puts "Saving atts to classification: #{atts.inspect}"
+      puts "Saving atts to classification: #{atts.inspect}"
       classification.child_subject.update_attributes atts
 
       classification.child_subject

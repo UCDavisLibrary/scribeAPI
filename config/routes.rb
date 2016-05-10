@@ -10,6 +10,7 @@ API::Application.routes.draw do
   # Annotation endpoints
   get '/mark',                                                to: 'annotate#index'
   get '/transcribe',                                          to: 'annotate#index'  
+  get '/verify',                                              to: 'annotate#index'
   
   # JSON endpoints
   get '/projects',                                            to: 'projects#index',       defaults: { format: 'json' }

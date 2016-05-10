@@ -81,9 +81,11 @@ class Subject
   end
 
   def update_subject_set_stats
-    subject_set.subject_activated_on_workflow(workflow) if ! workflow.nil? && status == 'active'
-    subject_set.inc_subject_count_for_workflow(workflow) if ! workflow.nil?
-    # subject_set.inc_active_secondary_subject 1 if type != 'root'
+    if subject_set?
+      subject_set.subject_activated_on_workflow(workflow) if ! workflow.nil? && status == 'active'
+      subject_set.inc_subject_count_for_workflow(workflow) if ! workflow.nil?
+      # subject_set.inc_active_secondary_subject 1 if type != 'root'
+    end
   end
 
   def increment_parents_subject_count_by(count)
@@ -159,7 +161,9 @@ class Subject
 
   def activate!
     status! 'active'
-    subject_set.subject_activated_on_workflow(workflow) if ! workflow.nil?
+    if subject_set?
+      subject_set.subject_activated_on_workflow(workflow) if ! workflow.nil?
+    end
     # subject_set.inc_active_secondary_subject 1 if type != 'root'
   end
 
