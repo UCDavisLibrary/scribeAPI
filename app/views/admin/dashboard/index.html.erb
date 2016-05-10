@@ -58,7 +58,7 @@
 
       </script>
     </div>
-   
+    
     <div class="status-list columns">
       <dl>
 	<dd><%= @stats[:completion_data][:verifies] %></dd>
@@ -70,6 +70,8 @@
       </dl>
     </div>
 </section>
+
+<% if @verifies.count > 0 %>
 <section class="small-12 medium-10 medium-offset-1 large-8 large-offset-2 columns">
   <h2>Verify Labels</h2>
   <p>You, fair admin user, should go through these labels, which have been previously marked and transcribed by random strangers, and verify that each transcription is accurate.</p>
@@ -88,3 +90,4 @@
 
   <%= paginate @verifies, :window => 2 %>  
 </section>
+<% end %>

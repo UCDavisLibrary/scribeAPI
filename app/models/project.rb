@@ -78,19 +78,8 @@ class Project
     total_subjects = Subject.count
     total_classifications = Classification.count
 
-    # retrieve user data in range
     users_data = []
-    # LD: Not needed
-    # users_in_range = User.where(:created_at => start_date..end_date).group_by {|d| d.created_at.strftime(datetime_format)}
-    # (start_date.to_i..end_date.to_i).step(1.hour) do |i_date|
-    #  n_date = Time.at(i_date).utc
-    #  hour = n_date.strftime(datetime_format)
-    #  users_data << {
-    #    date: hour,
-    #    value: users_in_range[hour] ? users_in_range[hour].size : 0
-    #  }
-    #end
-
+    
     # retrieve subject statuses by workflow:
     workflow_counts = {}
     workflows.each do |workflow|
@@ -102,23 +91,8 @@ class Project
       end
     end
 
-    # retrieve classification data in range
-    # LD: Not needed at this time anad computationally expensive
-    # classifications_in_range = Classification.group_by_hour({"created_at" => {"$gte" => start_date}}).inject({}) do |h,(rec,total)|
-    #  hour = "#{rec['y']}-#{rec['m']}-#{'%02d' % rec['d']} #{rec['h']}:00"
-    #  h[hour] = total
-    #  h
-    #end
-
     classifications_data = []
-    #(start_date.to_i..end_date.to_i).step(1.hour) do |i_date|
-    #  n_date = Time.at(i_date).utc
-    #  hour = n_date.strftime(datetime_format)
-    # classifications_data << {
-    #    date: hour,
-    #    value: classifications_in_range[hour] ? classifications_in_range[hour] : 0
-    #  }
-    # end
+
     mark_count = 0
     transcribe_count = 0
 
@@ -156,6 +130,10 @@ class Project
         {
           label: "verify",
           value: verify_count,
+        },
+        {
+          label: "unprocessed",
+          value: total_subjects - mark_count - transcribe_count - verify_count
         }
       ]
     }

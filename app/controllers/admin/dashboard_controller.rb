@@ -6,7 +6,9 @@ class Admin::DashboardController < Admin::AdminBaseController
     page = get_int :page, 1
     
     # Verify items
-    @verifies = Subject.page(page).per(limit).where(:workflow => Workflow.where(:name=>"verify").first.id)
+    @verifies = Subject.page(page).per(limit).where(:workflow => Workflow.where(:name=>"verify").first.id,
+                                                    :status => 'active')
+
     @stats = project.calc_stats
   end
 
