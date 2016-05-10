@@ -56,7 +56,8 @@ class SubjectGenerationMethod
       workflow: workflow_for_new_subject,
       type: subject_type,
       location: {
-        standard: classification.subject.location[:standard]
+        standard: classification.subject.location[:standard],
+        thumbnail: classification.subject.location[:thumbnail]        
       },
       region: region.empty? ? nil : region,
       width: classification.subject.width,
