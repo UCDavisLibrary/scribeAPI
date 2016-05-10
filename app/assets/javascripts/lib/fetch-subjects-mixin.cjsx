@@ -9,9 +9,9 @@ module.exports =
     if @props.identifier?
       @fetchSubjectByIdentifier @props.identifier
 
-    else if @props.params?.subject_id?
-      @fetchSubject @props.params.subject_id 
-
+    else if @state.subject_id?
+      @fetchSubject @state.subject_id 
+      
       
     # Fetching subjects by current workflow and optional filters:
     else

@@ -12,8 +12,8 @@ API::Application.routes.draw do
   get '/transcribe',                                          to: 'annotate#index'  
   get '/verify',                                              to: 'annotate#index'
   get '/mark/:subjectid',                                     to: 'annotate#index'
-  get '/transcribe/:subjectid',                                     to: 'annotate#index'
-  get '/verify/:subjectid',                                     to: 'annotate#index'  
+  get '/transcribe/:subjectid',                               to: 'annotate#index'
+  get '/verify/:subjectid',                                   to: 'annotate#index'  
   
   # JSON endpoints
   get '/projects',                                            to: 'projects#index',       defaults: { format: 'json' }

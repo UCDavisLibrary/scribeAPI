@@ -383,10 +383,12 @@ module.exports =
       currentSubToolIndex: 0, () =>
         @fetchSubjectsForCurrentSubjectSet(1, 100)
     
-  commitClassificationAndContinue: (d) ->
+  commitClassificationAndContinue: (d, callback) ->
     @commitCurrentClassification()
     @beginClassification {}, () =>
-      if @getCurrentTask()?.next_task?
+      if callback?
+        callback()
+      else if @getCurrentTask()?.next_task?
         @advanceToTask @getCurrentTask().next_task
 
       else

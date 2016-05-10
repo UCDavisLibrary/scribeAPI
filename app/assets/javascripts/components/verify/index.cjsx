@@ -35,7 +35,8 @@ module.exports = React.createClass # rename to Classifier
     subject_index:                0
     showingTutorial:              false
     helping:                      false
-
+    subject_id:                   @props.params?.subject_id
+    
   componentWillMount: ->
     @beginClassification()
 
@@ -57,8 +58,13 @@ module.exports = React.createClass # rename to Classifier
 
   handleTaskComplete: (d) ->
     @handleDataFromTool(d)
-    @commitClassificationAndContinue d
-
+    if @state.subject_id
+      @setState
+        subject_id: null
+      @commitClassificationAndContinue(d, @_fetchByProps)
+    else
+      @commitClassificationAndContinue d      
+    
   toggleTutorial: ->
     @setState showingTutorial: not @state.showingTutorial
 
