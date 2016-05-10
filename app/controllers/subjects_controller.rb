@@ -15,7 +15,6 @@ class SubjectsController < ApplicationController
     limit                 = get_int :limit, 10
     page                  = get_int :page, 1
     type                  = params[:type]
-    browse                = get_bool :browse, false
     order_filter          = get_int :order_filter, 0
     order_dir             = params[:order_dir]
     
@@ -28,7 +27,7 @@ class SubjectsController < ApplicationController
     @subjects = @subjects.active if status == 'active'
 
     # Filter by subject type (e.g. 'root')
-    @subjects = @subjects.by_type(type) if type != ''
+    @subjects = @subjects.by_type(type) if (type != '' and type != nil)
 
     # Filter by workflow (There should almost always be a workflow_id filter)
     @subjects = @subjects.by_workflow(workflow_id) if workflow_id
