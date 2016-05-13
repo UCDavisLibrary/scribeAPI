@@ -3,7 +3,7 @@ React = require 'react'
 {Link} = require 'react-router'
 
 BrowsePanel = require './browse-panel'
-
+ 
 module.exports = React.createClass
   displayName: "Browse"
   mixins: [Navigation]
