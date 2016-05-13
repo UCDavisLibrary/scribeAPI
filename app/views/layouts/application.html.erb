@@ -31,9 +31,6 @@
     <link rel="shortcut icon" href="<%= current_project.favicon %>">
   <% end %>
 
-  <script src="https://cdn.polyfill.io/v1/polyfill.min.js?features=default,es6,Promise,fetch&amp;flags=gated"></script>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
 </head>
 
 <body>
@@ -97,6 +94,9 @@
       <p>Copyright &copy; The Regents of the University of California, Davis campus. All rights reserved.</p>
     </section>
   </footer>
+  <script src="https://cdn.polyfill.io/v1/polyfill.min.js?features=default,es6,Promise,fetch&amp;flags=gated"></script>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
 
 
 </body>
