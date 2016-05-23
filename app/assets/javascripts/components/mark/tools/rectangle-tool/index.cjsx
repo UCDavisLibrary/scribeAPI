@@ -318,6 +318,7 @@ module.exports = React.createClass
                   transform="translate(10,34)"
                   fontSize="24"
                   fill="#F1E3D1"
+                  style={{cursor: "pointer"}}
                   stroke="none">
                   MARK AS IMAGE
                 </text>
@@ -344,7 +345,9 @@ module.exports = React.createClass
                   fontSize="24"
                   transform="translate(14,34)"
                   fill="#F1E3D1"
+                  style={{cursor: "pointer"}}                  
                   stroke="none">
+                    
                   MARK AS TEXT
                 </text>
                   
