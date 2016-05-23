@@ -197,10 +197,10 @@ module.exports = React.createClass
   # LD Add buttons for text/image marking
   getMarkSelectionButtonPosition: ()->
     points = @state.pointsHash["handleHHDrag"]
-
-    x: Math.min points[0], @props.sizeRect.props.width - 40 / @props.xScale
+    scaledX = @props.sizeRect.props.width - 140 / @props.xScale
+    x: Math.min points[0], scaledX
     y: Math.min points[1] - 100 / @props.yScale,  @props.sizeRect.props.height - 15 / @props.yScale
-
+    
   handleMouseDown: ->
     @props.onSelect @props.mark
 
