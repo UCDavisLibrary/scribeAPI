@@ -184,14 +184,6 @@ module.exports = React.createClass # rename to Classifier
               @getCurrentTask().tool_config.options?[currentAnnotation.value].next_task
             else
               @getCurrentTask().next_task
-              <div>
-                {
-                  if @getCurrentTask()?
-                    <p>
-                      <a className="tutorial-link" onClick={@toggleTutorial}>View A Tutorial</a>
-                    </p>
-                }
-              </div>
       }
       { if @state.showingTutorial
          <Tutorial workflow={@getActiveWorkflow()} onCloseTutorial={@toggleTutorial} />
