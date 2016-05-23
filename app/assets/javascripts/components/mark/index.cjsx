@@ -38,30 +38,15 @@ module.exports = React.createClass # rename to Classifier
     helping:             false
     hideOtherMarks:      false
     currentSubtool:      null
-    showingTutorial:     @showTutorialBasedOnUser @props.user
+    showingTutorial:     false
     lightboxHelp:        false
     activeSubjectHelper: null
     subjectCurrentPage:  1
-
-  componentWillReceiveProps: (new_props) ->
-    @setState showingTutorial: @showTutorialBasedOnUser(new_props.user)
-
-  showTutorialBasedOnUser: (user) ->
-    # Don't show tutorial by default
-    show = false
-    if user?.tutorial_complete?
-      # If we have a user, show tutorial if they haven't completed it:
-      show = ! user.tutorial_complete
-    #LD Use local storage to persist Tutorial state
-    if localStorage.getItem('seen_tutorial')?
-      show = false
-    show
 
   componentDidMount: ->
     @getCompletionAssessmentTask()
     @fetchSubjectSetsBasedOnProps(@computeViewBox)
     @fetchGroups()
-
 
   componentWillMount: ->
     @setState taskKey: @getActiveWorkflow().first_task
