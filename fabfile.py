@@ -16,7 +16,7 @@ env.hosts = ['labelthis.lib.ucdavis.edu']
 #code_dir = '/home/liza/scribeAPI'
 code_dir = '/home/deploy/scribeAPI'
 
-PROD_URL = "https://" + env.hosts[0]
+PROD_URL = "https://" + env.hosts[0] + "/mark"
 
 def deploy():
     deploy_app()
