@@ -18,6 +18,7 @@ TextTool = React.createClass
     return x: null, y: null if ! data.x?
 
     yPad = 20
+    modalWidth = 480  # Approximate width of the modal
     switch data.toolName
       when 'rectangleTool'
         x = data.x
@@ -30,6 +31,11 @@ TextTool = React.createClass
         y = data.y + yPad if data.y?
     x = @props.subject.width / 2 if ! x?
     y = @props.subject.height / 2 if ! y?
+
+    # Handle if we're off the edge of the viewport
+    if (x > $(window).width() - modalWidth) 
+      x = ($(window).width() - modalWidth) + (modalWidth / 2)
+
     return {x,y}
 
   getDefaultProps: ->
