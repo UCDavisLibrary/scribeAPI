@@ -152,12 +152,14 @@ TextTool = React.createClass
 
     if (! @state.autocompleting && [13].indexOf(e.keyCode) >= 0) && !e.shiftKey# ENTER
       @commitAnnotation()
+      e.preventDefault()
+      
     else if e.keyCode == 13 && e.shiftKey
       text_area =  $("textarea")
       the_text = text_area.val()
       the_text = the_text.concat("/n")
       text_area.val(the_text)
-
+    
   handleBadMark: ()->
     newAnnotation = []
     newAnnotation["low_quality_subject"]
