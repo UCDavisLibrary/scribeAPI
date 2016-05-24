@@ -74,8 +74,11 @@ class Subject
   index({"type" => 1, "subject_set_id" => 1}, {background: true})
   # Index for fetching child subjects for a parent subject, optionally filtering by region NOT NULL
   index({parent_subject_id: 1, status: 1, region: 1})
-  
 
+  def root_subject
+    Subject.root.by_subject_set(self.subject_set_id)[0]    
+  end
+  
   def thumbnail
     location['thumbnail'].nil? ? location['standard'] : location['thumbnail']
   end

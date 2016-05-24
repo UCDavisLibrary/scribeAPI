@@ -43,6 +43,11 @@ var data = <%= raw @stats[:graphable_data].to_json %>;
 	<a class="verify thumbnail" href="/verify/<%= subject.id %>">
 	  <img src="<%= subject.location['thumbnail'] %>" width="200" height="200" />
 	</a>
+	<h6>Status: <%= subject.root_subject.status %></h6>
+	<form action="admin/subjects/status/toggle" method="post">
+	  <input type="hidden" name="subject_set_id" value="<%= subject.subject_set_id %>"/>
+	  <input type="submit" name="Set as Done" />
+	</form>
       </div>
     <% end %>
   </div>

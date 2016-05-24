@@ -75,7 +75,6 @@ VerifyTool = React.createClass
       label = @props.label ? ''
 
     buttons = []
-    console.info "Verifying subject id #{@props.subject.id}"
 
     if @props.onShowHelp?
       buttons.push <HelpButton onClick={@props.onShowHelp} key="help-button"/>

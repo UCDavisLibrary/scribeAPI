@@ -15,8 +15,12 @@
       <a class="webicon twitter" href="#">Twitter</a>
     </div>
     <div>
+      <% if @subject.status == "done" %>
+      <h5>We’re all marked up for now. In the meantime, why don’t you <a href="/browse">browse</a> some of our favorite labels?</h5>
+      <% else %>
       <h5>Status: Needs marking</h5>
       <p><a href="/mark?subject_set_id=<%= @subject.subject_set_id %>&selected_subject_id=<%= @subject.id %>" class="button">Mark this Label</a></p>
+      <% end %>
     </div>
     <h5>Get the story behind this label:</h5>
     <h6><a href="">Who was Maynard Amerine?</a></h6>

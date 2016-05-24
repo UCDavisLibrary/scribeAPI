@@ -58,6 +58,7 @@ API::Application.routes.draw do
     get 'data/download' => 'data#download'
     get 'signin' => 'auth#signin'  
     post 'stats/recalculate' => 'dashboard#recalculate_stats'
+    post 'subjects/status/toggle' => 'subjects#toggle_done'
   end
   get 'admin' => 'admin/dashboard#index'
   
