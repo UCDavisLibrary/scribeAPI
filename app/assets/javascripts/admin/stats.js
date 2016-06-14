@@ -1,6 +1,6 @@
 if (typeof data !== 'undefined') {
-    var w = 400,
-    h = 400,
+    var w = 240,
+    h = 240,
     r = h/2;
 
 var color = d3.scale.ordinal()
@@ -17,7 +17,7 @@ var vis = d3.select('#chart')
 var pie = d3.layout.pie().value(function(d){return d.value;});
 
 // declare an arc generator function
-var arc = d3.svg.arc().outerRadius(r - 10).innerRadius(r - 110);
+var arc = d3.svg.arc().outerRadius(r - 10).innerRadius(r - 70);
 
 // select paths, use arc generator to draw
 var arcs = vis.selectAll("g.slice").data(pie).enter().append("svg:g").attr("class", "slice");

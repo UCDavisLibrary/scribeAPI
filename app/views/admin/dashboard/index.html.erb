@@ -1,32 +1,23 @@
 <script>
 var data = <%= raw @stats[:graphable_data].to_json %>;
 </script>
-
-<section class="row align-center toolbar admin">
-
-  <a class="secondary button" href="/admin">Admin Dashboard</a>
-  <a class="secondary button" href="/browse">Catalogue</a>
-  <a class="secondary button" href="#">Log Out </a>
-</section>
-
-<section class="small-12 medium-10 medium-offset-1 large-8 large-offset-2 columns">
-  <h2>Admin</h2>
-  <p>Here's how we're doing so far:</p>
-  <div class="row">
-    <div class="pie-chart large-9 columns">
-      <div id="chart"></div>
-      
+<div class="admin small-12 medium-10 medium-offset-1">
+<section class="row align-spaced medium-unstack">
+    <div class="small-12 medium-8 columns">
+        <h1>Admin Dashboard</h1>
+        <p>As an admin, you can help us make sure that the transcription work of the crowds is up to snuff.</p>
+        <h3>You can do one of two things:</h3>
+        <p>Verify that the transcription is correct.</p>
+        <p>Approve a label once you deem that it has been fully and accurately transcribed.</p>
     </div>
-    
-    <div class="status-list columns">
-      <dl>
-	<dd><%= @stats[:completion_data][:verifies] %></dd>
-	<dt>Verified labels</dt>
-	<dd><%= @stats[:completion_data][:marks] %></dd>
-	<dt>Marked labels</dt>
-	<dd><%= @stats[:completion_data][:transcribes] %></dd>
-	<dt>Transcribed labels</dt>
-      </dl>
+    <div class="columns project-progress">
+        <h3>Project Progress</h3>
+        <div id="chart"></div>
+        <dl>
+            <dt><%= @stats[:completion_data][:verifies] %> Verified labels</dt>
+            <dt><%= @stats[:completion_data][:marks] %> Marked labels</dt>
+            <dt><%= @stats[:completion_data][:transcribes] %> Transcribed labels</dt>
+        </dl>
     </div>
 </section>
 
@@ -36,7 +27,7 @@ var data = <%= raw @stats[:graphable_data].to_json %>;
   <p>You, fair admin user, should go through these labels, which have been previously marked and transcribed by random strangers, and verify that each transcription is accurate.</p>
 
   <%= paginate @verifies, :window => 2 %>
-  
+
   <div class="row small-up-2 medium-up-4 large-up-5">
     <% for subject in @verifies %>
       <div class="column">
@@ -52,7 +43,6 @@ var data = <%= raw @stats[:graphable_data].to_json %>;
     <% end %>
   </div>
 
-  <%= paginate @verifies, :window => 2 %>  
+  <%= paginate @verifies, :window => 2 %>
 </section>
 <% end %>
-
