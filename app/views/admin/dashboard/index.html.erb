@@ -23,9 +23,11 @@
             </dl>
         </div>
     </section>
-    <% if @verifies.count > 0 %>
+
     <section>
+
         <h2>Verify Labels</h2>
+        <% if @verifies.count > 0 %>
         <p>Please verify the transcriptions or descriptions on each of the following labels.</p>
 
         <div class="row small-up-2 medium-up-4 large-up-5">
@@ -43,8 +45,12 @@
             </div>
             <% end %>
         </div>
+        <% else %>
+        <p>There are no unverified transcriptions at this time.</p>
+        <% end %>
 
         <h2>Approve</h2>
+        <% if @approves.count > 0 %>
         <p>Please approve the transcriptions and descriptions that have already been verified for each of the following labels.</p>
         <div class="row small-up-2 medium-up-4 large-up-5">
             <% for subject in @approves %>
@@ -54,7 +60,8 @@
                 </a>
             </div>
             <% end %>
-
         </div>
+        <% else %>
+        <p>There are no labels awaiting approval right now.</p>
+        <% end %>
     </section>
-    <% end %>
