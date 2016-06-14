@@ -4,27 +4,27 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="x-ua-compatible" content="ie=edge"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title><%= current_project && current_project.title ? current_project.title: 'Scribe' %></title>
-  
+
   <% if @subject %>
 
     <meta name="og:title" content="Label <%= @subject.meta_data['identifier'] %>"/>
     <meta name="og:description" content="<%= @subject.meta_data['category'] %>"/>
     <meta name="og:image" content="<%= @subject.location['standard'] %>"/>
-    
+
   <% elsif current_project %>
     <meta name="og:title" content="<%= current_project.title %>"/>
     <meta name="og:description" content="<%= current_project.summary %>"/>
     <meta name="og:image" content="/images/label-this-title-image.svg"/>
-    
+
   <% end %>
-    
+
   <script src="https://use.typekit.net/hob5nwu.js"></script>
-  <script>try{Typekit.load({ async: true });}catch(e){}</script>    
+  <script>try{Typekit.load({ async: true });}catch(e){}</script>
 
   <%= stylesheet_link_tag "application", media: "all" %>
-  
+
   <link rel="stylesheet" href="/css/app.css">
 
   <% if current_project && current_project.favicon  %>
@@ -35,68 +35,129 @@
 
 <body>
   <header>
-    <nav class="top-bar">
-      <div class="top-bar-left">
-        <ul class="menu">
-          <li>
-            <a href="/">Label This</a>
-          </li>          
-          <li>
-            <a href="/browse/1">Browse</a>
-          </li>
-          <li>
-            <a href="/mark">Mark</a>
-          </li>
-          <li>
-            <a href="/transcribe">Transcribe</a>
-          </li>
-        </ul>
-      </div>
-      <div class="top-bar-right">
-        <ul class="menu">
-          <li>
-            <a href="">About the Project</a>
-          </li>
-          <li>
-            <a target="_blank" href="">Blog</a>
-          </li>
-	  <% if user_signed_in? %>
-    	  <li><a href="/admin/">Admin</a></li>
-    	  <li><%= link_to 'Sign out',  destroy_user_session_path, :method => :delete %></li>
-	  <% else %>
-	    <li><%= link_to 'Log in', new_user_session_path %></li>
-	  <% end %>
-        </ul>
-      </div>
-    </nav>
+  	<nav id="large-menu" class="top-bar">
+  		<div class="top-bar-left">
+  			<ul class="menu">
+  				<li class="menu-item-large">
+  					<a href="/">Home</a>
+  				</li>
+  				<li class="menu-item">
+  					<a href="/mark">Mark</a>
+  				</li>
+  				<li class="menu-item">
+  					<a href="/transcribe">Transcribe</a>
+  				</li>
+          <!--
+  				<li class="menu-item-large">
+  					<a href="#">Search</a>
+  				</li>
+        -->
+  			</ul>
+  		</div>
+  		<div class="top-bar-right">
+  			<ul class="menu">
+  				<li class="menu-item-large">
+  					<a href="#">About the Project</a>
+  				</li>
+  				<li class="menu-item-large">
+  					<a target="_blank" href="#">Blog</a>
+  				</li>
+  				<li class="menu-item-small">
+  					<a href="#small-menu">...</a>
+  				</li>
+  			</ul>
+  		</div>
+  	</nav>
   </header>
-  
+
   <%= yield %>
   <div id="react-target"></div>
-  
-  <footer>
-    <section class="row align-spaced">
-      <div><a href="https://www.lib.ucdavis.edu">UC Davis Library</a></div>
-      <div><a href="https://www.lib.ucdavis.edu/dept/specol/">Special Collections</a></div>
-      <div><a href="https://give.ucdavis.edu/ulib/">Support the Library</a></div>
-    </section>
-    <section class="row align-spaced">
-      <div><p>University of California, Davis, One Shields Avenue, Davis, CA 95616 | 530-752-1011</p></div>
-    </section>
-    <section class="row align-spaced">
-      <div><a href="https://www.ucdavis.edu/help">Help</a></div>
-      <div><a href="https://www.ucdavis.edu/contact">Questions or comments?</a></div>
-      <div><a href="https://www.ucdavis.edu/privacy-and-accessibility">Privacy & Accessibility</a></div>
-      <div><a href="http://occr.ucdavis.edu/poc/">Principles of Community</a></div>
-      <div><a href="http://www.universityofcalifornia.edu/">University of California</a></div>
-    </section>
-    <section class="row align-spaced">
-      <p>Copyright &copy; The Regents of the University of California, Davis campus. All rights reserved.</p>
-    </section>
+<!-- Begin Footer -->
+<!--
+<footer>
+	<section class="row align-spaced">
+		<div><a href="https://www.lib.ucdavis.edu">UC Davis Library</a></div>
+		<div><a href="https://www.lib.ucdavis.edu/dept/specol/">Special Collections</a></div>
+		<div><a href="https://give.ucdavis.edu/ulib/">Support the Library</a></div>
+	</section>
+	<section class="row align-spaced">
+		<div><p>University of California, Davis, One Shields Avenue, Davis, CA 95616 | 530-752-1011</p></div>
+	</section>
+	<section class="row align-spaced">
+		<div><a href="https://www.ucdavis.edu/help">Help</a></div>
+		<div><a href="https://www.ucdavis.edu/contact">Questions or comments?</a></div>
+		<div><a href="https://www.ucdavis.edu/privacy-and-accessibility">Privacy & Accessibility</a></div>
+		<div><a href="http://occr.ucdavis.edu/poc/">Principles of Community</a></div>
+		<div><a href="http://www.universityofcalifornia.edu/">University of California</a></div>
+	</section>
+	<section class="row align-spaced">
+		<p>Copyright &copy; The Regents of the University of California, Davis campus. All rights reserved.</p>
+	</section>
   </footer>
-  
+-->
+  <footer>
+	<nav>
+		<div class="secondary-menu">
+			<ul class="menu">
+				<li class="menu-item">
+          <%= render "admin/partials/login" %>
+				</li>
+				<li class="menu-item">
+					<a href="">Questions or Comments?</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+	<section class="row align-center donor-links">
+		<div><img src="../../images/uc-lib-logo-label-this.svg"></a></div>
+		<small>This site was built for the <a href="https://www.lib.ucdavis.edu/dept/specol/">Special Collections Department</a> at the <a href="https://www.lib.ucdavis.edu">UC Davis Library</a>.<br/>
+ 					Help us make this and other projects possible—<a href="https://give.ucdavis.edu/ulib/">support the Library.</a></small>
+	</section>
+	<section class="row align-center ucd-links">
+		<small class="legal"><a href="https://www.ucdavis.edu">University of California, Davis</a>, One Shields Avenue, Davis, CA 95616 | 530-752-1011<br/>
+			Copyright © The Regents of the <a href="http://www.universityofcalifornia.edu/">University of California</a>, Davis campus. All rights reserved.</small>
+	</section>
+	<section class="row align-spaced legal-links">
+		<div><small class="legal"><a href="https://www.ucdavis.edu/privacy-and-accessibility">Privacy & Accessibility</a></small></div>
+		<div><small class="legal"><a href="http://occr.ucdavis.edu/poc/">Principles of Community</a></small></div>
+	</section>
+</footer>
+<nav id="small-menu">
+	<ul class="sm-menu">
+		<li class="sm-menu-item close-button">
+			<a href="#large-menu">&times;</a>
+		</li>
+		<li class="sm-menu-item">
+			<a href="/">Home</a>
+		</li>
+		<li class="sm-menu-item">
+			<a href="/mark">Mark</a>
+		</li>
+		<li class="sm-menu-item">
+			<a href="">Transcribe</a>
+		</li>
+    <!--
+		<li class="sm-menu-item">
+			<a href="{{ link.templates-homepage }}">Search</a>
+		</li>
+  -->
+		<li class="sm-menu-item">
+			<a href="#">About the Project</a>
+		</li>
+		<li class="sm-menu-item">
+			<a target="_blank" href="#">Blog</a>
+		</li>
+		<li class="sm-menu-item">
+			<a target="_blank" href="#">Questions or Comments?</a>
+		</li>
+		<li class="sm-menu-item">
+      <%= render "admin/partials/login" %>
+		</li>
+	</ul>
+</nav>
+
   <script src="https://cdn.polyfill.io/v1/polyfill.min.js?features=default,es6,Promise,fetch&amp;flags=gated"></script>
-  
+
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 
