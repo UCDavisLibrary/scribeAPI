@@ -11,13 +11,13 @@ class Admin::SubjectsController < Admin::AdminBaseController
 
   def toggle_done
     subject = Subject.root.by_subject_set(params[:subject_set_id])[0]
-    if subject.status == "done"
+    if subject.status == "retired"
       subject.activate!
     elsif subject.status == "active"
-      subject.status = "done"
+      subject.retire!
     subject.save
-    redirect_to :back  
+    redirect_to :back
     end
   end
-  
+
 end

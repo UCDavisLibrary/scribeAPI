@@ -13,6 +13,7 @@ class Subject
   scope :not_bad, -> { where(:status.ne => 'bad').asc(:order)  }
   scope :visible_marks, -> { where(:status.ne => 'bad', :region.ne => nil).asc(:order)  }
   scope :complete, -> { where(status: 'complete').asc(:order)  }
+  scope :retired, -> {where(status: 'retired').asc(:order) }  # For Labels that are Approved
   scope :by_workflow, -> (workflow_id) { where(workflow_id: workflow_id)  }
   scope :by_subject_set, -> (subject_set_id) { where(subject_set_id: subject_set_id).asc(:order)  }
   scope :by_parent_subject, -> (parent_subject_id) { where(parent_subject_id: parent_subject_id) }
@@ -76,9 +77,9 @@ class Subject
   index({parent_subject_id: 1, status: 1, region: 1})
 
   def root_subject
-    Subject.root.by_subject_set(self.subject_set_id)[0]    
+    Subject.root.by_subject_set(self.subject_set_id)[0]
   end
-  
+
   def thumbnail
     location['thumbnail'].nil? ? location['standard'] : location['thumbnail']
   end
@@ -158,7 +159,7 @@ class Subject
     return if classifying_user_ids.length < workflow.retire_limit
     status! 'retired'
     subject_set.subject_completed_on_workflow(workflow) if ! workflow.nil?
-    
+
     # subject_set.inc_complete_secondary_subject 1 if type != 'root'
   end
 
@@ -201,7 +202,7 @@ class Subject
   # Same as above, but restricted to Group:
   def self.group_by_field_for_group(group, field, match={})
     self.collection.aggregate([
-      {"$match" => { "group_id" => group.id }.merge(match)}, 
+      {"$match" => { "group_id" => group.id }.merge(match)},
       {"$group" => { "_id" => "$#{field.to_s}", count: {"$sum" =>  1} }}
 
     ]).inject({}) do |h, p|

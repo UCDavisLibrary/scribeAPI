@@ -10,19 +10,19 @@ module.exports =
 
       state = {}
 
-      # If a specific subject id indicated..
+      # If a specific subject id was indicated
       if @props.query.selected_subject_id?
         # Get the index of the specified subject in the (presumably first & only) subject set:
         state.subject_index = (ind for subj,ind in subject_sets[0].subjects when subj.id == @props.query.selected_subject_id )[0] ? 0
 
       # If taskKey specified, now's the time to set that too:
       state.taskKey = @props.query.mark_task_key if @props.query.mark_task_key
-      
+
       @setState state if state
 
       # Any additional callbacks passed in
       callback() if callback?
-      
+
     # Fetch by subject-set id?
     subject_set_id = @props.params.subject_set_id ? @props.query.subject_set_id
     if subject_set_id?

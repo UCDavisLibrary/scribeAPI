@@ -1,48 +1,60 @@
 <script>
-var data = <%= raw @stats[:graphable_data].to_json %>;
+    var data = <%= raw @stats[:graphable_data].to_json %>;
 </script>
 <div class="admin small-12 medium-10 medium-offset-1">
-<section class="row align-spaced medium-unstack">
-    <div class="small-12 medium-8 columns">
-        <h1>Admin Dashboard</h1>
-        <p>As an admin, you can help us make sure that the transcription work of the crowds is up to snuff.</p>
-        <h3>You can do one of two things:</h3>
-        <p>Verify that the transcription is correct.</p>
-        <p>Approve a label once you deem that it has been fully and accurately transcribed.</p>
-    </div>
-    <div class="columns project-progress">
-        <h3>Project Progress</h3>
-        <div id="chart"></div>
-        <dl>
-            <dt><%= @stats[:completion_data][:verifies] %> Verified labels</dt>
-            <dt><%= @stats[:completion_data][:marks] %> Marked labels</dt>
-            <dt><%= @stats[:completion_data][:transcribes] %> Transcribed labels</dt>
-        </dl>
-    </div>
-</section>
+    <section class="row align-spaced medium-unstack">
+        <div class="small-12 medium-8 columns">
+            <h1>Admin Dashboard</h1>
+            <p>As an admin, you can help us make sure that the transcription work of the crowds is up to snuff.</p>
+            <h3>You can do one of two things:</h3>
+            <p>Verify that the transcription is correct.</p>
+            <p>Approve a label once you deem that it has been fully and accurately transcribed.</p>
+        </div>
+        <div class="columns project-progress">
+            <h3>Project Progress</h3>
+            <div id="chart"></div>
+            <dl>
+                <dt><%= @stats[:completion_data][:verifies] %>
+                    Verified labels</dt>
+                <dt><%= @stats[:completion_data][:marks] %>
+                    Marked labels</dt>
+                <dt><%= @stats[:completion_data][:transcribes] %>
+                    Transcribed labels</dt>
+            </dl>
+        </div>
+    </section>
+    <% if @verifies.count > 0 %>
+    <section>
+        <h2>Verify Labels</h2>
+        <p>Please verify the transcriptions or descriptions on each of the following labels.</p>
 
-<% if @verifies.count > 0 %>
-<section class="small-12 medium-10 medium-offset-1 large-8 large-offset-2 columns">
-  <h2>Verify Labels</h2>
-  <p>You, fair admin user, should go through these labels, which have been previously marked and transcribed by random strangers, and verify that each transcription is accurate.</p>
+        <div class="row small-up-2 medium-up-4 large-up-5">
+            <% for subject in @verifies %>
+            <div class="column">
+                <a class="verify thumbnail" href="/verify/<%= subject.id %>">
+                    <img src="<%= subject.location['thumbnail'] %>" width="200" height="200"/>
+                </a>
+                <!--
+            <form action="admin/subjects/status/toggle" method="post">
+                <input type="hidden" name="subject_set_id" value="<%= subject.subject_set_id %>"/>
+                <input type="submit" name="Set as Done"/>
+            </form>
+          -->
+            </div>
+            <% end %>
+        </div>
 
-  <%= paginate @verifies, :window => 2 %>
+        <h2>Approve</h2>
+        <p>Please approve the transcriptions and descriptions that have already been verified for each of the following labels.</p>
+        <div class="row small-up-2 medium-up-4 large-up-5">
+            <% for subject in @approves %>
+            <div class="column">
+                <a class="verify thumbnail" href="/verify/<%= subject.id %>">
+                    <img src="<%= subject.location['thumbnail'] %>" width="200" height="200"/>
+                </a>
+            </div>
+            <% end %>
 
-  <div class="row small-up-2 medium-up-4 large-up-5">
-    <% for subject in @verifies %>
-      <div class="column">
-	<a class="verify thumbnail" href="/verify/<%= subject.id %>">
-	  <img src="<%= subject.location['thumbnail'] %>" width="200" height="200" />
-	</a>
-	<h6>Status: <%= subject.root_subject.status %></h6>
-	<form action="admin/subjects/status/toggle" method="post">
-	  <input type="hidden" name="subject_set_id" value="<%= subject.subject_set_id %>"/>
-	  <input type="submit" name="Set as Done" />
-	</form>
-      </div>
+        </div>
+    </section>
     <% end %>
-  </div>
-
-  <%= paginate @verifies, :window => 2 %>
-</section>
-<% end %>
