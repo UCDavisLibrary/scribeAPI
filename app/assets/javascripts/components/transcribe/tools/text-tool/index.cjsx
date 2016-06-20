@@ -33,7 +33,7 @@ TextTool = React.createClass
     y = @props.subject.height / 2 if ! y?
 
     # Handle if we're off the edge of the viewport
-    if (x > $(window).width() - modalWidth) 
+    if (x > $(window).width() - modalWidth)
       x = ($(window).width() - modalWidth) + (modalWidth / 2)
 
     return {x,y}
@@ -55,7 +55,7 @@ TextTool = React.createClass
 
   toolConfig: ->
     @props.tool_config ? @props.task.tool_config
- 
+
   # Set focus on input:
   focus: ->
     el = $(@refs.input0?.getDOMNode())
@@ -153,13 +153,13 @@ TextTool = React.createClass
     if (! @state.autocompleting && [13].indexOf(e.keyCode) >= 0) && !e.shiftKey# ENTER
       @commitAnnotation()
       e.preventDefault()
-      
+
     else if e.keyCode == 13 && e.shiftKey
       text_area =  $("textarea")
       the_text = text_area.val()
       the_text = the_text.concat("/n")
       text_area.val(the_text)
-    
+
   handleBadMark: ()->
     newAnnotation = []
     newAnnotation["low_quality_subject"]
@@ -183,38 +183,43 @@ TextTool = React.createClass
 
     {x,y} = @getPosition @props.subject.region
 
-    if @props.task.key == 'image'          
+    if @props.task.key == 'image'
       title = <h2>Describe this Element</h2>
       illegible_button = "I can't tell what this is"
     else
       title = <h2>Transcribe this text</h2>
       illegible_button = "This text is illegible"
-    
+
+    if @props.isLastSubject
+      buttonLabel = 'Finish Transcribing'
+    else
+      buttonLabel = 'Continue'
+
     # create component input field(s)
     tool_content =
-    
+
      <DraggableModal
         x={x*@props.scale.horizontal + @props.scale.offsetX}
         y={y*@props.scale.vertical + @props.scale.offsetY}
         classes="transcribe-tool">
-          
+
       <div className="input-field active">
         <label>
-          
+
           { title }
-          
-          <p>{@props.task.instruction}</p>          
+
+          <p>{@props.task.instruction}</p>
           {
             atts =
               ref: ref
-              key: "#{@props.task.key}.#{@props.annotation_key}" 
+              key: "#{@props.task.key}.#{@props.annotation_key}"
               "data-task_key": @props.task.key
               onKeyDown: @handleKeyDown
               onChange: @handleChange
               onFocus: ( () => @props.onInputFocus? @props.annotation_key )
               value: val
               disabled: @props.badSubject
-              
+
             if @props.inputType == "text"
               <input type="text" value={val} {...atts} placeholder="Enter text here"/>
 
@@ -233,14 +238,8 @@ TextTool = React.createClass
         </label>
         <div className="button-group align-right">
           <IllegibleSubjectButton label={illegible_button} key="illegal-subject-button" active={@props.illegibleSubject} onClick={() => @props.onIllegibleSubject(@commitAnnotation)} />
-      
-          { if @props.isLastSubject
-              buttonLabel = 'Finish Transcribing'
-            else
-              buttonLabel = 'Continue'
-          }
-
           <SmallButton label={buttonLabel} key="done-button" onClick={@commitAnnotation} />
+
 
         </div>
       </div>
