@@ -6,7 +6,7 @@ SubjectZoomPan          = require 'components/subject-zoom-pan'
 
 module.exports = React.createClass
   displayName: "SubjectSetToolbar"
-  
+
   propTypes:
     hideOtherMarks: React.PropTypes.bool.isRequired
 
@@ -19,20 +19,31 @@ module.exports = React.createClass
 
   onZoomHide: ->
     @setState zoomExpanded: false
- 
+
   toggleZoom: ->
     if @state.zoomExpanded
       @onZoomHide()
     else
       @onZoomExpand()
 
-        
+  toggleShowTooltip: ->
+    if @state.tooltipExpanded
+      @onHideTooltip()
+    else
+      @onShowTooltip()
+
+  onShowTooltip: ->
+    @setState tooltipExpanded: true
+
+  onHideTooltip: ->
+    @setState tooltipExpanded: false
+
   render: ->
     # disable LightBox if work has begun
     disableLightBox = if @props.task.key isnt @props.workflow.first_task then true else false
     <div>
       <div className="row tools">
-        <div className="pan-zoom-controller" onMouseOver={@toggleZoom} onMouseOut={@toggleZoom}>          
+        <div className="pan-zoom-controller" onMouseOver={@toggleZoom} onMouseOut={@toggleZoom}>
 
           <div className={"pan-zoom-area pan-zoom pane" + if @state.zoomExpanded then ' active' else '' }>
             <SubjectZoomPan subject={@props.subject} handleZoomUI={@props.handleZoomUI} />
@@ -41,8 +52,8 @@ module.exports = React.createClass
         <div className="switch">
            <div className="toggle">
               <input className="switch-input" id="exampleSwitch" type="checkbox" name="exampleSwitch" onClick={@props.toggleHideOtherMarks}/>
-              <label className="switch-paddle" htmlFor="exampleSwitch">
-                 <span className="show-for-sr">Show Others’ Marks</span>
+              <label className="switch-paddle" htmlFor="exampleSwitch" onMouseOver={@toggleShowTooltip} onMouseOut={@toggleShowTooltip}>
+                <span className={"tooltip helper" + if @state.tooltipExpanded then ' active' else '' }>Show Others Users' Marks</span>
               </label>
            </div>
         </div>

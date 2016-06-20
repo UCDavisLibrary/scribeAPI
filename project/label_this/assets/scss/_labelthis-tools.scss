@@ -1,4 +1,5 @@
 .transcribe-tool {
+
     position: absolute;
     min-width: 200px;
     max-width: 500px;
@@ -9,7 +10,7 @@
     position: absolute;
     z-index: 20;
 }
- 
+
 //-----------------------------------------------------
 // Zoom UI styles, based on the ones on the ScribeAPI repo
 .pan-zoom-controller {
@@ -29,11 +30,11 @@
 }
 .pan-zoom-area {
   &.active {
-      display: block; 
+      display: block;
   }
   background-color: $labels-background-dark;
-  
-  display: none; 
+
+  display: none;
   width: 140px;
   height: 135px;
   left: 15px;
@@ -46,12 +47,12 @@
     border-radius: 4px;
     width: 60px;
     height: 70px;
-    position: absolute; 
+    position: absolute;
     top: -7px;
     left: 36px;
     margin-top: -36px;
     margin-left: -36px;
-    background: $labels-background-dark url('/images/zoom-button.svg') no-repeat center 4px; 
+    background: $labels-background-dark url('/images/zoom-button.svg') no-repeat center 4px;
   }
 }
 
@@ -204,4 +205,9 @@
   margin-left:-32px;
   font-size:14px;
 }
-
+.switch .toggle .tooltip {
+    display:none;
+    &.active {
+      display: block;
+    }
+}
