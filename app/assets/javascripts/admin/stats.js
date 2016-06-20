@@ -30,6 +30,7 @@ arcs.append("svg:path")
     });
 
 // add the text
+/*
 arcs.append("svg:text").attr("transform", function(d) {
     d.innerRadius = r;
     d.outerRadius = r;
@@ -40,4 +41,5 @@ arcs.append("svg:text").attr("transform", function(d) {
     	    return data[i].label;
   	}
     });
+    */
 }

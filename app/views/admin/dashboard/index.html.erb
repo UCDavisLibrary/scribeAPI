@@ -6,21 +6,21 @@
         <div class="small-12 medium-8 columns">
             <h1>Admin Dashboard</h1>
             <p>As an admin, you can help us make sure that the transcription work of the crowds is up to snuff.</p>
-            <h3>You can do one of two things:</h3>
+            <h2>You can do one of two things:</h2>
             <p>Verify that the transcription is correct.</p>
             <p>Approve a label once you deem that it has been fully and accurately transcribed.</p>
         </div>
-        <div class="columns project-progress">
-            <h3>Project Progress</h3>
+        <div class="small-12 medium-5 columns project-progress step-by-step">
+            <h1>Project Progress</h1>
             <div id="chart"></div>
-            <dl>
-                <dt><%= @stats[:completion_data][:verifies] %>
-                    Verified labels</dt>
-                <dt><%= @stats[:completion_data][:marks] %>
-                    Marked labels</dt>
-                <dt><%= @stats[:completion_data][:transcribes] %>
-                    Transcribed labels</dt>
-            </dl>
+            <ul>
+                <li><span style="background-color:#039317"><%= @stats[:completion_data][:verifies] %></span>
+                    Verified labels</li>
+                <li><span style="background-color:#921377"><%= @stats[:completion_data][:marks] %></span>
+                    Marked labels</li>
+                <li><span style="background-color:#214BB5"><%= @stats[:completion_data][:transcribes] %></span>
+                    Transcribed labels</li>
+            </ul>
         </div>
     </section>
 
