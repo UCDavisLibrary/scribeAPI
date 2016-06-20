@@ -1,31 +1,45 @@
-<section class="medium-10 medium-offset-1 medium-unstack row">
-  <div class="column">
-    <h1>Label <%= @subject.meta_data['identifier'] %></h1>
-    <% if @subject.meta_data['category'] %>
-    <dl>
-      <dt>Category</dt>
-      <dd><%= @subject.meta_data['category'] %></dd>
-    </dl>
-    <% end %> 
+<section class="label-card medium-10 medium-offset-1 medium-unstack">
+    <h2>About the Label</h2>
+    <!--    <h1>Label <%= @subject.meta_data['identifier'] %></h1> -->
+    <section class="row">
+        <% if @subject.meta_data['category'] %>
+        <div class="small-12 medium-7 large-8 medium-unstack columns">
+            <dl>
+                <dt>Category</dt>
+                <dd><%= @subject.meta_data['category'] %></dd>
+            </dl>
+        </div>
+        <% end %>
+        <div class="small-12 medium-5 large-4 medium-unstack columns">
+            <% if @subject.status == "done" %>
+            <p>We’re all marked up for now. In the meantime, why don’t you
+                <a href="/browse">browse</a>
+                some of our favorite labels?</p>
+        <% else %>
+            <p>This label still needs your help. Mark the elements on this label for transcription.</p>
+            <button type="button" class="button" onClick="window.location='/mark?subject_set_id=<%= @subject.subject_set_id %>&selected_subject_id=<%= @subject.id %>'">Mark This Label</button>
+        <% end %>
+        </div>
+      </section>
+      <section class="row">
+  <div class="small-12 medium-unstack columns">
+    <h3>The story behind this label</h3>
+    <p><a href="">Amerine and the Bohemian Club</a></p>
   </div>
-  <div class="small-4 columns">
-    <div class="row small-10 align-spaced">
-      <a class="webicon facebook" href="#">Facebook</a>
-      <a class="webicon pinterest" href="#">Pinterest</a>
-      <a class="webicon twitter" href="#">Twitter</a>
+</section>
+      <section class="row">
+    <div class="small-12 medium-7 large-8 medium-unstack columns">
+        <h3>Tell us your story</h3>
+        <p>Are you a wine expert? Do you have family history with this label?
+            <a href="">Send us your story</a>!</p>
     </div>
-    <div>
-      <% if @subject.status == "done" %>
-      <h5>We’re all marked up for now. In the meantime, why don’t you <a href="/browse">browse</a> some of our favorite labels?</h5>
-      <% else %>
-      <h5>Status: Needs marking</h5>
-      <p><a href="/mark?subject_set_id=<%= @subject.subject_set_id %>&selected_subject_id=<%= @subject.id %>" class="button">Mark this Label</a></p>
-      <% end %>
+    <div class="small-12 medium-5 large-4 medium-unstack columns">
+        <h3>Share this label</h3>
+        <div class="row align-spaced">
+            <a class="webicon facebook" href="#">Facebook</a>
+            <a class="webicon pinterest" href="#">Pinterest</a>
+            <a class="webicon twitter" href="#">Twitter</a>
+        </div>
     </div>
-    <h5>Get the story behind this label:</h5>
-    <h6><a href="">Who was Maynard Amerine?</a></h6>
-    <h5>Tell us your story</h5>
-    <p>Are you a wine expert? Do you have family history with this label? <a href="#">Send us your story</a>!</p>
-  </div>
-</section>        
- 
+</section>
+</section>
