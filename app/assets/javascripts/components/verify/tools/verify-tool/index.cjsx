@@ -91,22 +91,26 @@ VerifyTool = React.createClass
 
     {x,y} = @getPosition @props.subject.region
 
-    tool_content = 
+    tool_content =
       <DraggableModal
         x = {x*@props.scale.horizontal + @props.scale.offsetX}
         y = {y*@props.scale.vertical + @props.scale.offsetY}
         onDone = {@commitAnnotation}
         buttons = {buttons} >
-      
+
           <label>
             <h2>Verify this transcription</h2>
-            <p>Please choose one of the following transcriptions as the most correct one.</p>
+            <p>Please choose one of the following transcriptions as the most correct one. If none are exactly right, you can edit the most accurate one, and choose that.</p>
             <ul className="choice clickable">
-              { for data,i in @props.subject.data['values']
+              <div class="row align-middle">
+                <div class="field-container small-8">
+                 { for data,i in @props.subject.data['values']
                   <li key={i} onClick={@chooseOption} data-value_index={i}>
                     <span className="value">{data["value"]}</span><img src="/images/left-pointer-knockout.svg" alt="" />
                   </li>
-              }
+                 }
+                </div>
+              </div>
             </ul>
           </label>
         </DraggableModal>
