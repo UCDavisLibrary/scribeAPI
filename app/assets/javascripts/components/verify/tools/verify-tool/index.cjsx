@@ -5,6 +5,7 @@ DoneButton              = require 'components/buttons/done-button'
 HelpButton              = require 'components/buttons/help-button'
 BadSubjectButton        = require 'components/buttons/bad-subject-button'
 SmallButton             = require 'components/buttons/small-button'
+TranscribeInput         = require './transcribe-input'
 
 VerifyTool = React.createClass
   displayName: 'VerifyTool'
@@ -35,17 +36,14 @@ VerifyTool = React.createClass
     @forceUpdate()
 
   handleKeyPress: (e) ->
-
     if [13].indexOf(e.keyCode) >= 0 # ENTER:
       @commitAnnotation()
       e.preventDefault()
 
-  chooseOption: (e) ->
-    el = $(e.target)
-    value = @props.subject.data['values'][el.data('value_index')]
-
-    @setState({annotation: value}, () =>
+  chooseOption: (value) ->
+    @setState({annotation: {value: value}}, () =>
       @commitAnnotation()
+      @forceUpdate()  
     )
 
   # this can go into a mixin? (common across all transcribe tools)
@@ -98,21 +96,15 @@ VerifyTool = React.createClass
         onDone = {@commitAnnotation}
         buttons = {buttons} >
 
-          <label>
-            <h2>Verify this transcription</h2>
-            <p>Please choose one of the following transcriptions as the most correct one. If none are exactly right, you can edit the most accurate one, and choose that.</p>
-            <ul className="choice clickable">
-              <div class="row align-middle">
-                <div class="field-container small-8">
-                 { for data,i in @props.subject.data['values']
-                  <li key={i} onClick={@chooseOption} data-value_index={i}>
-                    <span className="value">{data["value"]}</span><img src="/images/left-pointer-knockout.svg" alt="" />
-                  </li>
-                 }
-                </div>
-              </div>
-            </ul>
-          </label>
-        </DraggableModal>
+        <div>
+          <h2>Verify this transcription</h2>
+          <p>Please choose one of the following transcriptions as the most correct one. If none are exactly right, you can edit the most accurate one, and choose that.</p>
+          <ul className="choice clickable">
+            { for data,i in @props.subject.data['values']
+              <TranscribeInput key={i} value={data["value"]} index={i} chooseCallback={@chooseOption}/>
+            }
+          </ul>
+        </div>
+      </DraggableModal>
 
 module.exports = VerifyTool
