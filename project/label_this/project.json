@@ -6,25 +6,21 @@
     "author": "University of California, Davis",
     "keywords": "Maynard Amerine, wine, University of California, Davis, UC Davis",
     "team_emails": [
-	"lizadaly@gmail.com"
+        "lizadaly@gmail.com"
     ],
-    
-    "team": [
-	{
-	    "name": "Liza Daly",
-	    "role": "Dev",
-	    "image": "http://placekitten.com/200/300",
-	    "organization": ""
-	}
-    ],
-    
-    "organizations": [
-	{
-	    "title": "UC Davis",
-	    "description": "UC Davis",
-	    "url":"http://ucdavis.example.com",
-	    "logo": "http://businesscat.org/logo.png"
-	}
-    ],
-    "blog_url": "http://blogs.lib.ucdavis.edu/"
+
+    "team": [{
+        "name": "Liza Daly",
+        "role": "Dev",
+        "image": "http://placekitten.com/200/300",
+        "organization": ""
+    }],
+
+    "organizations": [{
+        "title": "UC Davis",
+        "description": "UC Davis",
+        "url": "http://ucdavis.example.com",
+        "logo": "http://businesscat.org/logo.png"
+    }],
+    "blog_url": "https://labelthisblog.library.ucdavis.edu/"
 }
