@@ -10,10 +10,7 @@ Verify                        = require './verify'
 # New for Label This:
 Browse                        = require './browse'
 View                          = require './view'
-
-# TODO Group routes currently not implemented
-GroupPage                     = require './group-page'
-GroupBrowser                  = require './group-browser'
+Approve                       = require './approve'
 
 Project                       = require 'models/project.coffee'
 
@@ -33,7 +30,8 @@ class AppRouter
         </Route>
 
         <Route name="view" path="/view/:identifier" handler={View} />
-          
+        <Route name="approve" path="/approve/:identifier" handler={Approve} />
+
         { (w for w in project.workflows when w.name in ['mark','transcribe','verify']).map (workflow, key) =>
             handler = eval workflow.name.charAt(0).toUpperCase() + workflow.name.slice(1)
             <Route
@@ -89,19 +87,6 @@ class AppRouter
               name={page.name}
             />
         }
-
-        <Route
-          path='groups'
-          handler={GroupBrowser}
-          name='groups'
-        />
-        <Route
-          path='groups/:group_id'
-          handler={GroupPage}
-          name='group_show'
-        />
-
-
       </Route>
     Router.run routes, Router.HistoryLocation, (Handler) ->
       React.render <Handler />, document.getElementById('react-target')
