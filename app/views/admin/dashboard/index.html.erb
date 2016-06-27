@@ -56,7 +56,7 @@
         <div class="row small-up-2 medium-up-4 large-up-5">
             <% for subject in @approves %>
             <div class="column">
-                <a class="verify thumbnail" href="/verify/<%= subject.id %>">
+                <a class="verify thumbnail" href="/approve/<%= subject.meta_data['identifier'] %>">
                     <img src="<%= subject.location['thumbnail'] %>" width="200" height="200"/>
                 </a>
             </div>

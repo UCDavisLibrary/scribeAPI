@@ -18,11 +18,11 @@ module.exports = React.createClass
   resizing: false
 
   mixins: [MarkDrawingMixin] # load helper methods to draw marks and highlights
-  
+
   handleZoomPanViewBoxChange: (viewBox) ->
     console.log("In handle zoombox: new viewbox is " + viewBox)
     @setState viewBox: viewBox
-    
+
   getInitialState: ->
     subject: @props.subject
     marks: @getMarksFromProps(@props)
@@ -34,7 +34,7 @@ module.exports = React.createClass
       y: 0
     scale: {horizontal: 1, vertical: 1}
     sameSessionTranscriptions: []
-    
+
   getDefaultProps: ->
     tool: null # Optional tool to place alongside subject (e.g. transcription tool placed alongside mark)
     onLoad: null
@@ -123,10 +123,10 @@ module.exports = React.createClass
   handleInitStart: (e) ->
     return null if e.buttons? && e.button? && e.button > 0 # ignore right-click
     newMark = @createMark(e)
-    
+
     # Don't proceed as if a new mark was created if no mark was created (i.e. no drawing tool selected)
     return if ! newMark?
-    
+
     # LD -- we only want to commit a mark directly, so don't commit the old one, just throw it out
 
     if @state.uncommittedMark?
@@ -141,7 +141,7 @@ module.exports = React.createClass
   createMark: (e) ->
     # Creates a mark if the conditions are valid, like the user has engaged in an activity
     # that would generate a tool (like drawing a rect). Otherwise returns null. -LD
-     
+
     return null if ! (subToolIndex = @props.subToolIndex)?
     return null if ! (subTool = @props.task.tool_config?.options?[subToolIndex])?
 
@@ -323,9 +323,9 @@ module.exports = React.createClass
 
       displaysTranscribeButton = @props.task?.tool_config.displays_transcribe_button != false
       displaysTranscribeButton = false
-      
+
       isPriorMark = ! mark.userCreated
-      
+
       <g key={mark._key} className="marks-for-annotation#{if mark.groupActive then ' group-active' else ''}" data-disabled={isPriorMark or null}>
         {
           mark._key ?= Math.random()
@@ -366,7 +366,7 @@ module.exports = React.createClass
       viewBox = @state.viewBox
     else
       viewBox = @props.viewBox
-      
+
     marks = marks.concat @state.uncommittedMark if @state.uncommittedMark?
 
     {transcribableMarks, otherMarks} = @separateTranscribableMarks(marks)
@@ -444,7 +444,7 @@ module.exports = React.createClass
                 scale: scale                  # pass scale down to children (for transcribe tools)
           }
         </figure>
-        { if @props.subject? 
+        { if @props.subject?
           <SubjectMetadata subject={@props.subject} />
         }
     </section>
