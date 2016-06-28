@@ -211,3 +211,12 @@
       display: block;
     }
 }
+
+.approve-overlay {
+  position: absolute;
+  display: none;
+  span {
+    background-color: $labels-red;
+    padding: .5em;
+  }
+}

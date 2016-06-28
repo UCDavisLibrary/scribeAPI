@@ -3,6 +3,8 @@ Draggable       = require 'lib/draggable'
 DragHandle      = require './drag-handle'
 DeleteButton    = require 'components/buttons/delete-mark'
 MarkButtonMixin = require 'lib/mark-button-mixin'
+API = require 'lib/api'
+LabelDisplay = require '../label-tool'
 
 MINIMUM_SIZE = 15
 DELETE_BUTTON_ANGLE = 45
@@ -79,6 +81,8 @@ module.exports = React.createClass
     # If the mark tool is currently active, add an event listener to close the modal on ESC
     if @props.selected
       document.addEventListener("keydown", @handleEscKey)
+
+
 
   componentWillUnmount: ->
     document.removeEventListener("keydown", @handleEscKey)
@@ -225,6 +229,18 @@ module.exports = React.createClass
     @props.submitMark @props.mark
     document.removeEventListener("keydown", @handleEscKey, false)
 
+  handleSelection: (e) ->
+    subject_id = @props.mark.subject_id
+    svgEl = e.target
+    parentEl = $('.subject-viewer-svg')[0]
+    labelEl = $('#label-' + subject_id)
+    pos = svgEl.getBoundingClientRect()
+
+    labelX = pos.left + document.body.scrollLeft + (pos.width / 2) - (labelEl.width() / 2)
+    labelY = pos.top + document.body.scrollTop + pos.height
+
+    labelEl.css('top', labelY).css('left', labelX).show()
+
   render: ->
     classes = []
     classes.push 'transcribable' if @props.isTranscribable
@@ -249,111 +265,20 @@ module.exports = React.createClass
       [x1, y1].join ','
     ].join '\n'
 
+
     <g
       tool={this}
-      onMouseDown={@props.onSelect}
+      onMouseDown={@handleSelection}
       title={@props.mark.label}
     >
-      <g
-        className="rectangle-tool#{if @props.disabled then ' locked' else ''}"
-      >
-
+      <g className="rectangle-tool">
         <Draggable onDrag = {@handleMainDrag} >
           <g
-            className="tool-shape #{classes.join ' '}"
-            key={points}
-            dangerouslySetInnerHTML={
-              __html: "
-
-                <filter id=\"dropShadow\">
-                  <feGaussianBlur in=\"SourceAlpha\" stdDeviation=\"3\" />
-                  <feOffset dx=\"2\" dy=\"4\" />
-                  <feMerge>
-                    <feMergeNode />
-                    <feMergeNode in=\"SourceGraphic\" />
-                  </feMerge>
-                </filter>
-
-                <polyline
-                  #{if @props.mark.color? then "stroke=\"#{@props.mark.color}\""}
-                  points=\"#{points}\"
-
-                />
-              "
-            }
-          />
+            className="tool-shape"
+            key={points}>
+              <polyline stroke="rgb(0,0,0)" points={points} />
+          </g>
         </Draggable>
+      </g>
 
-        { if @props.selected
-            <DeleteButton onClick={@props.onDestroy} scale={scale} x={@getDeleteButtonPosition(@state.pointsHash).x} y={@getDeleteButtonPosition(@state.pointsHash).y}/>
-        }
-
-        {
-          if @props.selected && not @props.disabled
-            <g>
-              {
-                for key, value of @state.pointsHash
-                  <DragHandle key={key} tool={this} x={value[0]} y={value[1]} onDrag={@dragFilter(key)} onEnd={@normalizeMark} />
-              }
-            </g>
-        }
-
-        { # REQUIRES MARK-BUTTON-MIXIN
-          if @props.selected or @state.markStatus is 'transcribe-enabled'
-            @renderMarkButton() if @props.isTranscribable
-            <Draggable onEnd={@markSelectionAsImage}>
-              <g transform="translate(#{@getMarkSelectionButtonPosition().x}, #{@getMarkSelectionButtonPosition().y})">
-                <rect
-                fill="#642667"
-                stroke="#642667"
-                width="200"
-                height="60"
-                x="0"
-                y="0"
-                rx="0"
-                />
-                <text
-                  x="0"
-                  y="0"
-                  transform="translate(10,34)"
-                  fontSize="24"
-                  fill="#F1E3D1"
-                  style={{cursor: "pointer"}}
-                  stroke="none">
-                  MARK AS IMAGE
-                </text>
-
-              </g>
-            </Draggable>
-        }
-        {
-          if @props.selected
-            <Draggable onEnd={@markSelectionAsText}>
-              <g transform="translate(#{@getMarkSelectionButtonPosition().x}, #{@getMarkSelectionButtonPosition().y + 50})">
-                <rect
-                fill="rgb(77, 7, 23)"
-                stroke="rgb(77, 7, 23)"
-                width="200"
-                height="50"
-                x="0"
-                y="0"
-                rx="0"
-                />
-                <text
-                  x="0"
-                  y="0"
-                  fontSize="24"
-                  transform="translate(14,34)"
-                  fill="#F1E3D1"
-                  style={{cursor: "pointer"}}
-                  stroke="none">
-
-                  MARK AS TEXT
-                </text>
-
-              </g>
-
-            </Draggable>
-       }
     </g>
-</g>

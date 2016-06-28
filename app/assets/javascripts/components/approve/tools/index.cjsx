@@ -1,4 +1,3 @@
 module.exports =
-  pointTool:     require './point-tool'
-  textRowTool:   require './text-row-tool'
-  rectangleTool: require './rectangle-tool'
+  MarkDisplay: require './rectangle-tool'
+  LabelDisplay: require './label-tool'

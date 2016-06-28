@@ -188,6 +188,13 @@
   .switch .toggle .tooltip.active {
     display: block; }
 
+.approve-overlay {
+  position: absolute;
+  display: none; }
+  .approve-overlay span {
+    background-color: #4D0717;
+    padding: .5em; }
+
 .browse {
   min-height: 80%; }
 
@@ -402,6 +409,13 @@
   display: none; }
   .switch .toggle .tooltip.active {
     display: block; }
+
+.approve-overlay {
+  position: absolute;
+  display: none; }
+  .approve-overlay span {
+    background-color: #4D0717;
+    padding: .5em; }
 
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
 /**
