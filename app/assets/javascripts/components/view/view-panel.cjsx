@@ -14,7 +14,6 @@ module.exports = React.createClass
 
   getDefaultProps: ->
     identifier: null
-    showMarks: false
 
   getInitialState: ->
     subjects: []
@@ -24,6 +23,16 @@ module.exports = React.createClass
   componentWillReceiveProps: (newProps) ->
     if @props.identifier != newProps.identifier
       @fetchSubjectByIdentifier newProps.identifier
+
+  fetchSubjectsCallback: () ->
+    for subject in @state.subjects
+      @setState marks: @getMarksForSubject(subject)
+
+  selectMark: (mark) ->
+    request = API.type("subjects").get mark.subject_id
+    request.then (subject) =>
+      text = subject.child_subjects[0]?.data.values[0]?.value
+      console.log(text)
 
   getMarksForSubject: (subject) ->
     # Previous marks are really just the region hashes of all child subjects
@@ -45,11 +54,7 @@ module.exports = React.createClass
       continue if ! mark.x? || ! mark.y? # if mark hasn't acquired coords yet, don't draw it yet
       continue if mark.user_has_deleted
 
-      displaysTranscribeButton = false
-
-      isPriorMark = ! mark.userCreated
-
-      <g key={mark._key} className="marks-for-annotation#{if mark.groupActive then ' group-active' else ''}" data-disabled={isPriorMark or null}>
+      <g key={mark._key} className="marks-for-annotation#{if mark.groupActive then ' group-active' else ''}" data-disabled={null}>
         {
           mark._key ?= Math.random()
           <ApproveTool
@@ -62,14 +67,14 @@ module.exports = React.createClass
             disabled={! mark.userCreated}
             isTranscribable={mark.isTranscribable}
             interim={mark.interim_id?}
-            isPriorMark={isPriorMark}
+            isPriorMark={false}
             subjectCurrentPage={0}
             selected={false}
             getEventOffset={null}
             submitMark={null}
             sizeRect={{width: @state.subjects?[0].width, height: @state.subjects?[0].height}}
             displaysTranscribeButton={false}
-            onSelect={null}
+            onSelect={@selectMark.bind(this, mark)}
             onChange={null}
             onDestroy={null}
           />
@@ -81,10 +86,8 @@ module.exports = React.createClass
   render: ->
     subject = @state.subjects?[0]
 
-    if @props.showMarks and subject
-      marks = @getMarksForSubject(subject)
-      marksToRender = @renderMarks(marks)
-      # console.log(marksToRender)
+    if @state.marks and subject
+      marksToRender = @renderMarks(@state.marks)
 
     if subject?
       viewBox = [0, 0, subject.width, subject.height]
@@ -120,7 +123,7 @@ module.exports = React.createClass
               </svg>
             </figure>
           </section>
-        </section>  
+        </section>
         <SubjectMetadata subject={subject} key={subject.meta_data.identifier} />
       </div>
 
