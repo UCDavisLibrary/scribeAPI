@@ -8,17 +8,14 @@
   <title><%= current_project && current_project.title ? current_project.title: 'Scribe' %></title>
 
   <% if @subject %>
-
-    <meta name="og:title" content="Label <%= @subject.meta_data['identifier'] %>"/>
-    <meta name="og:description" content="<%= @subject.meta_data['category'] %>"/>
+    <meta name="og:title" content="Historic wine label from the Mayard Amerine Collection at the UC Davis Library #<%= @subject.meta_data['identifier'] %>"/>
+    <meta name="og:description" content="This wine label has been categorized as: <%= @subject.meta_data['category'] %>"/>
     <meta name="og:image" content="<%= @subject.location['standard'] %>"/>
-
-  <% elsif current_project %>
-    <meta name="og:title" content="<%= current_project.title %>"/>
-    <meta name="og:description" content="<%= current_project.summary %>"/>
-    <meta name="og:image" content="/images/label-this-title-image.svg"/>
-
   <% end %>
+
+  <meta name="og:title" content="<%= current_project.title %>"/>
+  <meta name="og:description" content="<%= current_project.summary %>"/>
+  <meta name="og:image" content="/images/label-this-title-image.svg"/>
 
   <script src="https://use.typekit.net/hob5nwu.js"></script>
   <script>try{Typekit.load({ async: true });}catch(e){}</script>

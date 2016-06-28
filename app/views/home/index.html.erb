@@ -54,10 +54,10 @@
     <div class="browse-group columns">
       <div class="row small-up-2 medium-up-4 large-up-5 align-center">
 
-	<% for @subject in @subjects %>
+	<% for subject in @subjects %>
 	<div class="column">
-	  <a class="thumbnail" href="/view/<%= @subject.meta_data['identifier'] %>">
-	    <img src="<%= @subject.location['thumbnail'] %>" width="200" height="200" />
+	  <a class="thumbnail" href="/view/<%= subject.meta_data['identifier'] %>">
+	    <img src="<%= subject.location['thumbnail'] %>" width="200" height="200" />
 	  </a>
 	</div>
 	<% end %>
@@ -68,4 +68,3 @@
 
   </section>
 </div>
-
