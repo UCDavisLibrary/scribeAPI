@@ -37,10 +37,10 @@
   		<div class="top-bar-right">
   			<ul class="menu">
   				<li class="menu-item-large">
-  					<a href="#">About the Project</a>
+  					<a href="https://labelthisblog.library.ucdavis.edu/about-the-project/">About the Project</a>
   				</li>
   				<li class="menu-item-large">
-  					<a target="_blank" href="https://labelthisblog.library.ucdavis.edu">Blog</a>
+			      <a target="_blank" href="https://labelthisblog.library.ucdavis.edu">Blog</a>
   				</li>
   				<li class="menu-item-small">
   					<a href="#small-menu">...</a>
@@ -50,21 +50,25 @@
   	</nav>
   </header>
 
-  <img src="/images/404-image.svg" alt="File not found" />
+  <article class="blog-post page-not-found small-12 medium-8 medium-offset-2 large-6 large-offset-3 columns">
+    <h2>Error 404</h2>
+    <img src="/images/404-image.svg" alt="404 Page Not Found"/></a>
+    <p>We can't find the page you are looking for. This may be because of a mistyped URL, faulty referral or out-of-date search engine listing. You should try the <a href="https://labelthis.lib.ucdavis.edu">homepage</a> instead. </p>
+  </article>
 
   <footer>
-    <nav>
-  		<div class="secondary-menu">
-  			<ul class="menu">
-  				<li class="menu-item">
-
-  				</li>
-  				<li class="menu-item">
-  					<a href="">Questions or Comments?</a>
-  				</li>
-  			</ul>
-  		</div>
-  	</nav>
+	<nav>
+		<div class="secondary-menu">
+			<ul class="menu">
+				<li class="menu-item">
+          <%= render "admin/partials/login" %>
+				</li>
+				<li class="menu-item">
+					<a href="mailto:labelthis@ucdavis.edu">Questions or Comments?</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
 	<section class="row align-center donor-links">
 		<div><img src="../../images/uc-lib-logo-label-this.svg"></a></div>
 		<small>This site was built for the <a href="https://www.lib.ucdavis.edu/dept/specol/">Special Collections Department</a> at the <a href="https://www.lib.ucdavis.edu">UC Davis Library</a>.<br/>
@@ -99,13 +103,13 @@
 		</li>
   -->
 		<li class="sm-menu-item">
-			<a href="#">About the Project</a>
+			<a href="https://labelthisblog.library.ucdavis.edu/about-the-project/">About the Project</a>
 		</li>
 		<li class="sm-menu-item">
-			<a target="_blank" href="#">Blog</a>a target="_blank" href="https://labelthisblog.library.ucdavis.edu">Blog</a>
+			<a target="_blank" href="https://labelthisblog.library.ucdavis.edu">Blog</a>
 		</li>
 		<li class="sm-menu-item">
-			<a target="_blank" href="#">Questions or Comments?</a>
+			<a target="_blank" href="mailto:labelthis@ucdavis.edu">Questions or Comments?</a>
 		</li>
 		<li class="sm-menu-item">
       <%= render "admin/partials/login" %>
