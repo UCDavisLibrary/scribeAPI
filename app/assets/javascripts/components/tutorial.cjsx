@@ -24,12 +24,12 @@ module.exports = React.createClass
                 <p>You can help us by marking up the labels — draw a box around each area of interest on the label, and log it as an image or as a piece of text. Mark as many areas as you want.</p>
                 <p>Try to keep phrases or groups of words that look like they belong together in one box.</p>
                 <figure>
-                  <img src="/images/fpo_4x3.png" alt="4x3 Image" />
+                  <img src="/images/image-step-1.gif" alt="Animated depiction of marking an area on a label" />
                 </figure>
                 <div className="button-group align-center">
                   <a onClick={@onClose} className="button">OK, got it!</a>
                 </div>
-              </label>          
+              </label>
           </div>
         else if @props.workflow.name == "transcribe"
           <div>
@@ -37,9 +37,12 @@ module.exports = React.createClass
               <h2>How to Transcribe this label</h2>
                 <p>Please tell us what the highlighted text says. Try to include any diacritics, like accents ( ` ) or umlauts ( ¨ ), as well as upper and lower case letters.</p>
                 <p>If something is illegible, that is important information for us to know as well, so please mark it as illegible.</p>
+                <figure>
+                  <img src="/images/image-step-2.gif" alt="Animated depiction of transcribing a text element on a label" />
+                </figure>
                 <p>If the area highlighted is an image, please use on or two words to describe the image.</p>
                 <figure>
-                  <img src="/images/fpo_4x3.png" alt="4x3 Image" />
+                  <img src="/images/image-step-3.gif" alt="Animated depiction of transcribing an image element on a label" />
                 </figure>
                 <div className="button-group align-center">
                   <a onClick={@onClose} className="button">OK, got it!</a>
@@ -50,5 +53,5 @@ module.exports = React.createClass
           <div></div>
           
       }
-      
+
     </DraggableModal>
