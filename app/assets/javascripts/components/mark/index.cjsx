@@ -1,7 +1,7 @@
 React                   = require 'react'
 {Navigation}            = require 'react-router'
 SubjectViewer           = require 'components/subject-viewer'
-SubjectSetViewer = require 'components/subject-set-viewer' 
+SubjectSetViewer = require 'components/subject-set-viewer'
 coreTools               = require 'components/core-tools'
 FetchSubjectSetsMixin   = require 'lib/fetch-subject-sets-mixin'
 SubjectSetToolbar       = require 'components/subject-set-toolbar'
@@ -21,7 +21,7 @@ ZoomPanListenerMethods        = require 'lib/zoom-pan-listener-methods'
 
 module.exports = React.createClass # rename to Classifier
   displayName: 'Mark'
-  
+
   getDefaultProps: ->
     workflowName: 'mark'
     type: 'root'
@@ -79,7 +79,7 @@ module.exports = React.createClass # rename to Classifier
   # User somehow indicated current task is complete; commit current classification
   handleToolComplete: (annotation) ->
     # LD - removing this code as we only have one type of tool (rect) and we don't need this distinction
-    # 
+    #
     # @handleDataFromTool(annotation)
     #
     if annotation.override_task_key?
@@ -87,7 +87,7 @@ module.exports = React.createClass # rename to Classifier
          taskKey: annotation.override_task_key, =>
            @createAndCommitClassification(annotation)
     else
-      @createAndCommitClassification(annotation)      
+      @createAndCommitClassification(annotation)
 
   # Handle user selecting a pick/drawing tool:
   handleDataFromTool: (d) ->
@@ -123,7 +123,7 @@ module.exports = React.createClass # rename to Classifier
   handleZoomUI: (viewBox) ->
     # accept changes to the viewbox and update accordingly
     @setState viewBox: viewBox
-    
+
   destroyCurrentClassification: ->
     classifications = @state.classifications
     classifications.splice(@state.classificationIndex,1)
@@ -197,15 +197,15 @@ module.exports = React.createClass # rename to Classifier
           viewBox={@state.viewBox}
           toggleHideOtherMarks={@toggleHideOtherMarks}
           />
-        <div className="columns align-center label-title">          
+        <div className="columns align-center label-title">
           <div className="mark-instructions small-12">
             <h1>Instructions:</h1>
             <p><small>Draw a box around an area of interest on this label. Then tell us whether what you’ve marked is an image or text.
             <br/><em>Need help? <a onClick={@toggleTutorial}>Watch a tutorial.</a></em></small></p>
-          </div>             
+          </div>
         </div>
-        <a className="secondary button next-label" disabled={waitingForAnswer} onClick={() => @advanceToNextSubject(@computeViewBox)}>Next Label<img className="right-pointer" src="/images/right-pointer-red.svg"/></a>
-      </section>          
+        <a className="secondary button next-label" disabled={waitingForAnswer} onClick={() => @advanceToNextSubject(@computeViewBox)}>Next<img className="right-pointer" src="/images/right-pointer-red.svg"/></a>
+      </section>
      { if @state.noMoreSubjectSets
          <p>There is nothing left to do. Thanks for your work and please check back soon!</p>
 
@@ -232,13 +232,12 @@ module.exports = React.createClass # rename to Classifier
          toggleHideOtherMarks={@toggleHideOtherMarks}
          currentSubtool={currentSubtool}
          lightboxHelp={@toggleLightboxHelp}
-         viewBox={@state.viewBox}              
+         viewBox={@state.viewBox}
          interimMarks={@state.interimMarks}
          />
-           
+
         }
         { if @state.showingTutorial
          <Tutorial workflow={@getActiveWorkflow()} onCloseTutorial={@toggleTutorial} />
-        }           
+        }
     </div>
-

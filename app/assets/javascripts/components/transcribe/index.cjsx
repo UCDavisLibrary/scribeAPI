@@ -26,7 +26,7 @@ GenericButton           = require 'components/buttons/generic-button'
 module.exports = React.createClass # rename to Classifier
   displayName: 'Transcribe'
   mixins: [FetchSubjectsMixin, BaseWorkflowMethods, Navigation] # load subjects and set state variables: subjects,  classification
-  
+
   getInitialState: ->
     taskKey:                      null
     classifications:              []
@@ -43,11 +43,11 @@ module.exports = React.createClass # rename to Classifier
     @beginClassification()
 
   fetchSubjectsCallback: ->
-    if @getCurrentSubject()?    
+    if @getCurrentSubject()?
       @setState
-        taskKey: @getCurrentSubject().type 
-        viewBox: [0, 0, @getCurrentSubject().width, @getCurrentSubject().height] 
-    
+        taskKey: @getCurrentSubject().type
+        viewBox: [0, 0, @getCurrentSubject().width, @getCurrentSubject().height]
+
   # Handle user selecting a pick/drawing tool:
   handleDataFromTool: (d) ->
     classifications = @state.classifications
@@ -118,7 +118,7 @@ module.exports = React.createClass # rename to Classifier
               {
                 if @state.noMoreSubjects or not @getCurrentSubject()
                   <div>
-                    <br/>                    
+                    <br/>
                     Currently, there are no labels for you to transcribe. Try <a href="/mark">marking</a> instead!
                     <br/><br/>
                   </div>
@@ -132,11 +132,11 @@ module.exports = React.createClass # rename to Classifier
             </div>
           </div>
           {
-            if not @state.noMoreSubjects and @getCurrentSubject()              
-              <a className="secondary button next-label" onClick={@advanceToNextSubject}>Next Label<img className="right-pointer" src="../../images/right-pointer-red.svg"/></a>
+            if not @state.noMoreSubjects and @getCurrentSubject()
+              <a className="secondary button next-label" onClick={@advanceToNextSubject}>Next<img className="right-pointer" src="../../images/right-pointer-red.svg"/></a>
           }
        </section>
-        {                   
+        {
           if @getCurrentSubject()? and @getCurrentTask()? and not @state.noMoreSubjects
 
             <SubjectViewer
@@ -145,7 +145,7 @@ module.exports = React.createClass # rename to Classifier
               subject={@getCurrentSubject()}
               active=true
               workflow={@getActiveWorkflow()}
-              viewBox={@state.viewBox}              
+              viewBox={@state.viewBox}
               classification={@props.classification}
               annotation={currentAnnotation}
             >
@@ -187,8 +187,8 @@ module.exports = React.createClass # rename to Classifier
       }
       { if @state.showingTutorial
          <Tutorial workflow={@getActiveWorkflow()} onCloseTutorial={@toggleTutorial} />
-      }                 
-      
+      }
+
     </div>
 
 window.React = React
