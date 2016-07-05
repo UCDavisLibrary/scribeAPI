@@ -195,6 +195,10 @@
     background-color: #4D0717;
     padding: .5em; }
 
+.loading-indicator {
+  text-align: center;
+  margin: 6em 0 4em 0; }
+
 .browse {
   min-height: 80%; }
 
@@ -416,6 +420,10 @@
   .approve-overlay span {
     background-color: #4D0717;
     padding: .5em; }
+
+.loading-indicator {
+  text-align: center;
+  margin: 6em 0 4em 0; }
 
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
 /**
