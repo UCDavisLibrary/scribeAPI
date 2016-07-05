@@ -45,7 +45,7 @@
 	<% for subject in @subjects %>
 	<div class="column">
 	  <a class="thumbnail" href="/view/<%= subject.meta_data['identifier'] %>">
-	    <img src="<%= subject.location['thumbnail'] %>" width="200" height="200" />
+	    <img src="<%= subject.location['thumbnail'] %>" width="200" height="200" alt="Wine label image number <%= subject.meta_data['identifier'] %>"/>
 	  </a>
 	</div>
 	<% end %>
