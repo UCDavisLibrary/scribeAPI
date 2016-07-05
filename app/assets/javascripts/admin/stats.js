@@ -4,7 +4,7 @@ if (typeof data !== 'undefined') {
     r = h/2;
 
 var color = d3.scale.ordinal()
-    .range(["#039317", "#921377", "#E6E6E6", "#214BB5"]);
+    .range(["#039317", "#921377", "#214BB5", "#CBBAA5"]);
 
 var vis = d3.select('#chart')
     .append("svg:svg")
