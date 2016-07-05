@@ -110,7 +110,7 @@ module.exports = React.createClass
             @updateDimensions()
             @scrollToSubject()
 
-  # VARIOUS EVENT HANDLERS
+  # VARIOUS EVENT HANDLERS 
 
   # Commit mark
   submitMark: (mark) ->
