@@ -8,10 +8,9 @@ class Admin::AdminBaseController < ApplicationController
   end
 
   def check_admin_user
-    # LD: No auth checks right now
-    #if current_user.nil? || ! current_user.can_view_admin?
-    #  session[:login_redirect] = request.fullpath
-    #  redirect_to admin_signin_path
-    #end
+    if current_user.nil?
+      session[:login_redirect] = request.fullpath
+      redirect_to signin_path
+    end
   end
 end
