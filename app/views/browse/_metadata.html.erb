@@ -36,9 +36,9 @@
     <div class="small-12 medium-5 large-4 medium-unstack columns">
         <h3>Share this label</h3>
         <div class="row align-spaced">
-            <a class="webicon facebook" href="https://www.facebook.com/sharer/sharer.php?u=labelthis.lib.ucdavis.edu/view?subject_set_id=<%= @subject.subject_set_id %>&selected_subject_id=<%= @subject.id %>">Facebook</a>
-            <a class="webicon pinterest" href="https://pinterest.com/pin/create/button/?url=https%3A//labelthis.lib.ucdavis.edu/view/0004&media=&description=A%20historic%20wine%20label%20from%20the%20Maynard%20Amerine%20Collection%20at%20UC%20Davis%20Library?subject_set_id=<%= @subject.subject_set_id %>&selected_subject_id=<%= @subject.id %>">Pinterest</a>
-            <a class="webicon twitter" href="https://twitter.com/home?status=Check%20out%20this%20historic%20wine%20label%20from%20the%20collection%20at%20UC%20Davis%20https%3A//labelthis.lib.ucdavis.edu/view?subject_set_id=<%= @subject.subject_set_id %>&selected_subject_id=<%= @subject.id %>">Twitter</a>
+            <a class="webicon facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3A//labelthis.lib.ucdavis.edu/view/<%= @subject.meta_data['identifier'] %>">Facebook</a>
+            <a class="webicon pinterest" href="https://pinterest.com/pin/create/button/?url=https%3A//labelthis.lib.ucdavis.edu/view/<%= @subject.meta_data['identifier'] %>?media=&description=A%20historic%20wine%20label%20from%20the%20Maynard%20Amerine%20Collection%20at%20UC%20Davis%20Library">Pinterest</a>
+            <a class="webicon twitter" href="https://twitter.com/home?status=Check%20out%20this%20historic%20wine%20label%20from%20the%20collection%20at%20UC%20Davis%20https%3A//labelthis.lib.ucdavis.edu/view/<%= @subject.meta_data['identifier'] %>">Twitter</a>
         </div>
     </div>
 </section>
