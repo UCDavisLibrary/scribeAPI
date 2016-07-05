@@ -4,14 +4,13 @@
       <a class="secondary button previous-label" href="<%= @link['prev'][:href] %>"><img class="left-pointer" src="../../images/left-pointer-red.svg"/>Previous Label</a>
       <div class="columns align-self-middle single label-title">Label <%= @subject.meta_data['identifier'] %></div>
       <a class="secondary button next-label" href="<%= @link['next'][:href] %>">Next Label<img class="right-pointer" src="../../images/right-pointer-red.svg"/></a>
-    </section>  
-    <section class="row align-center">  
+    </section>
+    <section class="row align-center">
       <figure class="main-wine-label">
-	<img src="<%= @subject.location['standard'] %>"  width="<%= @subject.width / 2 %>" height="<%= @subject.height / 2 %>" /> 
+	       <img src="<%= @subject.location['standard'] %>"  width="<%= @subject.width / 2 %>" height="<%= @subject.height / 2 %>" alt="Wine label image number <%= @subject.meta_data['identifier'] %>"/> 
       </figure>
     </section>
   </div>
-  
+
   <%= render 'metadata' %>
 </noscript>
-
