@@ -14,7 +14,7 @@ API::Application.routes.draw do
   get '/mark/:subjectid',                                     to: 'annotate#index'
   get '/transcribe/:subjectid',                               to: 'annotate#index'
   get '/verify/:subjectid',                                   to: 'annotate#index'
-  get '/approve/:subjectid',                                  to: 'annotate#index'  
+  get '/approve/:subjectid',                                  to: 'annotate#index'
 
   # JSON endpoints
   get '/projects',                                            to: 'projects#index',       defaults: { format: 'json' }
@@ -52,15 +52,17 @@ API::Application.routes.draw do
 
   resources :groups, only: [:show, :index], :defaults => { :format => 'json' }
 
-  namespace :admin do
-    resources :subjects, :subject_sets, :classifications, :users
-    get 'dashboard' => 'dashboard#index'
-    get 'data' => 'data#index'
-    get 'data/download' => 'data#download'
-    get 'signin' => 'auth#signin'
-    post 'stats/recalculate' => 'dashboard#recalculate_stats'
-    post 'subjects/status/toggle' => 'subjects#toggle_done'
+  authenticate :user do
+    namespace :admin do
+      resources :subjects, :subject_sets, :classifications, :users
+      get 'dashboard' => 'dashboard#index'
+      get 'data' => 'data#index'
+      get 'data/download' => 'data#download'
+      get 'signin' => 'auth#signin'
+      post 'stats/recalculate' => 'dashboard#recalculate_stats'
+      post 'subjects/status/toggle' => 'subjects#toggle_done'
+    end
+    get 'admin' => 'admin/dashboard#index'
   end
-  get 'admin' => 'admin/dashboard#index'
 
 end
