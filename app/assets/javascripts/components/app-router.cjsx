@@ -95,16 +95,6 @@ class AppRouter
     React.createClass
       displayName: "#{page.name}Page"
 
-      componentWillMount:->
-        # pattern = new RegExp('^(field_guide#(.*))')
-        # selectedID = pattern.match("#{window.location.hash}")
-        # if selectedID
-        #   $('.selected-content').removeClass("selected-content")
-
-        #   $("div#" + selectedID).addClass("selected-content"))
-        #   $("a#" + selectedID).addClass("selected-content"))
-
-
       componentDidMount: ->
         pattern = new RegExp('#/[A-z]*#(.*)')
         selectedID = "#{window.location.hash}".match(pattern)

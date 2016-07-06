@@ -8,4 +8,4 @@
 #= require 'lib/modernizr-custom.js'
 #= require 'components'
 #= require lib/d3.min
-#= require 'admin/stats'
+#= require 'admin/stats' 
