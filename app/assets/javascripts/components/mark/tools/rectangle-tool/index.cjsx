@@ -79,14 +79,14 @@ module.exports = React.createClass
     # If the mark tool is currently active, add an event listener to close the modal on ESC
     if @props.selected
       document.addEventListener("keydown", @handleEscKey)
-      
+
   componentWillUnmount: ->
     document.removeEventListener("keydown", @handleEscKey)
 
   handleEscKey: (event) ->
     if event.keyCode == 27
       @props.onDestroy()
-      
+
   componentWillReceiveProps:(newProps)->
     x1 = newProps.mark.x
     x2 = x1 + newProps.mark.width
@@ -200,7 +200,7 @@ module.exports = React.createClass
     scaledX = @props.sizeRect.props.width - 140 / @props.xScale
     x: Math.min points[0], scaledX
     y: Math.min points[1] - 100 / @props.yScale,  @props.sizeRect.props.height - 15 / @props.yScale
-    
+
   handleMouseDown: ->
     @props.onSelect @props.mark
 
@@ -218,13 +218,13 @@ module.exports = React.createClass
   markSelectionAsImage: ->
     @props.mark.override_task_key = 'image-on-label'
     @props.submitMark @props.mark
-    document.removeEventListener("keydown", @handleEscKey, false)    
-    
+    document.removeEventListener("keydown", @handleEscKey, false)
+
   markSelectionAsText: ->
-    @props.mark.override_task_key = 'text-on-label'    
+    @props.mark.override_task_key = 'text-on-label'
     @props.submitMark @props.mark
     document.removeEventListener("keydown", @handleEscKey, false)
-        
+
   render: ->
     classes = []
     classes.push 'transcribable' if @props.isTranscribable
@@ -274,10 +274,8 @@ module.exports = React.createClass
                   </feMerge>
                 </filter>
 
-                <polyline
-                  #{if @props.mark.color? then "stroke=\"#{@props.mark.color}\""}
-                  points=\"#{points}\"
-                  
+                <polyline stroke="rgb(255,0,0)" points=\"#{points}\"
+
                 />
               "
             }
@@ -322,7 +320,7 @@ module.exports = React.createClass
                   stroke="none">
                   MARK AS IMAGE
                 </text>
-                  
+
               </g>
             </Draggable>
         }
@@ -345,14 +343,14 @@ module.exports = React.createClass
                   fontSize="24"
                   transform="translate(14,34)"
                   fill="#F1E3D1"
-                  style={{cursor: "pointer"}}                  
+                  style={{cursor: "pointer"}}
                   stroke="none">
-                    
+
                   MARK AS TEXT
                 </text>
-                  
+
               </g>
-                
+
             </Draggable>
        }
     </g>

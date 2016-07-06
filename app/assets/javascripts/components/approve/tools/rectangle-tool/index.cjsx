@@ -276,7 +276,7 @@ module.exports = React.createClass
           <g
             className="tool-shape"
             key={points}>
-              <polyline stroke="rgb(0,0,0)" points={points} />
+              <polyline stroke="rgb(255,0,0)" points={points} />
           </g>
         </Draggable>
       </g>
