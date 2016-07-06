@@ -31,10 +31,10 @@ module API
       app.config.assets.precompile.push(Proc.new do |path|
         File.extname(path).in? [
           '.html', '.erb', '.haml',                 # Templates
-          '.png',  '.gif', '.jpg', '.jpeg',         # Images
-          '.eot',  '.otf', '.svc', '.woff', '.ttf', # Fonts
-          '.mp4',                                   # Video
-          '.ico',                                   # Icon
+          #'.png',  '.gif', '.jpg', '.jpeg',         # Images
+          #'.eot',  '.otf', '.svc', '.woff', '.ttf', # Fonts
+          #'.mp4',                                   # Video
+          #'.ico',                                   # Icon
           '.cjsx'
         ]
       end)
