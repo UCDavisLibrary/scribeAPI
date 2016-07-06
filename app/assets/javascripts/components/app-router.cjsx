@@ -13,8 +13,8 @@ View                          = require './view'
 Approve                       = require './approve'
 
 Project                       = require 'models/project.coffee'
- 
-class AppRouter
+
+class AppRouter 
   constructor: ->
     API.type('projects').get().then (result)=>
       window.project = new Project(result[0])
