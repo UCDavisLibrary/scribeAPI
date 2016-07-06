@@ -13,7 +13,7 @@ View                          = require './view'
 Approve                       = require './approve'
 
 Project                       = require 'models/project.coffee'
-
+ 
 class AppRouter
   constructor: ->
     API.type('projects').get().then (result)=>
