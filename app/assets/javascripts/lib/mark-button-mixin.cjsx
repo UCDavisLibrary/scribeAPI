@@ -60,7 +60,7 @@ module.exports =
     markStatus = @state.markStatus
 
     switch markStatus
-      when 'mark-committed'
+      when 'mark-committed' 
         @setState locked: true
         console.log '''
           1) disable mark editing
