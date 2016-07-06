@@ -127,12 +127,6 @@ class AppRouter
         <div className="page-content custom-page" id="#{page.name}">
           <h1>{formatted_name}</h1>
           <div dangerouslySetInnerHTML={{__html: marked(page.content)}} />
-          {
-            if page.group_browser? && page.group_browser != ''
-              <div className='group-area'>
-                <GroupBrowser project={project} title={page.group_browser} />
-              </div>
-          }
           <div className="updated-at">Last Update {page.updated_at}</div>
         </div>
 
