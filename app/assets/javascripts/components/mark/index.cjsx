@@ -7,7 +7,6 @@ FetchSubjectSetsMixin   = require 'lib/fetch-subject-sets-mixin'
 SubjectSetToolbar       = require 'components/subject-set-toolbar'
 BaseWorkflowMethods     = require 'lib/workflow-methods-mixin'
 JSONAPIClient           = require 'json-api-client' # use to manage data?
-ForumSubjectWidget      = require '../forum-subject-widget'
 API                     = require '../../lib/api'
 HelpModal               = require 'components/help-modal'
 Tutorial                = require 'components/tutorial'

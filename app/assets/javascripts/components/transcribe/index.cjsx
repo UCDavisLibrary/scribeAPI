@@ -5,8 +5,6 @@ React                   = require 'react'
 SubjectViewer           = require '../subject-viewer'
 JSONAPIClient           = require 'json-api-client' # use to manage data?
 FetchSubjectsMixin      = require 'lib/fetch-subjects-mixin'
-ForumSubjectWidget      = require '../forum-subject-widget'
-
 BaseWorkflowMethods     = require 'lib/workflow-methods-mixin'
 
 # Hash of core tools:

@@ -4,7 +4,6 @@ React              = require 'react'
 SubjectViewer      = require '../subject-viewer'
 JSONAPIClient      = require 'json-api-client' # use to manage data?
 FetchSubjectsMixin = require 'lib/fetch-subjects-mixin'
-ForumSubjectWidget = require '../forum-subject-widget'
 
 BaseWorkflowMethods     = require 'lib/workflow-methods-mixin'
 
@@ -36,15 +35,15 @@ module.exports = React.createClass # rename to Classifier
     showingTutorial:              false
     helping:                      false
     subject_id:                   @props.params?.subject_id
-    
+
   componentWillMount: ->
     @beginClassification()
 
   fetchSubjectsCallback: ->
-    if @getCurrentSubject()?    
+    if @getCurrentSubject()?
       @setState
-        taskKey: @getCurrentSubject().type 
-        viewBox: [0, 0, @getCurrentSubject().width, @getCurrentSubject().height]     
+        taskKey: @getCurrentSubject().type
+        viewBox: [0, 0, @getCurrentSubject().width, @getCurrentSubject().height]
 
   # Handle user selecting a pick/drawing tool:
   handleDataFromTool: (d) ->
@@ -63,8 +62,8 @@ module.exports = React.createClass # rename to Classifier
         subject_id: null
       @commitClassificationAndContinue(d, @_fetchByProps)
     else
-      @commitClassificationAndContinue d      
-    
+      @commitClassificationAndContinue d
+
   toggleTutorial: ->
     @setState showingTutorial: not @state.showingTutorial
 
@@ -91,16 +90,16 @@ module.exports = React.createClass # rename to Classifier
              </section>
 
           else if @getCurrentSubject()?
-            
+
             <SubjectViewer
                onLoad={@handleViewerLoad}
                subject={@getCurrentSubject()}
                active=true
                workflow={@getActiveWorkflow()}
-               viewBox={@state.viewBox}                          
+               viewBox={@state.viewBox}
                classification={@props.classification}
                annotation={currentAnnotation}>
-                 
+
               { if ( VerifyComponent = @getCurrentTool() )?
 
                 <VerifyComponent

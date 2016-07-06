@@ -1,6 +1,4 @@
 React                         = require 'react'
-LightBox                      = require './light-box'
-ForumSubjectWidget            = require './forum-subject-widget'
 {Link}                        = require 'react-router'
 SubjectZoomPan          = require 'components/subject-zoom-pan'
 
@@ -39,8 +37,6 @@ module.exports = React.createClass
     @setState tooltipExpanded: false
 
   render: ->
-    # disable LightBox if work has begun
-    disableLightBox = if @props.task.key isnt @props.workflow.first_task then true else false
     <div>
       <div className="row tools">
         <div className="pan-zoom-controller" onMouseOver={@toggleZoom} onMouseOut={@toggleZoom}>
