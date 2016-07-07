@@ -14,7 +14,7 @@ HelpButton              = require 'components/buttons/help-button'
 BadSubjectButton        = require 'components/buttons/bad-subject-button'
 DraggableModal          = require 'components/draggable-modal'
 Draggable               = require 'lib/draggable'
-{Link}                  = require 'react-router' 
+{Link}                  = require 'react-router'
 ZoomPanListenerMethods        = require 'lib/zoom-pan-listener-methods'
 
 module.exports = React.createClass # rename to Classifier

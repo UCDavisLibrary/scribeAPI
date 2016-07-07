@@ -18,6 +18,8 @@ API::Application.configure do
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 
+  # Generate assets locally
+  config.assets.prefix = "/dev-assets"
 
   # Debug mode disables concatenation and preprocessing of assets.
   # This option may cause significant delays in view rendering with a large
