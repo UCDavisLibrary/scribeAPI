@@ -12,15 +12,20 @@ timestamp="release-%s" % int(time.time() * 1000)
 env.user = 'deploy'  # Special group with limited sudo
 #env.hosts = ['104.236.224.252']
 QA_SERVER = 'labelthis-qa.lib.ucdavis.edu'
-PROD_SERVER = 'XXXXlabelthis.lib.ucdavis.edu'
+PROD_SERVER = 'XXXXlabelthis.lib.ucdavis.eduXXXX'
 
-#code_dir = '/home/liza/scribeAPI'
 code_dir = '/home/deploy/scribeAPI'
 
 PROD_URL = "https://" + PROD_SERVER + "/mark"
 QA_URL = "https://" + QA_SERVER + "/mark"
 
+# CURRENT_BRANCH = 'master'
+CURRENT_BRANCH = 'deploy-fix'
+
 def deploy():
+    deploy_qa()
+
+def deploy_qa():
     setup_qa()
     precompile_assets()
     deploy_app()
@@ -33,11 +38,14 @@ def setup_prod():
 
 def precompile_assets():
     local("RAILS_ENV=production rake assets:precompile")
-
+    # Commit the new assets
+    local("git commit 'Automated deployment commit for " + timestamp + "'")
+    local("git push origin " + CURRENT_BRANCH)
+    
 def deploy_app():
 
     with cd(code_dir):
-        run('git pull origin master')
+        run('git pull origin ' + CURRENT_BRANCH)
         run('rake project:load["label_this","workflows","content"]')
 
     stop_host()
