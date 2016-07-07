@@ -1,6 +1,6 @@
 import os
 
-from fabric.api import local, settings, abort, run, cd, env, put, sudo
+from fabric.api import local, settings, abort, run, cd, env, put, sudo, hosts
 from fabric.contrib.console import confirm
 import requests
 
@@ -11,15 +11,28 @@ timestamp="release-%s" % int(time.time() * 1000)
 
 env.user = 'deploy'  # Special group with limited sudo
 #env.hosts = ['104.236.224.252']
-env.hosts = ['labelthis.lib.ucdavis.edu']
+QA_SERVER = 'labelthis-qa.lib.ucdavis.edu'
+PROD_SERVER = 'XXXXlabelthis.lib.ucdavis.edu'
 
 #code_dir = '/home/liza/scribeAPI'
 code_dir = '/home/deploy/scribeAPI'
 
-PROD_URL = "https://" + env.hosts[0] + "/mark"
+PROD_URL = "https://" + PROD_SERVER + "/mark"
+QA_URL = "https://" + QA_SERVER + "/mark"
 
 def deploy():
+    setup_qa()
+    precompile_assets()
     deploy_app()
+
+def setup_qa():
+    env.hosts = [QA_SERVER]
+
+def setup_prod():
+    env.hosts = [PROD_SERVER]
+
+def precompile_assets():
+    local("RAILS_ENV=production rake assets:precompile")
 
 def deploy_app():
 
@@ -31,7 +44,7 @@ def deploy_app():
     time.sleep(DEPLOY_WAIT_TIME)  # Wait for the process to die
     start_host()
     ping_host()
-    
+
     print("Done deploying")
 
 def stop_host():
@@ -44,4 +57,5 @@ def start_host():
 def ping_host():
     """Ping the home page to start the refresh cycle for the static resources"""
     print("Requesting the home page to refresh static resources")
+    requests.get(QA_URL)
     requests.get(PROD_URL)
