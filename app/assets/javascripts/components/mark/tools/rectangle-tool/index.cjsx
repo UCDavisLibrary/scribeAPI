@@ -274,7 +274,7 @@ module.exports = React.createClass
                   </feMerge>
                 </filter>
 
-                <polyline stroke="rgb(255,0,0)" points=\"#{points}\"
+                <polyline stroke='rgb(255,0,0)' points=\"#{points}\"
 
                 />
               "
