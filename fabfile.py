@@ -39,9 +39,9 @@ def setup_prod():
 def precompile_assets():
     local("RAILS_ENV=production rake assets:precompile")
     # Commit the new assets
-    local("git commit 'Automated deployment commit for " + timestamp + "'")
+    local("git commit -m 'Automated deployment commit for " + timestamp + "' public/assets/")
     local("git push origin " + CURRENT_BRANCH)
-    
+
 def deploy_app():
 
     with cd(code_dir):
