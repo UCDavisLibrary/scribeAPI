@@ -23,18 +23,9 @@ QA_URL = "https://" + QA_SERVER + "/mark"
 CURRENT_BRANCH = 'deploy-fix'
 
 def deploy():
-    deploy_qa()
-
-def deploy_qa():
-    setup_qa()
     precompile_assets()
     deploy_app()
 
-def setup_qa():
-    env.hosts = [QA_SERVER]
-
-def setup_prod():
-    env.hosts = [PROD_SERVER]
 
 def precompile_assets():
     local("RAILS_ENV=production rake assets:precompile")
