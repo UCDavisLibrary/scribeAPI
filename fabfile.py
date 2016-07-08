@@ -12,7 +12,7 @@ timestamp="release-%s" % int(time.time() * 1000)
 env.user = 'deploy'  # Special group with limited sudo
 #env.hosts = ['104.236.224.252']
 QA_SERVER = 'labelthis-qa.lib.ucdavis.edu'
-PROD_SERVER = 'XXXXlabelthis.lib.ucdavis.eduXXXX'
+PROD_SERVER = 'labelthis.lib.ucdavis.edu'
 
 code_dir = '/home/deploy/scribeAPI'
 
