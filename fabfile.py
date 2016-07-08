@@ -17,7 +17,7 @@ PROD_SERVER = 'labelthis.lib.ucdavis.edu'
 code_dir = '/home/deploy/scribeAPI'
 
 PROD_URL = "https://" + PROD_SERVER + "/mark"
-QA_URL = "https://" + QA_SERVER + "/mark"
+QA_URL = "http://" + QA_SERVER + "/mark"
 
 CURRENT_BRANCH = 'master'
 #CURRENT_BRANCH = 'deploy-fix'
