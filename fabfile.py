@@ -28,8 +28,10 @@ def deploy():
 
 
 def precompile_assets():
-    local("RAILS_ENV=production rake assets:precompile")
     # Commit the new assets
+    local("rm -f public/assets/*")
+    local("RAILS_ENV=production rake assets:precompile")
+
     local("git commit -m 'Automated deployment commit for " + timestamp + " to host " + env.hosts[0] + "' public/assets")
     local("git push origin " + CURRENT_BRANCH)
 
