@@ -53,9 +53,10 @@ module.exports = React.createClass
 
     if new_props.subject.id == @props.subject.id
       @scrollToSubject()
+    else
+      @setState viewBox: [0, 0, new_props.subject.width, new_props.subject.height]
 
   componentDidMount: ->
-
     @setView 0, 0, @props.subject.width, @props.subject.height
     @loadImage @props.subject.location.standard
 

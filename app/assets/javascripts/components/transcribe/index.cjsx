@@ -44,7 +44,7 @@ module.exports = React.createClass # rename to Classifier
     if @getCurrentSubject()?
       @setState
         taskKey: @getCurrentSubject().type
-        viewBox: [0, 0, @getCurrentSubject().width, @getCurrentSubject().height]
+        # viewBox: [0, 0, @getCurrentSubject().width, @getCurrentSubject().height]
 
   # Handle user selecting a pick/drawing tool:
   handleDataFromTool: (d) ->
@@ -143,7 +143,6 @@ module.exports = React.createClass # rename to Classifier
               subject={@getCurrentSubject()}
               active=true
               workflow={@getActiveWorkflow()}
-              viewBox={@state.viewBox}
               classification={@props.classification}
               annotation={currentAnnotation}
             >
