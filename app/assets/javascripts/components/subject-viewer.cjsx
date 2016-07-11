@@ -205,7 +205,7 @@ module.exports = React.createClass
       selectedMark: mark #, => @forceUpdate() # not sure if this is needed?
 
   setView: (viewX, viewY, viewWidth, viewHeight) ->
-    @setState viewBox: [viewX, viewY, viewWidth, viewHeight]
+    @setState viewBox: [viewX, viewY, viewWidth, viewHeight] 
 
   # PB This is not returning anything but 0, 0 for me; Seems like @refs.sizeRect is empty when evaluated (though nonempty later)
   getScale: ->
