@@ -11,7 +11,7 @@ module.exports = React.createClass
   getInitialState: ->
     hideMarks: true
     zoomExpanded: false
-    viewBox: @props.viewBox
+    
   onZoomExpand: ->
     @setState zoomExpanded: true
 

@@ -189,7 +189,7 @@ module.exports =
   getSubjectById: (id) ->
     if @state.subjectSets?
 
-      # If current subject set has no subjects, we're likely in between one subject set
+      # If current subject set has subjects, we're likely in between one subject set
       # and the next (for which we're currently fetching subjects), so return null:
       return null if ! @getCurrentSubjectSet().subjects?
 

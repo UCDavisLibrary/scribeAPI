@@ -43,7 +43,7 @@ module.exports = React.createClass # rename to Classifier
 
   componentDidMount: ->
     @getCompletionAssessmentTask()
-    @fetchSubjectSetsBasedOnProps(@computeViewBox)
+    @fetchSubjectSetsBasedOnProps()
     @fetchGroups()  # FIXME maybe remove this code? LD
 
   componentWillMount: ->
@@ -53,7 +53,7 @@ module.exports = React.createClass # rename to Classifier
   componentDidUpdate: (prev_props) ->
     # If visitor nav'd from, for example, /mark/[some id] to /mark, this component won't re-mount, so detect transition here:
     if prev_props.hash != @props.hash
-      @fetchSubjectSetsBasedOnProps(@computeViewBox)
+      @fetchSubjectSetsBasedOnProps()
 
   toggleHelp: ->
     @setState helping: not @state.helping
@@ -120,7 +120,7 @@ module.exports = React.createClass # rename to Classifier
 
   handleZoomUI: (viewBox) ->
     # accept changes to the viewbox and update accordingly
-    @setState viewBox: viewBox
+    @setState zoomedViewBox: viewBox
 
   destroyCurrentClassification: ->
     classifications = @state.classifications
@@ -146,12 +146,6 @@ module.exports = React.createClass # rename to Classifier
     @commitCurrentClassification()
     @beginClassification()
     @advanceToNextSubject(callback_fn)
-
-  computeViewBox: ->
-    subject = @getCurrentSubjectSet()?.subjects?[0]
-    if subject
-      viewBox = [0, 0, subject.width, subject.height]
-      @setState viewBox: viewBox
 
   showSubjectHelp: (subject_type) ->
     @setState
@@ -192,7 +186,6 @@ module.exports = React.createClass # rename to Classifier
           lightboxHelp={@togglelightboxHelp}
           hideOtherMarks={@state.hideOtherMarks}
           handleZoomUI={@handleZoomUI}
-          viewBox={@state.viewBox}
           toggleHideOtherMarks={@toggleHideOtherMarks}
           />
         <div className="columns align-center label-title">
@@ -202,7 +195,7 @@ module.exports = React.createClass # rename to Classifier
             <br/><em>Need help? <a onClick={@toggleTutorial}>Watch a tutorial.</a></em></small></p>
           </div>
         </div>
-        <a className="secondary button next-label" disabled={waitingForAnswer} onClick={() => @advanceToNextSubject(@computeViewBox)}>Next<img className="right-pointer" src="/images/right-pointer-red.svg"/></a>
+        <a className="secondary button next-label" disabled={waitingForAnswer} onClick={() => @advanceToNextSubject()}>Next<img className="right-pointer" src="/images/right-pointer-red.svg"/></a>
       </section>
      { if @state.noMoreSubjectSets
          <p>There is nothing left to do. Thanks for your work and please check back soon!</p>
@@ -230,7 +223,7 @@ module.exports = React.createClass # rename to Classifier
          toggleHideOtherMarks={@toggleHideOtherMarks}
          currentSubtool={currentSubtool}
          lightboxHelp={@toggleLightboxHelp}
-         viewBox={@state.viewBox}
+         zoomedViewBox={@state.zoomedViewBox}
          interimMarks={@state.interimMarks}
          />
 

@@ -18,10 +18,8 @@ module.exports =
       # If taskKey specified, now's the time to set that too:
       state.taskKey = @props.query.mark_task_key if @props.query.mark_task_key
 
-      @setState state if state
-
-      # Any additional callbacks passed in
-      callback() if callback?
+      @setState state, () => # Any additional callbacks passed in
+         callback() if callback?
 
     # Fetch by subject-set id?
     subject_set_id = @props.params.subject_set_id ? @props.query.subject_set_id

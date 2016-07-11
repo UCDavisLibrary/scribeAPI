@@ -19,10 +19,6 @@ module.exports = React.createClass
 
   mixins: [MarkDrawingMixin] # load helper methods to draw marks and highlights
 
-  handleZoomPanViewBoxChange: (viewBox) ->
-    # console.log("In handle zoombox: new viewbox is " + viewBox)
-    @setState viewBox: viewBox
-
   getInitialState: ->
     subject: @props.subject
     marks: @getMarksFromProps(@props)
@@ -34,29 +30,35 @@ module.exports = React.createClass
       y: 0
     scale: {horizontal: 1, vertical: 1}
     sameSessionTranscriptions: []
+    viewBox: [0, 0, @props.subject.width, @props.subject.height]
 
   getDefaultProps: ->
     tool: null # Optional tool to place alongside subject (e.g. transcription tool placed alongside mark)
     onLoad: null
     annotationIsComplete: false
     interimMarks: {}
+    zoomedViewBox: null
+
 
   componentWillReceiveProps: (new_props) ->
     @setUncommittedMark null if new_props.task?.tool != 'pickOneMarkOne'
+    if new_props.zoomedViewBox
+      @setState viewBox: new_props.zoomedViewBox
 
     if Object.keys(@props.annotation).length == 0 #prevents back-to-back mark tasks, displaying a duplicate mark from previous tasks.
       @setUncommittedMark null
 
     @setState
       marks: @getMarksFromProps(new_props)
-      viewBox: new_props.viewBox
 
     if new_props.subject.id == @props.subject.id
       @scrollToSubject()
 
   componentDidMount: ->
+
     @setView 0, 0, @props.subject.width, @props.subject.height
     @loadImage @props.subject.location.standard
+
     window.addEventListener "resize", this.updateDimensions
 
   scrollToSubject: ->
@@ -72,7 +74,6 @@ module.exports = React.createClass
       @setState scale: scale, () =>
         @updateDimensions()
         @scrollToSubject()
-
 
   componentWillUnmount: ->
     window.removeEventListener "resize", @updateDimensions
