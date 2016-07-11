@@ -51,7 +51,7 @@ module.exports = React.createClass
     @setState
       marks: @getMarksFromProps(new_props)
 
-    if new_props.subject.id == @props.subject.id
+    if new_props.subject.id != @props.subject.id
       @scrollToSubject()
     else
       @setState viewBox: [0, 0, new_props.subject.width, new_props.subject.height]
