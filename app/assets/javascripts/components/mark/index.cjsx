@@ -53,7 +53,7 @@ module.exports = React.createClass # rename to Classifier
   componentDidUpdate: (prev_props) ->
     # If visitor nav'd from, for example, /mark/[some id] to /mark, this component won't re-mount, so detect transition here:
     if prev_props.hash != @props.hash
-      @fetchSubjectSetsBasedOnProps()
+      @fetchSubjectSetsBasedOnProps(@computeViewBox)
 
   toggleHelp: ->
     @setState helping: not @state.helping

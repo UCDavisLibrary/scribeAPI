@@ -20,7 +20,7 @@ module.exports = React.createClass
   mixins: [MarkDrawingMixin] # load helper methods to draw marks and highlights
 
   handleZoomPanViewBoxChange: (viewBox) ->
-    console.log("In handle zoombox: new viewbox is " + viewBox)
+    # console.log("In handle zoombox: new viewbox is " + viewBox)
     @setState viewBox: viewBox
 
   getInitialState: ->
@@ -87,17 +87,6 @@ module.exports = React.createClass
 
       @props.onLoad props
 
-    # Fix for IE: On resize, manually set dims of svg because otherwise it displays as a tiny tiny thumb
-    if $('.subject-viewer')
-      w = parseInt($('.subject-viewer').width())
-      w = Math.min w, $('body').width() - 300
-      h = (w / @props.subject.width) * @props.subject.height
-      $('.subject-viewer svg').width w
-      $('.subject-viewer svg').height h
-
-      # Also a fix for IE:
-      @setState scale: @getScale()
-
   loadImage: (url) ->
     @setState loading: true, =>
       img = new Image()
@@ -110,7 +99,7 @@ module.exports = React.createClass
             @updateDimensions()
             @scrollToSubject()
 
-  # VARIOUS EVENT HANDLERS      
+  # VARIOUS EVENT HANDLERS
 
   # Commit mark
   submitMark: (mark) ->
@@ -216,7 +205,7 @@ module.exports = React.createClass
       selectedMark: mark #, => @forceUpdate() # not sure if this is needed?
 
   setView: (viewX, viewY, viewWidth, viewHeight) ->
-    @setState {viewX, viewY, viewWidth, viewHeight}
+    @setState viewBox = [viewX, viewY, viewWidth, viewHeight]
 
   # PB This is not returning anything but 0, 0 for me; Seems like @refs.sizeRect is empty when evaluated (though nonempty later)
   getScale: ->
@@ -436,7 +425,7 @@ module.exports = React.createClass
 
     #  Render any tools passed directly in in same parent div so that we can efficiently position them with respect to marks"
     <section>
-        <figure className="main-wine-label">
+        <figure className="main-wine-label" >
           {markingSurfaceContent}
           { if @props.children?
               React.cloneElement @props.children,
