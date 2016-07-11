@@ -13,6 +13,7 @@ module.exports = React.createClass
 
   getDefaultProps: ->
     identifier: null
+    showMarks: false
 
   getInitialState: ->
     subjects: []
@@ -24,11 +25,12 @@ module.exports = React.createClass
       @fetchSubjectByIdentifier newProps.identifier
 
   fetchSubjectsCallback: () ->
-    for subject in @state.subjects
-      @setState marks: @getMarksForSubject(subject)
+    if @props.showMarks
+      for subject in @state.subjects
+        @setState marks: @getMarksForSubject(subject)
 
-  selectMark: (e) ->
-    console.log(e)
+#  selectMark: (e) ->
+#    console.log(e)
 
   getMarksForSubject: (subject) ->
     # Previous marks are really just the region hashes of all child subjects
