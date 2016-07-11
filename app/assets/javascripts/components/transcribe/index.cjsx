@@ -79,10 +79,6 @@ module.exports = React.createClass # rename to Classifier
   toggleTutorial: ->
     @setState showingTutorial: not @state.showingTutorial
 
-  componentWillUnmount:->
-    # PB: What's intended here? Docs state `void componentWillUnmount()`, so not sure what this serves:
-    not @state.badSubject
-
   # transition back to mark workflow
   returnToMarking: ->
     @transitionTo 'mark', {},
