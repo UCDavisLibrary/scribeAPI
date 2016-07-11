@@ -114,7 +114,7 @@ module.exports = React.createClass # rename to Classifier
           <div className="columns align-center label-title">
             <div className="transcribe-instructions small-12">
               {
-                if @state.noMoreSubjects or not @getCurrentSubject()
+                if @state.noMoreSubjects
                   <div>
                     <br/>
                     Currently, there are no labels for you to transcribe. Try <a href="/mark">marking</a> instead!
