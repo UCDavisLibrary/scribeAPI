@@ -48,7 +48,7 @@ module.exports =
 
     # Commit classification to backend
     classification.commit (classification) =>
-            
+
       # Did this generate a child_subject? Update local copy:
       if classification.child_subject
         @appendChildSubject classification.subject_id, classification.child_subject
@@ -149,7 +149,7 @@ module.exports =
           @forceUpdate()
           window.classifications = @state.classifications # make accessible to console
           callback() if callback?
-    
+
     @commitClassification(classification)
 
   toggleBadSubject: (e, callback) ->
@@ -344,7 +344,7 @@ module.exports =
         userClassifiedAll: @state.subjects.length > 0
 
     callback_fn() if callback_fn?
-    
+
 
   # This is the version of advanceToNextSubject for workflows that consume subject sets (mark)
   _advanceToNextSubjectInSubjectSets: (callback_fn) ->
@@ -356,11 +356,16 @@ module.exports =
       new_subject_set_index += 1
       new_subject_index = 0
 
-    # If we've exhausted all subject sets, collapse in shame
+    # If we've exhausted all subject sets:
     if new_subject_set_index >= @state.subjectSets.length
       if @state.subject_sets_current_page < @state.subject_sets_total_pages
         @fetchSubjectSets page: @state.subject_sets_current_page + 1
       else
+        # If we're in Mark, try reloading them; there are probably more -LD
+        if @props.workflowName == "mark"
+          window.location = '/mark'
+          return
+
         @setState
           taskKey: null
           notice:
@@ -371,18 +376,18 @@ module.exports =
               @setState
                 notice: null
                 taskKey: @getActiveWorkflow().first_task
-        console.warn "NO MORE SUBJECT SETS"
+        console.warn "NO MORE SUBJECT SETS were found"
       return
-    
+
     callback_fn() if callback_fn?
-        
+
     @setState
       subject_set_index: new_subject_set_index
       subject_index: new_subject_index
       taskKey: @getActiveWorkflow().first_task
       currentSubToolIndex: 0, () =>
         @fetchSubjectsForCurrentSubjectSet(1, 100)
-    
+
   commitClassificationAndContinue: (d, callback) ->
     @commitCurrentClassification()
     @beginClassification {}, () =>

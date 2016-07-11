@@ -44,7 +44,7 @@ module.exports = React.createClass # rename to Classifier
   componentDidMount: ->
     @getCompletionAssessmentTask()
     @fetchSubjectSetsBasedOnProps(@computeViewBox)
-    @fetchGroups()
+    @fetchGroups()  # FIXME maybe remove this code? LD
 
   componentWillMount: ->
     @setState taskKey: @getActiveWorkflow().first_task
