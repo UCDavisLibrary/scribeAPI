@@ -44,7 +44,6 @@ module.exports = React.createClass # rename to Classifier
     if @getCurrentSubject()?
       @setState
         taskKey: @getCurrentSubject().type
-        # viewBox: [0, 0, @getCurrentSubject().width, @getCurrentSubject().height]
 
   # Handle user selecting a pick/drawing tool:
   handleDataFromTool: (d) ->
@@ -100,6 +99,12 @@ module.exports = React.createClass # rename to Classifier
     if @state.subjects?
       isLastSubject = ( @state.subject_index >= @state.subjects.length - 1 )
     else isLastSubject = null
+
+    if @getCurrentSubject()
+      identifier = @getCurrentSubject()['meta_data'].identifier
+      historyState = {subject: identifier}
+      if window.history.state?['subject'] != identifier
+        window.history.pushState(historyState, '', '/transcribe/' + identifier)
 
     currentAnnotation = @getCurrentClassification().annotation
     TranscribeComponent = @getCurrentTool() # @state.currentTool

@@ -139,7 +139,11 @@ module.exports = React.createClass # rename to Classifier
     return null unless @getCurrentSubjectSet()? && @getActiveWorkflow()?
     subject = @getCurrentSubjectSet()?.subjects?[0]
     return null unless subject
-    window.history.pushState({subject:subject}, '', '/mark/' + subject['meta_data'].identifier)
+
+    identifier = subject['meta_data'].identifier
+    historyState = {subject: identifier}
+    if window.history.state?['subject'] != identifier
+      window.history.pushState({subject: identifier}, '', '/mark/' + identifier)
 
     currentTask = @getCurrentTask()
 
