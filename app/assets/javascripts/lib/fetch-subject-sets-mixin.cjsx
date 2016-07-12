@@ -26,6 +26,11 @@ module.exports =
     if subject_set_id?
       @fetchSubjectSet subject_set_id, postFetchCallback
 
+    # Fetch by identifier?
+    else if @props.params.identifier
+      # Fetch the subject sets related to this identifier
+      @fetchSubjectSetByIdentifier @props.params.identifier, postFetchCallback
+
     # Fetch subject-sets by filters:
     else
       # Gather filters by which to query subject-sets
@@ -44,9 +49,15 @@ module.exports =
   # Query hash added to prevent local mark from being re-transcribable.
   fetchSubjectSet: (subject_set_id, callback) ->
     request = API.type("subject_sets").get subject_set_id, {}
-
     request.then (set) =>
       @setState subjectSets: [set], () =>
+        @fetchSubjectsForCurrentSubjectSet 1, null, callback
+
+  # Fetch a single subject set by label identifier - LD
+  fetchSubjectSetByIdentifier: (identifier, callback) ->
+    request = API.type("subject_sets").get(identifier: identifier)
+    request.then (set) =>
+      @setState subjectSets: [set[0]], () =>
         @fetchSubjectsForCurrentSubjectSet 1, null, callback
 
   # This is the main fetch method for subject sets. (fetches via SubjectSetsController#index)

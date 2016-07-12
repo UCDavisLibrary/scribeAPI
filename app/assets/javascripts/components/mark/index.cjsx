@@ -137,6 +137,9 @@ module.exports = React.createClass # rename to Classifier
 
   render: ->
     return null unless @getCurrentSubjectSet()? && @getActiveWorkflow()?
+    subject = @getCurrentSubjectSet()?.subjects?[0]
+    return null unless subject
+    window.history.pushState({subject:subject}, '', '/mark/' + subject['meta_data'].identifier)
 
     currentTask = @getCurrentTask()
 
@@ -159,7 +162,7 @@ module.exports = React.createClass # rename to Classifier
         <SubjectSetToolbar
           workflow={@getActiveWorkflow()}
           task={currentTask}
-          subject={@getCurrentSubjectSet()?.subjects?[0]}
+          subject={subject}
           hideOtherMarks={@state.hideOtherMarks}
           handleZoomUI={@handleZoomUI}
           toggleHideOtherMarks={@toggleHideOtherMarks}

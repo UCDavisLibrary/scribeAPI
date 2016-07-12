@@ -14,7 +14,7 @@ Approve                       = require './approve'
 
 Project                       = require 'models/project.coffee'
 
-class AppRouter 
+class AppRouter
   constructor: ->
     API.type('projects').get().then (result)=>
       window.project = new Project(result[0])
@@ -31,6 +31,7 @@ class AppRouter
 
         <Route name="view" path="/view/:identifier" handler={View} />
         <Route name="approve" path="/approve/:identifier" handler={Approve} />
+        <Route name="mark-by-identifier" path="/mark/:identifier" handler={Mark} />
 
         { (w for w in project.workflows when w.name in ['mark','transcribe','verify']).map (workflow, key) =>
             handler = eval workflow.name.charAt(0).toUpperCase() + workflow.name.slice(1)
