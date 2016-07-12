@@ -17,20 +17,6 @@ App = React.createClass
   componentDidMount: ->
     @fetchUser()
 
-    # Calculate the total number of labels and remember that
-    @fetchSubjectCount()
-
-  fetchSubjectCount: ->
-    _params =
-      type: 'root'
-      browse: true
-      page: 1
-      limit: 1
-      
-    API.type('subjects').get(_params).then (subjects) =>
-      if subjects.length > 0
-        @setState subjectsTotalResults: subjects[0].getMeta("total")  
-      
   fetchUser:->
     @setState
       error: null
@@ -67,5 +53,3 @@ App = React.createClass
     </div>
 
 module.exports = App
- 
- 
