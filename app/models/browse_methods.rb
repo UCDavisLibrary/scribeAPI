@@ -1,19 +1,23 @@
 class BrowseMethods
 
-  def self.show_by_identifier(identifier)
-
-    type = 'root'
-    next_page = nil
-    prev_page = nil
-
-    puts identifier
-    subject = Subject.by_type(type).find_by('meta_data.identifier' => identifier)
-    if not subject
+  def self.get_by_identifier(identifier)
+    subject = Subject.root.page(1).where('meta_data.identifier' => identifier)
+    if subject.count() == 0
       raise ActionController::RoutingError.new('Not Found')
     end
 
-    this_subject_result = Subject.by_type(type).page(1).where('meta_data.identifier' => identifier)
-    next_subjects = Subject.by_type(type).where(:order.gt => subject.order.to_i).order(order: :asc)
+    return subject
+  end
+
+  def self.browse_by_identifier(identifier)
+
+    next_page = nil
+    prev_page = nil
+
+    subject_result = self.get_by_identifier(identifier)
+    subject = subject_result[0]
+
+    next_subjects = Subject.root.where(:order.gt => subject.order.to_i).order(order: :asc).limit(1)
 
     if next_subjects.count > 0
       next_page_identifier = next_subjects[0].meta_data[:identifier]
@@ -22,7 +26,7 @@ class BrowseMethods
       end
     end
 
-    previous_subjects = Subject.by_type(type).where(:order.lt => subject.order.to_i).order(order: :desc)
+    previous_subjects = Subject.root.where(:order.lt => subject.order.to_i).order(order: :desc).limit(1)
     if previous_subjects.count > 0
       previous_page_identifier = previous_subjects[0].meta_data[:identifier]
       if previous_page_identifier
@@ -39,7 +43,6 @@ class BrowseMethods
         href: prev_page
       }
     }
-    subject = this_subject_result
-    return subject, links
+    return subject_result, links
   end
 end
