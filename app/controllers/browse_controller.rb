@@ -4,7 +4,7 @@ class BrowseController < ApplicationController
   def index
     limit = 30
     page = get_int :page, 1
-    @subjects = Subject.by_type("root").page(page).per(limit)
+    @subjects = Subject.root.page(page).per(limit)
   end
 
   def view

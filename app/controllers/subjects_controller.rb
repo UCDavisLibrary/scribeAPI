@@ -18,13 +18,13 @@ class SubjectsController < ApplicationController
     order_filter          = get_int :order_filter, 0
     order_dir             = params[:order_dir]
 
+    @subjects = Subject.page(page).per(limit)
     # `status` filter must be one of: 'active', 'any'
     status                = ['active','any'].include?(params[:status]) ? params[:status] : 'active'
 
-    @subjects = Subject.page(page).per(limit)
 
     # Only active subjects?
-    @subjects = @subjects.active if status == 'active'
+    @subjects = @subjects.active if params[:status] == 'active'
 
     # Filter by subject type (e.g. 'root')
     @subjects = @subjects.by_type(type) if (type != '' and type != nil)
@@ -54,24 +54,7 @@ class SubjectsController < ApplicationController
 
 
     if ! subject_set_id
-      # Randomize?
-      # @subjects = @subjects.random(limit: limit) if random
-      # PB: Above randomization method produces better randomness, but inconsistent totals
       @subjects = @subjects.random_order if random
-
-      # If user/guest active, filter out anything already classified:
-      @subjects = @subjects.user_has_not_classified user.id.to_s if ! user.nil?
-
-      # If the user is just browsing, let them do whatever
-
-      # Should we filter out subjects that the user herself created?
-      # LD NO
-      #if workflow_id
-      #   if ! user.nil? && ! (workflow = Workflow.find(workflow_id)).nil? && ! workflow.subjects_classifiable_by_creator && ! browse
-      #     # Note: creating_user_ids are stored as ObjectIds, so no need to filter on user.id.to_s:
-      #     @subjects = @subjects.user_did_not_create user.id if ! user.nil?
-      #   end
-      # end
     end
 
     links = {
