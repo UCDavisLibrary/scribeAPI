@@ -12,22 +12,26 @@ class SubjectSetsController < ApplicationController
 
     subjects_limit              = get_int :subjects_limit, 100
     subjects_page               = get_int :subjects_page, 1
+    identifier                  = params[:identifier]
 
     query = {}
-    
+
     # Filter out sets not apprpriate for workflow?
     query["counts.#{workflow_id}.active_subjects"] = {"$gt"=>0} if ! workflow_id.nil?
 
-    # Filter by group_id? 
-    query[:group_id] = group_id if ! group_id.nil? 
+    # Filter by group_id?
+    query[:group_id] = group_id if ! group_id.nil?
 
-    # Override random if querying by subject_set_id:
-    random = false if ! subject_set_id.nil?
+    # Override random if querying by subject_set_id or identifier:
+    random = false if ! subject_set_id.nil? and ! identifier.nil?
 
     # Get random set of subject-sets?
     if random
       # TODO: should randomizer really require a limit be passed? Currently seems required by selection method, but ideally shouldn't
       @subject_sets = SubjectSet.random(selector: query, limit: subject_sets_limit)
+
+    elsif ! identifier.nil?
+      @subject_sets = SubjectSet.where('meta_data.identifier' => identifier)
 
     # Selecting a specific subject_set?
     elsif ! subject_set_id.nil?
@@ -37,7 +41,7 @@ class SubjectSetsController < ApplicationController
     else
       @subject_sets = SubjectSet.where(query)
     end
-    
+
     # Apply pagination:
     @subject_sets = @subject_sets.page(subject_sets_page).per(subject_sets_limit)
 
