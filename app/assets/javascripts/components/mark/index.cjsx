@@ -33,18 +33,14 @@ module.exports = React.createClass # rename to Classifier
     subject_set_index:   0
     subject_index:       0
     currentSubToolIndex: 0
-    helping:             false
     hideOtherMarks:      false
     currentSubtool:      null
     showingTutorial:     false
-    lightboxHelp:        false
-    activeSubjectHelper: null
     subjectCurrentPage:  1
 
   componentDidMount: ->
     @getCompletionAssessmentTask()
     @fetchSubjectSetsBasedOnProps()
-    @fetchGroups()  # FIXME maybe remove this code? LD
 
   componentWillMount: ->
     @setState taskKey: @getActiveWorkflow().first_task
@@ -55,16 +51,8 @@ module.exports = React.createClass # rename to Classifier
     if prev_props.hash != @props.hash
       @fetchSubjectSetsBasedOnProps()
 
-  toggleHelp: ->
-    @setState helping: not @state.helping
-    @hideSubjectHelp()
-
   toggleTutorial: ->
     @setState showingTutorial: not @state.showingTutorial
-
-  toggleLightboxHelp: ->
-    @setState lightboxHelp: not @state.lightboxHelp
-    @hideSubjectHelp()
 
   toggleHideOtherMarks: ->
     @setState hideOtherMarks: not @state.hideOtherMarks
@@ -147,17 +135,6 @@ module.exports = React.createClass # rename to Classifier
     @beginClassification()
     @advanceToNextSubject(callback_fn)
 
-  showSubjectHelp: (subject_type) ->
-    @setState
-      activeSubjectHelper: subject_type
-      helping: false
-      showingTutorial: false
-      lightboxHelp: false
-
-  hideSubjectHelp: () ->
-    @setState
-      activeSubjectHelper: null
-
   render: ->
     return null unless @getCurrentSubjectSet()? && @getActiveWorkflow()?
 
@@ -183,7 +160,6 @@ module.exports = React.createClass # rename to Classifier
           workflow={@getActiveWorkflow()}
           task={currentTask}
           subject={@getCurrentSubjectSet()?.subjects?[0]}
-          lightboxHelp={@togglelightboxHelp}
           hideOtherMarks={@state.hideOtherMarks}
           handleZoomUI={@handleZoomUI}
           toggleHideOtherMarks={@toggleHideOtherMarks}
@@ -222,7 +198,6 @@ module.exports = React.createClass # rename to Classifier
          hideOtherMarks={@state.hideOtherMarks}
          toggleHideOtherMarks={@toggleHideOtherMarks}
          currentSubtool={currentSubtool}
-         lightboxHelp={@toggleLightboxHelp}
          zoomedViewBox={@state.zoomedViewBox}
          interimMarks={@state.interimMarks}
          />
