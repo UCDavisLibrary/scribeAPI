@@ -7,12 +7,12 @@ class BrowseMethods
     prev_page = nil
 
     puts identifier
-    subject = Subject.find_by('meta_data.identifier' => identifier)
+    subject = Subject.by_type(type).find_by('meta_data.identifier' => identifier)
     if not subject
       raise ActionController::RoutingError.new('Not Found')
     end
 
-    this_subject_result = Subject.page(1).where('meta_data.identifier' => identifier)
+    this_subject_result = Subject.by_type(type).page(1).where('meta_data.identifier' => identifier)
     next_subjects = Subject.by_type(type).where(:order.gt => subject.order.to_i).order(order: :asc)
 
     if next_subjects.count > 0
