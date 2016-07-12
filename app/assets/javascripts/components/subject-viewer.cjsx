@@ -53,7 +53,6 @@ module.exports = React.createClass
 
     if new_props.subject.id != @props.subject.id
       @scrollToSubject()
-    else
       @setState viewBox: [0, 0, new_props.subject.width, new_props.subject.height]
 
   componentDidMount: ->
@@ -353,10 +352,6 @@ module.exports = React.createClass
 
     scale = @state.scale
     marks = @state.marks
-    if @state.viewBox
-      viewBox = @state.viewBox
-    else
-      viewBox = @props.viewBox
 
     marks = marks.concat @state.uncommittedMark if @state.uncommittedMark?
 
@@ -374,7 +369,7 @@ module.exports = React.createClass
       markingSurfaceContent =
         <svg
           className = "subject-viewer-svg"
-          viewBox = {viewBox}
+          viewBox = {@state.viewBox}
           data-tool = {@props.selectedDrawingTool?.type} >
           <rect
             ref = "sizeRect"
