@@ -18,6 +18,10 @@ module.exports =
       # If taskKey specified, now's the time to set that too:
       state.taskKey = @props.query.mark_task_key if @props.query.mark_task_key
 
+      subject = subject_sets[0].subjects?[0]
+      if subject
+        @updateBrowserState(subject)
+
       @setState state, () => # Any additional callbacks passed in
          callback() if callback?
 
@@ -97,6 +101,8 @@ module.exports =
     process_subjects = (subjs) =>
       sets[ind].subjects = subjs
 
+      @updateBrowserState(subjs[0])
+
       @setState
         subjectSets:                sets
         subjects_current_page:      subjs[0].getMeta('current_page')
@@ -107,6 +113,13 @@ module.exports =
     API.type('subjects').get(params).then (subjects) =>
       @_subject_queries[params] = subjects
       process_subjects subjects
+
+  updateBrowserState: (subject) ->
+    identifier = subject['meta_data'].identifier
+    historyState = {subject: identifier}
+    if window.history.state?['subject'] != identifier
+      window.history.pushState({subject: identifier}, '', '/mark/' + identifier)
+
 
 
   # used by "About this {group}" link on Mark interface

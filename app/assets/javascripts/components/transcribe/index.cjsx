@@ -42,6 +42,10 @@ module.exports = React.createClass # rename to Classifier
 
   fetchSubjectsCallback: ->
     if @getCurrentSubject()?
+      identifier = @getCurrentSubject()['meta_data'].identifier
+      historyState = {subject: identifier}
+      if window.history.state?['subject'] != identifier
+        window.history.pushState(historyState, '', '/transcribe/' + identifier)
       @setState
         taskKey: @getCurrentSubject().type
 
@@ -100,11 +104,7 @@ module.exports = React.createClass # rename to Classifier
       isLastSubject = ( @state.subject_index >= @state.subjects.length - 1 )
     else isLastSubject = null
 
-    if @getCurrentSubject()
-      identifier = @getCurrentSubject()['meta_data'].identifier
-      historyState = {subject: identifier}
-      if window.history.state?['subject'] != identifier
-        window.history.pushState(historyState, '', '/transcribe/' + identifier)
+
 
     currentAnnotation = @getCurrentClassification().annotation
     TranscribeComponent = @getCurrentTool() # @state.currentTool
