@@ -53,7 +53,6 @@ class SubjectSetsController < ApplicationController
         href: @subject_sets.prev_page.nil? ? nil : url_for(controller: 'subject_sets', page: @subject_sets.prev_page)
       }
     }
-
     respond_with SubjectSetResultSerializer.new(@subject_sets, scope: self.view_context), workflow_id: workflow_id, subjects_limit: subjects_limit, subjects_page: subjects_page, links: links
   end
 
