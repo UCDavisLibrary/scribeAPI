@@ -25,6 +25,7 @@ module.exports =
         order_filter:             @props.params?.order_filter ? null
         type:                     @props.type ? null
         status:                   @props.status ? null
+        random:                   @props.show_in_random_order ? false
       @fetchSubjects params
 
   orderSubjectsByY: (subjects) ->
