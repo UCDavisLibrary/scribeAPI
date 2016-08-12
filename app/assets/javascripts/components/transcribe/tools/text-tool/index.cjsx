@@ -48,10 +48,11 @@ TextTool = React.createClass
     inputType: 'text'
 
   componentWillUnmount: ->
+    # Autocomplete was removed
     tool_config = @toolConfig()
-    if tool_config.suggest == 'common'
-      el = $(@refs.input0.getDOMNode())
-      el.autocomplete 'destroy' if el.autocomplete?
+    #if tool_config.suggest == 'common'
+  #    el = $(@refs.input0.getDOMNode())
+  #    el.autocomplete 'destroy' if el.autocomplete?
 
   toolConfig: ->
     @props.tool_config ? @props.task.tool_config
