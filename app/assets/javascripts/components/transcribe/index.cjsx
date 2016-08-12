@@ -37,7 +37,7 @@ module.exports = React.createClass # rename to Classifier
   getDefaultProps: ->
     workflowName: 'transcribe'
     status: 'active'
-    show_in_random_order: true
+    show_in_random_order: false
 
   componentWillMount: ->
     @beginClassification()
