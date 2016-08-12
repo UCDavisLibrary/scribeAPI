@@ -70,7 +70,8 @@ TextTool = React.createClass
     if new_props.focus
       @focus()
 
-    @applyAutoComplete()
+    # Squash autocomplete for now - LD Aug 12 2016
+    # @applyAutoComplete()
 
     # Required to ensure tool has cleared annotation even if tool doesn't unmount between tasks:
     @setState
@@ -81,11 +82,11 @@ TextTool = React.createClass
     true
 
   componentDidMount: ->
-    @applyAutoComplete()
+    # @applyAutoComplete()
     @focus() if @props.focus
 
   componentDidUpdate: ->
-    @applyAutoComplete()
+    # @applyAutoComplete()
     @focus() if @props.focus
 
   applyAutoComplete: ->
