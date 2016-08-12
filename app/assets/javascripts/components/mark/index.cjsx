@@ -171,6 +171,7 @@ module.exports = React.createClass # rename to Classifier
           <div className="mark-instructions small-12">
             <h1>Instructions:</h1>
             <p><small>Draw a box around an area of interest on this label. Then tell us whether what you’ve marked is an image or text.
+            If the label is already completely marked, just hit ‘next’.
             <br/><em>Need help? <a onClick={@toggleTutorial}>Watch a tutorial.</a></em></small></p>
           </div>
         </div>
