@@ -24,6 +24,7 @@ module.exports =
         limit:                    @props.limit ? @getActiveWorkflow?().subject_fetch_limit
         order_filter:             @props.params?.order_filter ? null
         type:                     @props.type ? null
+        status:                   @props.status ? null
       @fetchSubjects params
 
   orderSubjectsByY: (subjects) ->
