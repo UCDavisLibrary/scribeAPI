@@ -17,10 +17,11 @@ class Classification
   belongs_to    :child_subject, class_name: "Subject", inverse_of: :parent_classifications
 
   after_create  :increment_subject_classification_count #, :check_for_retirement_by_classification_count
+
   after_create  :generate_new_subjects
   after_create  :generate_terms
   # removing this after create until we have a use case for the information
-  # after_create  :increment_subject_set_classification_count, 
+  # after_create  :increment_subject_set_classification_count,
 
   scope :by_child_subject, -> (id) { where(child_subject_id: id) }
   scope :having_child_subjects, -> { where(:child_subject_id.nin => ['', nil]) }
@@ -76,6 +77,7 @@ class Classification
   # removing this from the after_create hook in interest of speed. 10/22/15
   def increment_subject_set_classification_count
     subject.subject_set.inc classification_count: 1
+    check_for_retirement_by_classification_count(subject)  # LD adding back in Aug 12 2016 to allow for auto-retiring
   end
 
   def increment_subject_classification_count
@@ -97,7 +99,7 @@ class Classification
     # subject.inc classification_count: 1
     # Push user_id onto Subject.user_ids using mongo's fast addToSet feature, which ensures uniqueness
     subject_returned = Subject.where({id: subject_id}).find_and_modify({"$addToSet" => {classifying_user_ids: user_id.to_s}, "$inc" => {classification_count: 1}}, new: true)
-    
+
     #Passing the returned subject as parameters so that we eval the correct classification_count
     check_for_retirement_by_classification_count(subject_returned)
   end
@@ -114,14 +116,14 @@ class Classification
   def self.group_by_hour(match={})
     agg = []
     agg << {"$match" => match } if match
-    agg << {"$group" => { 
+    agg << {"$group" => {
       "_id" => {
         "y" => { '$year' => '$created_at' },
         "m" => { '$month' => '$created_at' },
         "d" => { '$dayOfMonth' => '$created_at' },
         "h" => { '$hour' => '$created_at' }
       },
-      "count" => {"$sum" =>  1} 
+      "count" => {"$sum" =>  1}
     }}
     self.collection.aggregate(agg).inject({}) do |h, p|
       h[p["_id"]] = p["count"]
