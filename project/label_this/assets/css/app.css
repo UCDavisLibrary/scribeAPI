@@ -199,6 +199,9 @@
   text-align: center;
   margin: 6em 0 4em 0; }
 
+.ui-autocomplete, .ui-helper-hidden-accessible {
+  display: none; }
+
 .browse {
   min-height: 80%; }
 
@@ -424,6 +427,9 @@
 .loading-indicator {
   text-align: center;
   margin: 6em 0 4em 0; }
+
+.ui-autocomplete, .ui-helper-hidden-accessible {
+  display: none; }
 
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
 /**
