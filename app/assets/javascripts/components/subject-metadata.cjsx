@@ -9,7 +9,9 @@ SubjectMetadata = React.createClass
     metadata: null
 
   componentWillReceiveProps: (newProps) ->
-    @updateMetadata(newProps.subject)
+    # Only update if subject has changed
+    if newProps.subject != @props.subject
+      @updateMetadata(newProps.subject)
 
   componentDidMount: ->
     @updateMetadata(@props.subject)
