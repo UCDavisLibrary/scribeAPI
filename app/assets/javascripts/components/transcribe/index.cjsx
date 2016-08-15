@@ -45,6 +45,7 @@ module.exports = React.createClass # rename to Classifier
   fetchSubjectsCallback: ->
     if @getCurrentSubject()?
       identifier = @getCurrentSubject()['meta_data'].identifier
+      console.log(identifier)
       historyState = {subject: identifier}
       if window.history.state?['subject'] != identifier
         window.history.pushState(historyState, '', '/transcribe/' + identifier)
@@ -134,7 +135,7 @@ module.exports = React.createClass # rename to Classifier
           </div>
           {
             if not @state.noMoreSubjects and @getCurrentSubject()
-              <a className="secondary button next-label" onClick={@advanceToNextSubject}>Next<img className="right-pointer" src="../../images/right-pointer-red.svg"/></a>
+              <a className="secondary button next-label" onClick={() => @advanceToNextSubject(@fetchSubjectsCallback)}>Next<img className="right-pointer" src="../../images/right-pointer-red.svg"/></a>
           }
        </section>
         {

@@ -323,7 +323,7 @@ module.exports =
       @_advanceToNextSubjectInSubjectSets(callback_fn)
 
   # This is the version of advanceToNextSubject for workflows that consume subjects (transcribe,verify)
-  _advanceToNextSubjectInSubjects: ->
+  _advanceToNextSubjectInSubjects: (callback_fn)->
     if @state.subject_index + 1 < @state.subjects.length
       next_index = @state.subject_index + 1
       next_subject = @state.subjects[next_index]
@@ -332,19 +332,17 @@ module.exports =
         subject_index: next_index, =>
           key = @getCurrentSubject().type
           @advanceToTask key
-
+          callback_fn() if callback_fn?
     # Haz more pages of subjects?
     else if @state.subjects_next_page?
-      @fetchSubjects page: @state.subjects_next_page
+      @fetchSubjects page: @state.subjects_next_page, => callback_fn() if callback_fn?
 
     else
       @setState
         subject_index: null
         noMoreSubjects: true
-        userClassifiedAll: @state.subjects.length > 0
-
-    callback_fn() if callback_fn?
-
+        userClassifiedAll: @state.subjects.length > 0, =>
+          callback_fn() if callback_fn?
 
   # This is the version of advanceToNextSubject for workflows that consume subject sets (mark)
   _advanceToNextSubjectInSubjectSets: (callback_fn) ->
