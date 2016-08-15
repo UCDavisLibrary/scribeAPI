@@ -7,12 +7,18 @@ SubjectMetadata = React.createClass
 
   getInitialState: ->
     metadata: null
-    
+
+  componentWillReceiveProps: (newProps) ->
+    @updateMetadata(newProps.subject)
+
   componentDidMount: ->
-    $.get("/metadata/" + @props.subject.meta_data["identifier"], (res) =>
+    @updateMetadata(@props.subject)
+
+  updateMetadata: (subject) ->
+    $.get("/metadata/" + subject.meta_data["identifier"], (res) =>
       @setState metadata: res
     )
-      
+
   render: ->
     if @state.metadata
       <div dangerouslySetInnerHTML={{__html: @state.metadata }}/>
