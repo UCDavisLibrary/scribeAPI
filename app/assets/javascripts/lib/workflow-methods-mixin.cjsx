@@ -335,7 +335,13 @@ module.exports =
           callback_fn() if callback_fn?
     # Haz more pages of subjects?
     else if @state.subjects_next_page?
-      @fetchSubjects page: @state.subjects_next_page, => callback_fn() if callback_fn?
+      @fetchSubjects {
+        page: @state.subjects_next_page
+        status: @props.status ? null
+        random: @props.show_in_random_order ? false
+        limit:                    @props.limit ? @getActiveWorkflow?().subject_fetch_limit
+        order_filter:             @props.params?.order_filter ? null
+      }, => callback_fn() if callback_fn?
 
     else
       @setState
