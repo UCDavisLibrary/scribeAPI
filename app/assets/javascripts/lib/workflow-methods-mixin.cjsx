@@ -389,10 +389,8 @@ module.exports =
   commitClassificationAndContinue: (d, callback) ->
     @commitCurrentClassification()
     @beginClassification {}, () =>
-      if callback?
-        callback()
-      else if @getCurrentTask()?.next_task?
+      if @getCurrentTask()?.next_task?
         @advanceToTask @getCurrentTask().next_task
 
       else
-        @advanceToNextSubject()
+        @advanceToNextSubject(callback)

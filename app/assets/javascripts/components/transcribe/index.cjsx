@@ -65,7 +65,7 @@ module.exports = React.createClass # rename to Classifier
 
   handleTaskComplete: (d) ->
     @handleDataFromTool(d)
-    @commitClassificationAndContinue d
+    @commitClassificationAndContinue(d, @fetchSubjectsCallback)
 
   handleViewerLoad: (props) ->
     @setState
