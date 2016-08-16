@@ -6,8 +6,8 @@ module.exports =
 
   _fetchByProps: ->
     # Fetching a single subject?
-    if @props.identifier?
-      @fetchSubjectByIdentifier @props.identifier
+    if @props.identifier? or @props.params.identifier
+      @fetchSubjectByIdentifier @props.identifier or @props.params.identifier
 
     else if @state.subject_id?
       @fetchSubject @state.subject_id
@@ -35,15 +35,25 @@ module.exports =
   # Fetch by identifier
   fetchSubjectByIdentifier: (identifier) ->
     request = API.type("labels").get identifier
-
     request.then (subject) =>
-      @setState
-        subjects_next_page: subject.getMeta("links")["next"]["href"]
-        subjects_prev_page: subject.getMeta("links")["prev"]["href"]
-        subjects: [subject],
-        () =>
-          if @fetchSubjectsCallback?
-            @fetchSubjectsCallback()
+      # Get any Marks that match this subject
+      _params = {
+        workflow_id: @getActiveWorkflow?().id
+        subject_set_id: subject.subject_set_id
+        status: "active"
+      }
+      marks = API.type("subjects").get(_params).then (subjects) =>
+        if subjects.length is 0
+          # Redirect the user to the /view endpoint for this identifier
+          location.href = '/view/' + identifier
+        else
+          @setState
+            subjects_next_page: subjects[0].getMeta("next_page")
+            subjects_prev_page: subjects[0].getMeta("prev_page")
+            subjects: subjects,
+              () =>
+                if @fetchSubjectsCallback?
+                  @fetchSubjectsCallback()
 
 
   # Fetch a single subject:

@@ -32,6 +32,7 @@ module.exports =
 
     # Fetch by identifier?
     else if @props.params.identifier
+      console.log("fetch by identifier")
       # Fetch the subject sets related to this identifier
       @fetchSubjectSetByIdentifier @props.params.identifier, postFetchCallback
 
