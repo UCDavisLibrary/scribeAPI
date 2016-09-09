@@ -6,7 +6,7 @@ module.exports =
 
   _fetchByProps: ->
     # Fetching a single subject?
-    if @props.identifier? or @props.params.identifier
+    if @props.identifier? or @props.params?.identifier
       @fetchSubjectByIdentifier @props.identifier or @props.params.identifier
 
     else if @state.subject_id?
