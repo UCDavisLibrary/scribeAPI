@@ -20,6 +20,15 @@
   box-shadow: 0 0 0 15px $labels-background-dark;
 }
 
+@mixin simple-modal-styling {
+  color: $labels-red;
+  background: $label-background;
+  padding: $global-padding;
+  border-radius: 0;
+  outline: 3px solid $label-background;
+  border: 3px solid $labels-background-dark;
+}
+
 // Overrides
 // Above and beyond the stock Foundation styles
 
@@ -931,15 +940,102 @@ footer {
   }
 }
 
+//-----------------------------------------------------
+// Newsletter Form Styles
+
+.newsletter-form {
+  margin-top: 1em;
+  @media only screen and (min-width: 47em) {
+    margin-top: -2em;
+  }
+  label {
+    font-size: 1em;
+  }
+  .email {
+    margin-top: 5px;
+    margin-right: 5px;
+  }
+}
 
 
+//-----------------------------------------------------
+// Manage This Styles
+.admin-body {
+  color: $labels-red;
+  background: $label-background;
+  min-width: 100%;
+  padding: $global-padding;
+  p, h1, h2, h3, h4, span, label {
+    color: $labels-red;
+    margin: 0;
+  }
+  input {
+    color: $label-background;
+  }
+  h1, h2, h3, h4 {
+    line-height: 1em;
+  }
+  a {
+    color: $labels-red;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+  .greeting {
+    margin-top: 1em;
+    h1, h2, p {
+      text-align: center;
+    }
+  }
+  form {
+    margin: 2em;
+  }
+  .quick-search {
+    border-right: 2px solid $labels-background-dark;
+    h1 {
+      text-align: center;
+    }
+    input {
+      margin: 1em auto;
+      width: 7em;
+      padding: 1.5em;
+    }
+  }
+  .refine-search {
+    select {
+      max-width: 7em;
+    }
+    label {
+      margin-top: 1em;
+      margin-bottom: 1em;
+    }
+    #id_limit {
+      max-width: 4em;
+    }
+  }
+  .submit-button {
+    text-align: center;
+    padding: 1em;
+    input {
+      min-width: 10em;
+    }
+  }
+}
 
-
-
-
-
-
-
+.herocard {
+  h1, h3, p, a {
+    color: $labels-red;
+    margin-bottom: 0;
+  }
+}
+.minicard {
+  @include simple-modal-styling;
+  max-width: 35em;
+  h1, h3, p, a {
+    color: $labels-red;
+    margin-bottom: 0;
+  }
+}
 
 
 
