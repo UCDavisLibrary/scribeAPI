@@ -14,6 +14,7 @@ module.exports = React.createClass
   getDefaultProps: ->
     identifier: null
     showMarks: false
+    mode: "view"
 
   getInitialState: ->
     subjects: []
@@ -22,7 +23,7 @@ module.exports = React.createClass
 
   componentWillReceiveProps: (newProps) ->
     if @props.identifier != newProps.identifier
-      @fetchSubjectByIdentifier newProps.identifier
+      @fetchSubjectView newProps.identifier
 
   fetchSubjectsCallback: () ->
     if @props.showMarks

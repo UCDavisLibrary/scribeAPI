@@ -7,7 +7,10 @@ module.exports =
   _fetchByProps: ->
     # Fetching a single subject?
     if @props.identifier? or @props.params?.identifier
-      @fetchSubjectByIdentifier @props.identifier or @props.params.identifier
+      if @props.mode == "view"
+        @fetchSubjectView @props.identifier or @props.params.identifier
+      else
+        @fetchSubjectByIdentifier @props.identifier or @props.params.identifier
 
     else if @state.subject_id?
       @fetchSubject @state.subject_id
@@ -32,7 +35,19 @@ module.exports =
     subjects.sort (a,b) ->
       return if a.region.y >= b.region.y then 1 else -1
 
-  # Fetch by identifier
+  # Used by /view
+  fetchSubjectView: (identifier) ->
+    request = API.type("labels").get identifier
+    request.then (subject) =>
+      @setState
+        subjects_next_page: subject.getMeta("next_page")
+        subjects_prev_page: subject.getMeta("prev_page")
+        subjects: [subject],
+          () =>
+            if @fetchSubjectsCallback?
+              @fetchSubjectsCallback()
+
+  # This may be unnecessary now if we don't use a view that shows marks
   fetchSubjectByIdentifier: (identifier) ->
     request = API.type("labels").get identifier
     request.then (subject) =>
